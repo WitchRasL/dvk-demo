@@ -40,4 +40,12 @@ describe('cn', () => {
     expect(cn('text-sm font-bold', 'text-fg font-display')).toBe('text-sm font-bold text-fg font-display');
     expect(cn('bg-surface', 'bg-surface-2')).toBe('bg-surface-2');
   });
+
+  it('собственные утилиты токенов вытесняют стандартные из той же группы', () => {
+    expect(cn('rounded-xl', 'rounded-base')).toBe('rounded-base');
+    expect(cn('shadow-lg', 'shadow-base')).toBe('shadow-base');
+    expect(cn('duration-300', 'duration-fast')).toBe('duration-fast');
+    expect(cn('duration-fast', 'duration-slow')).toBe('duration-slow');
+    expect(cn('rounded-base', 'rounded-lg')).toBe('rounded-lg');
+  });
 });
