@@ -1,0 +1,46 @@
+{
+  "name": "dvk-style-redesign",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Концепт редизайна dvk-style.ru: три варианта сайта с переключением",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "check": "vitest run && vite build",
+    "fetch-images": "node scripts/fetch-images.mjs",
+    "shot": "node scripts/screenshot.mjs"
+  },
+  "dependencies": {
+    "@fontsource/fira-sans": "^5.3.0",
+    "@fontsource/fira-sans-condensed": "^5.3.0",
+    "@fontsource/golos-text": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/onest": "^5.3.1",
+    "@fontsource/pt-mono": "^5.3.0",
+    "@fontsource/pt-serif": "^5.3.0",
+    "@fontsource/tenor-sans": "^5.3.0",
+    "@fontsource/unbounded": "^5.3.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.74.0",
+    "motion": "^14.14.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router": "^7.18.5",
+    "tailwind-merge": "^3.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@testing-library/react": "^16.3.3",
+    "@vitejs/plugin-react": "^6.3.0",
+    "cheerio": "^1.2.0",
+    "jsdom": "^31.0.1",
+    "puppeteer-core": "^25.18.1",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.5",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  }
+}

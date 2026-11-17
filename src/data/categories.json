@@ -1,0 +1,144 @@
+{
+  "directions": [
+    {
+      "id": "retail",
+      "name": "Ритейл и экспозиция",
+      "slug": "retail",
+      "summary": "[уточнить]",
+      "sections": [
+        {
+          "id": "trade-equipment",
+          "name": "Торговое оборудование",
+          "slug": "trade-equipment",
+          "count": 408,
+          "sourceUrl": null,
+          "categories": [
+            { "id": "showcases", "name": "Витрины", "slug": "showcases", "count": 178, "sourceUrl": null },
+            { "id": "counters", "name": "Прилавки", "slug": "counters", "count": 81, "sourceUrl": null },
+            { "id": "shoe-equipment", "name": "Оборудование для обуви", "slug": "shoe-equipment", "count": 58, "sourceUrl": null },
+            { "id": "jewelry-equipment", "name": "Ювелирное оборудование", "slug": "jewelry-equipment", "count": 54, "sourceUrl": null },
+            { "id": "optics-equipment", "name": "Оборудование для оптики", "slug": "optics-equipment", "count": 27, "sourceUrl": null },
+            { "id": "museum-equipment", "name": "Музейное оборудование", "slug": "museum-equipment", "count": 84, "sourceUrl": null },
+            { "id": "exhibition-stands", "name": "Выставочные стенды", "slug": "exhibition-stands", "count": 54, "sourceUrl": null }
+          ]
+        },
+        {
+          "id": "trade-furniture",
+          "name": "Торговая мебель",
+          "slug": "trade-furniture",
+          "count": 159,
+          "sourceUrl": null,
+          "categories": []
+        },
+        {
+          "id": "pharmacy-equipment",
+          "name": "Оборудование для аптек",
+          "slug": "pharmacy-equipment",
+          "count": 151,
+          "sourceUrl": null,
+          "categories": []
+        },
+        {
+          "id": "trade-islands",
+          "name": "Торговые островки",
+          "slug": "trade-islands",
+          "count": 69,
+          "sourceUrl": null,
+          "categories": []
+        }
+      ]
+    },
+    {
+      "id": "landscape",
+      "name": "Благоустройство",
+      "slug": "landscape",
+      "summary": "[уточнить]",
+      "sections": [
+        {
+          "id": "playgrounds",
+          "name": "Детские игровые площадки",
+          "slug": "playgrounds",
+          "count": 1133,
+          "sourceUrl": null,
+          "categories": []
+        },
+        {
+          "id": "benches",
+          "name": "Скамейки",
+          "slug": "benches",
+          "count": 508,
+          "sourceUrl": null,
+          "categories": []
+        },
+        {
+          "id": "small-architectural-forms",
+          "name": "Малые архитектурные формы",
+          "slug": "small-architectural-forms",
+          "count": 290,
+          "sourceUrl": null,
+          "categories": []
+        }
+      ]
+    },
+    {
+      "id": "metal",
+      "name": "Металлическая мебель",
+      "slug": "metal",
+      "summary": "[уточнить]",
+      "sections": [
+        {
+          "id": "metal-cabinets",
+          "name": "Металлические шкафы",
+          "slug": "metal-cabinets",
+          "count": 434,
+          "sourceUrl": null,
+          "categories": []
+        },
+        {
+          "id": "metal-racks",
+          "name": "Металлические стеллажи",
+          "slug": "metal-racks",
+          "count": 103,
+          "sourceUrl": null,
+          "categories": []
+        },
+        {
+          "id": "metal-furniture",
+          "name": "Металлическая мебель",
+          "slug": "metal-furniture",
+          "count": 682,
+          "sourceUrl": null,
+          "categories": [
+            { "id": "workbenches", "name": "Верстаки", "slug": "workbenches", "count": 272, "sourceUrl": null }
+          ]
+        }
+      ]
+    }
+  ],
+  "industries": [
+    {
+      "id": "pharmacy",
+      "name": "Аптеки",
+      "slug": "pharmacy",
+      "directions": ["retail"],
+      "summary": "[уточнить]",
+      "sourceUrl": null,
+      "series": [
+        { "name": "ORANGE", "sourceUrl": null },
+        { "name": "АМПИР", "sourceUrl": null },
+        { "name": "ДОКТОР", "sourceUrl": null },
+        { "name": "ОЗЕРКИ", "sourceUrl": null },
+        { "name": "РОДНИК ЗДОРОВЬЯ", "sourceUrl": null }
+      ]
+    },
+    { "id": "jewelry", "name": "Ювелирные салоны", "slug": "jewelry", "directions": ["retail"], "summary": "[уточнить]", "sourceUrl": null },
+    { "id": "optics", "name": "Оптика", "slug": "optics", "directions": ["retail"], "summary": "[уточнить]", "sourceUrl": null },
+    { "id": "museums", "name": "Музеи и выставки", "slug": "museums", "directions": ["retail"], "summary": "[уточнить]", "sourceUrl": null },
+    { "id": "apparel", "name": "Одежда и обувь", "slug": "apparel", "directions": ["retail"], "summary": "[уточнить]", "sourceUrl": null },
+    { "id": "mall-islands", "name": "Островки в ТЦ", "slug": "mall-islands", "directions": ["retail"], "summary": "[уточнить]", "sourceUrl": null },
+    { "id": "yards-schools", "name": "Дворы, детские сады и школы", "slug": "yards-schools", "directions": ["landscape"], "summary": "[уточнить]", "sourceUrl": null },
+    { "id": "warehouses", "name": "Склады и цеха", "slug": "warehouses", "directions": ["metal"], "summary": "[уточнить]", "sourceUrl": null }
+  ],
+  "aliases": {},
+  "meta": { "source": "https://dvk-style.ru", "collectedAt": null }
+}
