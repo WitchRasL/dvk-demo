@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+__pycache__/
+.DS_Store
+Thumbs.db
+.impeccable/config.local.json
+.autopilot/serve.*
+scripts/collect/.cache/
+.impeccable/review/
