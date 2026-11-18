@@ -1,0 +1,1134 @@
+/*
+ * «Палитра RAL» — общий слой: основа, атомы (кнопка-клавиша, код поля, линейка модулей, этикетка образца),
+ * карточка-образец, раскладка плиткой, шапка с мега-меню, слой перекраски, футер.
+ * Цвета — только из токенов поля (tokens.js). Анимируются только transform, opacity и clip-path.
+ * Экраны главной — home/home.css.
+ */
+
+/* --- основа ----------------------------------------------------------------- */
+
+[data-variant='ral'] {
+  --ral-gutter: clamp(1rem, 2.8vw, 2.5rem);
+  --ral-header-h: 3.5rem;
+  --ral-max: 90rem;
+  --page-sticky-top: calc(var(--ral-header-h) + 1.5rem);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  accent-color: var(--fg);
+  caret-color: var(--fg);
+}
+
+@media (min-width: 1024px) {
+  [data-variant='ral'] {
+    --ral-header-h: 4rem;
+  }
+}
+
+/* Любой элемент со своим полем красится целиком: фон и «чернила» поля. */
+[data-variant='ral'] [data-field-scope] {
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+[data-variant='ral'] ::selection,
+[data-variant='ral'] .page ::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+[data-variant='ral'] :focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+[data-variant='ral'] a {
+  text-underline-offset: 0.24em;
+  text-decoration-thickness: 0.08em;
+}
+
+[data-variant='ral'] .rail,
+[data-variant='ral'] .ral-tiles--rail,
+[data-variant='ral'] .ral-mega,
+[data-variant='ral'] .ral-mobile {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fg) transparent;
+}
+
+.ral-wrap {
+  width: min(100% - 2 * var(--ral-gutter), var(--ral-max));
+  margin-inline: auto;
+}
+
+/* Моноширинный — только коды RAL, габариты и артикулы. */
+.ral-mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+.ral-narrow-hide {
+  display: none;
+}
+@media (min-width: 1280px) {
+  .ral-narrow-hide {
+    display: inline;
+  }
+}
+
+/* --- кнопка-клавиша ----------------------------------------------------------- */
+
+.ral-btn {
+  --btn-wipe: transparent;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.5rem 1.375rem;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+/* Наведение — «мазок»: слой чуть другого тона закрашивает клавишу слева направо. */
+.ral-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--btn-wipe);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur-base) var(--ease-out);
+}
+.ral-btn:hover::before,
+.ral-btn:focus-visible::before {
+  clip-path: inset(0 0 0 0);
+}
+.ral-btn:active {
+  transform: translateY(1px);
+}
+.ral-btn__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ral-btn--sm {
+  min-height: 2.5rem;
+  padding: 0.375rem 0.875rem;
+  font-size: 0.875rem;
+}
+.ral-btn--lg {
+  min-height: 3.5rem;
+  padding: 0.625rem 1.75rem;
+  font-size: 1.0625rem;
+}
+
+/* Сигнальная — только заявка. */
+.ral-btn--signal {
+  --btn-wipe: var(--signal-lit);
+  background: var(--signal);
+  color: var(--signal-fg);
+}
+.ral-btn--primary {
+  --btn-wipe: color-mix(in oklab, var(--fg) 86%, var(--bg));
+  background: var(--fg);
+  color: var(--bg);
+}
+.ral-btn--secondary {
+  --btn-wipe: color-mix(in oklab, var(--fg) 14%, transparent);
+  background: transparent;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1.5px var(--fg);
+}
+/* «В запросе»: позиция уже в списке — клавиша залита чернилами поля. */
+.ral-btn--secondary.border-action {
+  --btn-wipe: color-mix(in oklab, var(--fg) 86%, var(--bg));
+  background: var(--fg);
+  color: var(--bg);
+}
+.ral-btn--ghost {
+  min-height: 2.75rem;
+  padding-inline: 0;
+  background: transparent;
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.32em;
+}
+.ral-btn--ghost:hover {
+  text-decoration-thickness: 3px;
+}
+.ral-btn.is-inactive {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.ral-btn.is-inactive::before {
+  display: none;
+}
+
+.ral-spin {
+  animation: ral-spin 0.9s linear infinite;
+}
+@keyframes ral-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.ral-iconbtn {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1.5px var(--line-strong);
+  cursor: pointer;
+}
+.ral-iconbtn:hover {
+  background: var(--fg);
+  color: var(--bg);
+  box-shadow: none;
+}
+
+/* --- код поля, линейка модулей -------------------------------------------------- */
+
+.ral-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+}
+.ral-code .ral-mono {
+  flex: none;
+  white-space: nowrap;
+}
+.ral-code__chip {
+  flex: none;
+  width: 0.875rem;
+  height: 0.875rem;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+.ral-code__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--fg-muted);
+}
+
+/* Сетка 600 мм: двенадцать целых модулей, каждое шестое деление длиннее. */
+.ral-rule {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--line-strong);
+}
+.ral-rule span {
+  width: 1px;
+  height: 0.375rem;
+  background: var(--line-strong);
+}
+.ral-rule span:nth-child(6n + 1) {
+  height: 0.75rem;
+}
+
+/* --- заголовки ------------------------------------------------------------------- */
+
+.ral-heading {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+.ral-heading__title {
+  max-width: 21ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.05rem + 2.1vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.ral-heading__lead {
+  max-width: 56ch;
+  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.125rem);
+  line-height: 1.5;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+
+/* --- шапка внутренней страницы ------------------------------------------------------ */
+
+.ral-pagehead {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+.ral-pagehead__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.875rem;
+}
+.ral-pagehead__title {
+  max-width: 24ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, 1.1rem + 2.4vw, 3rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.ral-pagehead__lead {
+  max-width: 60ch;
+  font-size: 1.0625rem;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+.ral-pagehead__label {
+  max-width: 26rem;
+}
+.ral-pagehead__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+.ral-pagehead__rule {
+  margin-top: 0.5rem;
+}
+
+/* --- этикетка образца: одна сетка подписи везде ------------------------------------- */
+
+.ral-label {
+  display: grid;
+  margin: 0;
+}
+.ral-label > div {
+  display: grid;
+  grid-template-columns: 5.25rem minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: baseline;
+  padding-block: 0.3125rem;
+  border-top: 1px solid var(--line);
+}
+.ral-label dt {
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: var(--fg-muted);
+}
+.ral-label dd {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+/* --- карточка-образец ---------------------------------------------------------------- */
+
+.ral-swatch {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  min-width: 0;
+}
+/* Подиум: поле цвета направления, фото приподнято мягкой тенью, сверху тёплый блик. */
+.ral-swatch__stage {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  aspect-ratio: 5 / 4;
+  padding: 0.875rem 0.875rem 0;
+  overflow: hidden;
+  text-decoration: none;
+}
+.ral-swatch__light {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 62%;
+  background: radial-gradient(120% 100% at 50% 0%, rgb(255 240 214 / 0.3), transparent 72%);
+  pointer-events: none;
+}
+.ral-swatch__img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  border-radius: 1px;
+  box-shadow: var(--shadow);
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.ral-swatch:hover .ral-swatch__img {
+  transform: translateY(-0.25rem) scale(1.015);
+}
+.ral-swatch__nophoto {
+  display: grid;
+  place-items: center;
+  font-size: 0.875rem;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+.ral-swatch__plinth {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-block: 0.5rem 0.5625rem;
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+.ral-swatch__plinth > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ral-swatch__body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  min-width: 0;
+}
+.ral-swatch__name {
+  display: -webkit-box;
+  min-height: 2.6em;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+.ral-swatch__name a {
+  text-decoration: none;
+}
+.ral-swatch__name a:hover {
+  text-decoration: underline;
+}
+.ral-swatch .ral-label {
+  align-self: start;
+}
+.ral-swatch__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 0.75rem;
+}
+.ral-swatch__price {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.ral-swatch__price.is-request {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--fg-muted);
+}
+.ral-swatch__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+/* --- раскладка образцов плиткой: целые модули, тонкий шов -------------------------------- */
+
+.ral-tiles {
+  display: grid;
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  list-style: none;
+}
+.ral-tiles > li {
+  min-width: 0;
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+.ral-tiles--grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.5rem), 1fr));
+}
+.ral-tiles--rail {
+  position: relative;
+  grid-auto-flow: column;
+  grid-auto-columns: min(78vw, 18.5rem);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+}
+.ral-tiles--rail > li {
+  scroll-snap-align: start;
+}
+
+/* --- появление шторкой -------------------------------------------------------------------- */
+
+.ral-reveal[data-reveal='pending'] {
+  clip-path: inset(0 100% 0 0);
+}
+.ral-reveal[data-reveal='shown'] {
+  animation: ral-shutter var(--dur-slow) var(--ease-out) var(--reveal-delay, 0s) backwards;
+}
+@keyframes ral-shutter {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* --- шапка ---------------------------------------------------------------------------------- */
+
+.ral-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: var(--bg);
+  color: var(--fg);
+  box-shadow: inset 0 -1px 0 var(--line);
+}
+.ral-header__bar {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.625rem, 1.2vw, 1.75rem);
+  height: var(--ral-header-h);
+  padding-inline: var(--ral-gutter);
+}
+
+.ral-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex: none;
+  min-height: 2.75rem;
+  text-decoration: none;
+}
+/* Знак — три лопасти веера: цвета трёх направлений на общей оси. */
+.ral-logo__mark {
+  position: relative;
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.ral-logo__mark > span {
+  position: absolute;
+  left: 0.5625rem;
+  bottom: 0.0625rem;
+  width: 0.4375rem;
+  height: 1.375rem;
+  transform-origin: 50% 100%;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--field-ink) 34%, transparent);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.ral-logo__mark > span:nth-child(1) {
+  transform: rotate(-32deg);
+}
+.ral-logo__mark > span:nth-child(3) {
+  transform: rotate(32deg);
+}
+.ral-logo:hover .ral-logo__mark > span:nth-child(1) {
+  transform: rotate(-46deg);
+}
+.ral-logo:hover .ral-logo__mark > span:nth-child(3) {
+  transform: rotate(46deg);
+}
+.ral-logo__word {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.ral-header__code {
+  display: none;
+}
+@media (min-width: 1536px) {
+  .ral-header__code {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    min-height: 1.5rem;
+    padding-left: clamp(0.625rem, 1.2vw, 1.75rem);
+    box-shadow: inset 1px 0 0 var(--line);
+  }
+  .ral-header__code .ral-code__name {
+    display: none;
+  }
+}
+@media (min-width: 1760px) {
+  .ral-header__code .ral-code__name {
+    display: inline;
+  }
+}
+
+.ral-nav {
+  display: none;
+  margin-right: auto;
+}
+@media (min-width: 1024px) {
+  .ral-nav {
+    display: block;
+  }
+}
+.ral-nav > ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.25rem, 0.9vw, 1rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ral-nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 2.75rem;
+  padding: 0 0.375rem;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+/* Черта под пунктом — «мазок» во всю ширину слова. */
+.ral-nav__link::after {
+  content: '';
+  position: absolute;
+  inset: auto 0.375rem 0.4375rem;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.ral-nav__link:hover::after,
+.ral-nav__link.active::after,
+.ral-nav__link[aria-expanded='true']::after {
+  transform: scaleX(1);
+}
+.ral-nav__chev {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.ral-nav__link[aria-expanded='true'] .ral-nav__chev {
+  transform: rotate(180deg);
+}
+
+.ral-header__tools {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: clamp(0.5rem, 1.1vw, 1.125rem);
+  margin-left: auto;
+}
+.ral-header__cta {
+  flex: none;
+  white-space: nowrap;
+}
+
+.ral-city {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+.ral-city > button {
+  min-height: 2.25rem;
+  padding: 0 0.625rem;
+  border: 0;
+  border-radius: 1px;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.ral-city > button[aria-pressed='true'] {
+  background: var(--fg);
+  color: var(--bg);
+}
+.ral-header__city {
+  display: none;
+}
+@media (min-width: 1280px) {
+  .ral-header__city {
+    display: inline-flex;
+  }
+}
+
+.ral-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ral-phone:hover .ral-phone__num {
+  text-decoration: underline;
+}
+.ral-header__tools > .ral-phone {
+  display: none;
+}
+@media (min-width: 640px) {
+  .ral-header__tools > .ral-phone {
+    display: inline-flex;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1365px) {
+  .ral-header__tools > .ral-phone .ral-phone__num {
+    display: none;
+  }
+  .ral-header__tools > .ral-phone {
+    width: 2.5rem;
+    justify-content: center;
+    box-shadow: inset 0 0 0 1px var(--line-strong);
+    border-radius: var(--radius);
+    min-height: 2.5rem;
+  }
+}
+
+.ral-kp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ral-kp__label {
+  display: none;
+}
+@media (min-width: 1440px) {
+  .ral-kp__label {
+    display: inline;
+  }
+}
+.ral-kp__count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.3125rem;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 0.8125rem;
+  line-height: 1;
+}
+.ral-kp:hover .ral-kp__label {
+  text-decoration: underline;
+}
+
+.ral-burger {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-right: -0.5rem;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+@media (min-width: 1024px) {
+  .ral-burger {
+    display: none;
+  }
+}
+@media (max-width: 379px) {
+  .ral-logo__word {
+    font-size: 0.875rem;
+  }
+  .ral-header__cta {
+    padding-inline: 0.625rem;
+  }
+}
+
+/* Мега-меню: три поля-направления вплотную, каждое опускается своей шторкой. */
+.ral-mega {
+  position: absolute;
+  inset: 100% 0 auto;
+  max-height: calc(100dvh - var(--ral-header-h));
+  overflow-y: auto;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+.ral-mega__cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ral-mega__col {
+  display: grid;
+  align-content: start;
+  gap: 1.25rem;
+  padding: 2rem var(--ral-gutter) 2.25rem;
+  animation: ral-drop var(--dur-slow) var(--ease-out) calc(var(--i, 0) * 70ms) backwards;
+}
+@keyframes ral-drop {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+.ral-mega__head {
+  display: grid;
+  gap: 0.375rem;
+  text-decoration: none;
+}
+.ral-mega__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 1.6vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+a.ral-mega__head:hover .ral-mega__title {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+.ral-mega__summary {
+  max-width: 36ch;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+.ral-mega__list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ral-mega__list a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.75rem;
+  padding-block: 0.625rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+}
+.ral-mega__list a:hover > span:first-child {
+  text-decoration: underline;
+}
+.ral-mega__list a > span:last-child:not(:first-child) {
+  font-weight: 400;
+  color: var(--fg-muted);
+}
+.ral-mega__note {
+  margin: 0;
+  padding: 0.875rem var(--ral-gutter);
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+}
+.ral-mega__note a {
+  color: var(--fg);
+}
+
+/* Меню телефона: поле на весь экран под шапкой. */
+.ral-mobile {
+  position: fixed;
+  inset: var(--ral-header-h) 0 0;
+  z-index: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: ral-drop var(--dur-base) var(--ease-out) backwards;
+}
+.ral-mobile__inner {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.25rem var(--ral-gutter) 6rem;
+}
+.ral-mobile__group {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+}
+.ral-mobile__fan {
+  display: grid;
+  gap: 1px;
+}
+.ral-mobile__list,
+.ral-mobile__industries {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ral-mobile__list a {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ral-mobile__industries {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  column-gap: 1rem;
+}
+.ral-mobile__industries a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9375rem;
+  line-height: 1.25;
+  text-decoration: none;
+}
+.ral-mobile__tools {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+  padding-top: 0.5rem;
+}
+.ral-mobile__tools .ral-btn {
+  width: 100%;
+}
+
+/* --- образец направления (веер в меню, футере, hero) -------------------------------------- */
+
+.ral-dir {
+  display: grid;
+  align-content: start;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 0.75rem 1rem 0.875rem;
+  text-decoration: none;
+}
+.ral-dir__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.ral-dir__arrow {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.ral-dir:hover .ral-dir__arrow,
+.ral-dir:focus-visible .ral-dir__arrow {
+  transform: translate(0.1875rem, -0.1875rem);
+}
+.ral-dir__name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.ral-dir__meta {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--fg-muted);
+}
+.ral-dir:focus-visible {
+  outline-offset: -4px;
+}
+
+/* --- слой перекраски ------------------------------------------------------------------------ */
+
+.ral-repaint {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  align-content: end;
+  padding: var(--ral-gutter);
+  padding-bottom: max(5rem, var(--ral-gutter));
+  will-change: clip-path;
+}
+.ral-repaint__label {
+  display: grid;
+  gap: 0.5rem;
+}
+.ral-repaint__code {
+  font-size: 1rem;
+}
+.ral-repaint__name {
+  max-width: 18ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 5.2vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* --- футер ---------------------------------------------------------------------------------- */
+
+.ral-footer {
+  padding-block: clamp(3rem, 6vw, 5rem) 5.5rem;
+}
+.ral-footer__grid {
+  display: grid;
+  gap: 2.5rem clamp(1.5rem, 3vw, 3rem);
+}
+@media (min-width: 640px) {
+  .ral-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1100px) {
+  .ral-footer__grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 2.5fr) minmax(0, 2.5fr);
+  }
+}
+.ral-footer__brand {
+  display: grid;
+  align-content: start;
+  gap: 0.875rem;
+}
+.ral-footer__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 2.2vw, 1.875rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+.ral-footer__claim {
+  max-width: 34ch;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+.ral-footer__concept {
+  justify-self: start;
+  padding: 0.3125rem 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+.ral-footer__fan {
+  display: grid;
+  align-content: start;
+  gap: 1px;
+}
+.ral-footer__links ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ral-footer__links a,
+.ral-footer__city a {
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+  line-height: 1.3;
+  text-decoration: none;
+}
+.ral-footer__links a:hover,
+.ral-footer__city a:hover,
+.ral-footer__base a:hover {
+  text-decoration: underline;
+}
+.ral-footer__cities {
+  display: grid;
+  align-content: start;
+  gap: 1.25rem;
+}
+.ral-footer__label {
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+}
+.ral-footer__city a {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.ral-footer__rule {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+.ral-footer__base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  padding-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+}
+.ral-footer__base a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 2.75rem;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+/* --- без движения ---------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ral-btn,
+  .ral-btn::before,
+  .ral-swatch__img,
+  .ral-logo__mark > span,
+  .ral-nav__link::after,
+  .ral-nav__chev,
+  .ral-dir__arrow {
+    transition: none;
+  }
+  .ral-mega__col,
+  .ral-mobile,
+  .ral-reveal[data-reveal='shown'] {
+    animation: none;
+  }
+  .ral-reveal[data-reveal='pending'] {
+    clip-path: none;
+  }
+  .ral-swatch:hover .ral-swatch__img {
+    transform: none;
+  }
+  .ral-spin {
+    animation-duration: 2.4s;
+  }
+}

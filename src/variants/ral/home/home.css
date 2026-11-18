@@ -1,0 +1,1308 @@
+/*
+ * «Палитра RAL» — главная: первый экран (поле цвета, рамка-образец с роликом и ярлыками, кинетический заголовок,
+ * веер у края) и семь экранов под ним. Анимируются только transform, opacity и clip-path.
+ */
+
+/* --- общий ритм экранов --------------------------------------------------------- */
+
+.ral-section {
+  padding-block: clamp(3.5rem, 8vw, 7.5rem);
+}
+.ral-section__head {
+  margin-bottom: clamp(1.75rem, 4vw, 3.25rem);
+}
+.ral-section__head--split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+}
+
+/* --- первый экран ------------------------------------------------------------------ */
+
+.ral-hero {
+  --wx: 0px;
+  --wy: 0px;
+  --ww: 0px;
+  --wh: 0px;
+  --hero-frame-edge: 0.5rem;
+  position: relative;
+  /* Сцена ролика начинается под закреплённой шапкой: первый экран — ровно один экран. */
+  margin-top: calc(-1 * var(--ral-header-h));
+}
+.ral-hero .scroll-video__stage {
+  background: var(--bg);
+}
+
+/* Кадр ролика (или заглушки) живёт в окне рамки-образца: прямоугольник окна измеряет Hero.jsx. */
+.ral-hero .scroll-video__poster,
+.ral-hero .scroll-video__video {
+  inset: auto;
+  left: var(--wx);
+  top: var(--wy);
+  width: var(--ww);
+  height: var(--wh);
+  object-position: 58% 50%;
+}
+.ral-hero .scroll-video__callouts {
+  inset: auto;
+  left: var(--wx);
+  top: var(--wy);
+  width: var(--ww);
+  height: var(--wh);
+  z-index: 4;
+}
+
+.ral-hero__layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template:
+    'title' auto
+    'frame' minmax(0, 1fr)
+    'offer' auto
+    'fan' auto / minmax(0, 1fr);
+  row-gap: 0.75rem;
+  padding-top: calc(var(--ral-header-h) + 0.875rem);
+}
+
+/* Паспарту: поле цвета закрывает всё, кроме окна рамки (камера заглушки увеличивает кадр — лишнее не видно). */
+.ral-hero__mat {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  clip-path: polygon(
+    evenodd,
+    0 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 0,
+    var(--wx) var(--wy),
+    var(--wx) calc(var(--wy) + var(--wh)),
+    calc(var(--wx) + var(--ww)) calc(var(--wy) + var(--wh)),
+    calc(var(--wx) + var(--ww)) var(--wy),
+    var(--wx) var(--wy)
+  );
+}
+
+.ral-hero__title,
+.ral-hero__offer,
+.ral-hero__frame,
+.ral-hero__fan {
+  position: relative;
+  min-width: 0;
+}
+
+/* Заголовок: три глагола — три крупные строки, «хвост» формулы — текстом. */
+.ral-hero__title {
+  grid-area: title;
+  margin: 0;
+  padding-inline: var(--ral-gutter);
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, min(9.4vw, 5.2svh), 3.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+.ral-title__line {
+  display: block;
+  animation: ral-rise var(--dur-slow) var(--ease-out) calc(var(--l, 0) * 80ms + 80ms) backwards;
+}
+.ral-title__tail {
+  max-width: 31ch;
+  margin-top: 0.5rem;
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 0.85rem + 0.5vw, 1.25rem);
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+@keyframes ral-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+}
+
+/* Глагол фазы «прокрашивается»: поверх слова — та же надпись выворотка, открывается слева направо. */
+.ral-paint {
+  position: relative;
+  display: inline-block;
+}
+.ral-paint--punct {
+  margin-right: 0.1em;
+}
+.ral-paint__ink {
+  position: absolute;
+  inset: 0.07em -0.14em;
+  display: flex;
+  align-items: center;
+  padding-inline: 0.14em;
+  background: var(--fg);
+  color: var(--bg);
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  clip-path: inset(0 calc((1 - var(--paint, 0)) * 100%) 0 0);
+}
+
+.ral-hero__offer {
+  grid-area: offer;
+  display: grid;
+  gap: 0.625rem;
+  padding-inline: var(--ral-gutter);
+  animation: ral-rise var(--dur-slow) var(--ease-out) 420ms backwards;
+}
+.ral-hero__promise {
+  max-width: 36ch;
+  margin: 0;
+  font-size: clamp(0.9375rem, 0.88rem + 0.3vw, 1.125rem);
+  line-height: 1.4;
+  text-wrap: balance;
+}
+.ral-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem 1.25rem;
+}
+.ral-hero__phone {
+  display: grid;
+  align-content: center;
+  min-height: 2.75rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ral-hero__phone:hover .tabular {
+  text-decoration: underline;
+}
+.ral-hero__phone-label {
+  display: none;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--fg-muted);
+}
+
+/* Рамка-образец: бумажная кромка, окно с кадром, под ним — полоса с кодом поля и фазами ролика. */
+.ral-hero__frame {
+  grid-area: frame;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin-inline: var(--ral-gutter);
+  box-shadow: var(--shadow);
+}
+.ral-hero__window {
+  flex: 1 1 auto;
+  min-height: 6.5rem;
+  border: var(--hero-frame-edge) solid var(--paper);
+  border-bottom-width: 0;
+}
+.ral-hero__band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  min-height: 2.5rem;
+  padding: 0.25rem var(--hero-frame-edge);
+}
+.ral-hero__field-code {
+  padding-left: 0.25rem;
+}
+.ral-hero__field-code .ral-code__name {
+  display: none;
+}
+.ral-hero__phases {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ral-hero__phases button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4375rem;
+  min-width: 2rem;
+  min-height: 2rem;
+  padding: 0 0.5rem;
+  border: 0;
+  background: none;
+  color: var(--fg-muted);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.ral-hero__phases button:disabled {
+  cursor: default;
+}
+.ral-hero__phases button[aria-current='step'] {
+  background: var(--fg);
+  color: var(--bg);
+}
+/* Узкий экран: название фазы видно только у текущей, остальные — номером (название остаётся для скринридера). */
+.ral-hero__phases button:not([aria-current='step']) .ral-hero__phase-t {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.ral-hero__phases button:not([aria-current='step']) {
+  justify-content: center;
+}
+
+/* Веер у края: три равных образца-направления. */
+.ral-hero__fan {
+  position: relative;
+  grid-area: fan;
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.ral-hero .ral-hero__blade {
+  flex: 0 0 64%;
+  scroll-snap-align: start;
+  padding: 0.625rem 0.875rem 3.5rem;
+  animation: ral-blade-in var(--dur-slow) var(--ease-out) calc(var(--i, 0) * 90ms + 240ms) backwards;
+}
+.ral-hero .ral-hero__blade:first-child {
+  padding-left: var(--ral-gutter);
+}
+.ral-hero .ral-hero__blade .ral-dir__meta {
+  display: none;
+}
+@keyframes ral-blade-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+/* Пометка заглушки — в углу окна рамки: на телефоне сверху (внизу раскрываются ярлыки), шире — справа внизу. */
+.ral-hero .scroll-video__label {
+  right: calc(100% - var(--wx) - var(--ww) + var(--hero-frame-edge) + 0.5rem);
+  top: calc(var(--wy) + 0.5rem);
+  bottom: auto;
+  max-width: calc(var(--ww) - 2 * var(--hero-frame-edge) - 1rem);
+  padding: 0.3125rem 0.5rem;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--paper-ink);
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+
+/* Ярлык пояснения: точка кадра и бумажная бирка. Оранжевого здесь нет — он только у заявки. */
+.ral-tag {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.ral-tag__pin {
+  position: absolute;
+  left: -0.5625rem;
+  top: -0.5625rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 1px 4px rgb(14 14 16 / 0.35);
+}
+.ral-tag__pin::after {
+  content: '';
+  position: absolute;
+  inset: 0.3125rem;
+  border-radius: 50%;
+  background: var(--paper-ink);
+}
+.ral-tag__card {
+  position: absolute;
+  display: grid;
+  gap: 0.1875rem;
+  width: min(11.5rem, 56vw);
+  padding: 0.5rem 0.625rem 0.5625rem;
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--paper-ink);
+  box-shadow: var(--shadow);
+  transition: clip-path var(--dur-base) var(--ease-out);
+}
+.ral-tag--right .ral-tag__card {
+  left: 1.125rem;
+  clip-path: inset(-2rem 100% -2rem -2rem);
+}
+.ral-tag--left .ral-tag__card {
+  right: 1.125rem;
+  clip-path: inset(-2rem -2rem -2rem 100%);
+}
+.ral-tag--down .ral-tag__card {
+  top: -0.5625rem;
+}
+.ral-tag--up .ral-tag__card {
+  bottom: -0.5625rem;
+}
+.ral-tag[data-active='true'] .ral-tag__card {
+  clip-path: inset(-2rem);
+}
+.ral-tag__code {
+  font-size: 0.6875rem;
+  color: var(--paper-muted);
+}
+.ral-tag__title {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.ral-tag__text,
+.ral-tag__note {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+.ral-tag__text {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.ral-tag__note {
+  display: none;
+  color: var(--paper-muted);
+}
+
+@media (max-width: 1023px) and (max-height: 700px) {
+  .ral-hero__promise {
+    display: none;
+  }
+  .ral-hero__title {
+    font-size: clamp(1.5rem, min(8.6vw, 4.5svh), 3rem);
+  }
+  .ral-hero__layer {
+    row-gap: 0.5rem;
+  }
+  .ral-hero__offer {
+    gap: 0.25rem;
+  }
+  .ral-title__tail {
+    margin-top: 0.25rem;
+  }
+  /* Низкое окно рамки: бирка — в одну строку текста, чтобы не закрывать полосу фаз. */
+  .ral-tag__text {
+    -webkit-line-clamp: 1;
+  }
+}
+
+@media (min-width: 480px) {
+  .ral-hero__field-code .ral-code__name {
+    display: inline;
+  }
+  .ral-hero__phone-label {
+    display: block;
+  }
+}
+
+@media (min-width: 640px) {
+  .ral-hero {
+    --hero-frame-edge: 0.625rem;
+  }
+  .ral-hero .ral-hero__blade {
+    flex: 1 1 0;
+  }
+  .ral-hero .ral-hero__blade .ral-dir__meta {
+    display: block;
+  }
+  .ral-hero__phases button:not([aria-current='step']) .ral-hero__phase-t {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+  .ral-hero__phase-n {
+    opacity: 0.7;
+  }
+  .ral-tag__card {
+    width: 15rem;
+    padding: 0.625rem 0.75rem 0.6875rem;
+  }
+  .ral-tag__title {
+    font-size: 0.9375rem;
+  }
+  .ral-tag__text,
+  .ral-tag__note {
+    font-size: 0.8125rem;
+  }
+  .ral-tag__text {
+    -webkit-line-clamp: 5;
+  }
+  .ral-tag__note {
+    display: block;
+  }
+  .ral-hero .scroll-video__label {
+    top: auto;
+    bottom: calc(100% - var(--wy) - var(--wh) + 0.5rem);
+    font-size: 0.8125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ral-hero__layer {
+    grid-template:
+      'title frame' auto
+      'offer frame' minmax(0, 1fr)
+      'fan fan' auto / minmax(0, 5fr) minmax(0, 7fr);
+    gap: 1.25rem clamp(1.5rem, 3vw, 3rem);
+    padding-top: calc(var(--ral-header-h) + clamp(1rem, 3svh, 2rem));
+  }
+  .ral-hero__title {
+    padding-inline: var(--ral-gutter) 0;
+    font-size: clamp(2rem, min(4vw, 8svh), 4.5rem);
+    line-height: 1.17;
+  }
+  .ral-title__tail {
+    margin-top: 0.875rem;
+  }
+  .ral-hero__offer {
+    align-self: end;
+    gap: 1rem;
+    padding-inline: var(--ral-gutter) 0;
+  }
+  .ral-hero__frame {
+    margin-inline: 0 var(--ral-gutter);
+  }
+  .ral-hero__fan {
+    margin-top: clamp(0.25rem, 1.5svh, 1rem);
+    overflow: visible;
+  }
+  /* Нижний запас — под плавающий переключатель вариантов; ещё полоска за краем экрана — на подъём при наведении. */
+  .ral-hero .ral-hero__blade {
+    margin-bottom: -0.75rem;
+    padding: 0.875rem 1.25rem 5.25rem;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .ral-hero .ral-hero__blade:hover,
+  .ral-hero .ral-hero__blade:focus-visible {
+    transform: translateY(-0.5rem);
+  }
+  .ral-hero .ral-hero__blade .ral-dir__name {
+    font-size: clamp(1rem, 1.35vw, 1.25rem);
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 700px) {
+  .ral-hero .ral-hero__blade .ral-dir__meta {
+    display: none;
+  }
+}
+
+/* reduced-motion: сцена не закреплена — тот же первый экран со статичным кадром, ниже — пояснения списком. */
+.ral-hero .scroll-video[data-mode='static'] .scroll-video__stage {
+  height: 100vh;
+  height: 100svh;
+  min-height: 38rem;
+}
+.ral-hero .scroll-video__list {
+  /* Шесть ярлыков: 1 → 2 → 3 колонки, без сиротской плитки. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(16rem, 30%)), 1fr));
+  gap: 1px;
+  padding: clamp(1.5rem, 4vw, 3rem) var(--ral-gutter);
+}
+.ral-hero .scroll-video__list > li {
+  display: grid;
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+.ral-hero .scroll-video__list .ral-tag {
+  position: static;
+  display: grid;
+}
+.ral-hero .scroll-video__list .ral-tag__pin {
+  display: none;
+}
+.ral-hero .scroll-video__list .ral-tag__card {
+  position: static;
+  width: auto;
+  padding: 0.875rem 1rem 1rem;
+  box-shadow: none;
+  clip-path: none;
+}
+.ral-hero .scroll-video__list .ral-tag__text {
+  display: block;
+}
+.ral-hero .scroll-video__list .ral-tag__note {
+  display: block;
+}
+
+/* --- веер направлений ------------------------------------------------------------- */
+
+.ral-fan {
+  overflow-x: clip;
+}
+/* Телефон: образцы листаются вбок, каждый встаёт целиком. */
+.ral-fan .ral-fan__deck {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0 var(--ral-gutter);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--ral-gutter);
+  scrollbar-width: none;
+  list-style: none;
+}
+.ral-blade {
+  flex: 0 0 min(84%, 21rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0;
+  padding: clamp(1.125rem, 2.2vw, 2rem);
+  scroll-snap-align: start;
+  /* Ось веера — ниже образцов: лопасти расходятся дугой. */
+  transform-origin: 50% 165%;
+  will-change: transform;
+}
+.ral-blade__head {
+  display: grid;
+  gap: 0.375rem;
+  text-decoration: none;
+}
+.ral-blade__code {
+  font-size: 0.9375rem;
+}
+.ral-blade__colour {
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+}
+.ral-blade__name {
+  margin-top: clamp(1.5rem, 5vw, 4.5rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 1rem + 1.4vw, 2.125rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.ral-blade__summary {
+  max-width: 34ch;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+.ral-blade__go {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 2.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.32em;
+}
+.ral-blade__go svg {
+  flex: none;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.ral-blade__head:hover .ral-blade__go svg {
+  transform: translate(0.1875rem, -0.1875rem);
+}
+.ral-blade__head:hover .ral-blade__go {
+  text-decoration-thickness: 3px;
+}
+.ral-blade__sections {
+  display: grid;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ral-blade__sections a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.75rem;
+  padding-block: 0.625rem;
+  border-top: 1px solid var(--line);
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+}
+.ral-blade__sections a:hover > span:first-child {
+  text-decoration: underline;
+}
+.ral-blade__sections a > span:last-child {
+  font-weight: 400;
+  color: var(--fg-muted);
+}
+.ral-blade__total {
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line-strong);
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+}
+@media (min-width: 768px) {
+  .ral-fan .ral-fan__deck {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: min(100% - 2 * var(--ral-gutter), var(--ral-max));
+    margin-inline: auto;
+    padding: 0;
+    overflow: visible;
+  }
+}
+
+/* --- каталог-образцы ---------------------------------------------------------------- */
+
+.ral-showcase__board {
+  position: relative;
+}
+/* Телефон: образцы — лентой; широкий экран — три колонки, каждая своего направления. */
+/* position: relative — чтобы абсолютные потомки (sr-only) обрезались лентой, а не растягивали страницу. */
+.ral-tiles--showcase {
+  position: relative;
+  grid-auto-flow: column;
+  grid-auto-columns: min(78vw, 18.5rem);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: var(--fg) transparent;
+}
+.ral-tiles--showcase > li {
+  scroll-snap-align: start;
+}
+.ral-shutters {
+  display: none;
+}
+@media (min-width: 768px) {
+  .ral-tiles--showcase {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: visible;
+  }
+  /* Три шторки цвета направлений закрывают колонки и поднимаются по очереди. */
+  .ral-shutters {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    pointer-events: none;
+  }
+  [data-entrance='pending'] > .ral-shutters,
+  [data-entrance='shown'] > .ral-shutters {
+    display: grid;
+  }
+  .ral-shutters > span {
+    padding: 1rem;
+  }
+  [data-entrance='shown'] > .ral-shutters > span {
+    animation: ral-lift 900ms var(--ease-in-out) calc(var(--i, 0) * 130ms) both;
+  }
+}
+@keyframes ral-lift {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+/* --- полный цикл ---------------------------------------------------------------------- */
+
+.ral-cycle {
+  position: relative;
+}
+.ral-cycle__sticky {
+  padding-block: clamp(3.5rem, 8vw, 7.5rem);
+}
+.ral-cycle__grid {
+  display: grid;
+  gap: 2rem clamp(2rem, 5vw, 5rem);
+}
+.ral-cycle__facts {
+  display: grid;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ral-cycle__facts li {
+  padding-block: 0.6875rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+.ral-cycle__steps {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--line-strong);
+  list-style: none;
+}
+.ral-step {
+  position: relative;
+  border-top: 1px solid var(--line-strong);
+}
+.ral-step__row {
+  display: grid;
+  grid-template-columns: clamp(2.25rem, 5vw, 3.75rem) minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  padding: clamp(0.75rem, 1.8svh, 1.25rem) clamp(0.75rem, 1.5vw, 1.25rem);
+}
+.ral-step__num {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 2.2vw, 2rem);
+  font-weight: 600;
+  line-height: 1;
+}
+.ral-step__body {
+  display: grid;
+  gap: 0.25rem;
+}
+.ral-step__title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.3vw, 1.1875rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.ral-step__text {
+  display: block;
+  max-width: 62ch;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+/* Слой краски: та же строка вывороткой, открывается слева направо, пока листают экран. */
+.ral-step__ink {
+  position: absolute;
+  inset: 0;
+  background: var(--fg);
+  color: var(--bg);
+}
+.ral-step__ink .ral-step__text {
+  color: color-mix(in oklab, var(--bg) 84%, var(--fg));
+}
+@media (min-width: 1024px) {
+  .ral-cycle__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+  }
+  .ral-cycle[data-pinned] {
+    height: calc((var(--steps, 5) * 55 + 100) * 1svh);
+  }
+  .ral-cycle[data-pinned] .ral-cycle__sticky {
+    position: sticky;
+    top: var(--ral-header-h);
+    display: grid;
+    align-items: center;
+    height: calc(100svh - var(--ral-header-h));
+    padding-block: 1.25rem;
+    overflow: hidden;
+  }
+}
+@media (min-width: 1024px) and (max-height: 760px) {
+  .ral-cycle[data-pinned] .ral-step__text,
+  .ral-cycle[data-pinned] .ral-cycle__facts li {
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+  .ral-cycle[data-pinned] .ral-cycle__facts {
+    margin-top: 1rem;
+  }
+  .ral-cycle[data-pinned] .ral-cycle__facts li {
+    padding-block: 0.4375rem;
+  }
+}
+
+/* --- решения по отраслям ---------------------------------------------------------------- */
+
+.ral-solutions__grid {
+  display: grid;
+  gap: 1.75rem clamp(1.5rem, 4vw, 4rem);
+}
+.ral-solutions__tabs {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+.ral-solutions__group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+.ral-solutions__groupname {
+  display: flex;
+  flex: 0 0 100%;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+}
+.ral-solutions__tab {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.875rem;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: left;
+  cursor: pointer;
+}
+.ral-solutions__tab:hover {
+  box-shadow: inset 0 0 0 1.5px var(--fg);
+}
+.ral-solutions__tab.is-active {
+  background: var(--fg);
+  color: var(--bg);
+  box-shadow: none;
+}
+.ral-solutions__panel {
+  display: grid;
+  gap: 1.5rem clamp(1.25rem, 2.5vw, 2.5rem);
+  min-width: 0;
+}
+.ral-solutions__visual {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  overflow: hidden;
+  background: var(--surface-2);
+  animation: ral-shutter var(--dur-slow) var(--ease-out) backwards;
+}
+.ral-solutions__visual img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+}
+.ral-solutions__visual.is-product {
+  padding: clamp(0.875rem, 2vw, 1.5rem) clamp(0.875rem, 2vw, 1.5rem) 0;
+  background: var(--bg);
+}
+.ral-solutions__visual.is-product img {
+  box-shadow: var(--shadow);
+}
+.ral-solutions__visual figcaption {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+.ral-solutions__visual:not(.is-product) figcaption {
+  background: var(--surface);
+  color: var(--fg);
+}
+.ral-solutions__visual.is-product figcaption {
+  padding-inline: 0;
+}
+.ral-solutions__nophoto {
+  display: grid;
+  place-items: center;
+  font-size: 0.875rem;
+}
+.ral-solutions__text {
+  display: grid;
+  align-content: start;
+  gap: 0.875rem;
+  min-width: 0;
+}
+.ral-solutions__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.ral-solutions__summary {
+  max-width: 46ch;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+.ral-solutions__facts {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ral-solutions__facts li {
+  padding-block: 0.5rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9375rem;
+}
+.ral-solutions__facts li > span {
+  font-weight: 600;
+}
+.ral-solutions__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+  padding-top: 0.25rem;
+}
+@media (min-width: 768px) {
+  .ral-solutions__panel {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: start;
+  }
+}
+@media (min-width: 1024px) {
+  .ral-solutions__grid {
+    grid-template-columns: minmax(0, 3.4fr) minmax(0, 8.6fr);
+    align-items: start;
+  }
+  .ral-solutions__tabs {
+    gap: 1.5rem;
+  }
+  /* Список отраслей длиннее панели: панель едет вместе с прокруткой, выбранная отрасль всегда на виду. */
+  .ral-solutions__grid > .ral-solutions__panel {
+    position: sticky;
+    top: calc(var(--ral-header-h) + 1.5rem);
+  }
+  .ral-solutions__group {
+    display: grid;
+    gap: 0;
+  }
+  .ral-solutions__groupname {
+    margin-bottom: 0.5rem;
+  }
+  .ral-solutions__tab {
+    min-height: 2.5rem;
+    padding: 0.4375rem 0.75rem;
+    border-radius: 0;
+    box-shadow: inset 0 1px 0 var(--line);
+  }
+  .ral-solutions__tab:hover {
+    box-shadow: inset 0 1px 0 var(--line), inset 3px 0 0 var(--fg);
+  }
+}
+
+/* --- проекты --------------------------------------------------------------------------- */
+
+.ral-projects__grid {
+  display: grid;
+  gap: clamp(1.75rem, 3.5vw, 3rem) clamp(1rem, 2.4vw, 2rem);
+  padding: 0;
+  list-style: none;
+}
+.ral-project__link {
+  display: block;
+  text-decoration: none;
+}
+.ral-project__photo {
+  display: block;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.ral-project__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.ral-project__link:hover .ral-project__photo img {
+  transform: scale(1.03);
+}
+/* Плашка направления наезжает на фото снизу слева. */
+.ral-project__plate {
+  position: relative;
+  display: grid;
+  gap: 0.25rem;
+  width: min(88%, 27rem);
+  margin-top: -2.25rem;
+  padding: 0.875rem 3rem 1rem 1rem;
+}
+.ral-project__code {
+  font-size: 0.75rem;
+}
+.ral-project__title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.ral-project__meta {
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--fg-muted);
+}
+.ral-project__arrow {
+  position: absolute;
+  top: 0.875rem;
+  right: 0.875rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.ral-project__link:hover .ral-project__arrow {
+  transform: translate(0.1875rem, -0.1875rem);
+}
+.ral-project[data-entrance='pending'] .ral-project__photo {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+.ral-project[data-entrance='pending'] .ral-project__plate {
+  clip-path: inset(0 100% 0 0);
+}
+.ral-project[data-entrance='shown'] .ral-project__photo {
+  animation: ral-photo-in var(--dur-slow) var(--ease-out) calc(var(--i, 0) * 120ms) backwards;
+}
+.ral-project[data-entrance='shown'] .ral-project__plate {
+  animation: ral-shutter var(--dur-slow) var(--ease-out) calc(var(--i, 0) * 120ms + 260ms) backwards;
+}
+@keyframes ral-photo-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+@media (min-width: 768px) {
+  .ral-projects__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* --- клиенты, письма, госзаказ --------------------------------------------------------- */
+
+.ral-proof__grid {
+  display: grid;
+  gap: 2.5rem clamp(2rem, 5vw, 5rem);
+}
+.ral-proof__services {
+  display: grid;
+  margin: 1.75rem 0 0;
+}
+.ral-proof__services > div {
+  display: grid;
+  gap: 0.25rem;
+  padding-block: 0.875rem;
+  border-top: 1px solid var(--line);
+}
+.ral-proof__services dt {
+  font-weight: 600;
+}
+.ral-proof__services dd {
+  max-width: 58ch;
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+.ral-logos {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 1px;
+  list-style: none;
+}
+.ral-logos li {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  padding: clamp(0.375rem, 1.6vw, 1.25rem);
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+.ral-logos img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.ral-proof__more {
+  max-width: 62ch;
+  margin: 1rem 0 0;
+  font-size: 0.9375rem;
+  color: var(--fg-muted);
+}
+.ral-letters {
+  display: grid;
+  gap: 1px;
+  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+  padding: 1px;
+  list-style: none;
+}
+.ral-letters li {
+  display: grid;
+  background: var(--surface);
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+.ral-letters figure {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 1.5rem;
+  margin: 0;
+  padding: clamp(1.125rem, 2.2vw, 1.75rem);
+}
+.ral-letters blockquote {
+  margin: 0;
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.ral-letters figcaption {
+  display: grid;
+  gap: 0.125rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--fg-muted);
+}
+.ral-letters__who {
+  font-weight: 600;
+  color: var(--fg);
+}
+.ral-proof__all {
+  margin: 1.25rem 0 0;
+}
+.ral-proof__all a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 600;
+}
+@media (min-width: 900px) {
+  .ral-letters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .ral-proof__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+}
+
+/* --- заявка ------------------------------------------------------------------------------ */
+
+.ral-request__grid {
+  display: grid;
+  gap: 2rem clamp(2rem, 5vw, 5rem);
+}
+.ral-request__cities {
+  display: grid;
+  margin-top: 1.75rem;
+}
+.ral-request__city {
+  display: grid;
+  gap: 0.625rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--line-strong);
+}
+.ral-request__cityname {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.ral-request__city[data-selected] .ral-request__cityname::before {
+  content: '';
+  width: 0.625rem;
+  height: 0.625rem;
+  flex: none;
+  background: var(--fg);
+}
+.ral-request__city ul {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+.ral-request__city li {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  gap: 0.625rem;
+  align-items: start;
+}
+.ral-request__city li > svg {
+  margin-top: 0.1875rem;
+}
+.ral-request__city li a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  overflow-wrap: anywhere;
+}
+.ral-request__form {
+  min-width: 0;
+  padding: clamp(1rem, 3vw, 2.25rem);
+  box-shadow: var(--shadow);
+}
+@media (min-width: 1024px) {
+  .ral-request__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+}
+
+/* --- без движения -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ral-title__line,
+  .ral-hero__offer,
+  .ral-hero .ral-hero__blade,
+  .ral-solutions__visual,
+  .ral-project[data-entrance] .ral-project__photo,
+  .ral-project[data-entrance] .ral-project__plate,
+  .ral-shutters > span {
+    animation: none !important;
+  }
+  .ral-shutters {
+    display: none !important;
+  }
+  .ral-hero .ral-hero__blade,
+  .ral-tag__card,
+  .ral-blade__go svg,
+  .ral-project__photo img,
+  .ral-project__arrow {
+    transition: none;
+  }
+  .ral-hero .ral-hero__blade:hover,
+  .ral-hero .ral-hero__blade:focus-visible,
+  .ral-project__link:hover .ral-project__photo img {
+    transform: none;
+  }
+  .ral-project[data-entrance='pending'] .ral-project__photo {
+    opacity: 1;
+    transform: none;
+  }
+  .ral-project[data-entrance='pending'] .ral-project__plate {
+    clip-path: none;
+  }
+}
