@@ -17,7 +17,7 @@ web
 - `src/lib/utils.js` с `cn()` (clsx + tailwind-merge) для совместимости с компонентами 21st.dev.
 - Шрифты локально через `@fontsource`, обязательно с кириллицей. Конкретные гарнитуры из `promt.md` (Cormorant Garamond, Manrope) пришли из Nocturne и больше не обязательны (вывод из отказа от Nocturne; гарнитуры выбираются заново).
 - Бэкенда нет. Форма по умолчанию в демо-режиме; реальная отправка через `VITE_FORM_ENDPOINT` (Formspree или Web3Forms), выключена, пока заказчик не даст свой адрес. Токены ботов во фронтенд не класть.
-- Деплой: публичный репозиторий `dvk-style-redesign` на GitHub, GitHub Pages через Actions, `base: '/dvk-style-redesign/'`, пути к картинкам через `import.meta.env.BASE_URL`.
+- Деплой: публичный репозиторий `WitchRasL/dvk-demo` на GitHub, GitHub Pages через Actions, `base: '/dvk-demo/'`, адрес `https://witchrasl.github.io/dvk-demo/`, пути к картинкам через `import.meta.env.BASE_URL`.
 
 ## Users
 

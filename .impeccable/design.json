@@ -1,0 +1,912 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-18T22:55:16.986Z",
+  "title": "Design System: ДВК Стиль — концепт редизайна",
+  "extensions": {
+    "colorMeta": {
+      "showroom-bg": {
+        "role": "neutral",
+        "displayName": "Шоурум · графит зала",
+        "canonical": "oklch(15.3% 0.007 56)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#282625",
+          "#474443",
+          "#696563",
+          "#8c8885",
+          "#b1adab",
+          "#d3d0ce",
+          "#f0eeec"
+        ]
+      },
+      "showroom-surface": {
+        "role": "neutral",
+        "displayName": "Шоурум · поверхность",
+        "canonical": "oklch(18.6% 0.009 59)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#282624",
+          "#484442",
+          "#6a6562",
+          "#8d8884",
+          "#b1adaa",
+          "#d4d0cd",
+          "#f1eeec"
+        ]
+      },
+      "showroom-surface-2": {
+        "role": "neutral",
+        "displayName": "Шоурум · поверхность 2",
+        "canonical": "oklch(22.3% 0.013 62)",
+        "tonalRamp": [
+          "#0d0b09",
+          "#292623",
+          "#494440",
+          "#6b655f",
+          "#8f8881",
+          "#b3ada7",
+          "#d5d0cb",
+          "#f2eeea"
+        ]
+      },
+      "showroom-fg": {
+        "role": "neutral",
+        "displayName": "Шоурум · тёплый лён",
+        "canonical": "oklch(94.0% 0.021 82)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#292621",
+          "#49443d",
+          "#6b655b",
+          "#8f887c",
+          "#b3ada3",
+          "#d5d0c8",
+          "#f2eee7"
+        ]
+      },
+      "showroom-fg-muted": {
+        "role": "neutral",
+        "displayName": "Шоурум · вторичный текст",
+        "canonical": "oklch(73.4% 0.035 79)",
+        "tonalRamp": [
+          "#0e0b06",
+          "#2b261c",
+          "#4c4437",
+          "#706453",
+          "#948773",
+          "#b7ac9b",
+          "#d9d0c2",
+          "#f5ede2"
+        ]
+      },
+      "showroom-line": {
+        "role": "neutral",
+        "displayName": "Шоурум · волосяная латунная линия",
+        "canonical": "rgb(226 196 146 / 0.16)",
+        "tonalRamp": [
+          "#110a01",
+          "#30240f",
+          "#534224",
+          "#79623a",
+          "#a08557",
+          "#c1ab85",
+          "#e1ceb0",
+          "#fcecd4"
+        ]
+      },
+      "showroom-accent": {
+        "role": "secondary",
+        "displayName": "Шоурум · латунь",
+        "canonical": "oklch(78.3% 0.100 81)",
+        "tonalRamp": [
+          "#120900",
+          "#332303",
+          "#584111",
+          "#7f6023",
+          "#a78340",
+          "#c7a974",
+          "#e6cea3",
+          "#feeccd"
+        ]
+      },
+      "showroom-accent-fg": {
+        "role": "neutral",
+        "displayName": "Шоурум · текст на латуни",
+        "canonical": "oklch(19.3% 0.020 73)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#2a2621",
+          "#4a443d",
+          "#6c655b",
+          "#91887d",
+          "#b4ada3",
+          "#d6d0c8",
+          "#f3eee7"
+        ]
+      },
+      "showroom-action": {
+        "role": "primary",
+        "displayName": "Шоурум · золото заявки",
+        "canonical": "oklch(80.3% 0.112 83)",
+        "tonalRamp": [
+          "#120900",
+          "#332301",
+          "#594004",
+          "#816014",
+          "#a98233",
+          "#c9a96c",
+          "#e8cd9d",
+          "#feeccc"
+        ]
+      },
+      "showroom-action-fg": {
+        "role": "neutral",
+        "displayName": "Шоурум · текст на золоте",
+        "canonical": "oklch(18.9% 0.024 75)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#2a2620",
+          "#4a443b",
+          "#6d6559",
+          "#92877a",
+          "#b5aca1",
+          "#d7d0c6",
+          "#f3ede6"
+        ]
+      },
+      "showroom-focus": {
+        "role": "secondary",
+        "displayName": "Шоурум · кольцо фокуса",
+        "canonical": "oklch(87.6% 0.096 85)",
+        "tonalRamp": [
+          "#110a00",
+          "#312405",
+          "#554215",
+          "#7c6227",
+          "#a28544",
+          "#c4ab77",
+          "#e3cfa5",
+          "#fdedcb"
+        ]
+      },
+      "showroom-brass": {
+        "role": "secondary",
+        "displayName": "Шоурум · латунь линий",
+        "canonical": "oklch(72.9% 0.101 80)",
+        "tonalRamp": [
+          "#130900",
+          "#342303",
+          "#594011",
+          "#816023",
+          "#a88240",
+          "#c9a974",
+          "#e7cda3",
+          "#feeccf"
+        ]
+      },
+      "showroom-brass-hi": {
+        "role": "secondary",
+        "displayName": "Шоурум · латунь, блик",
+        "canonical": "oklch(90.9% 0.080 89)",
+        "tonalRamp": [
+          "#100a01",
+          "#2f250c",
+          "#514320",
+          "#766435",
+          "#9c8752",
+          "#bead81",
+          "#ded0ad",
+          "#f9eed1"
+        ]
+      },
+      "showroom-brass-text": {
+        "role": "secondary",
+        "displayName": "Шоурум · латунь слова-акцента",
+        "canonical": "oklch(83.0% 0.095 83)",
+        "tonalRamp": [
+          "#120900",
+          "#322405",
+          "#564115",
+          "#7d6128",
+          "#a48444",
+          "#c5aa77",
+          "#e4cea5",
+          "#feeccb"
+        ]
+      },
+      "showroom-stone-hi": {
+        "role": "tertiary",
+        "displayName": "Шоурум · камень, свет",
+        "canonical": "oklch(93.9% 0.022 83)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#292620",
+          "#49443c",
+          "#6b655a",
+          "#8f887b",
+          "#b3ada2",
+          "#d5d0c7",
+          "#f2eee7"
+        ]
+      },
+      "showroom-stone": {
+        "role": "tertiary",
+        "displayName": "Шоурум · камень ниши",
+        "canonical": "oklch(87.8% 0.033 81)",
+        "tonalRamp": [
+          "#0e0b06",
+          "#2b261d",
+          "#4b4437",
+          "#6f6554",
+          "#938874",
+          "#b6ad9c",
+          "#d8d0c2",
+          "#f4eee3"
+        ]
+      },
+      "showroom-stone-lo": {
+        "role": "tertiary",
+        "displayName": "Шоурум · камень, тень",
+        "canonical": "oklch(77.5% 0.049 81)",
+        "tonalRamp": [
+          "#0f0a04",
+          "#2d2518",
+          "#4f4330",
+          "#73644a",
+          "#988769",
+          "#bbac93",
+          "#dbcfbb",
+          "#f7eddd"
+        ]
+      },
+      "showroom-landscape-bg": {
+        "role": "neutral",
+        "displayName": "Шоурум · сумерки (благоустройство)",
+        "canonical": "oklch(16.3% 0.014 264)",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#25262a",
+          "#42454a",
+          "#63666d",
+          "#858991",
+          "#aaaeb5",
+          "#ced1d7",
+          "#eceef3"
+        ]
+      },
+      "showroom-metal-bg": {
+        "role": "neutral",
+        "displayName": "Шоурум · холодный графит (металл)",
+        "canonical": "oklch(16.2% 0.005 248)",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#252728",
+          "#434547",
+          "#646669",
+          "#87898c",
+          "#acaeb0",
+          "#cfd1d3",
+          "#edeff0"
+        ]
+      },
+      "ral-primer": {
+        "role": "neutral",
+        "displayName": "RAL 1015 · грунт",
+        "canonical": "oklch(87.3% 0.045 77)",
+        "tonalRamp": [
+          "#0f0a05",
+          "#2d2519",
+          "#4f4332",
+          "#73644d",
+          "#98866c",
+          "#bbac96",
+          "#dbcfbd",
+          "#f7edde"
+        ]
+      },
+      "ral-retail": {
+        "role": "secondary",
+        "displayName": "RAL 9005 · ритейл",
+        "canonical": "oklch(16.5% 0.004 286)",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#262627",
+          "#454546",
+          "#666668",
+          "#89898b",
+          "#aeaeb0",
+          "#d1d1d2",
+          "#eeeef0"
+        ]
+      },
+      "ral-landscape": {
+        "role": "secondary",
+        "displayName": "RAL 6018 · благоустройство",
+        "canonical": "oklch(65.1% 0.164 138)",
+        "tonalRamp": [
+          "#011000",
+          "#0c2f00",
+          "#205208",
+          "#367819",
+          "#549e37",
+          "#84c170",
+          "#b0e2a0",
+          "#d4fcc7"
+        ]
+      },
+      "ral-metal": {
+        "role": "secondary",
+        "displayName": "RAL 7035 · металлическая мебель",
+        "canonical": "oklch(85.3% 0.008 152)",
+        "tonalRamp": [
+          "#0a0b0b",
+          "#252725",
+          "#434644",
+          "#636764",
+          "#868a87",
+          "#abafac",
+          "#cfd2cf",
+          "#edefed"
+        ]
+      },
+      "ral-paper": {
+        "role": "neutral",
+        "displayName": "RAL 9016 · бумага веера",
+        "canonical": "oklch(95.4% 0.008 99)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#272624",
+          "#464542",
+          "#676662",
+          "#8a8984",
+          "#afaeaa",
+          "#d2d1cd",
+          "#efeeeb"
+        ]
+      },
+      "ral-anthracite": {
+        "role": "neutral",
+        "displayName": "RAL 7016 · антрацит и чернила",
+        "canonical": "oklch(30.6% 0.012 214)",
+        "tonalRamp": [
+          "#090c0c",
+          "#232728",
+          "#404648",
+          "#60686a",
+          "#828b8d",
+          "#a8afb1",
+          "#ccd2d4",
+          "#eaeff1"
+        ]
+      },
+      "ral-ink-on-dark": {
+        "role": "neutral",
+        "displayName": "Палитра RAL · чернила на чёрном",
+        "canonical": "oklch(94.1% 0.020 88)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#292621",
+          "#48453d",
+          "#6a665b",
+          "#8e897d",
+          "#b2aea3",
+          "#d4d1c8",
+          "#f1eee7"
+        ]
+      },
+      "ral-signal": {
+        "role": "primary",
+        "displayName": "RAL 2004 · сигнал заявки",
+        "canonical": "oklch(64.3% 0.218 35)",
+        "tonalRamp": [
+          "#1f0000",
+          "#4b0c00",
+          "#7b2108",
+          "#b43007",
+          "#ec4718",
+          "#fb8a6d",
+          "#fec0b0",
+          "#fee9e4"
+        ]
+      },
+      "ral-signal-fg": {
+        "role": "neutral",
+        "displayName": "Палитра RAL · текст на сигнале",
+        "canonical": "oklch(16.0% 0.019 53)",
+        "tonalRamp": [
+          "#0e0a09",
+          "#2b2522",
+          "#4b433e",
+          "#6e645d",
+          "#93867f",
+          "#b6aca5",
+          "#d8cfca",
+          "#f4ede9"
+        ]
+      },
+      "ral-signal-lit": {
+        "role": "primary",
+        "displayName": "Палитра RAL · сигнал, наведение",
+        "canonical": "oklch(70.6% 0.192 40)",
+        "tonalRamp": [
+          "#1d0200",
+          "#471200",
+          "#782501",
+          "#ab3d0e",
+          "#e0571f",
+          "#fd8962",
+          "#fcc2ae",
+          "#fee9e2"
+        ]
+      },
+      "blueprint-sheet": {
+        "role": "neutral",
+        "displayName": "Чертёж · лист",
+        "canonical": "oklch(98.8% 0.001 0)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454544",
+          "#666665",
+          "#898988",
+          "#aeaead",
+          "#d1d1d0",
+          "#eeeeee"
+        ]
+      },
+      "blueprint-surface": {
+        "role": "neutral",
+        "displayName": "Чертёж · графа",
+        "canonical": "oklch(100.0% 0.000 0)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "blueprint-surface-2": {
+        "role": "neutral",
+        "displayName": "Чертёж · подложка",
+        "canonical": "oklch(95.1% 0.004 0)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#262625",
+          "#454543",
+          "#666664",
+          "#898987",
+          "#aeaeac",
+          "#d1d1cf",
+          "#eeeeed"
+        ]
+      },
+      "blueprint-ink": {
+        "role": "neutral",
+        "displayName": "Чертёж · тушь",
+        "canonical": "oklch(19.1% 0.000 0)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "blueprint-ink-muted": {
+        "role": "neutral",
+        "displayName": "Чертёж · вторичный текст",
+        "canonical": "oklch(47.4% 0.003 0)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454544",
+          "#666664",
+          "#898987",
+          "#aeaeac",
+          "#d1d1cf",
+          "#eeeeed"
+        ]
+      },
+      "blueprint-vermilion": {
+        "role": "primary",
+        "displayName": "Чертёж · киноварь",
+        "canonical": "oklch(54.2% 0.186 32)",
+        "tonalRamp": [
+          "#200000",
+          "#4b0a02",
+          "#7c1f10",
+          "#b03521",
+          "#e0553d",
+          "#fc8872",
+          "#fcc1b4",
+          "#fee9e4"
+        ]
+      },
+      "switcher-bg": {
+        "role": "neutral",
+        "displayName": "Переключатель · фон",
+        "canonical": "oklch(21.0% 0.004 0)",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#262627",
+          "#454546",
+          "#666668",
+          "#89898b",
+          "#aeaeb0",
+          "#d1d1d2",
+          "#eeeef0"
+        ]
+      },
+      "switcher-fg": {
+        "role": "neutral",
+        "displayName": "Переключатель · текст",
+        "canonical": "oklch(96.7% 0.001 0)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262627",
+          "#454545",
+          "#666667",
+          "#89898a",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeef"
+        ]
+      },
+      "switcher-muted": {
+        "role": "neutral",
+        "displayName": "Переключатель · вторичный текст",
+        "canonical": "oklch(73.4% 0.011 286)",
+        "tonalRamp": [
+          "#0b0b0d",
+          "#262629",
+          "#444449",
+          "#65656c",
+          "#888890",
+          "#adadb3",
+          "#d0d0d5",
+          "#eeeef2"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "showroom-display": {
+        "displayName": "Шоурум · Display",
+        "purpose": "h1 hero, всегда три короткие строки."
+      },
+      "showroom-headline": {
+        "displayName": "Шоурум · Headline",
+        "purpose": "Заголовки экранов."
+      },
+      "showroom-accent-word": {
+        "displayName": "Шоурум · слово-акцент",
+        "purpose": "Одно курсивное латунное слово в заголовке (PT Serif Italic)."
+      },
+      "showroom-body": {
+        "displayName": "Шоурум · Body",
+        "purpose": "Лиды и текст, строка до 62–64ch."
+      },
+      "showroom-label": {
+        "displayName": "Шоурум · Label",
+        "purpose": "Крошки, полоса фаз, названия колонок футера — прописные с трекингом 0.14–0.2em."
+      },
+      "ral-display": {
+        "displayName": "Палитра RAL · Display",
+        "purpose": "Три глагола позиционирования в hero."
+      },
+      "ral-headline": {
+        "displayName": "Палитра RAL · Headline",
+        "purpose": "Заголовки экранов, до 21ch."
+      },
+      "ral-body": {
+        "displayName": "Палитра RAL · Body",
+        "purpose": "Текст и интерфейс; кнопки — 600."
+      },
+      "ral-label": {
+        "displayName": "Палитра RAL · Mono",
+        "purpose": "Только коды RAL, артикулы и габариты."
+      },
+      "blueprint-display": {
+        "displayName": "Чертёж · Display",
+        "purpose": "h1 первого листа, курсив."
+      },
+      "blueprint-headline": {
+        "displayName": "Чертёж · Headline",
+        "purpose": "Заголовки листов, курсив."
+      },
+      "blueprint-body": {
+        "displayName": "Чертёж · Body",
+        "purpose": "Текст; жирного нет, выделение — 500."
+      },
+      "blueprint-label": {
+        "displayName": "Чертёж · Mono",
+        "purpose": "Только размеры, обозначения и номера листов."
+      }
+    },
+    "shadows": [
+      {
+        "name": "showroom-shadow",
+        "value": "0 28px 56px -22px rgb(0 0 0 / 0.75), 0 2px 6px rgb(0 0 0 / 0.35)",
+        "purpose": "Шоурум: форма заявки — то, что стоит над залом."
+      },
+      {
+        "name": "showroom-gold-button",
+        "value": "inset 0 1px 0 rgb(255 249 230 / 0.7), inset 0 -1px 0 rgb(96 64 22 / 0.4), 0 12px 28px -14px rgb(226 168 80 / 0.7)",
+        "purpose": "Шоурум: блик, кромка и свечение кнопки заявки."
+      },
+      {
+        "name": "showroom-hairline",
+        "value": "inset 0 0 0 1px rgb(226 196 146 / 0.16)",
+        "purpose": "Шоурум: волосяная латунная рамка поверхностей."
+      },
+      {
+        "name": "ral-shadow",
+        "value": "0 18px 40px -22px rgb(14 14 16 / 0.45), 0 2px 6px -2px rgb(14 14 16 / 0.18)",
+        "purpose": "Палитра RAL: фото товара на подиуме и мега-меню."
+      },
+      {
+        "name": "ral-seam",
+        "value": "inset 0 0 0 1px color-mix(in oklab, currentColor 46%, transparent)",
+        "purpose": "Палитра RAL: шов образца на поле того же цвета (в коде — var(--line-strong))."
+      },
+      {
+        "name": "blueprint-shadow",
+        "value": "0 18px 40px -22px rgb(20 20 20 / 0.45)",
+        "purpose": "Чертёж: только слои поверх листа — мега-меню, угловой штамп, диалоги."
+      },
+      {
+        "name": "switcher-bar",
+        "value": "0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.22)",
+        "purpose": "Переключатель вариантов над любым миром."
+      }
+    ],
+    "motion": [
+      {
+        "name": "rule-animated-properties",
+        "value": "transform, opacity, clip-path",
+        "purpose": "Единственные анимируемые свойства во всех вариантах (сторож — src/variants/conventions.test.js)."
+      },
+      {
+        "name": "rule-reduced-motion",
+        "value": "[data-variant] * { animation-duration: 1ms; animation-delay: 0ms; animation-iteration-count: 1; transition-duration: 1ms; transition-delay: 0ms }",
+        "purpose": "Одно правило отключения движения — src/core/ui/reduced-motion.css; hero при этом не закрепляется."
+      },
+      {
+        "name": "hero-scroll-length",
+        "value": "360vh / 230vh (телефон); фото-сцена «Палитры RAL» — 300vh / 200vh",
+        "purpose": "Длина закреплённой сцены hero, ролик перематывается скроллом."
+      },
+      {
+        "name": "showroom-ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Шоурум: появление света и состояний."
+      },
+      {
+        "name": "showroom-ease-in-out",
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "Шоурум: движение туда-обратно."
+      },
+      {
+        "name": "showroom-dur",
+        "value": "180ms / 420ms / 850ms",
+        "purpose": "Шоурум: fast / base / slow."
+      },
+      {
+        "name": "ral-ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Палитра RAL: «мазок» клавиши, подъём фото."
+      },
+      {
+        "name": "ral-ease-in-out",
+        "value": "cubic-bezier(0.76, 0, 0.24, 1)",
+        "purpose": "Палитра RAL: шторки и перекраска целыми модулями."
+      },
+      {
+        "name": "ral-dur",
+        "value": "160ms / 320ms / 640ms",
+        "purpose": "Палитра RAL: fast / base / slow; заливка перекраски — 0.7 s."
+      },
+      {
+        "name": "blueprint-ease-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Чертёж: «проход плоттера» — шторка clip-path."
+      },
+      {
+        "name": "blueprint-ease-in-out",
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "Чертёж: движение туда-обратно."
+      },
+      {
+        "name": "blueprint-dur",
+        "value": "140ms / 320ms / 720ms",
+        "purpose": "Чертёж: fast / base / slow."
+      },
+      {
+        "name": "switcher-sheet-in",
+        "value": "220ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Панель «О вариантах»: opacity + translateY(24px)."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "switcher-bar",
+        "value": "900px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Шоурум · кнопка заявки",
+      "kind": "button",
+      "refersTo": "showroom-button-primary",
+      "description": "Золотой градиент — только заявка и главное действие страницы; при наведении проходит блик.",
+      "html": "<button class=\"ds-sr-btn-primary\">Заявка на подбор</button>",
+      "css": ".ds-sr-btn-primary { position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0.8rem 1.45rem; border: 0; border-radius: 2px; font: 500 0.9375rem/1.2 'Golos Text', system-ui, sans-serif; letter-spacing: 0.01em; color: #1a1207; background: linear-gradient(176deg, #f8e3ab 0%, #e8c070 40%, #c99547 76%, #a87a33 100%); box-shadow: inset 0 1px 0 rgb(255 249 230 / 0.7), inset 0 -1px 0 rgb(96 64 22 / 0.4), 0 12px 28px -14px rgb(226 168 80 / 0.7); cursor: pointer; transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-sr-btn-primary::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(105deg, transparent 32%, rgb(255 251 238 / 0.6) 48%, transparent 64%); transform: translateX(-110%); transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1); } .ds-sr-btn-primary:hover::after { transform: translateX(110%); } .ds-sr-btn-primary:active { transform: scale(0.98); } .ds-sr-btn-primary:focus-visible { outline: 2px solid #f3d28c; outline-offset: 3px; }"
+    },
+    {
+      "name": "Шоурум · вторичная кнопка",
+      "kind": "button",
+      "refersTo": "showroom-button-secondary",
+      "description": "Латунная рамка в одну линию на графите; «В запросе» — рамка ярче.",
+      "html": "<div class=\"ds-sr-stage\"><button class=\"ds-sr-btn-secondary\">В запрос КП</button></div>",
+      "css": ".ds-sr-stage { padding: 1.25rem; background: #0e0b09; } .ds-sr-btn-secondary { display: inline-flex; align-items: center; min-height: 3rem; padding: 0.8rem 1.45rem; border: 0; border-radius: 2px; font: 500 0.9375rem/1.2 'Golos Text', system-ui, sans-serif; letter-spacing: 0.01em; color: #f2eadc; background: rgb(226 196 146 / 0.04); box-shadow: inset 0 0 0 1px rgb(226 196 146 / 0.45); cursor: pointer; } .ds-sr-btn-secondary:hover { background: rgb(226 196 146 / 0.1); box-shadow: inset 0 0 0 1px rgb(246 223 164 / 0.75); } .ds-sr-btn-secondary:focus-visible { outline: 2px solid #f3d28c; outline-offset: 3px; }"
+    },
+    {
+      "name": "Шоурум · карточка-витрина",
+      "kind": "card",
+      "refersTo": "showroom-card",
+      "description": "Каменная ниша 5:4 со светом сверху на графитовой карточке с волосяной латунной рамкой.",
+      "html": "<article class=\"ds-sr-card\"><div class=\"ds-sr-card__niche\"><span class=\"ds-sr-card__lamp\"></span></div><p class=\"ds-sr-card__title\">Позиция каталога</p><p class=\"ds-sr-card__meta\">Цена — с сайта или «по запросу»</p></article>",
+      "css": ".ds-sr-card { width: 17rem; overflow: hidden; background: #16120f; border-radius: 4px; box-shadow: inset 0 0 0 1px rgb(226 196 146 / 0.16); color: #f2eadc; font-family: 'Golos Text', system-ui, sans-serif; } .ds-sr-card__niche { position: relative; aspect-ratio: 5 / 4; background: radial-gradient(120% 70% at 50% -12%, #fff9ec 0%, rgb(255 249 236 / 0) 58%), linear-gradient(180deg, #f2eadb 0%, #e2d5bf 64%, #c6b393 100%); box-shadow: inset 0 22px 30px -22px rgb(40 26 10 / 0.55), inset 0 0 0 1px rgb(60 40 20 / 0.1); } .ds-sr-card__lamp { position: absolute; inset: 0; opacity: 0.55; background: radial-gradient(48% 40% at 50% 0%, rgb(255 236 196 / 0.95), rgb(255 236 196 / 0) 100%); mix-blend-mode: soft-light; transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-sr-card:hover .ds-sr-card__lamp { opacity: 1; } .ds-sr-card__title { margin: 0; padding: 1rem 1rem 0.25rem; font: 400 1.2rem/1.2 'Tenor Sans', 'Times New Roman', serif; } .ds-sr-card__meta { margin: 0; padding: 0 1rem 1rem; font-size: 0.875rem; color: #b5a791; }"
+    },
+    {
+      "name": "Палитра RAL · сигнальная клавиша",
+      "kind": "button",
+      "refersTo": "ral-button-signal",
+      "description": "Оранжевый RAL 2004 — только заявка; наведение закрашивает клавишу «мазком» слева направо.",
+      "html": "<button class=\"ds-ral-btn-signal\"><span>Заявка на подбор</span></button>",
+      "css": ".ds-ral-btn-signal { position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0.5rem 1.375rem; border: 0; border-radius: 2px; font: 600 0.9375rem/1.15 'Onest', system-ui, sans-serif; background: #F44611; color: #140B06; cursor: pointer; transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-ral-btn-signal::before { content: ''; position: absolute; inset: 0; z-index: -1; background: #FF6C35; clip-path: inset(0 100% 0 0); transition: clip-path 320ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-ral-btn-signal:hover::before, .ds-ral-btn-signal:focus-visible::before { clip-path: inset(0 0 0 0); } .ds-ral-btn-signal:active { transform: translateY(1px); } .ds-ral-btn-signal:focus-visible { outline: 2px solid #293133; outline-offset: 3px; }"
+    },
+    {
+      "name": "Палитра RAL · карточка-образец",
+      "kind": "card",
+      "refersTo": "ral-sample-label",
+      "description": "Подиум цвета направления со швом и кодом RAL, ниже — этикетка на бумаге: одна сетка подписи везде.",
+      "html": "<article class=\"ds-ral-swatch\"><div class=\"ds-ral-swatch__stage\"><span class=\"ds-ral-swatch__photo\"></span><p class=\"ds-ral-swatch__plinth\"><span class=\"ds-ral-mono\">RAL 6018</span><span>Благоустройство</span></p></div><dl class=\"ds-ral-label\"><div><dt>Материал</dt><dd class=\"ds-ral-mono\">[уточнить]</dd></div><div><dt>Ш×В×Г, мм</dt><dd class=\"ds-ral-mono\">[уточнить]</dd></div><div><dt>Арт.</dt><dd class=\"ds-ral-mono\">[уточнить]</dd></div></dl></article>",
+      "css": ".ds-ral-swatch { width: 17rem; font: 400 0.875rem/1.35 'Onest', system-ui, sans-serif; color: #293133; background: #F1F0EA; } .ds-ral-swatch__stage { display: grid; grid-template-rows: 1fr auto; aspect-ratio: 5 / 4; padding: 0.875rem 0.875rem 0; background: #57A639; color: #0B1A07; box-shadow: inset 0 0 0 1px rgb(11 26 7 / 0.46); } .ds-ral-swatch__photo { background: #ffffff; border-radius: 1px; box-shadow: 0 18px 40px -22px rgb(14 14 16 / 0.45), 0 2px 6px -2px rgb(14 14 16 / 0.18); transition: transform 640ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-ral-swatch:hover .ds-ral-swatch__photo { transform: translateY(-0.25rem) scale(1.015); } .ds-ral-swatch__plinth { display: flex; justify-content: space-between; margin: 0; padding-block: 0.5rem 0.5625rem; font-size: 0.75rem; } .ds-ral-mono { font: 400 0.8125rem/1.35 'JetBrains Mono', ui-monospace, Consolas, monospace; font-variant-numeric: tabular-nums; letter-spacing: 0.01em; } .ds-ral-label { display: grid; margin: 0; padding: 0.875rem; } .ds-ral-label > div { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); gap: 0.5rem; align-items: baseline; padding-block: 0.3125rem; border-top: 1px solid rgb(41 49 51 / 0.24); } .ds-ral-label dt { font-size: 0.75rem; color: #545B5D; } .ds-ral-label dd { margin: 0; }"
+    },
+    {
+      "name": "Чертёж · кнопка заявки",
+      "kind": "button",
+      "refersTo": "blueprint-button-primary",
+      "description": "Киноварь в рамке основной линии; наведение заливает кнопку тушью слева направо.",
+      "html": "<button class=\"ds-bp-btn-primary\"><span>Заявка на подбор</span></button>",
+      "css": ".ds-bp-btn-primary { position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; min-height: 2.875rem; padding: 0.625rem 1.25rem; border: 2px solid #c4321a; border-radius: 0; font: 500 0.9375rem/1.15 'Fira Sans', system-ui, sans-serif; background: #c4321a; color: #ffffff; cursor: pointer; transition: transform 140ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-bp-btn-primary::before { content: ''; position: absolute; inset: 0; z-index: -1; background: #141414; clip-path: inset(0 100% 0 0); transition: clip-path 320ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-bp-btn-primary:hover { border-color: #141414; } .ds-bp-btn-primary:hover::before, .ds-bp-btn-primary:focus-visible::before { clip-path: inset(0 0 0 0); } .ds-bp-btn-primary:active { transform: translateY(1px); } .ds-bp-btn-primary:focus-visible { outline: 2px solid #c4321a; outline-offset: 3px; }"
+    },
+    {
+      "name": "Чертёж · вторичная кнопка",
+      "kind": "button",
+      "refersTo": "blueprint-button-secondary",
+      "description": "Белая графа в рамке 2 px; наведение заливает её штриховкой сечения.",
+      "html": "<button class=\"ds-bp-btn-secondary\"><span class=\"ds-bp-btn-secondary__label\">В запрос КП</span></button>",
+      "css": ".ds-bp-btn-secondary { position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; min-height: 2.875rem; padding: 0.625rem 1.25rem; border: 2px solid #141414; border-radius: 0; font: 500 0.9375rem/1.15 'Fira Sans', system-ui, sans-serif; background: #ffffff; color: #141414; cursor: pointer; } .ds-bp-btn-secondary::before { content: ''; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(45deg, transparent 0 5px, rgb(20 20 20 / 0.55) 5px 6px), #efefec; clip-path: inset(0 100% 0 0); transition: clip-path 320ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-bp-btn-secondary:hover::before, .ds-bp-btn-secondary:focus-visible::before { clip-path: inset(0 0 0 0); } .ds-bp-btn-secondary__label { padding: 0 0.25rem; background: #ffffff; } .ds-bp-btn-secondary:hover .ds-bp-btn-secondary__label { background: #efefec; } .ds-bp-btn-secondary:focus-visible { outline: 2px solid #c4321a; outline-offset: 3px; }"
+    },
+    {
+      "name": "Чертёж · основная надпись",
+      "kind": "custom",
+      "refersTo": "blueprint-card",
+      "description": "Штамп листа графами: основная линия 2 px по контуру, тонкая 1 px между графами; номера — моноширинным.",
+      "html": "<dl class=\"ds-bp-stamp\"><div class=\"ds-bp-stamp__wide\"><dt>Организация</dt><dd>ООО «ДВК Стиль»</dd></div><div class=\"ds-bp-stamp__wide\"><dt>Наименование</dt><dd>Общий вид</dd></div><div><dt>Лист</dt><dd class=\"ds-bp-mono\">1</dd></div><div><dt>Листов</dt><dd class=\"ds-bp-mono\">8</dd></div></dl>",
+      "css": ".ds-bp-stamp { display: grid; grid-template-columns: 5fr 5fr 2fr 2fr; width: 27rem; margin: 0; border: 2px solid #141414; background: #ffffff; color: #141414; font: 400 0.9375rem/1.3 'Fira Sans', system-ui, sans-serif; } .ds-bp-stamp > div { padding: 0.5rem 0.75rem; min-width: 0; } .ds-bp-stamp > div + div { border-left: 1px solid #141414; } .ds-bp-stamp dt { margin-bottom: 0.125rem; font-size: 0.6875rem; line-height: 1.2; color: #5c5c5a; } .ds-bp-stamp dd { margin: 0; } .ds-bp-mono { font: 400 1.125rem/1.2 'PT Mono', ui-monospace, monospace; }"
+    },
+    {
+      "name": "Переключатель вариантов",
+      "kind": "nav",
+      "refersTo": "variant-switcher",
+      "description": "Нейтральная рамка концепта: одинаковая во всех трёх мирах, токены варианта не использует.",
+      "html": "<div class=\"ds-vs\"><button class=\"ds-vs__btn\" aria-pressed=\"true\"><span class=\"ds-vs__key\">1</span>Шоурум</button><button class=\"ds-vs__btn\" aria-pressed=\"false\"><span class=\"ds-vs__key\">2</span>Палитра RAL</button><button class=\"ds-vs__btn\" aria-pressed=\"false\"><span class=\"ds-vs__key\">3</span>Чертёж</button></div>",
+      "css": ".ds-vs { display: inline-flex; align-items: center; gap: 2px; padding: 4px; background: #18181a; border: 1px solid rgb(255 255 255 / 0.14); border-radius: 999px; box-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.22); font: 500 13px/1.2 system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; } .ds-vs__btn { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: #a8a8b0; font: inherit; white-space: nowrap; cursor: pointer; } .ds-vs__btn:hover { background: #2a2a2e; color: #f4f4f5; } .ds-vs__btn[aria-pressed='true'] { background: #f4f4f5; color: #18181a; } .ds-vs__btn:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; } .ds-vs__key { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 4px; border: 1px solid currentColor; border-radius: 4px; font-size: 11px; opacity: 0.75; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Три мира на одном ядре",
+    "overview": "Один сайт показан заказчику тремя принципиально разными способами. Данные, маршруты, страницы каталога, квиз заявки и движок hero-ролика общие; вариант — это кожа: свои шрифты, токены на `[data-variant=\"<id>\"]`, шапка, футер, главная и набор `ui` (кнопка, карточка товара, заголовки, появление). Миры не смешиваются: ни один приём не переезжает из варианта в вариант, и ни один вариант не правит ядро под себя. Три направления бизнеса (ритейл, благоустройство, металлическая мебель) в каждом мире равноправны и уживаются по-своему: в «Шоуруме» меняется свет, в «Палитре RAL» — поле цвета, в «Чертеже» — тип листа.\n\n- **«Шоурум» (`showroom`)** — ночной шоурум ДВК: свет витрин и есть интерфейс, всё важное буквально подсвечено. Тёплый почти чёрный графит, латунь только там, где свет, светлый камень под товарами.\n- **«Палитра RAL» (`ral`)** — веер образцов порошковой краски: цвет лежит целыми полями, на каждом подписан код. Смена направления — перекраска сайта. Коды RAL выбраны для макета, это не цвета производства.\n- **«Чертёж» (`blueprint`)** — комплект рабочей документации по ЕСКД: каждый экран — лист в рамке с основной надписью, каждый товар — позиция спецификации. Белый лист, чёрная линия, одна киноварь; без синьки и миллиметровки.\n\nГде что искать в этом документе: цвета варианта — в «Colors», шрифты — в «Typography», материал и поверхности — в «Elevation & Depth» и «Shapes», движение и фишка — в «Components», запреты — в «Do's and Don'ts». В каждом разделе сначала общее, затем три подраздела по вариантам.",
+    "keyCharacteristics": [
+      "Одно ядро, три кожи: вариант задаёт только токены, шрифты и свои компоненты; утилиты Tailwind (`bg-bg`, `text-fg`, `font-display`, `rounded-base`, `duration-base`) читают переменные ближайшего `[data-variant]`.",
+      "Переключатель вариантов — нейтральная рамка концепта, не принадлежит ни одному миру.",
+      "Hero каждого варианта — закреплённая сцена, ролик перематывается скроллом; пояснения стоят на деталях кадра.",
+      "Анимируются только `transform`, `opacity`, `clip-path`; движение выключается одним общим правилом.",
+      "Один главный призыв во всех мирах — «Заявка на подбор», и только он получает сигнальный цвет варианта.",
+      "Направления равноправны: три входа равного веса на первом экране каждого варианта.",
+      "Чего нет в данных — подписано «[уточнить]», а не выдумано."
+    ],
+    "rules": [
+      {
+        "name": "Правило одного сигнала",
+        "body": "В каждом мире сигнальный цвет один и принадлежит заявке: золотой градиент в «Шоуруме», оранжевый RAL 2004 в «Палитре RAL», киноварь в «Чертеже». Вторым акцентом он не становится.",
+        "section": "colors"
+      },
+      {
+        "name": "Правило латуни",
+        "body": "Латунь и золото стоят только там, где свет: линия, рамка, блик, слово-акцент, кнопка заявки. Сплошных латунных плоскостей нет.",
+        "section": "colors"
+      },
+      {
+        "name": "Правило поля",
+        "body": "Роль `--action` в этом мире — чернила поля, а не оранжевый: текущая страница, «В запросе», выделение красятся цветом текста. Оранжевый приходит только через `--signal`.",
+        "section": "colors"
+      },
+      {
+        "name": "Правило шва",
+        "body": "Образец, плашка или подиум того же цвета, что и поле под ними, не растворяется: по периметру идёт шов в одну линию `--line-strong`.",
+        "section": "colors"
+      },
+      {
+        "name": "Правило одной киновари",
+        "body": "Цвет в «Чертеже» один. Всё, что не заявка и не подсветка на чертеже, — тушь на листе.",
+        "section": "colors"
+      },
+      {
+        "name": "Правило одного слова",
+        "body": "В заголовке курсивом PT Serif и латунью набрано одно слово (`<em>`), остальное — Tenor Sans цветом текста.",
+        "section": "typography"
+      },
+      {
+        "name": "Правило маркировки",
+        "body": "JetBrains Mono — только для кодов RAL, артикулов и габаритов. Названия, цены и текст им не набираются.",
+        "section": "typography"
+      },
+      {
+        "name": "Правило моно",
+        "body": "PT Mono — только размеры, обозначения и номера листов. Всё остальное — Fira Sans.",
+        "section": "typography"
+      },
+      {
+        "name": "Правило света",
+        "body": "Акцент делается освещением, а не цветом или рамкой: важное подсвечено, остальное в полутени. При `prefers-reduced-motion` всё освещено сразу.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** держи каждый мир целиком в его папке: токены на `[data-variant=\"<id>\"]`, шрифты и CSS — в `index.jsx` варианта.",
+      "**Do** анимируй только `transform`, `opacity`, `clip-path` и бери длительности из `--dur-*` варианта.",
+      "**Do** прячь и открывай конечные состояния в одном месте: общее правило reduced-motion только сжимает время до 1 ms.",
+      "**Do** оставляй внизу слева место под переключатель вариантов на первом экране и в футере.",
+      "**Do** давай трём направлениям равный вес: три входа одного размера, без «главного».",
+      "**Do** в «Шоуруме» выделяй светом: полутень уходит, сверху раскрывается конус; товар на белом фоне ставь в каменную нишу.",
+      "**Do** в «Палитре RAL» клади цвет целым полем и подписывай его кодом; образец на поле своего цвета обводи швом.",
+      "**Do** в «Чертеже» ставь всё на сетку листа, держи две толщины линий (2 px и 1 px) и подписывай недостающие данные «[уточнить]»."
+    ],
+    "donts": [
+      "**Don't** переноси приёмы между мирами: латунь и свет — только «Шоурум», поля RAL — только «Палитра RAL», рамка листа и штамп — только «Чертёж».",
+      "**Don't** крась переключатель вариантов токенами варианта: он одинаковый во всех трёх.",
+      "**Don't** анимируй раскладку, цвет, тень или фильтр и не заводи в варианте свой список `transition: none` для reduced-motion.",
+      "**Don't** ставь надзаголовки над заголовками экранов — их нет ни в одном из трёх вариантов.",
+      "**Don't** в «Шоуруме»: стекло и размытие подложек, градиентный текст, сплошные латунные плоскости, второе курсивное слово в заголовке, золотой градиент на чём-либо кроме заявки.",
+      "**Don't** в «Палитре RAL»: оранжевый где-либо кроме заявки и отправки квиза, жёсткие тени-плашки, стекло, градиентный текст, моноширинный в тексте и названиях, выдавать коды полей за цвета производства.",
+      "**Don't** в «Чертеже»: синька и миллиметровка, скругления, градиенты, стекло, второй цвет кроме киновари, PT Mono в тексте, `stroke-dashoffset` вместо шторки, выдуманные размеры на чертежах."
+    ]
+  }
+}
