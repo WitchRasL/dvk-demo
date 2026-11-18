@@ -167,6 +167,7 @@ describe('useHeaderMenu', () => {
           дальше
         </button>
         <p data-testid="outside">страница</p>
+        <input aria-label="Поле на странице" />
       </div>
     );
   }
@@ -193,12 +194,24 @@ describe('useHeaderMenu', () => {
     expect(panel()).toBeNull();
   });
 
-  it('Esc закрывает меню и возвращает фокус на его кнопку', () => {
+  it('Esc закрывает меню и возвращает фокус на его кнопку, если фокус был в шапке', () => {
     renderHeader();
+    trigger('solutions').focus();
     fireEvent.click(trigger('solutions'));
-    fireEvent.keyDown(document.body, { key: 'Escape' });
+    trigger('catalog').focus(); // фокус ушёл на соседний элемент шапки
+    fireEvent.keyDown(document.activeElement, { key: 'Escape' });
     expect(panel()).toBeNull();
     expect(document.activeElement).toBe(trigger('solutions'));
+  });
+
+  it('Esc закрывает меню, но не забирает фокус у поля на странице вне шапки', () => {
+    renderHeader();
+    fireEvent.click(trigger('catalog')); // меню открыто (в вариантах — ещё и наведением), а посетитель печатает в поле
+    const field = screen.getByRole('textbox', { name: 'Поле на странице' });
+    field.focus();
+    fireEvent.keyDown(field, { key: 'Escape' });
+    expect(panel()).toBeNull();
+    expect(document.activeElement).toBe(field);
   });
 
   it('нажатие вне шапки закрывает меню, внутри — нет', () => {
@@ -219,21 +232,26 @@ describe('useHeaderMenu', () => {
 });
 
 describe('useFocusTrap: модальное меню удерживает фокус', () => {
-  function Menu({ active = true }) {
+  function Menu({ active = true, burgerStyle, hiddenStyle = { display: 'none' } }) {
     const panelRef = useRef(null);
     const burgerRef = useRef(null);
     useFocusTrap(panelRef, { active, include: [burgerRef] });
     return (
       <div>
         <a href="#before">до меню</a>
-        <button type="button" ref={burgerRef}>
-          Закрыть меню
-        </button>
+        <div style={burgerStyle}>
+          <button type="button" ref={burgerRef}>
+            Закрыть меню
+          </button>
+        </div>
         <div ref={panelRef} role="dialog" aria-modal="true" aria-label="Меню">
           <a href="#one">Каталог</a>
           <button type="button" disabled>
             выключена
           </button>
+          <a href="#hidden" style={hiddenStyle}>
+            скрытый пункт
+          </a>
           <a href="#two">Контакты</a>
         </div>
         <a href="#after">страница под меню</a>
@@ -269,6 +287,43 @@ describe('useFocusTrap: модальное меню удерживает фок�
     screen.getByText('страница под меню').focus();
     tab();
     expect(document.activeElement.textContent).toBe('Закрыть меню');
+  });
+
+  it.each([
+    ['display: none', { display: 'none' }],
+    ['visibility: hidden', { visibility: 'hidden' }],
+  ])('скрытая кнопка закрытия (%s — окно расширили) в круг не входит: Tab не застревает', (_name, burgerStyle) => {
+    render(<Menu burgerStyle={burgerStyle} />);
+    expect(document.activeElement.textContent).toBe('Каталог');
+    tab();
+    expect(document.activeElement.textContent).toBe('Контакты');
+    tab(); // с последнего пункта — на первый, минуя скрытую кнопку
+    expect(document.activeElement.textContent).toBe('Каталог');
+    tab(true); // и обратно
+    expect(document.activeElement.textContent).toBe('Контакты');
+  });
+
+  it('скрытый пункт внутри меню (visibility: hidden) пропускается', () => {
+    render(<Menu hiddenStyle={{ visibility: 'hidden' }} />);
+    tab();
+    expect(document.activeElement.textContent).toBe('Контакты');
+  });
+
+  it('в браузере видимость спрашивается у checkVisibility вместе с visibility: hidden', () => {
+    const asked = [];
+    Element.prototype.checkVisibility = function checkVisibility(options) {
+      asked.push(options);
+      return !(options?.visibilityProperty && this.textContent.includes('Закрыть меню'));
+    };
+    try {
+      render(<Menu />);
+      screen.getByText('Контакты').focus();
+      tab();
+      expect(document.activeElement.textContent).toBe('Каталог');
+      expect(asked.every((options) => options?.visibilityProperty === true)).toBe(true);
+    } finally {
+      delete Element.prototype.checkVisibility;
+    }
   });
 
   it('выключенная ловушка клавишу Tab не перехватывает', () => {

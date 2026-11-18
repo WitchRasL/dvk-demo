@@ -33,10 +33,14 @@ function splitTopLevel(value) {
   return parts.map((part) => part.trim()).filter(Boolean);
 }
 
-/** Блоки `@media (… prefers-reduced-motion: reduce …) { … }` целиком. */
+/**
+ * Блоки `@media (prefers-reduced-motion: reduce) { … }` целиком — только те, где reduce единственное условие.
+ * Составной запрос (`(max-width: 1023px), (prefers-reduced-motion: reduce)`) — это раскладка для телефона
+ * и для reduce сразу, а не список отключения движения: его сторож не трогает.
+ */
 function reducedMotionBlocks(css) {
   const blocks = [];
-  const pattern = /@media[^{]*prefers-reduced-motion:\s*reduce[^{]*\{/g;
+  const pattern = /@media\s*\(\s*prefers-reduced-motion\s*:\s*reduce\s*\)\s*\{/g;
   let match;
   while ((match = pattern.exec(css))) {
     let depth = 1;
@@ -90,6 +94,16 @@ describe('prefers-reduced-motion: одно правило и один источ
     expect(read(`${id}/index.jsx`)).toMatch(/import '\.\.\/\.\.\/core\/ui\/reduced-motion\.css';/);
   });
 
+  it('сторож смотрит только блоки, где reduce — единственное условие', () => {
+    const css = `
+      @media (max-width: 1023px), (prefers-reduced-motion: reduce) { .a { transition: none; } }
+      @media (prefers-reduced-motion: reduce) { .b { animation: none; } }
+      @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) { .c { transition: opacity 1s; } }`;
+    const blocks = reducedMotionBlocks(css);
+    expect(blocks).toHaveLength(1);
+    expect(blocks[0]).toContain('.b { animation: none; }');
+  });
+
   it('в CSS вариантов нет своих списков отключения: под reduce не трогают transition и animation', () => {
     const offenders = [];
     for (const name of cssFiles) {
@@ -121,9 +135,16 @@ describe('общая логика — из ядра, без копий', () => {
   });
 
   it('меню шапки и табы отраслей собраны на хуках ядра', () => {
-    const uses = (hook) => codeFiles.filter((name) => read(name).includes(hook)).map((name) => name.split('/')[0]);
-    expect([...new Set(uses('useHeaderMenu('))].sort()).toEqual([...VARIANT_IDS].sort());
-    expect([...new Set(uses('useTabs('))].sort()).toEqual([...VARIANT_IDS].sort());
-    expect([...new Set(uses('CoreCitySwitch'))].sort()).toEqual([...VARIANT_IDS].sort());
+    // Шов — модуль ядра, из которого вариант импортирует: путь, а не локальное имя импорта.
+    const importsFrom = (modulePath) => {
+      const target = `core/${modulePath}`;
+      // модули из `import … from '…'` и `import '…'` (импорт может занимать несколько строк), без ведущих `../`
+      const imports = (name) => [...read(name).matchAll(/\b(?:from|import)\s*['"]([^'"]+)['"]/g)].some((match) => match[1].replace(/^(?:\.\.\/)+/, '') === target);
+      return [...new Set(codeFiles.filter(imports).map((name) => name.split('/')[0]))].sort();
+    };
+    const all = [...VARIANT_IDS].sort();
+    expect(importsFrom('hooks/useHeaderMenu.js')).toEqual(all);
+    expect(importsFrom('hooks/useTabs.js')).toEqual(all);
+    expect(importsFrom('ui/CitySwitch.jsx')).toEqual(all);
   });
 });

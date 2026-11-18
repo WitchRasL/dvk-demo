@@ -5,12 +5,27 @@ import { useEffect, useRef } from 'react';
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
 
+/**
+ * Узел виден и может принять фокус: не под hidden / inert, не display: none и не visibility: hidden.
+ * На скрытом узле focus() молча не срабатывает — в круг фокуса такой узел входить не должен.
+ */
+export function canTakeFocus(node) {
+  if (!node || !node.isConnected || node.disabled || node.closest('[hidden], [inert]')) return false;
+  // checkVisibilityCSS — прежнее имя той же опции (Chrome до 121); без неё visibility: hidden не учитывается.
+  if (typeof node.checkVisibility === 'function') return node.checkVisibility({ visibilityProperty: true, checkVisibilityCSS: true });
+  // Окружения без checkVisibility: visibility (она наследуется) — у самого узла, display: none — у него и предков.
+  const view = node.ownerDocument.defaultView;
+  if (/^(hidden|collapse)$/.test(view.getComputedStyle(node).visibility)) return false;
+  for (let element = node; element; element = element.parentElement) {
+    if (view.getComputedStyle(element).display === 'none') return false;
+  }
+  return true;
+}
+
 /** Элементы контейнера, до которых доходит Tab, в порядке документа. */
 export function focusableIn(container) {
   if (!container) return [];
-  return [...container.querySelectorAll(FOCUSABLE)].filter(
-    (node) => !node.closest('[hidden], [inert]') && (typeof node.checkVisibility !== 'function' || node.checkVisibility()),
-  );
+  return [...container.querySelectorAll(FOCUSABLE)].filter(canTakeFocus);
 }
 
 const inDocumentOrder = (a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1);
@@ -29,7 +44,8 @@ export function useFocusTrap(ref, { active = true, include, initialFocus = true 
     const container = ref.current;
     if (!active || !container) return undefined;
     const loop = () => {
-      const extra = (includeRef.current ?? []).map((item) => item?.current).filter((node) => node && !node.disabled);
+      // Кнопка закрытия из шапки входит в круг, только пока видна: на широком окне её прячет CSS.
+      const extra = (includeRef.current ?? []).map((item) => item?.current).filter(canTakeFocus);
       return [...extra, ...focusableIn(container)].sort(inDocumentOrder);
     };
     if (initialFocus && !container.contains(document.activeElement)) focusableIn(container)[0]?.focus();

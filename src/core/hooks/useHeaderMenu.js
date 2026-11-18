@@ -1,6 +1,6 @@
 // Состояние меню шапки — одно на три варианта: мега-меню и меню телефона.
-// Открыто не больше одного меню; его закрывают смена страницы, Esc (фокус возвращается на кнопку меню)
-// и нажатие вне шапки. Разметку, вид и наведение мышью задаёт вариант.
+// Открыто не больше одного меню; его закрывают смена страницы, Esc (фокус возвращается на кнопку меню,
+// если он был в шапке или в меню) и нажатие вне шапки. Разметку, вид и наведение мышью задаёт вариант.
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 
@@ -29,8 +29,13 @@ export function useHeaderMenu({ containerRef, keepOnOutsidePress } = {}) {
     if (!open) return undefined;
     const onKey = (event) => {
       if (event.key !== 'Escape') return;
-      const scope = containerRef?.current ?? document;
-      restoreRef.current = [...scope.querySelectorAll('[aria-controls]')].find((node) => node.getAttribute('aria-controls') === panelId(open)) ?? null;
+      const container = containerRef?.current;
+      const id = panelId(open);
+      // Фокус возвращается на кнопку меню, только если он был в шапке или в самом меню:
+      // меню, открытое наведением, по Esc не забирает фокус у поля на странице.
+      const focused = document.activeElement;
+      const inside = Boolean(focused) && (container ? container.contains(focused) : Boolean(focused.closest?.(`[id="${id}"], [aria-controls="${id}"]`)));
+      restoreRef.current = inside ? ([...(container ?? document).querySelectorAll('[aria-controls]')].find((node) => node.getAttribute('aria-controls') === id) ?? null) : null;
       setOpen(null);
     };
     const onPointer = (event) => {
