@@ -1,6 +1,6 @@
 // UI «Палитры RAL»: кнопки-«клавиши», заголовки, шапка страницы с кодом поля, карточка-образец с единой этикеткой,
 // раскладка образцов плиткой (целыми модулями, со швом), появление «шторкой» по модулям.
-import { Children, isValidElement, useRef } from 'react';
+import { Children, isValidElement, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import { Eye, LoaderCircle } from 'lucide-react';
 import { getProduct } from '../../core/catalog/index.js';
@@ -237,14 +237,26 @@ export function ProductList({ products = [], onQuickView, layout = 'rail', class
  * ({ children, as='div', delay=0 }) — шторка: блок открывается слева направо целыми модулями.
  * Видимое по умолчанию: прячется только то, что ниже экрана в момент появления; шаги квиза открываются сразу.
  * reduced-motion и окружения без IntersectionObserver — без движения.
+ * Шторка доехала — состояние снова 'idle': обрезка (clip-path) держится только пока идёт движение.
  */
 const inForm = (element) => Boolean(element.closest('form'));
 
 export function Reveal({ children, as: Tag = 'div', delay = 0, className }) {
   const ref = useRef(null);
   const state = useEntrance(ref, { immediate: inForm });
+  const [played, setPlayed] = useState(false);
+  // Своя анимация блока, а не всплывшая от содержимого (кнопки, индикаторы внутри).
+  const onAnimationEnd = (event) => {
+    if (event.target === event.currentTarget) setPlayed(true);
+  };
   return (
-    <Tag ref={ref} className={cn('ral-reveal', className)} data-reveal={state} style={delay ? { '--reveal-delay': `${delay}s` } : undefined}>
+    <Tag
+      ref={ref}
+      className={cn('ral-reveal', className)}
+      data-reveal={played ? 'idle' : state}
+      onAnimationEnd={onAnimationEnd}
+      style={delay ? { '--reveal-delay': `${delay}s` } : undefined}
+    >
       {children}
     </Tag>
   );

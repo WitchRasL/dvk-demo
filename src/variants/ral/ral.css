@@ -492,20 +492,30 @@
   scroll-snap-align: start;
 }
 
-/* --- появление шторкой -------------------------------------------------------------------- */
+/* --- появление шторкой --------------------------------------------------------------------
+   Край шторки едет через зарегистрированную переменную, а clip-path остаётся обычным значением стиля.
+   Анимацию самого clip-path Chrome уводит на композитор и до её конца не отдаёт блоку нажатия:
+   карточка уже видна, а тап по ней пропадает. Так открытая часть принимает указатель сразу.
+   Когда шторка доехала, Reveal снимает состояние shown — обрезка по краю блока не остаётся. */
 
+@property --ral-shutter {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
 .ral-reveal[data-reveal='pending'] {
   clip-path: inset(0 100% 0 0);
 }
 .ral-reveal[data-reveal='shown'] {
+  clip-path: inset(0 var(--ral-shutter, 0%) 0 0);
   animation: ral-shutter var(--dur-slow) var(--ease-out) var(--reveal-delay, 0s) backwards;
 }
 @keyframes ral-shutter {
   from {
-    clip-path: inset(0 100% 0 0);
+    --ral-shutter: 100%;
   }
   to {
-    clip-path: inset(0 0 0 0);
+    --ral-shutter: 0%;
   }
 }
 

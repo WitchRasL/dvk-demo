@@ -1,5 +1,6 @@
 // Галерея фото: «витрина» (большое фото + миниатюры, товар) или «лента» (фото друг под другом, проект).
 // Первое фото грузится сразу (srcset), остальные — лениво. alt — из данных, иначе название.
+// У миниатюр alt — название и номер фото: это фото товара, а не украшение (кнопку по-прежнему называет aria-label).
 import { useState } from 'react';
 import { cn } from '../../../lib/utils.js';
 import { imageSrc, srcSet } from '../../../lib/images.js';
@@ -80,7 +81,7 @@ export function Gallery({ images = [], name, layout = 'stage', className }) {
                   index === active ? 'border-fg' : 'border-line opacity-70 hover:opacity-100',
                 )}
               >
-                <img src={imageSrc(image.base, 800)} alt="" width={image.w} height={image.h} loading="lazy" decoding="async" className="size-full object-contain p-1" />
+                <img src={imageSrc(image.base, 800)} alt={`${name}, фото ${index + 1}`} width={image.w} height={image.h} loading="lazy" decoding="async" className="size-full object-contain p-1" />
               </button>
             </li>
           ))}

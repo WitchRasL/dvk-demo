@@ -119,6 +119,31 @@ describe('страница товара', () => {
     expect(screen.getByRole('link', { name: /Смотреть товар на dvk-style\.ru/ }).getAttribute('href')).toBe(watch.sourceUrl);
   });
 
+  // Слепая приёмка (F2, P1): миниатюры галереи шли с пустым alt. Ожидаемые подписи — из названий в products.json.
+  it.each(['showroom', 'ral', 'blueprint'])('картинки страницы товара, вариант %s: у каждой alt из названия, фото товара не помечены декоративными', async (variantId) => {
+    const showcase = bySlug('vitrina-pristennaya-s-nakopitelem-vod-24'); // 6 фото
+    const { container } = await renderApp(`/${variantId}/product/${showcase.slug}`);
+    await heading1(showcase.name);
+
+    const images = [...container.querySelectorAll('img')];
+    const isDecorative = (image) => image.getAttribute('alt') === '' && image.getAttribute('aria-hidden') === 'true';
+    const unlabelled = images.filter((image) => !isDecorative(image) && !(image.getAttribute('alt') ?? '').trim());
+    expect(unlabelled.map((image) => image.getAttribute('src'))).toEqual([]);
+
+    const gallery = [...container.querySelectorAll('.gallery img')];
+    expect(gallery.filter(isDecorative)).toEqual([]);
+    const thumbs = [...container.querySelectorAll('.gallery ul img')];
+    expect(thumbs.map((image) => image.getAttribute('alt'))).toEqual(showcase.images.map((_, index) => `${showcase.name}, фото ${index + 1}`));
+    const stage = gallery.find((image) => !thumbs.includes(image));
+    expect(stage.getAttribute('alt')).toBe(showcase.name);
+
+    // Вне галереи на странице — только фото похожих товаров: подпись — название этого товара.
+    const names = new Set(products.map((product) => product.name));
+    const related = [...container.querySelectorAll('main img')].filter((image) => !gallery.includes(image) && !isDecorative(image));
+    expect(related.length).toBeGreaterThan(0);
+    expect(related.filter((image) => !names.has(image.getAttribute('alt')) || image.getAttribute('alt') === showcase.name).map((image) => image.getAttribute('alt'))).toEqual([]);
+  });
+
   it('цена из данных или «по запросу»; характеристики, «Как мы работаем» из 5 шагов и похожие товары', async () => {
     await renderApp(`/ral/product/${watch.slug}`);
     await heading1(watch.name);
