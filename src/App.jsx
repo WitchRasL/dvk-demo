@@ -66,6 +66,7 @@ export default function App() {
           <Route path="contacts" element={<ContactsPage />} />
           <Route path="request" element={<RequestPage />} />
           <Route path="privacy" element={<PrivacyPage />} />
+          {import.meta.env.DEV && <Route path="__scroll-video" Component={lazy(() => import('./core/scroll-video/ScrollVideoDemo.jsx'))} />}
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

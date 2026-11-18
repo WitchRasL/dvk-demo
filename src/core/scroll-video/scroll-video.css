@@ -1,0 +1,175 @@
+/*
+ * Механика скролл-видео. Внешний вид пояснений и оверлея — от варианта (render-пропсы), здесь только
+ * закреплённая сцена, слои и нейтральные запасные стили на токенах варианта.
+ * Анимируются только transform, opacity и clip-path.
+ */
+
+/* Трек: высокий элемент, внутри которого сцена закреплена. Длина — в vh (в svh, если браузер умеет). */
+.scroll-video {
+  position: relative;
+  width: 100%;
+  height: calc(var(--scroll-video-length, 350) * 1vh);
+  height: calc(var(--scroll-video-length, 350) * 1svh);
+}
+
+.scroll-video__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--surface-2, #1b1b1b);
+}
+
+/* reduced-motion: без закрепления, обычный блок с кадром, ниже — список пояснений. */
+.scroll-video[data-mode='static'] {
+  height: auto;
+}
+.scroll-video[data-mode='static'] .scroll-video__stage {
+  position: relative;
+  height: 70vh;
+  height: 70svh;
+  min-height: 24rem;
+}
+
+/* Постер виден с первого кадра; ролик ложится поверх, когда готов его первый кадр. */
+.scroll-video__poster,
+.scroll-video__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.scroll-video__poster {
+  transform-origin: 50% 50%;
+}
+.scroll-video__poster--empty {
+  background: var(--surface-2, #1b1b1b);
+}
+.scroll-video[data-mode='placeholder'] .scroll-video__poster {
+  will-change: transform;
+}
+
+.scroll-video__video {
+  opacity: 0;
+  transition: opacity var(--dur-base, 240ms) var(--ease-out, ease-out);
+}
+.scroll-video__video[data-ready='true'] {
+  opacity: 1;
+}
+
+/* Пояснения: слой с точками кадра; каждое появляется на своём отрезке. */
+.scroll-video__callouts {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.scroll-video__callout {
+  position: absolute;
+  opacity: 0;
+  transform: translate3d(0, 0.75rem, 0);
+  transition:
+    opacity var(--dur-base, 240ms) var(--ease-out, ease-out),
+    transform var(--dur-base, 240ms) var(--ease-out, ease-out);
+}
+.scroll-video__callout[data-active='true'] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Запасной вид пояснения, если вариант не передал renderCallout. */
+.scroll-video__callout--default {
+  left: clamp(9rem, var(--callout-x), calc(100% - 9rem));
+  top: clamp(4rem, var(--callout-y), calc(100% - 4rem));
+}
+.scroll-video__callout-card {
+  translate: -50% -50%;
+  width: min(17rem, 70vw);
+  padding: 0.75rem 1rem;
+  background: var(--surface, #fff);
+  color: var(--fg, #111);
+  border: 1px solid var(--line, #d4d4d0);
+  border-radius: var(--radius, 0.5rem);
+}
+.scroll-video__callout-title {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display, inherit);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.scroll-video__callout-text {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--fg-muted, inherit);
+}
+
+/* Заголовок, кнопки, крошки — слой варианта; клики проходят насквозь, кроме интерактивных элементов. */
+.scroll-video__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.scroll-video__overlay a,
+.scroll-video__overlay button,
+.scroll-video__overlay input,
+.scroll-video__overlay select,
+.scroll-video__overlay textarea,
+.scroll-video__overlay [data-interactive] {
+  pointer-events: auto;
+}
+
+/* Пометка заглушки. Справа внизу: слева внизу плавает переключатель вариантов. */
+.scroll-video__label {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 4;
+  max-width: calc(100% - 2rem);
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface, #fff);
+  color: var(--fg, #111);
+  border: 1px solid var(--line, #d4d4d0);
+  border-radius: var(--radius, 0.5rem);
+  font-family: var(--font-body, inherit);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+
+/* Список пояснений для скринридера: всегда в DOM, не виден. */
+.scroll-video__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Список пояснений в статичном режиме: виден под кадром. */
+.scroll-video__list {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.5rem 1rem;
+  list-style: none;
+}
+.scroll-video__list .scroll-video__callout-card {
+  translate: none;
+  width: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-video__video,
+  .scroll-video__callout {
+    transition: none;
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "directions": [
+    {
+      "id": "retail",
+      "name": "Ритейл и экспозиция",
+      "slug": "retail",
+      "summary": "Фикстура: торговое оборудование",
+      "sections": [
+        {
+          "id": "trade-equipment",
+          "name": "Торговое оборудование",
+          "slug": "trade-equipment",
+          "count": 5,
+          "sourceUrl": null,
+          "categories": [
+            { "id": "showcases", "name": "Витрины", "slug": "showcases", "count": 3, "sourceUrl": null },
+            { "id": "counters", "name": "Прилавки", "slug": "counters", "count": 2, "sourceUrl": null }
+          ]
+        },
+        {
+          "id": "pharmacy-equipment",
+          "name": "Оборудование для аптек",
+          "slug": "pharmacy-equipment",
+          "count": 1,
+          "sourceUrl": null,
+          "categories": [
+            { "id": "pharmacy-showcases", "name": "Аптечные витрины", "slug": "pharmacy-showcases", "count": 1, "sourceUrl": null }
+          ]
+        },
+        { "id": "trade-furniture", "name": "Торговая мебель", "slug": "trade-furniture", "count": 0, "sourceUrl": null, "categories": [] }
+      ]
+    },
+    {
+      "id": "landscape",
+      "name": "Благоустройство",
+      "slug": "landscape",
+      "summary": "Фикстура: уличное оборудование",
+      "sections": [
+        {
+          "id": "benches",
+          "name": "Скамейки",
+          "slug": "benches",
+          "count": 2,
+          "sourceUrl": null,
+          "categories": [
+            { "id": "park-benches", "name": "Парковые скамейки", "slug": "park-benches", "count": 2, "sourceUrl": null }
+          ]
+        },
+        {
+          "id": "playgrounds",
+          "name": "Детские площадки",
+          "slug": "playgrounds",
+          "count": 31,
+          "sourceUrl": null,
+          "categories": [
+            { "id": "slides", "name": "Горки", "slug": "slides", "count": 31, "sourceUrl": null }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "metal",
+      "name": "Металлическая мебель",
+      "slug": "metal",
+      "summary": "Фикстура: металл",
+      "sections": [
+        {
+          "id": "metal-cabinets",
+          "name": "Металлические шкафы",
+          "slug": "metal-cabinets",
+          "count": 2,
+          "sourceUrl": null,
+          "categories": [
+            { "id": "lockers", "name": "Шкафы для раздевалок", "slug": "lockers", "count": 2, "sourceUrl": null }
+          ]
+        },
+        {
+          "id": "metal-racks",
+          "name": "Металлические стеллажи",
+          "slug": "metal-racks",
+          "count": 1,
+          "sourceUrl": null,
+          "categories": []
+        },
+        {
+          "id": "metal-furniture",
+          "name": "Металлическая мебель",
+          "slug": "metal-furniture",
+          "count": 2,
+          "sourceUrl": null,
+          "categories": [
+            { "id": "workbenches", "name": "Верстаки", "slug": "workbenches", "count": 2, "sourceUrl": null }
+          ]
+        }
+      ]
+    }
+  ],
+  "industries": [
+    { "id": "pharmacy", "name": "Аптеки", "slug": "pharmacy", "directions": ["retail"], "summary": "Фикстура", "sourceUrl": null },
+    { "id": "jewelry", "name": "Ювелирные салоны", "slug": "jewelry", "directions": ["retail"], "summary": "Фикстура", "sourceUrl": null },
+    { "id": "school", "name": "Школы и детские сады", "slug": "school", "directions": ["landscape", "metal"], "summary": "Фикстура", "sourceUrl": null },
+    { "id": "municipal", "name": "Городская среда", "slug": "municipal", "directions": ["landscape"], "summary": "Фикстура", "sourceUrl": null },
+    { "id": "industrial", "name": "Производство и склады", "slug": "industrial", "directions": ["metal"], "summary": "Фикстура", "sourceUrl": null }
+  ],
+  "aliases": { "ВИТРИНЫ ТОРГОВЫЕ ПРОМЕТ": "showcases" },
+  "meta": { "source": "fixture", "collectedAt": "2026-11-17" }
+}

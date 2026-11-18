@@ -1,0 +1,1354 @@
+[
+  {
+    "industries": [
+      "pharmacy",
+      "jewelry"
+    ],
+    "materials": [
+      "glass",
+      "metal"
+    ],
+    "lighting": "warm",
+    "dimensions": {
+      "w": 600,
+      "h": 1800,
+      "d": 400,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размер",
+        "value": "600×400×1800 мм"
+      },
+      {
+        "label": "Стекло",
+        "value": "закалённое"
+      }
+    ],
+    "price": 45000,
+    "priceNote": null,
+    "kind": "showcase",
+    "sourceUrl": "https://example.test/vitrina-uzkaya",
+    "images": [
+      {
+        "base": "images/products/vitrina-uzkaya/1",
+        "alt": "vitrina-uzkaya",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p01",
+    "slug": "vitrina-uzkaya",
+    "name": "Витрина узкая торговая",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "showcases"
+  },
+  {
+    "industries": [
+      "jewelry"
+    ],
+    "materials": [
+      "glass",
+      "ldsp"
+    ],
+    "lighting": "cold",
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 52000,
+    "priceNote": null,
+    "kind": "showcase",
+    "sourceUrl": "https://example.test/vitrina-uglovaya",
+    "images": [
+      {
+        "base": "images/products/vitrina-uglovaya/1",
+        "alt": "vitrina-uglovaya",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p02",
+    "slug": "vitrina-uglovaya",
+    "name": "Витрина угловая",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "showcases"
+  },
+  {
+    "industries": [],
+    "materials": [
+      "glass"
+    ],
+    "lighting": "rgb",
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": null,
+    "priceNote": "по запросу",
+    "kind": "showcase",
+    "sourceUrl": "https://example.test/vitrina-muzeynaya",
+    "images": [
+      {
+        "base": "images/products/vitrina-muzeynaya/1",
+        "alt": "vitrina-muzeynaya",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p03",
+    "slug": "vitrina-muzeynaya",
+    "name": "Музейная витрина «Лёд»",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "showcases"
+  },
+  {
+    "industries": [
+      "pharmacy"
+    ],
+    "materials": [
+      "ldsp"
+    ],
+    "lighting": "none",
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": null,
+    "priceNote": "по запросу",
+    "kind": "counter",
+    "sourceUrl": "https://example.test/prilavok-kassa",
+    "images": [
+      {
+        "base": "images/products/prilavok-kassa/1",
+        "alt": "prilavok-kassa",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p04",
+    "slug": "prilavok-kassa",
+    "name": "Прилавок-касса",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "counters"
+  },
+  {
+    "industries": [
+      "jewelry"
+    ],
+    "materials": [
+      "glass",
+      "wood"
+    ],
+    "lighting": "warm",
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 61000,
+    "priceNote": null,
+    "kind": "counter",
+    "sourceUrl": "https://example.test/prilavok-yuvelirny",
+    "images": [
+      {
+        "base": "images/products/prilavok-yuvelirny/1",
+        "alt": "prilavok-yuvelirny",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p05",
+    "slug": "prilavok-yuvelirny",
+    "name": "Прилавок ювелирный",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "counters"
+  },
+  {
+    "industries": [
+      "pharmacy"
+    ],
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "lighting": "cold",
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 38000,
+    "priceNote": null,
+    "kind": "showcase",
+    "sourceUrl": "https://example.test/apteka-vitrina-orange",
+    "images": [
+      {
+        "base": "images/products/apteka-vitrina-orange/1",
+        "alt": "apteka-vitrina-orange",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p06",
+    "slug": "apteka-vitrina-orange",
+    "name": "Аптечная витрина ORANGE",
+    "direction": "retail",
+    "sectionId": "pharmacy-equipment",
+    "categoryId": "pharmacy-showcases"
+  },
+  {
+    "industries": [
+      "municipal"
+    ],
+    "materials": [
+      "wood",
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 14500,
+    "priceNote": null,
+    "kind": "bench",
+    "sourceUrl": "https://example.test/skameyka-parkovaya",
+    "images": [
+      {
+        "base": "images/products/skameyka-parkovaya/1",
+        "alt": "skameyka-parkovaya",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p07",
+    "slug": "skameyka-parkovaya",
+    "name": "Скамейка парковая «Лёгкая»",
+    "direction": "landscape",
+    "sectionId": "benches",
+    "categoryId": "park-benches"
+  },
+  {
+    "industries": [
+      "municipal"
+    ],
+    "materials": [
+      "stone"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 27000,
+    "priceNote": null,
+    "kind": "bench",
+    "sourceUrl": "https://example.test/skamya-kamennaya",
+    "images": [
+      {
+        "base": "images/products/skamya-kamennaya/1",
+        "alt": "skamya-kamennaya",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p08",
+    "slug": "skamya-kamennaya",
+    "name": "Скамья каменная",
+    "direction": "landscape",
+    "sectionId": "benches",
+    "categoryId": "park-benches"
+  },
+  {
+    "industries": [
+      "school",
+      "municipal"
+    ],
+    "materials": [
+      "plastic",
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 89000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-detskaya",
+    "images": [
+      {
+        "base": "images/products/gorka-detskaya/1",
+        "alt": "gorka-detskaya",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p09",
+    "slug": "gorka-detskaya",
+    "name": "Горка детская",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school",
+      "industrial"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 500,
+      "h": 1800,
+      "d": 400,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [],
+    "price": 12000,
+    "priceNote": null,
+    "kind": "cabinet",
+    "sourceUrl": "https://example.test/shkaf-metallicheskiy-1",
+    "images": [
+      {
+        "base": "images/products/shkaf-metallicheskiy-1/1",
+        "alt": "shkaf-metallicheskiy-1",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p10",
+    "slug": "shkaf-metallicheskiy-1",
+    "name": "Шкаф металлический ШМ-1",
+    "direction": "metal",
+    "sectionId": "metal-cabinets",
+    "categoryId": "lockers"
+  },
+  {
+    "industries": [
+      "industrial"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 18000,
+    "priceNote": null,
+    "kind": "cabinet",
+    "sourceUrl": "https://example.test/shkaf-metallicheskiy-2",
+    "images": [
+      {
+        "base": "images/products/shkaf-metallicheskiy-2/1",
+        "alt": "shkaf-metallicheskiy-2",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p11",
+    "slug": "shkaf-metallicheskiy-2",
+    "name": "Шкаф металлический ШМ-2 двустворчатый",
+    "direction": "metal",
+    "sectionId": "metal-cabinets",
+    "categoryId": "lockers"
+  },
+  {
+    "industries": [
+      "industrial"
+    ],
+    "materials": [
+      "metal",
+      "wood"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": 500,
+    "specs": [
+      {
+        "label": "Нагрузка",
+        "value": "500 кг"
+      }
+    ],
+    "price": 21000,
+    "priceNote": null,
+    "kind": "workbench",
+    "sourceUrl": "https://example.test/verstak-slesarny",
+    "images": [
+      {
+        "base": "images/products/verstak-slesarny/1",
+        "alt": "verstak-slesarny",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p12",
+    "slug": "verstak-slesarny",
+    "name": "Верстак слесарный",
+    "direction": "metal",
+    "sectionId": "metal-furniture",
+    "categoryId": "workbenches"
+  },
+  {
+    "industries": [
+      "industrial"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": 200,
+    "specs": [],
+    "price": null,
+    "priceNote": "по запросу",
+    "kind": "rack",
+    "sourceUrl": "https://example.test/stellazh-polochny",
+    "images": [
+      {
+        "base": "images/products/stellazh-polochny/1",
+        "alt": "stellazh-polochny",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p13",
+    "slug": "stellazh-polochny",
+    "name": "Стеллаж полочный",
+    "direction": "metal",
+    "sectionId": "metal-racks",
+    "categoryId": null
+  },
+  {
+    "industries": [
+      "industrial"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": 1000,
+    "specs": [],
+    "price": 33000,
+    "priceNote": null,
+    "kind": "workbench",
+    "sourceUrl": "https://example.test/verstak-tyazhely",
+    "images": [
+      {
+        "base": "images/products/verstak-tyazhely/1",
+        "alt": "verstak-tyazhely",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "p14",
+    "slug": "verstak-tyazhely",
+    "name": "Верстак тяжёлый",
+    "direction": "metal",
+    "sectionId": "metal-furniture",
+    "categoryId": "workbenches"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 1000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-01",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-01/1",
+        "alt": "gorka-testovaya-01",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-01",
+    "slug": "gorka-testovaya-01",
+    "name": "Горка тестовая 01",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 2000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-02",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-02/1",
+        "alt": "gorka-testovaya-02",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-02",
+    "slug": "gorka-testovaya-02",
+    "name": "Горка тестовая 02",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 3000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-03",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-03/1",
+        "alt": "gorka-testovaya-03",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-03",
+    "slug": "gorka-testovaya-03",
+    "name": "Горка тестовая 03",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 4000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-04",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-04/1",
+        "alt": "gorka-testovaya-04",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-04",
+    "slug": "gorka-testovaya-04",
+    "name": "Горка тестовая 04",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 5000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-05",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-05/1",
+        "alt": "gorka-testovaya-05",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-05",
+    "slug": "gorka-testovaya-05",
+    "name": "Горка тестовая 05",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 6000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-06",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-06/1",
+        "alt": "gorka-testovaya-06",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-06",
+    "slug": "gorka-testovaya-06",
+    "name": "Горка тестовая 06",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 7000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-07",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-07/1",
+        "alt": "gorka-testovaya-07",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-07",
+    "slug": "gorka-testovaya-07",
+    "name": "Горка тестовая 07",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 8000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-08",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-08/1",
+        "alt": "gorka-testovaya-08",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-08",
+    "slug": "gorka-testovaya-08",
+    "name": "Горка тестовая 08",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 9000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-09",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-09/1",
+        "alt": "gorka-testovaya-09",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-09",
+    "slug": "gorka-testovaya-09",
+    "name": "Горка тестовая 09",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 10000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-10",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-10/1",
+        "alt": "gorka-testovaya-10",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-10",
+    "slug": "gorka-testovaya-10",
+    "name": "Горка тестовая 10",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 11000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-11",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-11/1",
+        "alt": "gorka-testovaya-11",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-11",
+    "slug": "gorka-testovaya-11",
+    "name": "Горка тестовая 11",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 12000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-12",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-12/1",
+        "alt": "gorka-testovaya-12",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-12",
+    "slug": "gorka-testovaya-12",
+    "name": "Горка тестовая 12",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 13000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-13",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-13/1",
+        "alt": "gorka-testovaya-13",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-13",
+    "slug": "gorka-testovaya-13",
+    "name": "Горка тестовая 13",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 14000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-14",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-14/1",
+        "alt": "gorka-testovaya-14",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-14",
+    "slug": "gorka-testovaya-14",
+    "name": "Горка тестовая 14",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 15000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-15",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-15/1",
+        "alt": "gorka-testovaya-15",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-15",
+    "slug": "gorka-testovaya-15",
+    "name": "Горка тестовая 15",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 16000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-16",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-16/1",
+        "alt": "gorka-testovaya-16",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-16",
+    "slug": "gorka-testovaya-16",
+    "name": "Горка тестовая 16",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 17000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-17",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-17/1",
+        "alt": "gorka-testovaya-17",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-17",
+    "slug": "gorka-testovaya-17",
+    "name": "Горка тестовая 17",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 18000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-18",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-18/1",
+        "alt": "gorka-testovaya-18",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-18",
+    "slug": "gorka-testovaya-18",
+    "name": "Горка тестовая 18",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 19000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-19",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-19/1",
+        "alt": "gorka-testovaya-19",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-19",
+    "slug": "gorka-testovaya-19",
+    "name": "Горка тестовая 19",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 20000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-20",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-20/1",
+        "alt": "gorka-testovaya-20",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-20",
+    "slug": "gorka-testovaya-20",
+    "name": "Горка тестовая 20",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 21000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-21",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-21/1",
+        "alt": "gorka-testovaya-21",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-21",
+    "slug": "gorka-testovaya-21",
+    "name": "Горка тестовая 21",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 22000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-22",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-22/1",
+        "alt": "gorka-testovaya-22",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-22",
+    "slug": "gorka-testovaya-22",
+    "name": "Горка тестовая 22",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 23000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-23",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-23/1",
+        "alt": "gorka-testovaya-23",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-23",
+    "slug": "gorka-testovaya-23",
+    "name": "Горка тестовая 23",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 24000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-24",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-24/1",
+        "alt": "gorka-testovaya-24",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-24",
+    "slug": "gorka-testovaya-24",
+    "name": "Горка тестовая 24",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 25000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-25",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-25/1",
+        "alt": "gorka-testovaya-25",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-25",
+    "slug": "gorka-testovaya-25",
+    "name": "Горка тестовая 25",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 26000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-26",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-26/1",
+        "alt": "gorka-testovaya-26",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-26",
+    "slug": "gorka-testovaya-26",
+    "name": "Горка тестовая 26",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 27000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-27",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-27/1",
+        "alt": "gorka-testovaya-27",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-27",
+    "slug": "gorka-testovaya-27",
+    "name": "Горка тестовая 27",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 28000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-28",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-28/1",
+        "alt": "gorka-testovaya-28",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-28",
+    "slug": "gorka-testovaya-28",
+    "name": "Горка тестовая 28",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 29000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-29",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-29/1",
+        "alt": "gorka-testovaya-29",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-29",
+    "slug": "gorka-testovaya-29",
+    "name": "Горка тестовая 29",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  },
+  {
+    "industries": [
+      "school"
+    ],
+    "materials": [
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [],
+    "price": 30000,
+    "priceNote": null,
+    "kind": "playground",
+    "sourceUrl": "https://example.test/gorka-testovaya-30",
+    "images": [
+      {
+        "base": "images/products/gorka-testovaya-30/1",
+        "alt": "gorka-testovaya-30",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "id": "bulk-30",
+    "slug": "gorka-testovaya-30",
+    "name": "Горка тестовая 30",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides"
+  }
+]

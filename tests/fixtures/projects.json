@@ -1,0 +1,5 @@
+[
+  { "id": "pr-1", "slug": "apteka-fixture", "title": "Фикстура: аптека", "client": null, "city": null, "year": null, "direction": "retail", "industry": "pharmacy", "summary": "Фикстура", "scope": [], "images": [], "sourceUrl": null },
+  { "id": "pr-2", "slug": "park-fixture", "title": "Фикстура: парк", "client": null, "city": null, "year": null, "direction": "landscape", "industry": "municipal", "summary": "Фикстура", "scope": [], "images": [], "sourceUrl": null },
+  { "id": "pr-3", "slug": "sklad-fixture", "title": "Фикстура: склад", "client": null, "city": null, "year": null, "direction": "metal", "industry": "industrial", "summary": "Фикстура", "scope": [], "images": [], "sourceUrl": null }
+]
