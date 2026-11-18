@@ -1,10 +1,12 @@
 // Швы варианта «Чертёж»: что рисует «Режим чертёж» по данным товара, обозначение позиции спецификации,
 // выноски hero — только из данных (иначе [уточнить]). Ожидаемые значения — из src/data/*.json и спецификации.
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import products from '../../data/products.json';
 import company from '../../data/company.json';
 import { designation, drawingSpec } from './lib/drawing.js';
-import { heroConfig, mapPhotoPoint } from './lib/hero.js';
+import { calloutPoint, heroConfig, heroSource, mapPhotoPoint } from './lib/hero.js';
 
 const bySlug = (slug) => products.find((product) => product.slug === slug);
 
@@ -67,6 +69,33 @@ describe('«Режим чертёж»: слои и размеры по данн�
   });
 });
 
+describe('«Режим чертёж»: шаблон повторяет форму изделия, условный — подписан схемой', () => {
+  it('карусель — свой шаблон: круг в плане, диаметр из данных', () => {
+    const spec = drawingSpec(bySlug('karusel-next-mk-27')); // 1920 × 630 × 1920, план
+    expect(spec.template).toBe('carousel');
+    expect(spec.dims.w).toBe('1920');
+    expect(spec.schematic).toBe(false);
+  });
+
+  it('типовой шаблон игрового комплекса и изделие без габаритов — «габаритная схема», не чертёж', () => {
+    expect(drawingSpec(bySlug('igrovoy-kompleks-d-24-akula')).schematic).toBe(true); // общий шаблон площадки
+    expect(drawingSpec(bySlug('prilavok-dlya-optiki-pod-20')).schematic).toBe(true); // dimensions: null
+    expect(drawingSpec(bySlug('muzeynaya-vitrina-mvp-30')).schematic).toBe(false);
+  });
+
+  it('верстак: тумба и экран — только если они есть в характеристиках', () => {
+    // ВС-100-01: «Комплектация: столешница, опоры», «Наличие экрана: нет»
+    expect(drawingSpec(bySlug('verstak-vs-100-01')).parts).toMatchObject({ pedestal: false, screen: false });
+    // ВЛ-200-05: «нагрузка на ящик тумбы», «Наличие экрана: есть»
+    expect(drawingSpec(bySlug('verstak-vl-200-05-s-ekranom-vl-200-e4')).parts).toMatchObject({ pedestal: true, screen: true });
+  });
+
+  it('стеллаж: число ярусов — из обозначения «высота/ширина×глубина/ярусы»', () => {
+    expect(drawingSpec(bySlug('stellazh-metallicheskiy-ms-pro-2500-1010x800-4')).parts.levels).toBe(4);
+    expect(drawingSpec(bySlug('stellazh-demonstratsionnyy-sd-12')).parts.levels).toBeNull();
+  });
+});
+
 describe('hero: выноски с полкой по данным', () => {
   const { callouts, poster } = heroConfig;
 
@@ -94,8 +123,58 @@ describe('hero: выноски с полкой по данным', () => {
     expect(texts.some((text) => text.includes('Брянск'))).toBe(true); // projects.json: museum-bryansk
   });
 
-  it('заглушка — реальное фото проекта из company.heroPhotos', () => {
-    expect(company.heroPhotos.map((photo) => photo.base)).toContain(poster.base);
+  it('постер — первый кадр ролика, лежит рядом с ним; исходник кадра — фото проекта из company.heroPhotos', () => {
+    expect(poster.src).toBe('media/blueprint/hero-poster.jpg');
+    for (const file of [poster.src, heroConfig.sources.desktop, heroConfig.sources.mobile]) {
+      expect(existsSync(resolve(process.cwd(), 'public', file)), file).toBe(true);
+    }
+    expect(poster.w / poster.h).toBeCloseTo(1280 / 704, 3); // ffprobe hero.mp4: 1280×704
+    expect(company.heroPhotos.map((photo) => photo.base)).toContain(heroSource.base);
+    expect(heroSource.project).toBe('museum-bryansk');
+  });
+
+  it('выноска не приписывает предмету на фото артикул каталога: размеры на объекте — [уточнить], артикул — «в каталоге»', () => {
+    const withCode = callouts.filter((callout) => /ВТ-К-1|МВП-30/.test(callout.text ?? ''));
+    expect(withCode.length).toBeGreaterThanOrEqual(2);
+    for (const callout of withCode) {
+      expect(callout.text).toContain('[уточнить]');
+      expect(callout.text).toMatch(/[Вв] каталоге/);
+      expect(callout.title).not.toMatch(/ВТ-К-1|МВП-30/);
+    }
+  });
+
+  it('точки стоят на деталях ролика (замер по кадрам hero.mp4, 8,04 с): ребро стекла, лампы, костюм', () => {
+    const find = (id) => callouts.find((callout) => callout.id === id);
+    const at = (id, p) => calloutPoint(find(id), p);
+    const glass = find('glass');
+    // ребро стекла ближней витрины: x = 0,74 на 4,8 с и 0,715 на 6,4 с — едет влево
+    expect(at('glass', glass.from).x).toBeGreaterThan(0.72);
+    expect(at('glass', glass.from).x).toBeLessThan(0.76);
+    expect(at('glass', glass.to).x).toBeLessThan(at('glass', glass.from).x);
+    // светильники большой витрины — верхняя четверть кадра, левая половина
+    const light = find('light');
+    expect(at('light', light.from).y).toBeLessThan(0.25);
+    expect(at('light', light.from).x).toBeLessThan(0.45);
+    // костюм в ближней витрине входит справа только во второй половине ролика
+    const object = find('object');
+    expect(object.from).toBeGreaterThan(0.6);
+    expect(at('object', object.to).x).toBeGreaterThan(0.86);
+  });
+});
+
+describe('выноска едет за деталью: точка на прогрессе p', () => {
+  const callout = { from: 0.2, to: 0.4, x: 0.8, y: 0.3, end: { x: 0.7, y: 0.5 } };
+
+  it('внутри отрезка — линейно от начала к концу', () => {
+    const point = calloutPoint(callout, 0.3);
+    expect(point.x).toBeCloseTo(0.75, 5);
+    expect(point.y).toBeCloseTo(0.4, 5);
+  });
+
+  it('до отрезка — начальная точка, после — конечная; без end точка стоит', () => {
+    expect(calloutPoint(callout, 0)).toEqual({ x: 0.8, y: 0.3 });
+    expect(calloutPoint(callout, 1)).toEqual({ x: 0.7, y: 0.5 });
+    expect(calloutPoint({ from: 0, to: 0.5, x: 0.1, y: 0.2 }, 0.25)).toEqual({ x: 0.1, y: 0.2 });
   });
 });
 

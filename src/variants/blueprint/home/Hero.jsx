@@ -1,6 +1,7 @@
 // Лист 1 «Общий вид»: закреплённый лист в рамке формата с зонами. В поле листа — заголовок позиционирования,
 // заявка, телефон и обещание; справа — спецификация трёх направлений (три равных входа); внизу — «Вид А»:
-// ролик или заглушка (фото проекта ДВК) с выносками-позициями; в углу — основная надпись «Лист 1».
+// ролик (проезд по залу музея, доработанное фото проекта ДВК) с выносками-позициями, которые едут за своей
+// деталью; в углу — основная надпись «Лист 1». Ролик не открылся — тот же первый кадр работает заглушкой.
 // Механику даёт ядро (ScrollVideo); окно вида измеряется и передаётся сцене CSS-переменными.
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
@@ -10,10 +11,11 @@ import { useCity } from '../../../core/city/index.js';
 import { ScrollVideo, findScrollVideoRoot, findScrollVideoStage } from '../../../core/scroll-video/index.js';
 import { toTel, wordFor } from '../../../core/ui/format.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
-import { heroConfig, mapPhotoPoint } from '../lib/hero.js';
+import { calloutPoint, heroCaption, heroConfig, mapPhotoPoint } from '../lib/hero.js';
 import { Button } from '../ui/Button.jsx';
 import { Stamp } from './Sheet.jsx';
 
+const HERO_TITLE_ID = 'bp-hero-title';
 const ZONES = 8;
 // ЕСКД: зоны по горизонтали — цифрами справа налево, по вертикали — латинскими буквами снизу вверх.
 const ROWS = ['D', 'C', 'B', 'A'];
@@ -120,7 +122,9 @@ function HeroSheet({ mode, onViewSize, aspect }) {
       <Zones />
       <div className="bp-hs__field">
         <div className="bp-hs__title">
-          <h1 className="bp-hs__h1 font-display">{company.positioning}</h1>
+          <h1 id={HERO_TITLE_ID} className="bp-hs__h1 font-display">
+            {company.positioning}
+          </h1>
           <div className="bp-hs__cta">
             <Button to={`/${variantId}/request`}>Заявка на подбор</Button>
             {phone ? (
@@ -135,8 +139,11 @@ function HeroSheet({ mode, onViewSize, aspect }) {
         </div>
         <DirectionSpec variantId={variantId} />
         <div className="bp-hs__viewbox">
-          <div ref={slotRef} className="bp-hs__view" aria-hidden="true">
-            <span className="bp-hs__view-label bp-mono">Вид А</span>
+          <div ref={slotRef} className="bp-hs__view">
+            <p className="bp-hs__view-label">
+              <span className="bp-mono bp-hs__view-mark">Вид А</span>
+              <span className="bp-hs__view-note">{heroCaption()}</span>
+            </p>
           </div>
         </div>
         <div className="bp-hs__slot" aria-hidden="true" />
@@ -149,11 +156,13 @@ function HeroSheet({ mode, onViewSize, aspect }) {
 function HeroCallout({ callout, index, local, view }) {
   // первая выноска видна с первого кадра; остальные вычерчиваются в начале своего отрезка
   const draw = callout.from === 0 ? 1 : Math.min(1, Math.max(0, local / 0.3));
-  // в заглушке выноска указывает на ту же деталь опорного фото с учётом движения камеры
   const p = callout.from + local * (callout.to - callout.from);
+  // ролик: камера едет — точка идёт за деталью; заглушка: та же деталь на первом кадре с учётом её камеры
+  const onVideo = calloutPoint(callout, p);
   const onPhoto = mapPhotoPoint(callout.photo ?? callout, heroConfig.poster, view, heroConfig.camera, p);
+  const style = { '--cx': callout.x, '--cy': callout.y, '--vx': onVideo.x, '--vy': onVideo.y, '--px': onPhoto.x, '--py': onPhoto.y, '--draw': draw };
   return (
-    <div className="bp-co" style={{ '--cx': callout.x, '--cy': callout.y, '--px': onPhoto.x, '--py': onPhoto.y, '--draw': draw }}>
+    <div className="bp-co" style={style}>
       <span className="bp-co__dot" />
       <span className="bp-co__leader" />
       <div className="bp-co__shelf">
@@ -172,18 +181,15 @@ export function Hero() {
   const [view, setView] = useState(null);
   const onViewSize = useCallback((next) => setView((current) => (current && current.w === next.w && current.h === next.h ? current : next)), []);
   const indexOf = (callout) => config.callouts.findIndex((item) => item.id === callout.id);
-  // окно заглушки — в пропорциях фото, но не уже 2,2 : 1 (лёгкая обрезка по краям вместо пустого листа)
-  const photoAspect = config.poster?.w && config.poster?.h ? Math.min(2.2, config.poster.w / config.poster.h) : 16 / 9;
+  // окно вида — в пропорциях кадра ролика; постер — его первый кадр, поэтому при подмене ничего не прыгает
+  const aspect = config.poster?.w && config.poster?.h ? config.poster.w / config.poster.h : 16 / 9;
   return (
-    <section id="sheet-hero" data-sheet="1" className="bp-hero-sheet" aria-labelledby="bp-hero-title">
-      <h2 id="bp-hero-title" className="sr-only">
-        Общий вид: заявка, направления и интерьер
-      </h2>
+    <section id="sheet-hero" data-sheet="1" className="bp-hero-sheet" aria-labelledby={HERO_TITLE_ID}>
       <ScrollVideo
         {...config}
         className="bp-hero"
         listLabel="Позиции на виде А"
-        renderOverlay={(progress, api) => <HeroSheet mode={api.mode} onViewSize={onViewSize} aspect={api.mode === 'video' ? 16 / 9 : photoAspect} />}
+        renderOverlay={(progress, api) => <HeroSheet mode={api.mode} onViewSize={onViewSize} aspect={aspect} />}
         renderCallout={(callout, state) => <HeroCallout callout={callout} index={indexOf(callout)} local={state.local} view={view} />}
       />
     </section>

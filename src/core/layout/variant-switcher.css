@@ -315,8 +315,11 @@
   }
 }
 
-/* Телефон: маленькая кнопка «1/3», панель — лист снизу во всю ширину. */
-@media (max-width: 639px) {
+/*
+ * Ниже 900 px панель из трёх кнопок (≈480 px) закрывала бы содержимое первого экрана: остаётся маленькая
+ * кнопка «1/3», а выбор варианта переезжает в лист «О вариантах».
+ */
+@media (max-width: 899px) {
   .vs-variant,
   .vs-sep,
   .vs-icon-desktop,
@@ -339,19 +342,10 @@
     color: var(--vs-fg);
   }
 
-  .vs-panel {
-    inset: auto 0 0 0;
-    width: 100%;
-    max-height: 88dvh;
-    border-bottom: 0;
-    border-radius: 16px 16px 0 0;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
   .vs-sheet-switch {
     display: flex;
     gap: 4px;
-    padding: 12px 16px 0;
+    padding: 12px 20px 0;
   }
 
   .vs-variant-sheet {
@@ -362,6 +356,22 @@
     border: 1px solid var(--vs-line);
     white-space: normal;
     text-align: center;
+  }
+}
+
+/* Телефон: панель — лист снизу во всю ширину. */
+@media (max-width: 639px) {
+  .vs-panel {
+    inset: auto 0 0 0;
+    width: 100%;
+    max-height: 88dvh;
+    border-bottom: 0;
+    border-radius: 16px 16px 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .vs-sheet-switch {
+    padding: 12px 16px 0;
   }
 
   .vs-variant-sheet .vs-key {

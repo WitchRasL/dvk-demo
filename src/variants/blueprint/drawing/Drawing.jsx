@@ -1,15 +1,16 @@
 // «Режим чертёж»: SVG-чертёж изделия по шаблону его типа. Слои: каркас (основная линия), стекло (штриховка
 // светопрозрачного материала), LED (цвет-маркер), размеры (выносные и размерные линии, значения — из данных
-// или [уточнить]). Пропорции — по габаритам из данных; без них — условные для типа.
+// или [уточнить]). Пропорции — по габаритам из данных; без них — условные для типа. Условный шаблон подписан
+// «Габаритная схема»; в углу — строка-легенда слоёв.
 import { useId } from 'react';
 import { cn } from '../../../lib/utils.js';
-import { UNKNOWN } from '../lib/drawing.js';
+import { LAYER_LABELS, SCHEMATIC_LABEL, UNKNOWN } from '../lib/drawing.js';
 
 const VB = { w: 400, h: 300 };
 const AREA = { x: 64, y: 30, w: 300, h: 206 };
 
 /** Условные пропорции (ширина : высота или ширина : глубина в плане), если размеров нет. */
-const DEFAULT_RATIO = { showcase: 0.45, counter: 2, cabinet: 0.5, rack: 0.62, workbench: 1.5, bench: 3, playground: 1.45, island: 1.7, other: 1 };
+const DEFAULT_RATIO = { showcase: 0.45, counter: 2, cabinet: 0.5, rack: 0.62, workbench: 1.5, bench: 3, 'bench-arc': 2.5, playground: 1.45, carousel: 1, island: 1.7, other: 1 };
 
 const LOAD_ARROW = 34;
 
@@ -78,8 +79,8 @@ function showcase(b) {
   const ix = b.x + b.w * 0.07;
   const iw = b.w * 0.86;
   const top = b.y + b.h * 0.06;
-  const mid = b.y + b.h * 0.62;
-  const base = b.y + b.h * 0.92;
+  const mid = b.y + b.h * 0.76;
+  const base = b.y + b.h * 0.95;
   return {
     frame: (
       <g>
@@ -88,8 +89,7 @@ function showcase(b) {
         {L(b.x, mid, b.x + b.w, mid, 'bp-d-main')}
         {L(b.x, base, b.x + b.w, base, 'bp-d-thin')}
         <rect x={ix} y={top + 5} width={iw} height={mid - top - 10} className="bp-d-thin" />
-        {L(ix, top + (mid - top) * 0.38, ix + iw, top + (mid - top) * 0.38, 'bp-d-thin')}
-        {L(ix, top + (mid - top) * 0.7, ix + iw, top + (mid - top) * 0.7, 'bp-d-thin')}
+        {[0.27, 0.51, 0.75].map((k) => L(ix, top + (mid - top) * k, ix + iw, top + (mid - top) * k, 'bp-d-thin'))}
         {L(b.x + b.w / 2, mid, b.x + b.w / 2, base, 'bp-d-thin')}
         {L(b.x + b.w / 2 - 5, (mid + base) / 2 - 6, b.x + b.w / 2 - 5, (mid + base) / 2 + 6, 'bp-d-main')}
         {L(b.x + b.w / 2 + 5, (mid + base) / 2 - 6, b.x + b.w / 2 + 5, (mid + base) / 2 + 6, 'bp-d-main')}
@@ -160,9 +160,9 @@ function cabinet(b, { glass }) {
   };
 }
 
-function rack(b) {
+function rack(b, { parts }) {
   const post = Math.max(4, b.w * 0.04);
-  const levels = b.h / b.w > 1.6 ? 5 : 4;
+  const levels = parts?.levels ?? (b.h / b.w > 1.6 ? 5 : 4);
   const shelves = Array.from({ length: levels }, (_, i) => b.y + b.h * 0.04 + ((b.h * 0.86) / (levels - 1)) * i);
   return {
     frame: (
@@ -194,8 +194,9 @@ function rack(b) {
   };
 }
 
-function workbench(b, { ratio, view, ids }) {
-  const screen = ratio ? ratio.h > 1300 : false;
+function workbench(b, { view, ids, parts }) {
+  const screen = Boolean(parts?.screen);
+  const pedestal = Boolean(parts?.pedestal);
   const tableY = screen ? b.y + b.h * 0.58 : b.y;
   const th = Math.max(5, (b.y + b.h - tableY) * 0.08);
   const pedW = b.w * 0.34;
@@ -204,19 +205,25 @@ function workbench(b, { ratio, view, ids }) {
     frame: (
       <g>
         <rect x={b.x} y={tableY} width={b.w} height={th} className="bp-d-main" fill={view === 'detail' ? `url(#${ids.hatch})` : 'none'} />
-        <rect x={b.x + 4} y={tableY + th} width={pedW} height={(b.y + b.h - tableY - th) * 0.72} className="bp-d-main" />
-        {[0.25, 0.5, 0.75].map((k) => {
-          const py = tableY + th + (b.y + b.h - tableY - th) * 0.72 * k;
-          return (
-            <g key={k}>
-              {L(b.x + 4, py, b.x + 4 + pedW, py, 'bp-d-thin')}
-              {L(b.x + 4 + pedW / 2 - 8, py - 7, b.x + 4 + pedW / 2 + 8, py - 7, 'bp-d-main')}
-            </g>
-          );
-        })}
+        {pedestal ? (
+          <g>
+            <rect x={b.x + 4} y={tableY + th} width={pedW} height={(b.y + b.h - tableY - th) * 0.72} className="bp-d-main" />
+            {[0.25, 0.5, 0.75].map((k) => {
+              const py = tableY + th + (b.y + b.h - tableY - th) * 0.72 * k;
+              return (
+                <g key={k}>
+                  {L(b.x + 4, py, b.x + 4 + pedW, py, 'bp-d-thin')}
+                  {L(b.x + 4 + pedW / 2 - 8, py - 7, b.x + 4 + pedW / 2 + 8, py - 7, 'bp-d-main')}
+                </g>
+              );
+            })}
+          </g>
+        ) : null}
         <rect x={b.x + 4} y={tableY + th} width={legW} height={b.y + b.h - tableY - th} className="bp-d-main" />
         <rect x={b.x + b.w - 4 - legW} y={tableY + th} width={legW} height={b.y + b.h - tableY - th} className="bp-d-main" />
-        {L(b.x + 4 + pedW, b.y + b.h - (b.y + b.h - tableY) * 0.12, b.x + b.w - 4 - legW, b.y + b.h - (b.y + b.h - tableY) * 0.12, 'bp-d-thin')}
+        {/* без тумбы — стяжки опор: царга под столешницей и проножка у пола */}
+        {pedestal ? null : L(b.x + 4 + legW, tableY + th + (b.y + b.h - tableY - th) * 0.16, b.x + b.w - 4 - legW, tableY + th + (b.y + b.h - tableY - th) * 0.16, 'bp-d-thin')}
+        {L(b.x + 4 + (pedestal ? pedW : legW), b.y + b.h - (b.y + b.h - tableY) * 0.12, b.x + b.w - 4 - legW, b.y + b.h - (b.y + b.h - tableY) * 0.12, 'bp-d-thin')}
         {screen ? (
           <g>
             <rect x={b.x + b.w * 0.04} y={b.y} width={b.w * 0.92} height={tableY - b.y - 6} className="bp-d-main" />
@@ -275,6 +282,91 @@ function bench(b, { view, materials, ids }) {
     ),
     glass: null,
     led: <LedStrip x1={b.x + 8} x2={b.x + b.w - 8} y={seat + b.h * 0.14} />,
+    node: { x: b.x + b.w, y: b.y + b.h },
+  };
+}
+
+/** Дуговая скамья в плане: кольцевой сектор, брусья сиденья — по радиусам, под ними бетонное основание. */
+function benchArc(b, { materials, ids }) {
+  const concrete = materials.includes('concrete');
+  const half = (35 * Math.PI) / 180;
+  const sin = Math.sin(half);
+  const cos = Math.cos(half);
+  const R = b.w / (2 * sin);
+  const r = Math.max(R * 0.3, (R - b.h) / cos); // внутренний радиус: сектор вписан в габарит по глубине
+  const cx = b.x + b.w / 2;
+  const cy = b.y + R;
+  const at = (radius, angle) => [cx + radius * Math.sin(angle), cy - radius * Math.cos(angle)];
+  const sector = (outer, inner, a) => {
+    const [x1, y1] = at(outer, -a);
+    const [x2, y2] = at(outer, a);
+    const [x3, y3] = at(inner, a);
+    const [x4, y4] = at(inner, -a);
+    return `M${x1} ${y1} A${outer} ${outer} 0 0 1 ${x2} ${y2} L${x3} ${y3} A${inner} ${inner} 0 0 0 ${x4} ${y4} Z`;
+  };
+  const slats = 12;
+  const inset = (R - r) * 0.16;
+  return {
+    frame: (
+      <g>
+        <path d={sector(R - inset, r + inset, half * 0.94)} className="bp-d-hidden" fill={concrete ? `url(#${ids.concrete})` : 'none'} />
+        <path d={sector(R, r, half)} className="bp-d-main" />
+        {Array.from({ length: slats - 1 }, (_, i) => {
+          const angle = -half + ((2 * half) / slats) * (i + 1);
+          const [x1, y1] = at(R, angle);
+          const [x2, y2] = at(r, angle);
+          return L(x1, y1, x2, y2, 'bp-d-thin');
+        })}
+        {L(cx, b.y - 8, cx, b.y + b.h + 8, 'bp-d-axis')}
+      </g>
+    ),
+    glass: null,
+    led: null,
+    node: { x: b.x + b.w, y: b.y + b.h },
+  };
+}
+
+/** Карусель в плане: окружность платформы по диаметру из данных, поручень, сиденья, ступица и оси. */
+function carousel(b) {
+  const R = Math.min(b.w, b.h) / 2;
+  const cx = b.x + b.w / 2;
+  const cy = b.y + b.h / 2;
+  const rail = R * 0.74;
+  const seats = 6;
+  const polar = (radius, angle) => [cx + radius * Math.cos(angle), cy + radius * Math.sin(angle)];
+  return {
+    frame: (
+      <g>
+        <circle cx={cx} cy={cy} r={R} className="bp-d-main" />
+        <circle cx={cx} cy={cy} r={R * 0.9} className="bp-d-thin" />
+        <circle cx={cx} cy={cy} r={rail} className="bp-d-main" />
+        <circle cx={cx} cy={cy} r={R * 0.13} className="bp-d-main" />
+        {Array.from({ length: seats }, (_, i) => {
+          const angle = (Math.PI * 2 * i) / seats + Math.PI / 6;
+          const [x1, y1] = polar(R * 0.13, angle);
+          const [x2, y2] = polar(rail, angle);
+          const [sx, sy] = polar(rail, angle + Math.PI / seats);
+          return (
+            <g key={i}>
+              {L(x1, y1, x2, y2, 'bp-d-thin')}
+              <rect
+                x={sx - R * 0.1}
+                y={sy - R * 0.06}
+                width={R * 0.2}
+                height={R * 0.12}
+                transform={`rotate(${((angle + Math.PI / seats) * 180) / Math.PI + 90} ${sx} ${sy})`}
+                className="bp-d-main bp-d-solid"
+              />
+            </g>
+          );
+        })}
+        {L(cx - R - 10, cy, cx + R + 10, cy, 'bp-d-axis')}
+        {L(cx, cy - R - 10, cx, cy + R + 10, 'bp-d-axis')}
+      </g>
+    ),
+    glass: null,
+    led: null,
+    round: true,
     node: { x: b.x + b.w, y: b.y + b.h },
   };
 }
@@ -363,7 +455,44 @@ function other(b) {
   };
 }
 
-const TEMPLATE_FNS = { showcase, counter, cabinet, rack, workbench, bench, playground, island, other };
+const TEMPLATE_FNS = { showcase, counter, cabinet, rack, workbench, bench, 'bench-arc': benchArc, playground, carousel, island, other };
+
+/** Шаблоны, которые на листе генплана рисуются видом сверху. */
+const PLAN_TEMPLATES = ['playground', 'carousel', 'bench', 'bench-arc', 'other'];
+
+/** Строка-легенда слоёв в углу чертежа: образец линии и название. LED без данных — с пометкой [уточнить]. */
+function Legend({ spec, show, markerId }) {
+  const items = ['frame', 'glass', 'led', 'dims']
+    .filter((layer) => (layer === 'led' ? spec.led !== 'no' : spec.layers.includes(layer)))
+    .map((layer) => ({
+      layer,
+      label: layer === 'led' ? (spec.led === 'unknown' ? `LED ${UNKNOWN}` : 'LED') : LAYER_LABELS[layer].toLowerCase(),
+      off: layer === 'led' ? spec.led === 'unknown' || !show.has(layer) : !show.has(layer),
+    }));
+  let x = 16;
+  const y = VB.h - 9;
+  return (
+    <g className="bp-d-legend">
+      {items.map((item) => {
+        const start = x;
+        x += 22 + item.label.length * 5.7 + 12;
+        return (
+          <g key={item.layer} className={cn(item.off && 'is-off')}>
+            {item.layer === 'frame' ? L(start, y - 3.5, start + 16, y - 3.5, 'bp-d-main') : null}
+            {item.layer === 'glass' ? [0, 5, 10].map((o) => L(start + o, y, start + o + 6, y - 7, 'bp-d-thin')) : null}
+            {item.layer === 'led' ? <line x1={start} y1={y - 3.5} x2={start + 16} y2={y - 3.5} className={item.off ? 'bp-d-hidden' : 'bp-d-led-line'} /> : null}
+            {item.layer === 'dims' ? (
+              <line x1={start} y1={y - 3.5} x2={start + 16} y2={y - 3.5} className="bp-d-thin" markerStart={`url(#${markerId})`} markerEnd={`url(#${markerId})`} />
+            ) : null}
+            <text x={start + 21} y={y} className="bp-d-legend-text">
+              {item.label}
+            </text>
+          </g>
+        );
+      })}
+    </g>
+  );
+}
 
 /** Размерная линия со стрелками и значением. */
 function Dimension({ x1, y1, x2, y2, value, vertical, offset, markerId }) {
@@ -407,13 +536,13 @@ function Dimension({ x1, y1, x2, y2, value, vertical, offset, markerId }) {
 export function Drawing({ spec, materials = [], code, visible, compact = false, className, title }) {
   const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '');
   const markerId = `bp-arrow-${uid}`;
-  const plan = spec.view === 'plan' && ['playground', 'bench', 'other'].includes(spec.template);
+  const plan = spec.view === 'plan' && PLAN_TEMPLATES.includes(spec.template);
   const view = plan ? 'plan' : spec.view === 'plan' ? 'facade' : spec.view;
   const r = spec.ratio;
   const ratio = r ? (plan ? r.w / r.d : r.w / r.h) : DEFAULT_RATIO[spec.template];
   let box = fitBox(ratio);
   const ids = { hatch: `bp-hatch-${uid}`, concrete: `bp-concrete-${uid}` };
-  const build = (b) => TEMPLATE_FNS[spec.template]({ ...b }, { ratio: r, view, glass: spec.layers.includes('glass'), materials, ids });
+  const build = (b) => (TEMPLATE_FNS[spec.template] ?? other)({ ...b }, { ratio: r, view, glass: spec.layers.includes('glass'), materials, ids, parts: spec.parts });
   let parts = build(box);
   // стрелке нагрузки нужно место над изделием: если она упирается в верх поля — уменьшаем вид, прижав к полу
   if (spec.load && parts.loadAt && parts.loadAt.y - LOAD_ARROW < AREA.y + 4) {
@@ -424,8 +553,11 @@ export function Drawing({ spec, materials = [], code, visible, compact = false, 
   const show = new Set(visible ?? spec.layers);
   const has = (layer) => spec.layers.includes(layer) && show.has(layer);
   const dimBox = parts.front ?? box;
-  const horizontal = spec.dims.w;
+  const horizontal = parts.round && spec.dims.w !== UNKNOWN ? `Ø${spec.dims.w}` : spec.dims.w;
   const verticalValue = plan ? spec.dims.d : spec.dims.h;
+  // условный шаблон — не чертёж изделия: так и подписан
+  const caption = spec.schematic ? SCHEMATIC_LABEL : VIEW_LABELS[view];
+  const captionWidth = caption.length * (spec.schematic ? 6.2 : 7.4);
   const noteLabel = plan ? 'В' : 'Г';
   const noteValue = plan ? spec.dims.h : spec.dims.d;
 
@@ -455,14 +587,14 @@ export function Drawing({ spec, materials = [], code, visible, compact = false, 
       {!compact ? (
         <g className="bp-d-caption">
           <text x={AREA.x} y={16} className="bp-d-label">
-            {VIEW_LABELS[view]}
+            {caption}
           </text>
           {code ? (
-            <text x={AREA.x + VIEW_LABELS[view].length * 7.4 + 14} y={16} className="bp-d-text">
+            <text x={AREA.x + captionWidth + 14} y={16} className="bp-d-text">
               {code}
             </text>
           ) : null}
-          {L(AREA.x, 20, AREA.x + VIEW_LABELS[view].length * 7.4 + 4, 20, 'bp-d-thin')}
+          {L(AREA.x, 20, AREA.x + captionWidth + 4, 20, 'bp-d-thin')}
         </g>
       ) : null}
 
@@ -481,7 +613,7 @@ export function Drawing({ spec, materials = [], code, visible, compact = false, 
           </g>
         ) : null}
         {view === 'plan' && !compact ? (
-          <g transform={`translate(26 ${VB.h - 40})`}>
+          <g transform={`translate(26 ${VB.h - 50})`}>
             <path d="M0 -12 L6 8 L0 4 L-6 8 Z" className="bp-d-north" />
             <text x={0} y={22} textAnchor="middle" className="bp-d-label">
               С
@@ -496,9 +628,11 @@ export function Drawing({ spec, materials = [], code, visible, compact = false, 
       {has('dims') ? (
         <g data-layer="dims">
           <Dimension x1={dimBox.x} y1={box.y + box.h} x2={dimBox.x + dimBox.w} y2={box.y + box.h} value={horizontal} offset={compact ? 20 : 26} markerId={markerId} />
-          <Dimension x1={box.x} y1={dimBox.y} x2={box.x} y2={dimBox.y + dimBox.h} value={verticalValue} vertical offset={compact ? 18 : 24} markerId={markerId} />
+          {parts.round ? null : (
+            <Dimension x1={box.x} y1={dimBox.y} x2={box.x} y2={dimBox.y + dimBox.h} value={verticalValue} vertical offset={compact ? 18 : 24} markerId={markerId} />
+          )}
           {!compact ? (
-            <text x={VB.w - 16} y={VB.h - 12} textAnchor="end" className={cn('bp-d-text', noteValue === UNKNOWN && 'is-unknown')}>
+            <text x={VB.w - 12} y={VB.h - 9} textAnchor="end" className={cn('bp-d-text', noteValue === UNKNOWN && 'is-unknown')}>
               {`${noteLabel} ${noteValue}`}
             </text>
           ) : null}
@@ -512,6 +646,8 @@ export function Drawing({ spec, materials = [], code, visible, compact = false, 
           ) : null}
         </g>
       ) : null}
+
+      {!compact ? <Legend spec={spec} show={show} markerId={markerId} /> : null}
     </svg>
   );
 }

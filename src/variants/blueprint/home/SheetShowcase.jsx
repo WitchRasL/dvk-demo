@@ -1,4 +1,5 @@
-// Лист 5 «Позиции каталога»: по две характерные позиции каждого направления. Появление группой: все шесть
+// Лист 5 «Позиции каталога»: по две характерные позиции каждого направления — те, у которых шаблон чертежа
+// повторяет форму изделия (витрины, карусель в плане, дуговая скамья, верстак, стеллаж). Появление группой: все шесть
 // сначала вычерчиваются как чертежи, затем фото «проявляются» поверх шторкой — по столбцам, слева направо.
 // Это и есть фишка «Режим чертёж» в обратную сторону: наведение или кнопка «Чертёж» возвращают чертёж.
 import { useRef } from 'react';
@@ -13,11 +14,11 @@ import { Sheet } from './Sheet.jsx';
 
 const SHOWCASE = [
   'muzeynaya-vitrina-mvp-30',
-  'stellazh-demonstratsionnyy-sd-12',
+  'vitriny-peredney-linii',
   'karusel-next-mk-27',
   'skameyka-na-betonnom-osnovanii-s-222',
   'verstak-vs-100-01',
-  'shkaf-arkhivnyy-sham-11-920',
+  'stellazh-metallicheskiy-ms-pro-2500-1010x800-4',
 ];
 
 export function SheetShowcase() {
@@ -42,7 +43,7 @@ export function SheetShowcase() {
         <ul ref={ref} className="bp-showcase rail" data-intro={shown ? 'done' : 'pending'}>
           {products.map((product, index) => (
             <li key={product.id} style={{ '--col': index % 3 }}>
-              <ProductCard product={product} onQuickView={openQuickView} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 80vw" />
+              <ProductCard product={product} onQuickView={openQuickView} sizes="(min-width: 1024px) 26vw, (min-width: 640px) 40vw, 70vw" />
             </li>
           ))}
         </ul>

@@ -9,6 +9,36 @@ export { UNKNOWN };
 /** Шаблоны чертежей по `product.kind` (interfaces.md); всё прочее — «other». */
 export const TEMPLATES = ['showcase', 'counter', 'cabinet', 'rack', 'workbench', 'bench', 'playground', 'island', 'other'];
 
+// Уточнения шаблона, чтобы чертёж повторял форму изделия. Карусель узнаётся по названию из данных;
+// дуговая скамья — по фото товара: в данных формы в плане нет, поэтому список позиций — здесь.
+const CAROUSEL = /карусел/i;
+const ARC_BENCHES = ['skameyka-na-betonnom-osnovanii-s-222'];
+
+/** Шаблоны, где рисуется условная компоновка, а не изделие: под ними подпись «Габаритная схема». */
+const CONDITIONAL = ['playground', 'other'];
+
+const specValue = (product, pattern) => product?.specs?.find((spec) => pattern.test(spec.label))?.value ?? null;
+
+function templateFor(product) {
+  const base = TEMPLATES.includes(product?.kind) ? product.kind : 'other';
+  if (base === 'playground' && CAROUSEL.test(product?.name ?? '')) return 'carousel';
+  if (base === 'bench' && ARC_BENCHES.includes(product?.slug)) return 'bench-arc';
+  return base;
+}
+
+/** Детали шаблона из характеристик: тумба и экран верстака, число ярусов стеллажа. Нет в данных — не рисуем. */
+function partsFor(product, dimensions) {
+  const labels = (product?.specs ?? []).map((spec) => `${spec.label} ${spec.value}`).join(' ');
+  const screen = specValue(product, /наличие экрана/i);
+  // обозначение стеллажа «2500/1010x800/4»: высота / ширина × глубина / ярусы
+  const levels = String(product?.name ?? '').match(/\d+\/\d+[xх]\d+\/(\d)(?!\d)/i);
+  return {
+    pedestal: /тумб/i.test(labels),
+    screen: screen ? /есть/i.test(screen) : (dimensions?.h ?? 0) > 1300,
+    levels: levels ? Number(levels[1]) : null,
+  };
+}
+
 /** Тип листа по направлению (R18): ритейл — фасады и узлы, благоустройство — генплан, металл — деталировка и нагрузки. */
 export const SHEET_TYPES = {
   retail: { view: 'facade', name: 'Фасады и узлы' },
@@ -53,10 +83,12 @@ const size = (value) => (typeof value === 'number' && Number.isFinite(value) && 
  *   dims: { w: string, h: string, d: string },
  *   ratio: { w: number, h: number, d: number }|null,
  *   load: string|null,
+ *   schematic: boolean,                 // шаблон условный или пропорции не по габаритам — «Габаритная схема»
+ *   parts: { pedestal: boolean, screen: boolean, levels: number|null },
  * }}
  */
 export function drawingSpec(product) {
-  const template = TEMPLATES.includes(product?.kind) ? product.kind : 'other';
+  const template = templateFor(product);
   const materials = Array.isArray(product?.materials) ? product.materials : [];
   const lighting = product?.lighting ?? null;
   const led = LIT.includes(lighting) ? 'yes' : lighting === 'none' ? 'no' : 'unknown';
@@ -72,6 +104,8 @@ export function drawingSpec(product) {
     dims: { w: size(dimensions?.w), h: size(dimensions?.h), d: size(dimensions?.d) },
     ratio: known ? { w: dimensions.w, h: dimensions.h, d: dimensions.d } : null,
     load: typeof product?.load === 'number' && product.load > 0 ? String(product.load) : null,
+    schematic: CONDITIONAL.includes(template) || !known,
+    parts: partsFor(product, dimensions),
   };
 }
 
@@ -88,3 +122,6 @@ export function materialsText(product, label = (value) => value) {
 
 /** Подпись слоя для переключателей. */
 export const LAYER_LABELS = { frame: 'Каркас', glass: 'Стекло', led: 'LED', dims: 'Размеры' };
+
+/** Подпись под видом: условный шаблон — схема, а не чертёж. */
+export const SCHEMATIC_LABEL = 'Габаритная схема';

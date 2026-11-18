@@ -1,7 +1,7 @@
 // Лист 3 «Полный цикл» — структурная схема: пять блоков (замер → проект → производство → доставка → монтаж),
 // соединённых линией связи. На широком экране лист закреплён: скролл ведёт линию от блока к блоку (clip-path),
 // текущий блок «вводится в работу» — заливка тушью, а рисунок стадии под ним вычерчивается по мере подхода линии.
-// На телефоне и с reduced-motion — обычный список, всё видно сразу.
+// На телефоне, в низком окне (до 600 px) и с reduced-motion лист не закрепляется: всё видно сразу.
 import { useRef, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { useMotionValueEvent, useScroll } from 'motion/react';
@@ -34,7 +34,7 @@ export function SheetCycle() {
             <SectionHeading
               id="bp-cycle-title"
               title="Полный цикл под одной крышей"
-              lead="Пять этапов от замера до монтажа — своими специалистами, на своём производстве, своим транспортом."
+              lead={`Этапы 1–${steps.length}: от замера до монтажа — своими специалистами, на своём производстве, своим транспортом.`}
             />
             <div ref={lineRef} className="bp-cycle__scheme" style={{ '--p': 0 }}>
               <span className="bp-cycle__line" aria-hidden="true">

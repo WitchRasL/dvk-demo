@@ -8,7 +8,7 @@ import { UNKNOWN, countText } from '../../../core/ui/format.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { imageSrc, srcSet } from '../../../lib/images.js';
 import { cn } from '../../../lib/utils.js';
-import { heroConfig } from '../lib/hero.js';
+import { heroSource } from '../lib/hero.js';
 import { SectionHeading } from '../ui/headings.jsx';
 import { Sheet } from './Sheet.jsx';
 
@@ -34,7 +34,7 @@ function industryEntry(id) {
   const products = queryProducts({ industry: industry.id });
   const projectImage = projects
     .flatMap((project) => project.images ?? [])
-    .find((image) => image.base !== heroConfig.poster?.base);
+    .find((image) => image.base !== heroSource?.base); // фото музея в Брянске уже стоит в hero — роликом
   const productImage = products.items.find((product) => product.images?.length)?.images[0];
   return {
     industry,
