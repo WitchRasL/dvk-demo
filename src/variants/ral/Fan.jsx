@@ -8,7 +8,7 @@ import { prefersReducedMotion } from '../../core/hooks/media.js';
 import { countText } from '../../core/ui/format.js';
 import { useVariant } from '../../core/variants/VariantContext.jsx';
 import { cn } from '../../lib/utils.js';
-import { cancelRepaint, chooseDirection, finishRepaint, useRepaint, useRepaintLink } from './field-store.js';
+import { cancelRepaint, chooseDirection, finishRepaint, useCurrentDirection, useRepaint, useRepaintLink } from './field-store.js';
 import { fieldFor } from './palette.js';
 
 /** Направления с полем, числом разделов и позиций на dvk-style.ru (из categories.json). */
@@ -38,15 +38,33 @@ export function FieldLink({ direction, to, className, children, ...rest }) {
   );
 }
 
-/** Образец направления: поле цвета, код, название, разделы и позиции. size: strip (hero) | chip (меню, футер). */
+/**
+ * Образец направления: поле цвета, код, название, разделы и позиции. size: strip (hero) | chip (меню, футер).
+ * Образец текущего поля сайта того же цвета, что и фон под ним, поэтому держит край швом и подписан «Текущее поле».
+ */
 export function DirectionSwatch({ direction, className, size = 'strip', ...rest }) {
+  const current = useCurrentDirection() === direction.id;
   return (
-    <FieldLink direction={direction.id} to={direction.to} className={cn('ral-dir', `ral-dir--${size}`, className)} data-field-scope={direction.field.id} {...rest}>
+    <FieldLink
+      direction={direction.id}
+      to={direction.to}
+      className={cn('ral-dir', `ral-dir--${size}`, className)}
+      data-field-scope={direction.field.id}
+      aria-current={current ? 'true' : undefined}
+      {...rest}
+    >
       <span className="ral-dir__top">
         <span className="ral-mono ral-dir__code">{direction.field.code}</span>
         <ArrowUpRight className="ral-dir__arrow" aria-hidden="true" />
       </span>
-      <span className="ral-dir__name">{direction.name}</span>
+      <span className="ral-dir__name">
+        <span className="ral-dir__full">{direction.name}</span>
+        {/* Короткое название — для узких лопастей в hero на телефоне; скринридер читает полное. */}
+        <span className="ral-dir__short" aria-hidden="true">
+          {direction.field.short}
+        </span>
+      </span>
+      {current ? <span className="ral-dir__current">Текущее поле</span> : null}
       {size === 'strip' ? (
         <span className="ral-dir__meta">
           {direction.sectionsText} · {direction.totalText} на dvk-style.ru

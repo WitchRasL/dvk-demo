@@ -1,13 +1,16 @@
-// Экран «Полный цикл»: закреплённая секция на антраците RAL 7016. Пять шагов из company.json прокрашиваются
+// Экран «Полный цикл»: закреплённая секция на антраците RAL 7016. Шаги из company.json прокрашиваются
 // по очереди, пока посетитель листает: каждый шаг — полоса образца, которую «покрывают» краской слева направо.
 // Телефон и reduced-motion — обычный список без закрепления.
 import { useRef } from 'react';
 import { motion, useMotionTemplate, useScroll, useTransform } from 'motion/react';
 import { getCompany } from '../../../core/catalog/index.js';
 import { useMediaQuery, usePrefersReducedMotion } from '../../../core/hooks/media.js';
+import { plural } from '../../../core/ui/format.js';
 import { SectionHeading } from '../ui.jsx';
 
 const FACTS = ['izhora', 'german-machines', 'own-fleet', 'same-day-measure'];
+// Шаги докрашены чуть раньше конца закреплённой сцены: последняя строка успевает побыть готовой.
+const PAINT_END = 0.92;
 
 /** Содержимое шага; копия-«краска» поверх — те же классы, но без семантики (aria-hidden). */
 function StepContent({ index, step, semantic }) {
@@ -27,8 +30,8 @@ function StepContent({ index, step, semantic }) {
 }
 
 function Step({ step, index, count, progress, pinned }) {
-  const start = index / count;
-  const end = (index + 1) / count;
+  const start = (index / count) * PAINT_END;
+  const end = ((index + 1) / count) * PAINT_END;
   const right = useTransform(progress, [start, end], [100, 0], { clamp: true });
   const clipPath = useMotionTemplate`inset(0 ${right}% 0 0)`;
   return (
@@ -66,7 +69,11 @@ export function Cycle() {
       <div className="ral-cycle__sticky">
         <div className="ral-wrap ral-cycle__grid">
           <div className="ral-cycle__intro">
-            <SectionHeading id="ral-cycle-title" title="Полный цикл под одной крышей" lead="Пять шагов от замера до монтажа — своими силами, на своём производстве." />
+            <SectionHeading
+              id="ral-cycle-title"
+              title="Полный цикл под одной крышей"
+              lead={`${steps.length} ${plural(steps.length, ['шаг', 'шага', 'шагов'])} от замера до монтажа — своими силами, на своём производстве.`}
+            />
             <ul className="ral-cycle__facts">
               {facts.map((fact) => (
                 <li key={fact.id}>{fact.text}</li>

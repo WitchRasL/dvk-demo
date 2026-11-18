@@ -43,7 +43,7 @@
   top: var(--wy);
   width: var(--ww);
   height: var(--wh);
-  object-position: 58% 50%;
+  object-position: var(--hero-focus, 50% 50%);
 }
 .ral-hero .scroll-video__callouts {
   inset: auto;
@@ -105,10 +105,17 @@
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.025em;
+  /* Поля плашки-краски по бокам слова; перед знаком препинания правое поле уже. */
+  --paint-pad: 0.09em;
+  --paint-pad-end: var(--paint-pad);
 }
 .ral-title__line {
   display: block;
   animation: ral-rise var(--dur-slow) var(--ease-out) calc(var(--l, 0) * 80ms + 80ms) backwards;
+}
+/* Строки глаголов отступают на поле плашки: закрашенная плашка встаёт ровно по краю текстовой колонки. */
+.ral-title__line:not(.ral-title__tail) {
+  padding-left: var(--paint-pad);
 }
 .ral-title__tail {
   max-width: 31ch;
@@ -126,26 +133,36 @@
   }
 }
 
-/* Глагол фазы «прокрашивается»: поверх слова — та же надпись выворотка, открывается слева направо. */
+/* Глагол фазы «прокрашивается»: поверх слова — та же надпись вывороткой. Край краски встаёт только на границу
+   букв (--paint — доля ширины слова до правого края последней закрашенной буквы) и доезжает до неё коротким мазком. */
 .ral-paint {
   position: relative;
   display: inline-block;
 }
+/* Знак после глагола отодвинут на поле плашки, а сама плашка перед ним короче: в знак она не упирается. */
 .ral-paint--punct {
-  margin-right: 0.1em;
+  --paint-pad-end: 0.03em;
+  margin-right: var(--paint-pad);
 }
 .ral-paint__ink {
   position: absolute;
-  inset: 0.07em -0.14em;
+  inset: 0.07em calc(-1 * var(--paint-pad-end)) 0.07em calc(-1 * var(--paint-pad));
   display: flex;
   align-items: center;
-  padding-inline: 0.14em;
+  padding-inline: var(--paint-pad) var(--paint-pad-end);
   background: var(--fg);
   color: var(--bg);
   line-height: 1;
   white-space: nowrap;
   user-select: none;
-  clip-path: inset(0 calc((1 - var(--paint, 0)) * 100%) 0 0);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur-fast) var(--ease-out);
+}
+.ral-paint[data-paint='part'] .ral-paint__ink {
+  clip-path: inset(0 calc((1 - var(--paint, 0)) * (100% - var(--paint-pad) - var(--paint-pad-end)) + var(--paint-pad-end)) 0 0);
+}
+.ral-paint[data-paint='full'] .ral-paint__ink {
+  clip-path: inset(0 0 0 0);
 }
 
 .ral-hero__offer {
@@ -195,13 +212,33 @@
   flex-direction: column;
   min-height: 0;
   margin-inline: var(--ral-gutter);
-  box-shadow: var(--shadow);
+  /* Рамка — образец на поле: край держит шов в одну линию, без тени. */
+  box-shadow: 0 0 0 1px var(--line-strong);
 }
 .ral-hero__window {
   flex: 1 1 auto;
   min-height: 6.5rem;
   border: var(--hero-frame-edge) solid var(--paper);
   border-bottom-width: 0;
+}
+/* Подпись кадра. Телефон: строка на бумаге под окном (в окне тесно — там ярлыки), объект назван коротко.
+   Шире — плашка в верхнем углу окна: ярлыки раскрываются ниже. */
+.ral-hero__caption {
+  margin: 0;
+  padding: 0.3125rem calc(var(--hero-frame-edge) + 0.25rem) 0;
+  background: var(--paper);
+  color: var(--paper-ink);
+  font-size: 0.6875rem;
+  line-height: 1.25;
+}
+.ral-hero__caption > span:first-child::after {
+  content: ':';
+}
+.ral-hero__caption-object {
+  color: var(--paper-muted);
+}
+.ral-hero__caption-object:not(.is-short) {
+  display: none;
 }
 .ral-hero__band {
   display: flex;
@@ -261,26 +298,38 @@
 }
 
 /* Веер у края: три равных образца-направления. */
+/* Телефон: три равные лопасти во всю ширину экрана — код и короткое название; счётчики и лента — на втором экране. */
 .ral-hero__fan {
   position: relative;
   grid-area: fan;
-  display: flex;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .ral-hero .ral-hero__blade {
-  flex: 0 0 64%;
-  scroll-snap-align: start;
-  padding: 0.625rem 0.875rem 3.5rem;
+  padding: 0.5rem 0.625rem 3.5rem;
   animation: ral-blade-in var(--dur-slow) var(--ease-out) calc(var(--i, 0) * 90ms + 240ms) backwards;
 }
 .ral-hero .ral-hero__blade:first-child {
   padding-left: var(--ral-gutter);
 }
-.ral-hero .ral-hero__blade .ral-dir__meta {
+.ral-hero .ral-hero__blade .ral-dir__meta,
+.ral-hero .ral-hero__blade .ral-dir__arrow {
   display: none;
+}
+.ral-hero .ral-hero__blade .ral-dir__name {
+  font-size: 0.75rem;
+  hyphens: manual;
+}
+.ral-hero .ral-hero__blade .ral-dir__full {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.ral-hero .ral-hero__blade .ral-dir__short {
+  display: inline;
 }
 @keyframes ral-blade-in {
   from {
@@ -288,26 +337,20 @@
   }
 }
 
-/* Пометка заглушки — в углу окна рамки: на телефоне сверху (внизу раскрываются ярлыки), шире — справа внизу. */
+/* Пометку заглушки ядра вариант не показывает: в рамке всегда настоящий кадр (первый кадр ролика или фото проекта),
+   и он подписан своей подписью — .ral-hero__caption. */
 .ral-hero .scroll-video__label {
-  right: calc(100% - var(--wx) - var(--ww) + var(--hero-frame-edge) + 0.5rem);
-  top: calc(var(--wy) + 0.5rem);
-  bottom: auto;
-  max-width: calc(var(--ww) - 2 * var(--hero-frame-edge) - 1rem);
-  padding: 0.3125rem 0.5rem;
-  border: 0;
-  border-radius: var(--radius);
-  background: var(--paper);
-  color: var(--paper-ink);
-  font-size: 0.75rem;
-  line-height: 1.25;
+  display: none;
 }
 
 /* Ярлык пояснения: точка кадра и бумажная бирка. Оранжевого здесь нет — он только у заявки. */
 .ral-tag {
+  --tag-w: min(13.5rem, 62vw);
   position: absolute;
   left: 0;
   top: 0;
+  /* Камера едет — бирка идёт за своей деталью: сдвиг в долях окна рамки. */
+  transform: translate(calc(var(--ww) * var(--tx, 0)), calc(var(--wh) * var(--ty, 0)));
 }
 .ral-tag__pin {
   position: absolute;
@@ -317,7 +360,7 @@
   height: 1.125rem;
   border-radius: 50%;
   background: var(--paper);
-  box-shadow: 0 1px 4px rgb(14 14 16 / 0.35);
+  box-shadow: 0 0 0 1px var(--paper-ink);
 }
 .ral-tag__pin::after {
   content: '';
@@ -330,30 +373,31 @@
   position: absolute;
   display: grid;
   gap: 0.1875rem;
-  width: min(11.5rem, 56vw);
+  width: var(--tag-w);
   padding: 0.5rem 0.625rem 0.5625rem;
   border-radius: var(--radius);
   background: var(--paper);
   color: var(--paper-ink);
-  box-shadow: var(--shadow);
+  /* Бирка — бумажный образец: край держит шов в одну линию. */
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--paper-ink) 46%, transparent);
   transition: clip-path var(--dur-base) var(--ease-out);
-}
-.ral-tag--right .ral-tag__card {
-  left: 1.125rem;
-  clip-path: inset(-2rem 100% -2rem -2rem);
-}
-.ral-tag--left .ral-tag__card {
-  right: 1.125rem;
-  clip-path: inset(-2rem -2rem -2rem 100%);
+  /* Узкое окно: бирка встаёт под точкой или над ней и не выходит за окно рамки (--px — доля окна до точки). */
+  left: clamp(
+    calc(var(--ww) * var(--px, 0.5) * -1 + var(--hero-frame-edge) + 0.25rem),
+    calc(var(--tag-w) / -2),
+    calc(var(--ww) * (1 - var(--px, 0.5)) - var(--tag-w) - var(--hero-frame-edge) - 0.25rem)
+  );
 }
 .ral-tag--down .ral-tag__card {
-  top: -0.5625rem;
+  top: 0.875rem;
+  clip-path: inset(-2px -2px 100% -2px);
 }
 .ral-tag--up .ral-tag__card {
-  bottom: -0.5625rem;
+  bottom: 0.875rem;
+  clip-path: inset(100% -2px -2px -2px);
 }
 .ral-tag[data-active='true'] .ral-tag__card {
-  clip-path: inset(-2rem);
+  clip-path: inset(-2px);
 }
 .ral-tag__code {
   font-size: 0.6875rem;
@@ -375,7 +419,7 @@
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
 }
 .ral-tag__note {
   display: none;
@@ -417,9 +461,6 @@
   .ral-hero {
     --hero-frame-edge: 0.625rem;
   }
-  .ral-hero .ral-hero__blade {
-    flex: 1 1 0;
-  }
   .ral-hero .ral-hero__blade .ral-dir__meta {
     display: block;
   }
@@ -433,9 +474,65 @@
   .ral-hero__phase-n {
     opacity: 0.7;
   }
+  .ral-tag {
+    --tag-w: 15rem;
+  }
   .ral-tag__card {
-    width: 15rem;
     padding: 0.625rem 0.75rem 0.6875rem;
+  }
+  /* Окно широкое: бирка раскрывается от точки вбок, в свободную сторону. */
+  .ral-tag--right .ral-tag__card {
+    left: 1.125rem;
+    clip-path: inset(-2px 100% -2px -2px);
+  }
+  .ral-tag--left .ral-tag__card {
+    right: 1.125rem;
+    left: auto;
+    clip-path: inset(-2px -2px -2px 100%);
+  }
+  .ral-tag--down .ral-tag__card {
+    top: -0.5625rem;
+  }
+  .ral-tag--up .ral-tag__card {
+    bottom: -0.5625rem;
+  }
+  .ral-tag[data-active='true'] .ral-tag__card {
+    clip-path: inset(-2px);
+  }
+  .ral-hero__caption {
+    position: absolute;
+    top: calc(var(--hero-frame-edge) + 0.5rem);
+    right: calc(var(--hero-frame-edge) + 0.5rem);
+    max-width: calc(100% - 2 * var(--hero-frame-edge) - 1rem);
+    padding: 0.3125rem 0.5rem;
+    border-radius: var(--radius);
+    font-size: 0.8125rem;
+  }
+  .ral-hero__caption-object:not(.is-short) {
+    display: inline;
+  }
+  .ral-hero__caption-object.is-short {
+    display: none;
+  }
+  .ral-hero .ral-hero__blade {
+    padding: 0.625rem 0.875rem 3.5rem;
+  }
+  .ral-hero .ral-hero__blade .ral-dir__arrow {
+    display: block;
+  }
+  .ral-hero .ral-hero__blade .ral-dir__name {
+    font-size: 1rem;
+  }
+  .ral-hero .ral-hero__blade .ral-dir__full {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+  .ral-hero .ral-hero__blade .ral-dir__short {
+    display: none;
   }
   .ral-tag__title {
     font-size: 0.9375rem;
@@ -450,11 +547,6 @@
   .ral-tag__note {
     display: block;
   }
-  .ral-hero .scroll-video__label {
-    top: auto;
-    bottom: calc(100% - var(--wy) - var(--wh) + 0.5rem);
-    font-size: 0.8125rem;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -462,29 +554,31 @@
     grid-template:
       'title frame' auto
       'offer frame' minmax(0, 1fr)
-      'fan fan' auto / minmax(0, 5fr) minmax(0, 7fr);
-    gap: 1.25rem clamp(1.5rem, 3vw, 3rem);
+      'fan fan' auto / minmax(0, 4fr) minmax(0, 5fr);
+    gap: 0 clamp(1.5rem, 3vw, 3rem);
     padding-top: calc(var(--ral-header-h) + clamp(1rem, 3svh, 2rem));
   }
   .ral-hero__title {
     padding-inline: var(--ral-gutter) 0;
-    font-size: clamp(2rem, min(4vw, 8svh), 4.5rem);
+    /* Самая длинная строка («Проектируем,») — до ширины колонки. */
+    font-size: clamp(2rem, min(4.45vw, 8svh), 4.75rem);
     line-height: 1.17;
   }
   .ral-title__tail {
     margin-top: 0.875rem;
   }
+  /* Оффер — сразу под хвостом заголовка (зазор не больше 6rem), пустота уходит вниз колонки. */
   .ral-hero__offer {
-    align-self: end;
+    align-self: start;
     gap: 1rem;
+    margin-top: clamp(1.75rem, 10.5svh, 6rem);
     padding-inline: var(--ral-gutter) 0;
   }
   .ral-hero__frame {
     margin-inline: 0 var(--ral-gutter);
   }
   .ral-hero__fan {
-    margin-top: clamp(0.25rem, 1.5svh, 1rem);
-    overflow: visible;
+    margin-top: calc(1.25rem + clamp(0.25rem, 1.5svh, 1rem));
   }
   /* Нижний запас — под плавающий переключатель вариантов; ещё полоска за краем экрана — на подъём при наведении. */
   .ral-hero .ral-hero__blade {
@@ -526,12 +620,14 @@
 .ral-hero .scroll-video__list .ral-tag {
   position: static;
   display: grid;
+  transform: none;
 }
 .ral-hero .scroll-video__list .ral-tag__pin {
   display: none;
 }
 .ral-hero .scroll-video__list .ral-tag__card {
   position: static;
+  inset: auto;
   width: auto;
   padding: 0.875rem 1rem 1rem;
   box-shadow: none;
@@ -805,8 +901,9 @@
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     align-items: center;
   }
+  /* Закреплённый экран + по 25svh прокрутки на шаг: около 220svh на пять шагов. */
   .ral-cycle[data-pinned] {
-    height: calc((var(--steps, 5) * 55 + 100) * 1svh);
+    height: calc(100svh - var(--ral-header-h) + var(--steps, 5) * 25svh);
   }
   .ral-cycle[data-pinned] .ral-cycle__sticky {
     position: sticky;
@@ -858,6 +955,8 @@
   color: var(--fg-muted);
 }
 .ral-solutions__tab {
+  position: relative;
+  isolation: isolate;
   min-height: 2.75rem;
   padding: 0.5rem 0.875rem;
   border: 0;
@@ -872,8 +971,21 @@
   text-align: left;
   cursor: pointer;
 }
-.ral-solutions__tab:hover {
-  box-shadow: inset 0 0 0 1.5px var(--fg);
+/* Наведение — «мазок», как у клавиши: тон поля закрашивает строку слева направо. */
+.ral-solutions__tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in oklab, var(--fg) 14%, transparent);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur-base) var(--ease-out);
+}
+.ral-solutions__tab:hover::before {
+  clip-path: inset(0 0 0 0);
+}
+.ral-solutions__tab.is-active::before {
+  display: none;
 }
 .ral-solutions__tab.is-active {
   background: var(--fg);
@@ -997,9 +1109,6 @@
     border-radius: 0;
     box-shadow: inset 0 1px 0 var(--line);
   }
-  .ral-solutions__tab:hover {
-    box-shadow: inset 0 1px 0 var(--line), inset 3px 0 0 var(--fg);
-  }
 }
 
 /* --- проекты --------------------------------------------------------------------------- */
@@ -1037,6 +1146,8 @@
   width: min(88%, 27rem);
   margin-top: -2.25rem;
   padding: 0.875rem 3rem 1rem 1rem;
+  /* Плашка цвета направления на поле того же цвета не растворяется: край держит шов. */
+  box-shadow: inset 0 0 0 1px var(--line-strong);
 }
 .ral-project__code {
   font-size: 0.75rem;
@@ -1253,6 +1364,10 @@
 .ral-request__city li > svg {
   margin-top: 0.1875rem;
 }
+/* Строка-ссылка (телефон, почта) высотой 2rem: иконка — по её центру. */
+.ral-request__city li:has(> a) > svg {
+  margin-top: 0.5rem;
+}
 .ral-request__city li a {
   display: inline-flex;
   align-items: center;
@@ -1262,7 +1377,8 @@
 .ral-request__form {
   min-width: 0;
   padding: clamp(1rem, 3vw, 2.25rem);
-  box-shadow: var(--shadow);
+  /* Квиз — бумажный образец на поле: шов в одну линию. */
+  box-shadow: 0 0 0 1px var(--line-strong);
 }
 @media (min-width: 1024px) {
   .ral-request__grid {

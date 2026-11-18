@@ -5,6 +5,8 @@ import { act, cleanup, render, screen, waitFor, within } from '@testing-library/
 import { MemoryRouter } from 'react-router';
 import { installBrowserStubs, renderApp, resetStores } from '../../core/pages/test-utils.jsx';
 import { VariantProvider } from '../../core/variants/VariantContext.jsx';
+import company from '../../data/company.json';
+import { chooseDirection } from './field-store.js';
 import ral from './index.jsx';
 
 beforeAll(installBrowserStubs);
@@ -76,6 +78,46 @@ describe('главная «Палитры RAL»', () => {
     const addButtons = [...container.querySelectorAll('button')].filter((button) => /В запрос КП/.test(button.textContent));
     expect(addButtons.length).toBeGreaterThan(0);
     addButtons.forEach((button) => expect(button.matches(SIGNAL)).toBe(false));
+  });
+
+  it('в рамке hero — ролик: постер — его первый кадр, кадр подписан как доработанное фото проекта, пометки-заглушки нет', async () => {
+    await resetStores();
+    const { title } = await renderHome();
+    const hero = title.closest('section');
+    expect(hero.querySelector('.scroll-video__poster').getAttribute('src')).toMatch(/media\/ral\/hero-poster\.jpg$/);
+    expect(hero.querySelector('video')).toBeTruthy();
+    expect(hero.textContent).toContain('Доработанное фото проекта ДВК');
+    expect(hero.textContent).toContain('Балашиха');
+    expect(hero.textContent).not.toContain('Здесь будет видео-интерьер');
+    // ни один образец веера не помечен: поле — грунт
+    expect(hero.querySelector('[aria-current="true"]')).toBeNull();
+  });
+
+  it('«Полный цикл»: число шагов в тексте — из company.cycle', async () => {
+    await resetStores();
+    const { container } = await renderHome();
+    const cycle = container.querySelector('.ral-cycle');
+    expect(company.cycle.length).toBe(5);
+    expect(cycle.textContent).toContain('5 шагов от замера до монтажа');
+    expect(cycle.querySelectorAll('ol > li').length).toBe(company.cycle.length);
+  });
+
+  it('поле благоустройства: в рамке кадр направления без ролика, образец текущего поля помечен', async () => {
+    await resetStores();
+    await act(async () => chooseDirection('landscape'));
+    const { title } = await renderHome();
+    const hero = title.closest('section');
+    expect(hero.querySelector('video')).toBeNull();
+    expect(hero.querySelector('.scroll-video__poster').getAttribute('src')).toMatch(/images\/projects\/playground-/);
+    expect(hero.textContent).toContain('Фото проекта ДВК');
+    expect(hero.textContent).not.toContain('Доработанное фото');
+    const fan = within(hero).getByRole('navigation', { name: /Направления/ });
+    const current = fan.querySelectorAll('[aria-current="true"]');
+    expect(current.length).toBe(1);
+    expect(href(current[0])).toBe('/ral/catalog/landscape');
+    expect(current[0].textContent).toContain('Текущее поле');
+    // образцы остаются равными входами
+    expect(new Set(within(fan).getAllByRole('link').map((entry) => entry.className)).size).toBe(1);
   });
 });
 

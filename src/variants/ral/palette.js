@@ -2,7 +2,7 @@
 // бумага веера и антрацит для плотных экранов. Цвета экрана — приближения каталожных RAL; код подписан на каждом поле.
 // Контраст текста на каждом поле и его поверхностях ≥ 4.5:1 — проверяет palette.test.js.
 
-/** @typedef {{ id: string, code: string, name: string, label: string, bg: string, fg: string, muted: string, surface: string, surface2: string, scheme: 'light'|'dark', stage: string }} Field */
+/** @typedef {{ id: string, code: string, name: string, label: string, short?: string, bg: string, fg: string, muted: string, surface: string, surface2: string, scheme: 'light'|'dark', stage: string }} Field */
 
 /** @type {Record<string, Field>} */
 export const FIELDS = {
@@ -25,6 +25,8 @@ export const FIELDS = {
     code: 'RAL 9005',
     name: 'Глубокий чёрный',
     label: 'Ритейл и экспозиция',
+    // Короткое имя — для узких образцов (лопасти hero на телефоне); мягкий перенос — на случай совсем узкого экрана.
+    short: 'Ритейл',
     bg: '#0E0E10',
     fg: '#F1EBDD',
     muted: '#BDB4A2',
@@ -38,6 +40,7 @@ export const FIELDS = {
     code: 'RAL 6018',
     name: 'Жёлто-зелёный',
     label: 'Благоустройство',
+    short: 'Благо­устройство',
     bg: '#57A639',
     fg: '#0B1A07',
     muted: '#142B0C',
@@ -51,6 +54,7 @@ export const FIELDS = {
     code: 'RAL 7035',
     name: 'Светло-серый',
     label: 'Металлическая мебель',
+    short: 'Металл',
     bg: '#CBD0CC',
     fg: '#293133',
     muted: '#454D50',
@@ -73,7 +77,7 @@ export const FIELDS = {
     scheme: 'light',
     stage: '#FFFFFF',
   },
-  // Антрацит — цвет порошковой краски каркасов: плотные экраны, футер.
+  // Антрацит — плотные экраны и футер.
   anthracite: {
     id: 'anthracite',
     code: 'RAL 7016',
