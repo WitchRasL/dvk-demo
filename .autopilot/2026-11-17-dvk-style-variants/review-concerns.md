@@ -1,0 +1,22 @@
+# Отложенные оговорки сборки — подтвердить или отбросить
+
+- src/core/variants/paths.js:5 — PAGE_ROOTS дублирует маршруты App.jsx; новый маршрут без правки даст /new → /showroom
+- src/core/variants/VariantContext.jsx:20 — мёртвая ветка удаления отклонённого промиса; ErrorBoundary не сбрасывается
+- src/core/layout/Shell.jsx:28, src/styles/index.css:78 — токены только внутри div[data-variant]; html/body и порталы видят нейтральный :root (правило записано в interfaces.md)
+- src/core/variants/registry.test.jsx:52 — футер в тесте рендерится без провайдеров ядра; хуки T03 должны работать без провайдера (правило в interfaces.md)
+- src/core/request/submit.js — если в VITE_FORM_ENDPOINT есть ?access_key=… (Web3Forms), ключ дублируется в тело формы
+- src/core/scroll-video — iOS Safari не проверялся: «разбудка» play/pause best-effort
+- docs/hero-video/README.md — ffmpeg на машине нет, команда кодирования не прогонялась
+- основной чанк вырос до ~186 КБ gz: данные каталога попали в него через base.jsx → AddToKp → useKp — риск для Lighthouse Performance
+- src/core/catalog — нет подписей МДФ/фанера/бетон (подменено в ui/format.materialLabel); getProducts не экспортируется
+- Lighthouse через npx в этой среде запрещён — R59 замеряется отдельно
+- docs/bitrix-integration.md — предложены поля externalId и oldprice в схеме товара; BITRIX_WEBHOOK_URL и BITRIX_STAGING_URL не внесены в .env.example (этап полного сайта)
+- src/core/scroll-video — пометка «Здесь будет видео-интерьер» при выходе hero из закрепления ~60 px проходит под шапкой (видно в «Шоуруме»)
+- scripts/screenshot.mjs — --full не прокручивает страницу: ленивые фото и появления по входу в окно на снимке не срабатывают
+- src/variants/blueprint/lib/hero.js — точки x,y выносок для режима ролика пересчитаны под раскадровку, с реальным видео не сверены
+- src/variants/blueprint — угловой штамп на 640–899 px показывает только «Лист N/8»: мешает панель переключателя вариантов ядра (variant-switcher.css)
+- src/variants/blueprint/drawing/ProductBlueprint.jsx — опирается на разметку .gallery ядра и переопределяет классы ядра по именам, хрупко
+- src/variants/blueprint/home/CycleStage.jsx — рисунки стадий цикла скрыты на экранах ниже 1024×860 / 1280×720
+- src/variants/ral/palette.js — цвета RAL заданы экранными приближениями, с веером не сверены
+- src/variants/ral/home/Hero.jsx — на 360×640 бирка hero сокращена до одной строки; меню шапки открывается нажатием, не наведением
+- src/variants/ral — опорный кадр hero: панорама с водяным знаком и вывесками «PERFUMES»
