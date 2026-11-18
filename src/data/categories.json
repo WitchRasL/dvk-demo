@@ -1288,25 +1288,6 @@
     "Шкафы инструментальные серии ТС, АМН ТС и HARD": "tool-cabinets",
     "Шкафы инструментальные серии ВС и ВЛ": "tool-cabinets"
   },
-  "facetLabels": {
-    "material": {
-      "metal": "Металл",
-      "glass": "Стекло",
-      "ldsp": "ЛДСП",
-      "mdf": "МДФ",
-      "wood": "Дерево",
-      "plywood": "Фанера",
-      "plastic": "Пластик",
-      "concrete": "Бетон",
-      "stone": "Камень"
-    },
-    "light": {
-      "warm": "Тёплая подсветка",
-      "cold": "Холодная подсветка",
-      "rgb": "RGB-подсветка",
-      "none": "Без подсветки"
-    }
-  },
   "meta": {
     "source": "https://dvk-style.ru",
     "collectedAt": "2026-11-18"

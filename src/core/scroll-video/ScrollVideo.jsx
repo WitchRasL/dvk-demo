@@ -4,6 +4,7 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { asset } from '../../lib/base-url.js';
 import { imageSrc, srcSet } from '../../lib/images.js';
 import { cn } from '../../lib/utils.js';
+import { SCROLL_VIDEO_CLASSES as CLASSES, SCROLL_VIDEO_MODE_ATTRIBUTE } from './contract.js';
 import { calloutState, cameraTransform, phaseAt } from './math.js';
 import { useMediaQuery, useScrollVideo } from './useScrollVideo.js';
 import './scroll-video.css';
@@ -14,12 +15,12 @@ const VIDEO_START_DELAY_MS = 2500;
 const UNLOCK_DELAY_MS = 1200;
 
 function Poster({ poster, imageRef, onLoad }) {
-  if (!poster) return <div ref={imageRef} className="scroll-video__poster scroll-video__poster--empty" />;
+  if (!poster) return <div ref={imageRef} className={`${CLASSES.poster} scroll-video__poster--empty`} />;
   const hasBase = Boolean(poster.base);
   return (
     <img
       ref={imageRef}
-      className="scroll-video__poster"
+      className={CLASSES.poster}
       src={hasBase ? imageSrc(poster.base, 1600) : asset(poster.src)}
       srcSet={hasBase ? srcSet(poster.base) : undefined}
       sizes="100vw"
@@ -150,17 +151,17 @@ export function ScrollVideo({
   return (
     <div
       ref={trackRef}
-      className={cn('scroll-video', className)}
-      data-mode={mode}
+      className={cn(CLASSES.root, className)}
+      {...{ [SCROLL_VIDEO_MODE_ATTRIBUTE]: mode }}
       style={isStatic ? undefined : { '--scroll-video-length': length }}
     >
-      <div ref={stageRef} className="scroll-video__stage">
+      <div ref={stageRef} className={CLASSES.stage}>
         <Poster poster={poster} imageRef={posterRef} onLoad={() => setPosterLoaded(true)} />
 
         {!isStatic && src ? (
           <video
             ref={videoRef}
-            className="scroll-video__video"
+            className={CLASSES.video}
             data-ready={videoReady}
             src={loadVideo ? src : undefined}
             muted
@@ -176,7 +177,7 @@ export function ScrollVideo({
         ) : null}
 
         {!isStatic && callouts.length ? (
-          <div className="scroll-video__callouts" aria-hidden="true">
+          <div className={CLASSES.callouts} aria-hidden="true">
             {callouts.map((callout) => {
               const state = calloutState(progress, callout);
               const x = (callout.x ?? 0.5) * 100;
@@ -186,7 +187,7 @@ export function ScrollVideo({
                   key={callout.id}
                   data-callout={callout.id}
                   data-active={state.active}
-                  className={cn('scroll-video__callout', !renderCallout && 'scroll-video__callout--default')}
+                  className={cn(CLASSES.callout, !renderCallout && 'scroll-video__callout--default')}
                   style={{ left: `${x}%`, top: `${y}%`, '--callout-x': `${x}%`, '--callout-y': `${y}%` }}
                 >
                   {renderCallout ? renderCallout(callout, state) : <DefaultCallout callout={callout} />}
@@ -196,14 +197,14 @@ export function ScrollVideo({
           </div>
         ) : null}
 
-        {showLabel ? <p className="scroll-video__label">{placeholderLabel}</p> : null}
+        {showLabel ? <p className={CLASSES.label}>{placeholderLabel}</p> : null}
 
-        {renderOverlay ? <div className="scroll-video__overlay">{renderOverlay(isStatic ? 0 : progress, api)}</div> : null}
+        {renderOverlay ? <div className={CLASSES.overlay}>{renderOverlay(isStatic ? 0 : progress, api)}</div> : null}
       </div>
 
       {callouts.length ? (
         isStatic ? (
-          <ol className="scroll-video__list" aria-label={listLabel}>
+          <ol className={CLASSES.list} aria-label={listLabel}>
             {callouts.map((callout) => (
               <li key={callout.id}>
                 {renderCallout ? renderCallout(callout, { active: true, local: 1 }) : <DefaultCallout callout={callout} />}

@@ -1,0 +1,18 @@
+/*
+ * Одно правило отключения движения для всех вариантов (prefers-reduced-motion: reduce).
+ * Вариант подключает этот файл и не ведёт своих списков «transition: none»: новая анимация
+ * выключается сама. Длительность 1ms, а не 0 — события transitionend / animationend приходят,
+ * и код, который их ждёт, не зависает. Конечные состояния (то, что скрыто до появления) вариант
+ * открывает сам, там же, где его прячет.
+ */
+@media (prefers-reduced-motion: reduce) {
+  [data-variant] *,
+  [data-variant] *::before,
+  [data-variant] *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+}

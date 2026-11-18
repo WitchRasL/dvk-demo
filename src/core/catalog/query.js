@@ -1,5 +1,6 @@
 // Запрос к каталогу: разбор параметров URL, выписывание обратно, фильтры, поиск, сортировка,
 // пагинация и фасеты. Чистые функции над данными из lookup.js.
+import { lightLabel, materialLabel } from './labels.js';
 import { getCategory, getDirection, getIndustry, getProducts, getSection } from './lookup.js';
 import { normalizeText, tokenize } from './text.js';
 
@@ -8,9 +9,6 @@ export const SORTS = ['relevance', 'name', 'price'];
 export const LIGHTS = ['warm', 'cold', 'rgb', 'none'];
 
 export const SORT_LABELS = { relevance: 'По релевантности', name: 'По названию', price: 'По цене' };
-export const LIGHT_LABELS = { warm: 'Тёплый свет', cold: 'Холодный свет', rgb: 'RGB', none: 'Без подсветки' };
-/** Подписи известных материалов; для остальных значений из данных подписью служит само значение. */
-export const MATERIAL_LABELS = { metal: 'Металл', glass: 'Стекло', ldsp: 'ЛДСП', wood: 'Дерево', plastic: 'Пластик', stone: 'Камень' };
 
 const MAX_QUERY_LENGTH = 100;
 const FACET_KEYS = ['industry', 'material', 'light', 'category'];
@@ -232,8 +230,8 @@ const priceOf = (entry) => (typeof entry.product.price === 'number' ? entry.prod
 
 const facetLabel = {
   industry: (value) => getIndustry(value)?.name ?? value,
-  material: (value) => MATERIAL_LABELS[value] ?? value,
-  light: (value) => LIGHT_LABELS[value] ?? value,
+  material: materialLabel,
+  light: lightLabel,
   category: (value) => getCategory(value)?.name ?? value,
 };
 

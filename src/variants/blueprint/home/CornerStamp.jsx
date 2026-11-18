@@ -2,6 +2,7 @@
 // содержание комплекта (переход к любому листу).
 import { useEffect, useId, useRef, useState } from 'react';
 import { ChevronUp } from 'lucide-react';
+import { prefersReducedMotion } from '../../../core/hooks/media.js';
 import { cn } from '../../../lib/utils.js';
 import { SHEETS, sheetAnchor } from './sheets.js';
 
@@ -29,7 +30,14 @@ export function CornerStamp() {
   const [open, setOpen] = useState(false);
   const listId = useId();
   const rootRef = useRef(null);
+  const buttonRef = useRef(null);
   const sheet = SHEETS[current - 1] ?? SHEETS[0];
+  const shown = current > 1; // на первом листе штамп спрятан: основная надпись уже стоит в углу листа
+
+  // Штамп спрятался (вернулись к первому листу) — содержание закрыто.
+  useEffect(() => {
+    if (!shown) setOpen(false);
+  }, [shown]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -37,7 +45,9 @@ export function CornerStamp() {
       if (!rootRef.current?.contains(event.target)) setOpen(false);
     };
     const onKey = (event) => {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key !== 'Escape') return;
+      setOpen(false);
+      buttonRef.current?.focus();
     };
     document.addEventListener('pointerdown', onDown);
     document.addEventListener('keydown', onKey);
@@ -51,13 +61,16 @@ export function CornerStamp() {
     setOpen(false);
     const node = document.getElementById(sheetAnchor(id));
     if (!node) return;
-    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    node.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-    node.querySelector('h2')?.focus?.({ preventScroll: true });
+    node.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+    // Нажатая кнопка содержания уже скрыта — фокус переходит на заголовок листа (h1 у первого, h2 у остальных).
+    const heading = document.getElementById(node.getAttribute('aria-labelledby') ?? '') ?? node.querySelector('h1, h2');
+    if (!heading) return;
+    if (!heading.hasAttribute('tabindex')) heading.setAttribute('tabindex', '-1');
+    heading.focus({ preventScroll: true });
   };
 
   return (
-    <div ref={rootRef} className={cn('bp-corner', current > 1 && 'is-shown')}>
+    <div ref={rootRef} className={cn('bp-corner', shown && 'is-shown')} inert={!shown}>
       <ol id={listId} className="bp-corner__list" hidden={!open} aria-label="Содержание комплекта">
         {SHEETS.map((item, index) => (
           <li key={item.id}>
@@ -68,7 +81,7 @@ export function CornerStamp() {
           </li>
         ))}
       </ol>
-      <button type="button" className="bp-corner__stamp" aria-expanded={open} aria-controls={listId} onClick={() => setOpen((value) => !value)}>
+      <button ref={buttonRef} type="button" className="bp-corner__stamp" aria-expanded={open} aria-controls={listId} onClick={() => setOpen((value) => !value)}>
         <span className="bp-corner__cell bp-corner__name">{sheet.title}</span>
         <span className="bp-corner__cell bp-corner__num">
           <span className="bp-corner__label">Лист</span>

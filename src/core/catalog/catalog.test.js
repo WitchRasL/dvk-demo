@@ -7,8 +7,11 @@ import {
   PAGE_SIZE,
   getCategory,
   getCompany,
+  getCycleStep,
   getDirection,
+  getDirectionTotal,
   getDirections,
+  getFactText,
   getIndustries,
   getIndustry,
   getProduct,
@@ -328,6 +331,20 @@ describe('справочники', () => {
     expect(getProject('park-fixture')?.direction).toBe('landscape');
     expect(getProject('nope')).toBeUndefined();
     expect(getCompany().cities.spb.label).toBe('Санкт-Петербург');
+  });
+
+  it('итог позиций направления: сумма разделов; по id, по объекту и для неизвестного направления', () => {
+    // фикстура: ритейл 5 + 1 + 0, благоустройство 2 + 31, металл 2 + 1 + 2
+    expect(getDirectionTotal('retail')).toBe(6);
+    expect(getDirectionTotal(getDirection('landscape'))).toBe(33);
+    expect(getDirectionTotal({ sections: [{ count: 2 }, { count: null }, {}] })).toBe(2);
+    expect(getDirectionTotal('nope')).toBe(0);
+    expect(getDirectionTotal(null)).toBe(0);
+  });
+
+  it('факта или шага цикла в данных нет — «[уточнить]» и undefined, без выдумки', () => {
+    expect(getFactText('night-install')).toBe('[уточнить]');
+    expect(getCycleStep('measure')).toBeUndefined();
   });
 
   it('похожие: сначала та же категория, себя нет, чужих направлений нет, по умолчанию 4', () => {

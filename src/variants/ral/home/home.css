@@ -1271,27 +1271,12 @@
   }
 }
 
-/* --- без движения -------------------------------------------------------------------------- */
+/* --- без движения --------------------------------------------------------------------------
+   Переходы и анимации выключает общее правило core/ui/reduced-motion.css; здесь — только конечные состояния. */
 
 @media (prefers-reduced-motion: reduce) {
-  .ral-title__line,
-  .ral-hero__offer,
-  .ral-hero .ral-hero__blade,
-  .ral-solutions__visual,
-  .ral-project[data-entrance] .ral-project__photo,
-  .ral-project[data-entrance] .ral-project__plate,
-  .ral-shutters > span {
-    animation: none !important;
-  }
   .ral-shutters {
     display: none !important;
-  }
-  .ral-hero .ral-hero__blade,
-  .ral-tag__card,
-  .ral-blade__go svg,
-  .ral-project__photo img,
-  .ral-project__arrow {
-    transition: none;
   }
   .ral-hero .ral-hero__blade:hover,
   .ral-hero .ral-hero__blade:focus-visible,

@@ -1,14 +1,17 @@
 // Шапка «Палитры RAL»: общая для всех полей. data-field задаёт цвет всего сайта (см. tokens.js).
 // Каталог — мега-меню из трёх полей-направлений; Решения — отрасли по направлениям; город, телефон, запрос КП,
 // сигнальная «Заявка на подбор». На телефоне — меню на всё поле.
-import { useEffect, useId, useRef, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router';
+import { useEffect, useRef } from 'react';
+import { Link, NavLink } from 'react-router';
 import { ChevronDown, ClipboardList, Menu, Phone, X } from 'lucide-react';
-import { getCompany, getIndustries } from '../../core/catalog/index.js';
-import { CITIES, useCity } from '../../core/city/index.js';
+import { getIndustries } from '../../core/catalog/index.js';
+import { useCity } from '../../core/city/index.js';
+import { useFocusTrap } from '../../core/hooks/useFocusTrap.js';
+import { useHeaderMenu } from '../../core/hooks/useHeaderMenu.js';
 import { useKp } from '../../core/kp/index.js';
 import { useNav } from '../../core/layout/nav.js';
-import { plural, toTel } from '../../core/ui/format.js';
+import { CitySwitch as CoreCitySwitch } from '../../core/ui/CitySwitch.jsx';
+import { countText, toTel } from '../../core/ui/format.js';
 import { useVariant } from '../../core/variants/VariantContext.jsx';
 import { cn } from '../../lib/utils.js';
 import { DirectionSwatch, FieldLink, RepaintLayer, useFanDirections } from './Fan.jsx';
@@ -18,7 +21,8 @@ import { Button, FieldCode } from './ui.jsx';
 import { TOKENS_CSS } from './tokens.js';
 
 const CITY_SHORT = { spb: 'СПб', msk: 'Москва' };
-const POSITION_FORMS = ['позиция', 'позиции', 'позиций'];
+/** Меню телефона нажатие вне шапки не закрывает: оно на всё поле, закрывается кнопкой и Esc. */
+const MODAL_MENUS = ['mobile'];
 
 function Tokens() {
   // React 19 поднимает <style href precedence> в <head> и не дублирует.
@@ -30,17 +34,7 @@ function Tokens() {
 }
 
 export function CitySwitch({ className }) {
-  const { city, setCity } = useCity();
-  const company = getCompany();
-  return (
-    <div role="group" aria-label="Город" className={cn('ral-city', className)}>
-      {CITIES.map((id) => (
-        <button key={id} type="button" aria-pressed={city === id} onClick={() => setCity(id)} title={company.cities?.[id]?.label}>
-          {CITY_SHORT[id] ?? company.cities?.[id]?.label}
-        </button>
-      ))}
-    </div>
-  );
+  return <CoreCitySwitch className={cn('ral-city', className)} labels={CITY_SHORT} />;
 }
 
 function PhoneLink({ className }) {
@@ -60,7 +54,7 @@ function KpLink() {
   const { id } = useVariant();
   const kp = useKp();
   return (
-    <Link to={`/${id}/request`} className="ral-kp" aria-label={`Запрос КП: ${kp.count} ${plural(kp.count, POSITION_FORMS)}`}>
+    <Link to={`/${id}/request`} className="ral-kp" aria-label={`Запрос КП: ${countText(kp.count, 'position')}`}>
       <ClipboardList className="size-4" aria-hidden="true" />
       <span className="ral-kp__label">Запрос КП</span>
       <span className="ral-kp__count tabular">{kp.count}</span>
@@ -134,15 +128,18 @@ function SolutionsMenu({ id, onClose }) {
   );
 }
 
-function MobileMenu({ id, field, onClose }) {
+/** Меню телефона — модальное (role="dialog", aria-modal): фокус ходит по кругу «кнопка закрытия → пункты меню». */
+function MobileMenu({ id, field, onClose, closeRef }) {
   const { items } = useNav();
   const directions = useFanDirections();
   const { id: variantId } = useVariant();
   const industries = getIndustries();
   const panelRef = useRef(null);
 
+  // Удержание фокуса и первый фокус — из ядра; кнопка закрытия стоит в шапке и входит в круг.
+  useFocusTrap(panelRef, { include: [closeRef] });
+
   useEffect(() => {
-    panelRef.current?.querySelector('a, button')?.focus();
     const root = document.documentElement;
     const previous = root.style.overflow;
     root.style.overflow = 'hidden';
@@ -200,35 +197,10 @@ export function Header() {
   const { items } = useNav();
   const direction = useCurrentDirection();
   const field = fieldFor(direction).id;
-  const { pathname } = useLocation();
-  const [open, setOpen] = useState(null); // 'catalog' | 'solutions' | 'mobile' | null
   const headerRef = useRef(null);
-  const baseId = useId();
-
-  // Новая страница — меню закрыто.
-  useEffect(() => setOpen(null), [pathname]);
-
-  useEffect(() => {
-    if (!open) return undefined;
-    const onKey = (event) => {
-      if (event.key === 'Escape') {
-        setOpen(null);
-        headerRef.current?.querySelector(`[aria-controls="${baseId}-${open}"]`)?.focus();
-      }
-    };
-    const onPointer = (event) => {
-      if (open !== 'mobile' && headerRef.current && !headerRef.current.contains(event.target)) setOpen(null);
-    };
-    document.addEventListener('keydown', onKey);
-    document.addEventListener('pointerdown', onPointer);
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.removeEventListener('pointerdown', onPointer);
-    };
-  }, [open, baseId]);
-
-  const toggle = (name) => setOpen((current) => (current === name ? null : name));
-  const close = () => setOpen(null);
+  const burgerRef = useRef(null);
+  // Общее состояние меню шапки (ядро): 'catalog' | 'solutions' | 'mobile' | null; Esc, клик мимо и смена страницы закрывают.
+  const { open, toggle, close, panelId, triggerProps } = useHeaderMenu({ containerRef: headerRef, keepOnOutsidePress: MODAL_MENUS });
 
   return (
     <header ref={headerRef} className="ral-header" data-field={field} data-open={open ?? undefined}>
@@ -252,8 +224,7 @@ export function Header() {
                   <button
                     type="button"
                     className="ral-nav__link"
-                    aria-expanded={open === item.id}
-                    aria-controls={`${baseId}-${item.id}`}
+                    {...triggerProps(item.id)}
                     onClick={() => toggle(item.id)}
                   >
                     {item.label}
@@ -281,10 +252,10 @@ export function Header() {
             </span>
           </Button>
           <button
+            ref={burgerRef}
             type="button"
             className="ral-burger"
-            aria-expanded={open === 'mobile'}
-            aria-controls={`${baseId}-mobile`}
+            {...triggerProps('mobile')}
             onClick={() => toggle('mobile')}
           >
             {open === 'mobile' ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
@@ -293,9 +264,9 @@ export function Header() {
         </div>
       </div>
 
-      {open === 'catalog' ? <CatalogMenu id={`${baseId}-catalog`} onClose={close} /> : null}
-      {open === 'solutions' ? <SolutionsMenu id={`${baseId}-solutions`} onClose={close} /> : null}
-      {open === 'mobile' ? <MobileMenu id={`${baseId}-mobile`} field={field} onClose={close} /> : null}
+      {open === 'catalog' ? <CatalogMenu id={panelId('catalog')} onClose={close} /> : null}
+      {open === 'solutions' ? <SolutionsMenu id={panelId('solutions')} onClose={close} /> : null}
+      {open === 'mobile' ? <MobileMenu id={panelId('mobile')} field={field} onClose={close} closeRef={burgerRef} /> : null}
       <RepaintLayer />
     </header>
   );

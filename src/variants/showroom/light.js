@@ -1,11 +1,7 @@
 // Свет «Шоурума»: когда зажигать подсветку (по скроллу), где луч курсора, магнит кнопки.
 // Всё, что движется, двигается через transform; без тонкого указателя и при reduced-motion — без движения.
 import { useEffect, useRef, useState } from 'react';
-import { useMediaQuery } from '../../core/scroll-video/useScrollVideo.js';
-
-export const useReducedMotion = () => useMediaQuery('(prefers-reduced-motion: reduce)');
-/** Мышь или тачпад: только здесь курсор работает лучом света. */
-export const useFinePointer = () => useMediaQuery('(hover: hover) and (pointer: fine)');
+import { usePrefersReducedMotion } from '../../core/hooks/media.js';
 
 /**
  * Подсветка зажигается, когда элемент вошёл в окно, и больше не гаснет.
@@ -14,7 +10,7 @@ export const useFinePointer = () => useMediaQuery('(hover: hover) and (pointer: 
  */
 export function useLitOnView({ threshold = 0.2, rootMargin = '0px 0px -12% 0px' } = {}) {
   const ref = useRef(null);
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const [seen, setSeen] = useState(false);
   useEffect(() => {
     const element = ref.current;

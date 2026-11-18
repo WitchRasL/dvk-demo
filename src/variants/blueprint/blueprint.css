@@ -1236,9 +1236,6 @@
 [data-variant='blueprint'] .bp-spec tbody tr:last-child td {
   border-bottom: 0;
 }
-[data-variant='blueprint'] .bp-spec__row {
-  transition: background-color 0s;
-}
 [data-variant='blueprint'] .bp-spec__row:hover {
   background: #f6f6f3;
 }
@@ -3578,12 +3575,4 @@
   background: linear-gradient(135deg, transparent 50%, var(--fg) 50% calc(50% + 1px), transparent calc(50% + 1px)) left 0.25rem center / 0.625rem 0.625rem no-repeat;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  [data-variant='blueprint'] *,
-  [data-variant='blueprint'] *::before,
-  [data-variant='blueprint'] *::after {
-    transition-duration: 0ms !important;
-    animation-duration: 0ms !important;
-    animation-delay: 0ms !important;
-  }
-}
+/* Отключение движения при prefers-reduced-motion — одно правило на все варианты: core/ui/reduced-motion.css (подключено в index.jsx). */

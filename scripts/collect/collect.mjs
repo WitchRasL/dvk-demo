@@ -8,7 +8,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as cheerio from 'cheerio';
-import { CATEGORIES, DIRECTIONS, DUPLICATE_SECTIONS, FACET_LABELS, INDUSTRIES, SECTIONS } from './catalog-map.mjs';
+import { CATEGORIES, DIRECTIONS, DUPLICATE_SECTIONS, INDUSTRIES, SECTIONS } from './catalog-map.mjs';
 import { ORIGIN, originalImageUrl, parseCatalogTree, parseGallery, parseMenuChildren, parsePageText, parseProduct } from './parse.mjs';
 import { HERO_PHOTOS, PRODUCTS, PROJECTS } from './picks.mjs';
 import { createPoliteClient } from './polite.mjs';
@@ -269,7 +269,6 @@ async function buildCategories() {
     directions,
     industries,
     aliases,
-    facetLabels: FACET_LABELS,
     meta: { source: ORIGIN, collectedAt: TODAY },
   };
 }

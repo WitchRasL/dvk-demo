@@ -9,6 +9,7 @@ import '@fontsource/golos-text/cyrillic-400.css';
 import '@fontsource/golos-text/latin-400.css';
 import '@fontsource/golos-text/cyrillic-500.css';
 import '@fontsource/golos-text/latin-500.css';
+import '../../core/ui/reduced-motion.css';
 import './showroom.css';
 import './home.css';
 import './pages.css';

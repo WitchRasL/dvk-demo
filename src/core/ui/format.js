@@ -1,4 +1,6 @@
-// Мелкие форматтеры текстов интерфейса: склонение, цена, габариты, телефон для tel:.
+// Мелкие форматтеры текстов интерфейса: склонение, общие формы слов, цена, габариты, телефон для tel:.
+// Подписи материалов и маркер «[уточнить]» живут в словаре каталога и отсюда только переэкспортируются.
+export { UNKNOWN, lightLabel, materialLabel } from '../catalog/labels.js';
 
 /** Склонение по числу: plural(21, ['товар', 'товара', 'товаров']) → 'товар'. */
 export function plural(count, [one, few, many]) {
@@ -8,6 +10,25 @@ export function plural(count, [one, few, many]) {
   if (last === 1) return one;
   if (last >= 2 && last <= 4) return few;
   return many;
+}
+
+/** Формы слов для счётчиков — одни на ядро и все варианты. */
+export const WORD_FORMS = Object.freeze({
+  position: ['позиция', 'позиции', 'позиций'],
+  product: ['товар', 'товара', 'товаров'],
+  series: ['серия', 'серии', 'серий'],
+  section: ['раздел', 'раздела', 'разделов'],
+  project: ['проект', 'проекта', 'проектов'],
+});
+
+/** Слово в нужной форме: wordFor(408, 'position') → 'позиций'. */
+export function wordFor(count, word) {
+  return plural(count, WORD_FORMS[word]);
+}
+
+/** Число со словом: countText(408, 'position') → '408 позиций'. */
+export function countText(count, word) {
+  return `${count} ${wordFor(count, word)}`;
 }
 
 const priceFormat = new Intl.NumberFormat('ru-RU');
@@ -33,21 +54,4 @@ export function toTel(phone) {
   const digits = String(phone ?? '').replace(/\D/g, '');
   if (!digits) return '';
   return `+${digits.length === 11 && digits.startsWith('8') ? `7${digits.slice(1)}` : digits}`;
-}
-
-/** Подписи материалов. В ядре каталога нет подписей для МДФ, фанеры и бетона (в фасетах они остаются английскими) — полный список здесь. */
-const MATERIAL_NAMES = {
-  metal: 'Металл',
-  glass: 'Стекло',
-  ldsp: 'ЛДСП',
-  mdf: 'МДФ',
-  wood: 'Дерево',
-  plywood: 'Фанера',
-  plastic: 'Пластик',
-  concrete: 'Бетон',
-  stone: 'Камень',
-};
-
-export function materialLabel(value) {
-  return MATERIAL_NAMES[value] ?? value;
 }

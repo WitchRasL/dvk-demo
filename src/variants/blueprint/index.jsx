@@ -7,6 +7,7 @@ import '@fontsource/fira-sans/cyrillic-500.css';
 import '@fontsource/fira-sans/latin-500.css';
 import '@fontsource/pt-mono/cyrillic-400.css';
 import '@fontsource/pt-mono/latin-400.css';
+import '../../core/ui/reduced-motion.css';
 import './blueprint.css';
 import { Home } from './home/Home.jsx';
 import { Footer } from './layout/Footer.jsx';

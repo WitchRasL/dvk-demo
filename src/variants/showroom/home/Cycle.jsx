@@ -4,9 +4,9 @@
 import { useRef, useState } from 'react';
 import { motion, useMotionValueEvent, useScroll, useTransform } from 'motion/react';
 import { getCompany } from '../../../core/catalog/index.js';
-import { useMediaQuery } from '../../../core/scroll-video/useScrollVideo.js';
+import { useMediaQuery, usePrefersReducedMotion } from '../../../core/hooks/media.js';
 import { cn } from '../../../lib/utils.js';
-import { useLitOnView, useReducedMotion } from '../light.js';
+import { useLitOnView } from '../light.js';
 import { SectionHeading } from '../ui.jsx';
 
 const TITLE = (
@@ -114,7 +114,7 @@ function ListCycle({ steps }) {
 export function Cycle() {
   const steps = getCompany().cycle ?? [];
   const wide = useMediaQuery('(min-width: 1024px) and (min-height: 640px)');
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const pinned = wide && !reduce;
   if (!steps.length) return null;
   return (

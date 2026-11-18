@@ -5,17 +5,16 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { ArrowUpRight, Phone } from 'lucide-react';
-import { ScrollVideo, cameraTransform } from '../../../core/scroll-video/index.js';
-import { getCompany } from '../../../core/catalog/index.js';
+import { ScrollVideo, cameraTransform, findScrollVideoStage } from '../../../core/scroll-video/index.js';
+import { getCompany, getDirectionTotal } from '../../../core/catalog/index.js';
 import { useCity } from '../../../core/city/index.js';
+import { useFinePointer, usePrefersReducedMotion } from '../../../core/hooks/media.js';
 import { useNav } from '../../../core/layout/nav.js';
-import { plural, toTel } from '../../../core/ui/format.js';
+import { toTel, wordFor } from '../../../core/ui/format.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { HERO_LAMPS, heroConfig } from '../hero-config.js';
-import { useFinePointer, useReducedMotion } from '../light.js';
 import { Button } from '../ui.jsx';
 
-const POSITION_FORMS = ['позиция', 'позиции', 'позиций'];
 /** Доля пути hero, за которую шоурум освещается полностью. */
 const LIGHT_UP_UNTIL = 0.45;
 /** Точка, куда смотрит свет без мыши: главная пристенная витрина. */
@@ -98,13 +97,13 @@ function Directions() {
     <nav aria-label="Направления" className="sr-hero__dirs">
       <ul>
         {directions.map((direction) => {
-          const total = direction.sections.reduce((sum, section) => sum + (section.count ?? 0), 0);
+          const total = getDirectionTotal(direction);
           return (
             <li key={direction.id} data-direction={direction.id}>
               <Link to={direction.to} className="sr-hero__dir">
                 <span className="sr-hero__dir-name">{direction.name}</span>
                 <span className="sr-hero__dir-meta tabular">
-                  {total.toLocaleString('ru-RU')} {plural(total, POSITION_FORMS)} на dvk-style.ru
+                  {total.toLocaleString('ru-RU')} {wordFor(total, 'position')} на dvk-style.ru
                 </span>
                 <ArrowUpRight className="sr-hero__dir-arrow size-5" aria-hidden="true" />
               </Link>
@@ -124,7 +123,7 @@ function Lights({ progress, mode }) {
   const shadeRef = useRef(null);
   const beamRef = useRef(null);
   const fine = useFinePointer();
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const [booted, setBooted] = useState(false);
   const isStatic = mode === 'static';
   const isVideo = mode === 'video';
@@ -139,7 +138,7 @@ function Lights({ progress, mode }) {
   useEffect(() => {
     const shade = shadeRef.current;
     const beam = beamRef.current;
-    const stage = shade?.closest('.scroll-video__stage');
+    const stage = findScrollVideoStage(shade);
     if (!shade || !stage) return undefined;
     const place = (x, y) => {
       const value = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;

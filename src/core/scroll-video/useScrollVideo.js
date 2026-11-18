@@ -1,5 +1,6 @@
 // Движок скролл-видео: прогресс закреплённой сцены (rAF + сглаживание), режим, перемотка кадра.
-import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMediaQuery, usePrefersReducedMotion } from '../hooks/media.js';
 import { clamp01, damp, progressToTime, resolveMode, trackProgress } from './math.js';
 
 /** За это время (мс) остаётся 1/e расстояния до цели: ~90 мс — заметная инерция, но кадр не отстаёт от руки. */
@@ -14,29 +15,8 @@ const SEEK_EPSILON_EXACT = 0.0005;
 /** Кадр не длиннее: после паузы вкладки сглаживание не должно «прыгать». */
 const MAX_FRAME_MS = 64;
 
-function matches(query) {
-  return typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia(query).matches;
-}
-
-/** Подписка на media query без провайдера; без matchMedia (старые окружения, тесты) — false. */
-export function useMediaQuery(query) {
-  const subscribe = useCallback(
-    (notify) => {
-      if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return () => {};
-      const list = window.matchMedia(query);
-      if (list.addEventListener) list.addEventListener('change', notify);
-      else list.addListener?.(notify);
-      return () => {
-        if (list.removeEventListener) list.removeEventListener('change', notify);
-        else list.removeListener?.(notify);
-      };
-    },
-    [query],
-  );
-  return useSyncExternalStore(subscribe, () => matches(query), () => false);
-}
-
-export const usePrefersReducedMotion = () => useMediaQuery('(prefers-reduced-motion: reduce)');
+// Хуки медиазапросов переехали в core/hooks/media.js; переэкспорт — для прежних импортов.
+export { useMediaQuery, usePrefersReducedMotion };
 
 /** Перематывает ролик на кадр под прогресс. false — перемотка занята, надо повторить на следующем кадре. */
 function seekVideo(video, progress, exact = false) {

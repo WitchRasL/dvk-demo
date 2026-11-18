@@ -3,13 +3,14 @@
 import { Fragment, useRef } from 'react';
 import { Link } from 'react-router';
 import { LoaderCircle } from 'lucide-react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
 import { cn } from '../../lib/utils.js';
 import { imageSrc, srcSet } from '../../lib/images.js';
 import { AddToKp } from '../../core/ui/AddToKp.jsx';
 import { formatPrice } from '../../core/ui/format.js';
 import { useVariant } from '../../core/variants/VariantContext.jsx';
-import { useFinePointer, useMagnetic } from './light.js';
+import { useFinePointer, usePrefersReducedMotion } from '../../core/hooks/media.js';
+import { useMagnetic } from './light.js';
 
 const BUTTON_VARIANTS = ['primary', 'secondary', 'ghost'];
 
@@ -66,7 +67,7 @@ export function Button({ variant = 'primary', size = 'md', as, href, to, loading
 function Magnet({ children }) {
   const ref = useRef(null);
   const fine = useFinePointer();
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   useMagnetic(ref, { enabled: fine && !reduce });
   return (
     <span ref={ref} className="sr-magnet">
@@ -181,7 +182,7 @@ export function ProductCard({ product, onQuickView, className }) {
 
 /** ({ children, as, delay }) — «свет включается»: блок из полутени становится ярким. Видим с первого кадра. */
 export function Reveal({ children, as = 'div', delay = 0, className }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   if (reduce) {
     const Tag = as;
     return <Tag className={className}>{children}</Tag>;

@@ -3,6 +3,7 @@
 // и слоями «Каркас / Стекло / LED / Размеры». Галерея — ядра, поэтому чертёж встаёт в неё порталом.
 import { useEffect, useId, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { hasFinePointer } from '../../../core/hooks/media.js';
 import { cn } from '../../../lib/utils.js';
 import { LAYER_LABELS, UNKNOWN, designation, drawingSpec } from '../lib/drawing.js';
 import { Drawing } from './Drawing.jsx';
@@ -33,10 +34,6 @@ function useGalleryTargets(productId) {
   return targets;
 }
 
-function finePointer() {
-  return typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-}
-
 /** @param {{ product: object }} props */
 export function ProductBlueprint({ product }) {
   const targets = useGalleryTargets(product.id);
@@ -50,7 +47,7 @@ export function ProductBlueprint({ product }) {
   // Наведение на фото (точный указатель): граница сравнения идёт за курсором.
   useEffect(() => {
     const stage = targets?.stage;
-    if (!stage || !finePointer()) return undefined;
+    if (!stage || !hasFinePointer()) return undefined;
     const move = (event) => {
       const rect = stage.getBoundingClientRect();
       if (!rect.width) return;

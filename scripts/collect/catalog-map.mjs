@@ -158,18 +158,3 @@ export const INDUSTRIES = [
   { id: 'locker-rooms', name: 'Раздевалки', directions: ['metal', 'landscape'], summary: 'Шкафчики для раздевалок необходимы', source: 'shkafy-dlya-razdevalok', categories: ['locker-room-cabinets', 'clothes-cabinets', 'drying-cabinets', 'locker-room-benches'] },
 ];
 
-/** Подписи значений фасетов (для ядра каталога). */
-export const FACET_LABELS = {
-  material: {
-    metal: 'Металл',
-    glass: 'Стекло',
-    ldsp: 'ЛДСП',
-    mdf: 'МДФ',
-    wood: 'Дерево',
-    plywood: 'Фанера',
-    plastic: 'Пластик',
-    concrete: 'Бетон',
-    stone: 'Камень',
-  },
-  light: { warm: 'Тёплая подсветка', cold: 'Холодная подсветка', rgb: 'RGB-подсветка', none: 'Без подсветки' },
-};

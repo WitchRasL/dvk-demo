@@ -4,16 +4,15 @@
 import { useRef } from 'react';
 import { Link } from 'react-router';
 import { ArrowUpRight } from 'lucide-react';
-import { getProduct, getProject } from '../../../core/catalog/index.js';
+import { getDirectionTotal, getProduct, getProject } from '../../../core/catalog/index.js';
+import { useFinePointer, usePrefersReducedMotion } from '../../../core/hooks/media.js';
 import { useNav } from '../../../core/layout/nav.js';
-import { plural } from '../../../core/ui/format.js';
+import { countText, wordFor } from '../../../core/ui/format.js';
 import { imageSrc, srcSet } from '../../../lib/images.js';
 import { cn } from '../../../lib/utils.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
-import { useFinePointer, useLitOnView, usePointerLight, useReducedMotion } from '../light.js';
+import { useLitOnView, usePointerLight } from '../light.js';
 import { Button, SectionHeading } from '../ui.jsx';
-
-const POSITION_FORMS = ['позиция', 'позиции', 'позиций'];
 
 /** Какой кадр у раздела: фото реального объекта ДВК (крупная плитка) или товар на подиуме. */
 const SECTION_MEDIA = {
@@ -66,7 +65,7 @@ function Tile({ section, size, index }) {
         <span className="sr-tile__text">
           <span className="sr-tile__name">{section.name}</span>
           <span className="sr-tile__count tabular">
-            {section.count} {plural(section.count, POSITION_FORMS)}
+            {countText(section.count, 'position')}
           </span>
         </span>
         <span className="sr-tile__ring" aria-hidden="true">
@@ -79,7 +78,7 @@ function Tile({ section, size, index }) {
 
 function Bay({ direction }) {
   const [ref, lit] = useLitOnView({ threshold: 0.25 });
-  const total = direction.sections.reduce((sum, section) => sum + (section.count ?? 0), 0);
+  const total = getDirectionTotal(direction);
   const withMedia = direction.sections.filter((section) => SECTION_MEDIA[section.id]);
   const rest = direction.sections.filter((section) => !SECTION_MEDIA[section.id]);
   const [lead, ...small] = withMedia;
@@ -111,7 +110,7 @@ function Bay({ direction }) {
           </ul>
         ) : null}
         <Link to={direction.to} className="sr-bay__all">
-          Всё направление: <span className="tabular">{total.toLocaleString('ru-RU')}</span> {plural(total, POSITION_FORMS)}
+          Всё направление: <span className="tabular">{total.toLocaleString('ru-RU')}</span> {wordFor(total, 'position')}
           <ArrowUpRight className="size-4" aria-hidden="true" />
         </Link>
       </div>
@@ -124,7 +123,7 @@ export function Bento() {
   const { directions } = useNav();
   const gridRef = useRef(null);
   const fine = useFinePointer();
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   usePointerLight(gridRef, { enabled: fine && !reduce });
   return (
     <section className="sr-screen sr-bento" aria-labelledby="sr-bento-title">

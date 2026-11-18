@@ -1,10 +1,10 @@
 // Лист 4 «Решения по отраслям»: табы-ведомость слева, справа — лист отрасли: фото (проект ДВК или товар),
 // описание с сайта и счётчики из данных. Смена таба — фото «перелистывается» шторкой clip-path.
-import { useId, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { ArrowRight } from 'lucide-react';
 import { buildCatalogUrl, getIndustry, getProjects, queryProducts } from '../../../core/catalog/index.js';
-import { plural } from '../../../core/ui/format.js';
+import { useTabs } from '../../../core/hooks/useTabs.js';
+import { UNKNOWN, countText } from '../../../core/ui/format.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { imageSrc, srcSet } from '../../../lib/images.js';
 import { cn } from '../../../lib/utils.js';
@@ -13,9 +13,6 @@ import { SectionHeading } from '../ui/headings.jsx';
 import { Sheet } from './Sheet.jsx';
 
 const INDUSTRY_IDS = ['pharmacy', 'jewelry', 'optics', 'museums', 'apparel', 'mall-islands', 'yards-schools', 'warehouses'];
-const PRODUCT_FORMS = ['товар', 'товара', 'товаров'];
-const SERIES_FORMS = ['серия', 'серии', 'серий'];
-const PROJECT_FORMS = ['проект', 'проекта', 'проектов'];
 
 /** Первые предложения описания отрасли с сайта, не длиннее ~260 знаков. */
 function shortText(text, limit = 260) {
@@ -51,25 +48,9 @@ function industryEntry(id) {
 export function SheetIndustries() {
   const { id: variantId } = useVariant();
   const entries = INDUSTRY_IDS.map(industryEntry).filter(Boolean);
-  const [active, setActive] = useState(0);
-  const tabsRef = useRef([]);
-  const baseId = useId();
-  const current = entries[active];
+  const tabs = useTabs({ count: entries.length }); // состояние и клавиатура табов — общие, из ядра
+  const current = entries[tabs.selected];
   if (!current) return null;
-
-  const select = (index) => {
-    const next = (index + entries.length) % entries.length;
-    setActive(next);
-    tabsRef.current[next]?.focus();
-  };
-
-  const onKeyDown = (event) => {
-    const keys = { ArrowDown: active + 1, ArrowRight: active + 1, ArrowUp: active - 1, ArrowLeft: active - 1, Home: 0, End: entries.length - 1 };
-    if (event.key in keys) {
-      event.preventDefault();
-      select(keys[event.key]);
-    }
-  };
 
   const { industry, image, kind, total, projects } = current;
   const series = industry.series?.length ?? 0;
@@ -83,29 +64,16 @@ export function SheetIndustries() {
           lead="Аптека, ювелирный салон, музей, двор или склад — у каждой отрасли свой набор оборудования и свой лист."
         />
         <div className="bp-ind">
-          <div className="bp-ind__tabs" role="tablist" aria-label="Отрасли" aria-orientation="vertical" onKeyDown={onKeyDown}>
+          <div className="bp-ind__tabs" {...tabs.listProps} aria-label="Отрасли">
             {entries.map((entry, index) => (
-              <button
-                key={entry.industry.id}
-                ref={(node) => {
-                  tabsRef.current[index] = node;
-                }}
-                type="button"
-                role="tab"
-                id={`${baseId}-tab-${index}`}
-                aria-selected={index === active}
-                aria-controls={`${baseId}-panel`}
-                tabIndex={index === active ? 0 : -1}
-                className="bp-ind__tab"
-                onClick={() => setActive(index)}
-              >
+              <button key={entry.industry.id} {...tabs.tabProps(index)} className="bp-ind__tab">
                 <span className="bp-mono bp-ind__pos">{index + 1}</span>
                 <span className="bp-ind__tab-name">{entry.industry.name}</span>
               </button>
             ))}
           </div>
 
-          <div id={`${baseId}-panel`} role="tabpanel" aria-labelledby={`${baseId}-tab-${active}`} className="bp-ind__panel" tabIndex={0}>
+          <div {...tabs.panelProps} className="bp-ind__panel">
             <div key={industry.id} className={cn('bp-ind__media', kind === 'product' && 'is-product')}>
               {image ? (
                 <img
@@ -132,20 +100,20 @@ export function SheetIndustries() {
                 <div>
                   <dt>В прототипе</dt>
                   <dd className="tabular">
-                    {total} {plural(total, PRODUCT_FORMS)}
+                    {countText(total, 'product')}
                   </dd>
                 </div>
                 {series ? (
                   <div>
                     <dt>Готовые серии</dt>
                     <dd className="tabular">
-                      {series} {plural(series, SERIES_FORMS)}
+                      {countText(series, 'series')}
                     </dd>
                   </div>
                 ) : null}
                 <div>
                   <dt>Проекты</dt>
-                  <dd className="tabular">{projects.length ? `${projects.length} ${plural(projects.length, PROJECT_FORMS)}` : '[уточнить]'}</dd>
+                  <dd className="tabular">{projects.length ? countText(projects.length, 'project') : UNKNOWN}</dd>
                 </div>
               </dl>
               <div className="bp-ind__links">

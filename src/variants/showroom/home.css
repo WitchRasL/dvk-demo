@@ -316,7 +316,6 @@
     color: rgb(242 234 220 / 0.66);
     cursor: pointer;
     pointer-events: auto;
-    transition: color var(--dur-base) var(--ease-out);
   }
 
   .sr-phases__step:hover {
@@ -1100,7 +1099,6 @@
     text-align: center;
     text-transform: uppercase;
     color: rgb(242 234 220 / 0.6);
-    transition: color var(--dur-base) var(--ease-out);
   }
 
   .sr-cycle__stops [data-state='past'] .sr-cycle__stop {
@@ -1234,7 +1232,6 @@
     white-space: nowrap;
     color: var(--fg-muted);
     cursor: pointer;
-    transition: color var(--dur-base) var(--ease-out);
   }
 
   .sr-industries__tab:hover {

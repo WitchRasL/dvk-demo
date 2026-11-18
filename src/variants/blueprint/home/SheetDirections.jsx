@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router';
 import { ArrowRight } from 'lucide-react';
 import { useInView } from 'motion/react';
-import { buildCatalogUrl, getDirections } from '../../../core/catalog/index.js';
+import { buildCatalogUrl, getDirectionTotal, getDirections } from '../../../core/catalog/index.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { SheetGlyph } from '../drawing/SheetGlyph.jsx';
 import { SHEET_TYPES } from '../lib/drawing.js';
@@ -27,7 +27,7 @@ export function SheetDirections() {
         <div ref={ref} className="bp-dirs" data-filled={filled || undefined}>
           {getDirections().map((direction, index) => {
             const sheet = SHEET_TYPES[direction.id];
-            const total = direction.sections.reduce((sum, section) => sum + (section.count ?? 0), 0);
+            const total = getDirectionTotal(direction);
             return (
               <article key={direction.id} className="bp-dirs__col" data-direction-sheet={direction.id} style={{ '--col': index }}>
                 <div className="bp-dirs__head">

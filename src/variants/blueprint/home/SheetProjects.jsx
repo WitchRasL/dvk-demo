@@ -4,7 +4,7 @@
 import { useRef } from 'react';
 import { Link } from 'react-router';
 import { useInView } from 'motion/react';
-import { getDirection, getProject } from '../../../core/catalog/index.js';
+import { UNKNOWN, getDirection, getProject } from '../../../core/catalog/index.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { imageSrc, srcSet } from '../../../lib/images.js';
 import { SectionHeading } from '../ui/headings.jsx';
@@ -55,15 +55,15 @@ export function SheetProjects() {
                     </h3>
                     <p className="bp-psheet__cell">
                       <span className="bp-cell__label">Город</span>
-                      {project.city ?? '[уточнить]'}
+                      {project.city ?? UNKNOWN}
                     </p>
                     <p className="bp-psheet__cell">
                       <span className="bp-cell__label">Направление</span>
-                      {direction?.name ?? '[уточнить]'}
+                      {direction?.name ?? UNKNOWN}
                     </p>
                     <p className="bp-psheet__cell bp-psheet__scope">
                       <span className="bp-cell__label">Состав работ</span>
-                      {project.scope?.length ? project.scope.join(' · ') : '[уточнить]'}
+                      {project.scope?.length ? project.scope.join(' · ') : UNKNOWN}
                     </p>
                     <p className="bp-psheet__cell bp-psheet__no">
                       <span className="bp-cell__label">Лист</span>

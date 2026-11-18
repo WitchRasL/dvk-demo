@@ -1,17 +1,14 @@
 // Экран «Решения по отраслям»: интерактивные табы (отрасли сгруппированы по направлениям — полями цвета),
 // смена картинки — шторкой целыми модулями. Картинка — фото проекта отрасли, иначе товар отрасли на подиуме.
-import { useId, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { buildCatalogUrl, getIndustries, getProjects, queryProducts } from '../../../core/catalog/index.js';
-import { plural } from '../../../core/ui/format.js';
+import { useTabs } from '../../../core/hooks/useTabs.js';
+import { wordFor } from '../../../core/ui/format.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { imageSrc, srcSet } from '../../../lib/images.js';
 import { cn } from '../../../lib/utils.js';
 import { useFanDirections } from '../Fan.jsx';
 import { Button, SectionHeading } from '../ui.jsx';
-
-const PRODUCT_FORMS = ['товар', 'товара', 'товаров'];
-const SERIES_FORMS = ['серия', 'серии', 'серий'];
 
 function industryVisual(industry) {
   const project = getProjects().find((item) => item.industry === industry.id && item.images?.length);
@@ -25,28 +22,14 @@ export function Solutions() {
   const { id } = useVariant();
   const directions = useFanDirections();
   const industries = getIndustries();
-  const [active, setActive] = useState(industries[0]?.id);
-  const baseId = useId();
-  const tabRefs = useRef(new Map());
+  // Табы идут в порядке показа: по направлениям. Состояние и клавиатура — общие, из ядра.
   const order = directions.flatMap((direction) => industries.filter((industry) => industry.directions?.[0] === direction.id));
-  const current = order.find((industry) => industry.id === active) ?? order[0];
+  const tabs = useTabs({ count: order.length, initial: Math.max(0, order.indexOf(industries[0])) });
+  const current = order[tabs.selected];
   if (!current) return null;
 
   const products = queryProducts({ industry: current.id });
   const visual = industryVisual(current);
-
-  function onKeyDown(event) {
-    const index = order.findIndex((industry) => industry.id === current.id);
-    const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[event.key];
-    let next = null;
-    if (step) next = order[(index + step + order.length) % order.length];
-    if (event.key === 'Home') next = order[0];
-    if (event.key === 'End') next = order.at(-1);
-    if (!next) return;
-    event.preventDefault();
-    setActive(next.id);
-    tabRefs.current.get(next.id)?.focus();
-  }
 
   return (
     <section className="ral-section ral-solutions" data-field-scope="paper" aria-labelledby="ral-solutions-title">
@@ -54,7 +37,7 @@ export function Solutions() {
         <SectionHeading id="ral-solutions-title" title="Решения по отраслям" lead="Аптека, музей, двор или склад — выберите объект: что делаем, какие товары и проекты есть." />
       </div>
       <div className="ral-wrap ral-solutions__grid">
-        <div className="ral-solutions__tabs" role="tablist" aria-label="Отрасли" aria-orientation="vertical" onKeyDown={onKeyDown}>
+        <div className="ral-solutions__tabs" {...tabs.listProps} aria-label="Отрасли">
           {directions.map((direction) => (
             <div key={direction.id} className="ral-solutions__group" role="presentation">
               <p className="ral-solutions__groupname" aria-hidden="true">
@@ -66,18 +49,7 @@ export function Solutions() {
                 .map((industry) => {
                   const selected = industry.id === current.id;
                   return (
-                    <button
-                      key={industry.id}
-                      ref={(node) => (node ? tabRefs.current.set(industry.id, node) : tabRefs.current.delete(industry.id))}
-                      type="button"
-                      role="tab"
-                      id={`${baseId}-tab-${industry.id}`}
-                      aria-selected={selected}
-                      aria-controls={`${baseId}-panel`}
-                      tabIndex={selected ? 0 : -1}
-                      className={cn('ral-solutions__tab', selected && 'is-active')}
-                      onClick={() => setActive(industry.id)}
-                    >
+                    <button key={industry.id} {...tabs.tabProps(order.indexOf(industry))} className={cn('ral-solutions__tab', selected && 'is-active')}>
                       {industry.name}
                     </button>
                   );
@@ -86,7 +58,7 @@ export function Solutions() {
           ))}
         </div>
 
-        <div id={`${baseId}-panel`} role="tabpanel" aria-labelledby={`${baseId}-tab-${current.id}`} className="ral-solutions__panel">
+        <div {...tabs.panelProps} className="ral-solutions__panel">
           <figure key={current.id} className={cn('ral-solutions__visual', visual?.kind === 'product' && 'is-product')} data-field-scope={visual?.kind === 'product' ? visual.direction : undefined}>
             {visual ? (
               <img
@@ -109,11 +81,11 @@ export function Solutions() {
             <p className="ral-solutions__summary">{current.summary}</p>
             <ul className="ral-solutions__facts">
               <li>
-                <span className="tabular">{products.total}</span> {plural(products.total, PRODUCT_FORMS)} отрасли в прототипе
+                <span className="tabular">{products.total}</span> {wordFor(products.total, 'product')} отрасли в прототипе
               </li>
               {current.series?.length ? (
                 <li>
-                  <span className="tabular">{current.series.length}</span> {plural(current.series.length, SERIES_FORMS)} оборудования
+                  <span className="tabular">{current.series.length}</span> {wordFor(current.series.length, 'series')} оборудования
                 </li>
               ) : null}
             </ul>

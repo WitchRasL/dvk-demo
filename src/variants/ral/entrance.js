@@ -1,10 +1,7 @@
 // Появление по скроллу без «пустого» первого кадра: прячется только то, что в момент монтирования ниже экрана.
 // 'idle' — видно сразу (уже на экране, reduced-motion, нет IntersectionObserver); 'pending' — ждёт; 'shown' — играет вход.
-import { useLayoutEffect, useState, useSyncExternalStore } from 'react';
-
-export function prefersReducedMotion() {
-  return typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
+import { useLayoutEffect, useState } from 'react';
+import { prefersReducedMotion } from '../../core/hooks/media.js';
 
 /**
  * @param {{ current: Element|null }} ref
@@ -35,18 +32,4 @@ export function useEntrance(ref, { immediate = false, threshold = 0.9 } = {}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return state;
-}
-
-/** Подписка на media query; без matchMedia (тесты) — false. */
-export function useMedia(query) {
-  return useSyncExternalStore(
-    (notify) => {
-      if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return () => {};
-      const list = window.matchMedia(query);
-      list.addEventListener?.('change', notify);
-      return () => list.removeEventListener?.('change', notify);
-    },
-    () => typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia(query).matches,
-    () => false,
-  );
 }

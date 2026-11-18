@@ -4,15 +4,16 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import { ArrowUpRight, ChevronDown, ClipboardList, Menu, Phone, X } from 'lucide-react';
 import { cn } from '../../lib/utils.js';
-import { useCity, CITIES } from '../../core/city/index.js';
+import { useCity } from '../../core/city/index.js';
 import { getCompany } from '../../core/catalog/index.js';
+import { useHeaderMenu } from '../../core/hooks/useHeaderMenu.js';
 import { useKp } from '../../core/kp/index.js';
 import { useNav } from '../../core/layout/nav.js';
-import { plural, toTel } from '../../core/ui/format.js';
+import { CitySwitch as CoreCitySwitch } from '../../core/ui/CitySwitch.jsx';
+import { toTel, wordFor } from '../../core/ui/format.js';
 import { useVariant } from '../../core/variants/VariantContext.jsx';
 import { Button } from './ui.jsx';
 
-const POSITION_FORMS = ['позиция', 'позиции', 'позиций'];
 const CITY_SHORT = { spb: 'Петербург', msk: 'Москва' };
 const HOVER_OPEN_MS = 90;
 const HOVER_CLOSE_MS = 220;
@@ -40,17 +41,7 @@ export function Logo({ to, className }) {
 
 /** Город в шапке: две кнопки, выбранная подсвечена. Меняет телефон, почту и адрес по всему сайту. */
 export function CitySwitch({ className }) {
-  const { city, setCity } = useCity();
-  const company = getCompany();
-  return (
-    <div role="group" aria-label="Выбор города" className={cn('sr-city', className)}>
-      {CITIES.filter((id) => company.cities?.[id]).map((id) => (
-        <button key={id} type="button" aria-pressed={city === id} onClick={() => setCity(id)} className="sr-city__btn">
-          {CITY_SHORT[id] ?? company.cities[id].label}
-        </button>
-      ))}
-    </div>
-  );
+  return <CoreCitySwitch className={cn('sr-city', className)} buttonClassName="sr-city__btn" labels={CITY_SHORT} label="Выбор города" />;
 }
 
 function KpLink({ to, className }) {
@@ -61,7 +52,7 @@ function KpLink({ to, className }) {
       <span className="sr-kp__label">Запрос КП</span>
       <span className="sr-kp__count tabular">
         {count}
-        <span className="sr-only"> {plural(count, POSITION_FORMS)}</span>
+        <span className="sr-only"> {wordFor(count, 'position')}</span>
       </span>
     </Link>
   );
@@ -271,40 +262,12 @@ export function Header() {
   const { pathname } = useLocation();
   const headerRef = useRef(null);
   const timer = useRef(null);
-  const [menu, setMenu] = useState(null); // 'catalog' | 'solutions' | null
-  const [drawer, setDrawer] = useState(false);
-  const catalogId = useId();
-  const solutionsId = useId();
-  const drawerId = useId();
+  // Общее состояние меню шапки (ядро): 'catalog' | 'solutions' | 'mobile' | null; Esc, клик мимо и смена страницы закрывают.
+  const { open, show, toggle: toggleMenu, close: closeMenu, panelId, triggerProps } = useHeaderMenu({ containerRef: headerRef });
+  const menu = open === 'mobile' ? null : open; // выпадающее мега-меню
   const isHome = pathname === `/${variantId}` || pathname === `/${variantId}/`;
   const overHero = useOverHero(isHome);
   const pageRoot = pathname.split('/')[2] ?? '';
-
-  // Новая страница — меню закрыты.
-  useEffect(() => {
-    setMenu(null);
-    setDrawer(false);
-  }, [pathname]);
-
-  // Esc и клик мимо шапки закрывают выпадающее меню; фокус возвращается на его кнопку.
-  useEffect(() => {
-    if (!menu) return undefined;
-    const onKey = (event) => {
-      if (event.key !== 'Escape') return;
-      const toggle = headerRef.current?.querySelector(`[aria-controls="${menu === 'catalog' ? catalogId : solutionsId}"]`);
-      setMenu(null);
-      toggle?.focus();
-    };
-    const onPointer = (event) => {
-      if (!headerRef.current?.contains(event.target)) setMenu(null);
-    };
-    document.addEventListener('keydown', onKey);
-    document.addEventListener('pointerdown', onPointer);
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.removeEventListener('pointerdown', onPointer);
-    };
-  }, [menu, catalogId, solutionsId]);
 
   useEffect(() => () => clearTimeout(timer.current), []);
 
@@ -314,13 +277,13 @@ export function Header() {
     clearTimeout(timer.current);
     timer.current = setTimeout(() => {
       openedBy.current = 'hover';
-      setMenu(next);
+      show(next);
     }, HOVER_OPEN_MS);
   };
   const hoverClose = (event) => {
     if (event.pointerType !== 'mouse') return;
     clearTimeout(timer.current);
-    timer.current = setTimeout(() => setMenu(null), HOVER_CLOSE_MS);
+    timer.current = setTimeout(closeMenu, HOVER_CLOSE_MS);
   };
   const hoverKeep = () => clearTimeout(timer.current);
   // Клик по уже открытому наведением меню его не закрывает: мышь сначала наводит, потом кликает.
@@ -331,9 +294,12 @@ export function Header() {
       return;
     }
     openedBy.current = 'click';
-    setMenu((current) => (current === next ? null : next));
+    toggleMenu(next);
   };
-  const closeMenu = () => setMenu(null);
+  const openDrawer = () => {
+    clearTimeout(timer.current); // отложенное закрытие мега-меню не должно закрыть меню телефона
+    show('mobile');
+  };
   const solutions = items.find((item) => item.id === 'solutions');
 
   return (
@@ -355,15 +321,13 @@ export function Header() {
               const active = pageRoot === root || (item.id === 'catalog' && pageRoot === 'product');
               if (item.id === 'catalog' || item.id === 'solutions') {
                 const key = item.id;
-                const panelId = key === 'catalog' ? catalogId : solutionsId;
                 return (
                   <li key={item.id} onPointerEnter={hoverOpen(key)}>
                     <button
                       type="button"
                       className="sr-nav__item"
                       data-active={active || undefined}
-                      aria-expanded={menu === key}
-                      aria-controls={panelId}
+                      {...triggerProps(key)}
                       onClick={toggle(key)}
                     >
                       {item.label}
@@ -395,9 +359,8 @@ export function Header() {
           <button
             type="button"
             className="sr-icon-btn sr-header__burger"
-            aria-expanded={drawer}
-            aria-controls={drawerId}
-            onClick={() => setDrawer(true)}
+            {...triggerProps('mobile')}
+            onClick={openDrawer}
           >
             <Menu className="size-5" aria-hidden="true" />
             <span className="sr-only">Меню</span>
@@ -405,9 +368,9 @@ export function Header() {
         </div>
       </div>
 
-      {menu === 'catalog' ? <CatalogPanel id={catalogId} variantId={variantId} directions={directions} onNavigate={closeMenu} onPointerEnter={hoverKeep} /> : null}
-      {menu === 'solutions' && solutions ? <SolutionsPanel id={solutionsId} industries={solutions.children} onNavigate={closeMenu} onPointerEnter={hoverKeep} /> : null}
-      {drawer ? <MobileMenu id={drawerId} variantId={variantId} items={items} directions={directions} onClose={() => setDrawer(false)} /> : null}
+      {menu === 'catalog' ? <CatalogPanel id={panelId('catalog')} variantId={variantId} directions={directions} onNavigate={closeMenu} onPointerEnter={hoverKeep} /> : null}
+      {menu === 'solutions' && solutions ? <SolutionsPanel id={panelId('solutions')} industries={solutions.children} onNavigate={closeMenu} onPointerEnter={hoverKeep} /> : null}
+      {open === 'mobile' ? <MobileMenu id={panelId('mobile')} variantId={variantId} items={items} directions={directions} onClose={closeMenu} /> : null}
     </header>
   );
 }

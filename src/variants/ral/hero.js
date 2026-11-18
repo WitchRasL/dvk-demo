@@ -1,13 +1,11 @@
 // Hero-ролик «Палитры RAL»: источники, кадр-заглушка, камера, фазы и пояснения-ярлыки.
 // Тексты пояснений берутся из данных (company.json, products.json) — без выдумки; не нашлось — «[уточнить]».
 // Раскадровка с привязкой каждого пояснения к отрезку и точке кадра — docs/hero-video/ral.md.
-import { getCompany, getProduct } from '../../core/catalog/index.js';
+import { UNKNOWN, getCompany, getCycleStep, getFactText, getProduct } from '../../core/catalog/index.js';
 
-const UNKNOWN = '[уточнить]';
 const company = getCompany();
 
-const fact = (id) => company.facts?.find((item) => item.id === id)?.text ?? UNKNOWN;
-const step = (id) => company.cycle?.find((item) => item.id === id) ?? { title: UNKNOWN, text: UNKNOWN };
+const step = (id) => getCycleStep(id) ?? { title: UNKNOWN, text: UNKNOWN };
 const service = (id) => company.services?.find((item) => item.id === id) ?? { title: UNKNOWN, text: UNKNOWN };
 
 /** Значение характеристики товара и его название — источник пояснения. */
@@ -31,12 +29,12 @@ const light = spec('prilavok-dlya-optiki-pod-20', 'Дополнительные 
  * Отрезки идут по фазам: проектирование → производство → монтаж.
  */
 export const HERO_CALLOUTS = [
-  { id: 'design', from: 0.03, to: 0.23, x: 0.56, y: 0.4, code: 'Проект', title: service('shop-design').title, text: fact('free-shop-design') },
+  { id: 'design', from: 0.03, to: 0.23, x: 0.56, y: 0.4, code: 'Проект', title: service('shop-design').title, text: getFactText('free-shop-design') },
   { id: 'glass', from: 0.26, to: 0.38, x: 0.63, y: 0.68, code: 'Стекло 5мм', title: 'Полированное стекло', text: glass.text, note: glass.note },
   { id: 'board', from: 0.38, to: 0.5, x: 0.83, y: 0.72, code: 'ДСП 16 мм', title: 'Противоударная кромка', text: board.text, note: board.note },
   { id: 'light', from: 0.5, to: 0.62, x: 0.2, y: 0.46, code: 'Подсветка', title: 'Подсветка витрин', text: light.text, note: light.note },
   { id: 'production', from: 0.62, to: 0.76, x: 0.4, y: 0.3, code: 'Колпино', title: production.title, text: production.text },
-  { id: 'install', from: 0.79, to: 1, x: 0.68, y: 0.84, code: 'Монтаж', title: install.title, text: fact('night-install') },
+  { id: 'install', from: 0.79, to: 1, x: 0.68, y: 0.84, code: 'Монтаж', title: install.title, text: getFactText('night-install') },
 ];
 
 /** Фазы ролика — они же глаголы заголовка: «проектируем, производим и монтируем». */

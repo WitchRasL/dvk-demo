@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { FieldLink, useFanDirections } from '../Fan.jsx';
-import { useMedia } from '../entrance.js';
+import { useMediaQuery, usePrefersReducedMotion } from '../../../core/hooks/media.js';
 import { SectionHeading } from '../ui.jsx';
 
 function Blade({ direction, index, progress, animate }) {
@@ -46,8 +46,8 @@ function Blade({ direction, index, progress, animate }) {
 export function FanSection() {
   const directions = useFanDirections();
   const ref = useRef(null);
-  const wide = useMedia('(min-width: 1024px)');
-  const reduce = useMedia('(prefers-reduced-motion: reduce)');
+  const wide = useMediaQuery('(min-width: 1024px)');
+  const reduce = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.9', 'start 0.15'] });
   return (
     <section ref={ref} className="ral-section ral-fan" data-field-scope="paper" aria-labelledby="ral-fan-title">

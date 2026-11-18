@@ -1105,30 +1105,16 @@ a.ral-mega__head:hover .ral-mega__title {
   text-decoration: none;
 }
 
-/* --- без движения ---------------------------------------------------------------------------- */
+/* --- без движения ----------------------------------------------------------------------------
+   Само движение (переходы и анимации) выключает одно правило на все варианты — core/ui/reduced-motion.css,
+   подключено в index.jsx; своих списков селекторов здесь нет. Ниже только конечные состояния:
+   то, что спрятано до появления, видно сразу, и наведение не сдвигает картинку. */
 
 @media (prefers-reduced-motion: reduce) {
-  .ral-btn,
-  .ral-btn::before,
-  .ral-swatch__img,
-  .ral-logo__mark > span,
-  .ral-nav__link::after,
-  .ral-nav__chev,
-  .ral-dir__arrow {
-    transition: none;
-  }
-  .ral-mega__col,
-  .ral-mobile,
-  .ral-reveal[data-reveal='shown'] {
-    animation: none;
-  }
   .ral-reveal[data-reveal='pending'] {
     clip-path: none;
   }
   .ral-swatch:hover .ral-swatch__img {
     transform: none;
-  }
-  .ral-spin {
-    animation-duration: 2.4s;
   }
 }

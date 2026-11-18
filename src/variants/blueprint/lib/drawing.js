@@ -1,7 +1,10 @@
 // Чистая логика «Режима чертёж» и спецификации: что рисовать по данным товара. Ничего не выдумываем:
 // нет размера — на размерной линии [уточнить]; подсветка не указана — слоя LED нет, есть пометка.
 
-export const UNKNOWN = '[уточнить]';
+import { UNKNOWN } from '../../../core/ui/format.js';
+
+// Маркер «[уточнить]» — общий, из ядра; переэкспорт — для модулей варианта.
+export { UNKNOWN };
 
 /** Шаблоны чертежей по `product.kind` (interfaces.md); всё прочее — «other». */
 export const TEMPLATES = ['showcase', 'counter', 'cabinet', 'rack', 'workbench', 'bench', 'playground', 'island', 'other'];

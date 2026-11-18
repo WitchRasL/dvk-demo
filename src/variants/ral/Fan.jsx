@@ -3,28 +3,26 @@
 import { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowUpRight } from 'lucide-react';
-import { buildCatalogUrl, getDirections } from '../../core/catalog/index.js';
-import { plural } from '../../core/ui/format.js';
+import { buildCatalogUrl, getDirectionTotal, getDirections } from '../../core/catalog/index.js';
+import { prefersReducedMotion } from '../../core/hooks/media.js';
+import { countText } from '../../core/ui/format.js';
 import { useVariant } from '../../core/variants/VariantContext.jsx';
 import { cn } from '../../lib/utils.js';
-import { chooseDirection, finishRepaint, useRepaint, useRepaintLink } from './field-store.js';
+import { cancelRepaint, chooseDirection, finishRepaint, useRepaint, useRepaintLink } from './field-store.js';
 import { fieldFor } from './palette.js';
-
-const SECTION_FORMS = ['раздел', 'раздела', 'разделов'];
-const POSITION_FORMS = ['позиция', 'позиции', 'позиций'];
 
 /** Направления с полем, числом разделов и позиций на dvk-style.ru (из categories.json). */
 export function useFanDirections() {
   const { id } = useVariant();
   return getDirections().map((direction) => {
-    const total = direction.sections.reduce((sum, section) => sum + (section.count ?? 0), 0);
+    const total = getDirectionTotal(direction);
     return {
       ...direction,
       field: fieldFor(direction.id),
       to: buildCatalogUrl(id, { direction: direction.id }),
       total,
-      totalText: `${total} ${plural(total, POSITION_FORMS)}`,
-      sectionsText: `${direction.sections.length} ${plural(direction.sections.length, SECTION_FORMS)}`,
+      totalText: countText(total, 'position'),
+      sectionsText: countText(direction.sections.length, 'section'),
     };
   });
 }
@@ -58,10 +56,6 @@ export function DirectionSwatch({ direction, className, size = 'strip', ...rest 
   );
 }
 
-function reducedMotion() {
-  return typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
-
 /** Слой заливки: раскрывается кругом от точки клика, после перехода уходит вверх, открывая страницу того же цвета. */
 export function RepaintLayer() {
   const repaint = useRepaint();
@@ -73,6 +67,10 @@ export function RepaintLayer() {
     navigateRef.current = navigate;
   }, [navigate]);
 
+  // Слой размонтирован посреди заливки (переключили вариант) — запрос перекраски сбрасывается:
+  // иначе при возврате в вариант заливка проиграется снова и уведёт на старый адрес.
+  useEffect(() => () => cancelRepaint(), []);
+
   // Зависимость — только сам запрос перекраски: смена страницы посреди заливки не должна её обрывать.
   useEffect(() => {
     const element = ref.current;
@@ -83,7 +81,7 @@ export function RepaintLayer() {
     const run = async () => {
       try {
         await element.animate([{ clipPath: `circle(0px at ${x}px ${y}px)` }, { clipPath: `circle(${radius}px at ${x}px ${y}px)` }], {
-          duration: reducedMotion() ? 1 : 720,
+          duration: prefersReducedMotion() ? 1 : 720,
           easing: 'cubic-bezier(0.7, 0, 0.2, 1)',
           fill: 'forwards',
         }).finished;

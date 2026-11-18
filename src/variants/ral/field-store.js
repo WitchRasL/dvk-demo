@@ -4,6 +4,7 @@
 import { useCallback, useEffect, useMemo, useSyncExternalStore } from 'react';
 import { useLocation } from 'react-router';
 import { getDirections, getIndustry, getProduct, getProject } from '../../core/catalog/index.js';
+import { prefersReducedMotion } from '../../core/hooks/media.js';
 import { createPersistedStore, useStore } from '../../core/kp/persisted-store.js';
 import { DIRECTION_FIELDS } from './palette.js';
 
@@ -71,8 +72,12 @@ export function finishRepaint(id) {
   }
 }
 
-function prefersReducedMotion() {
-  return typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/** Сбрасывает незавершённую перекраску: слой заливки размонтирован (сменили вариант) — доигрывать её некому. */
+export function cancelRepaint() {
+  if (repaint) {
+    repaint = null;
+    emit();
+  }
 }
 
 /**

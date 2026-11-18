@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatDimensions, formatPrice, plural, toTel } from './format.js';
+import { UNKNOWN, WORD_FORMS, countText, formatDimensions, formatPrice, plural, toTel, wordFor } from './format.js';
 
 // Пробелы в числах — неразрывные; для сравнения приводим к обычным.
 const plain = (text) => String(text).replace(/\s/g, ' ');
@@ -50,5 +50,34 @@ describe('toTel: телефон для ссылки tel:', () => {
   it('оставляет плюс и цифры', () => {
     expect(toTel('+7 (812) 461-97-51')).toBe('+78124619751');
     expect(toTel('8 (495) 268-15-21')).toBe('+74952681521');
+  });
+});
+
+describe('общие формы слов и маркер неизвестного', () => {
+  it('маркер того, чего нет в данных, — «[уточнить]»', () => {
+    expect(UNKNOWN).toBe('[уточнить]');
+  });
+
+  it.each([
+    ['position', 1, 'позиция'],
+    ['position', 3, 'позиции'],
+    ['position', 408, 'позиций'],
+    ['product', 21, 'товар'],
+    ['product', 35, 'товаров'],
+    ['series', 2, 'серии'],
+    ['series', 11, 'серий'],
+    ['section', 4, 'раздела'],
+    ['section', 7, 'разделов'],
+    ['project', 9, 'проектов'],
+    ['project', 1, 'проект'],
+  ])('wordFor(%s, %i) → %s', (word, count, expected) => {
+    expect(wordFor(count, word)).toBe(expected);
+    expect(plural(count, WORD_FORMS[word])).toBe(expected);
+  });
+
+  it('countText — число и слово одной строкой', () => {
+    expect(countText(787, 'position')).toBe('787 позиций');
+    expect(countText(1, 'section')).toBe('1 раздел');
+    expect(countText(0, 'product')).toBe('0 товаров');
   });
 });

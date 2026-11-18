@@ -1,12 +1,15 @@
 // Шапка «Чертежа» — верхняя строка листа, собранная из граф: знак, навигация (мега-меню «Каталог» по трём
 // направлениям, «Решения» по отраслям), город, телефон, запрос КП, заявка. На телефоне — лист-меню.
-import { useCallback, useEffect, useId, useRef, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router';
+import { useEffect, useRef } from 'react';
+import { Link, NavLink } from 'react-router';
 import { ChevronDown, ClipboardList, Menu, Phone, X } from 'lucide-react';
 import { getDirection, getIndustry } from '../../../core/catalog/index.js';
-import { CITIES, useCity } from '../../../core/city/index.js';
+import { useCity } from '../../../core/city/index.js';
+import { useFinePointer } from '../../../core/hooks/media.js';
+import { useHeaderMenu } from '../../../core/hooks/useHeaderMenu.js';
 import { useKp } from '../../../core/kp/index.js';
 import { useNav } from '../../../core/layout/nav.js';
+import { CitySwitch as CoreCitySwitch } from '../../../core/ui/CitySwitch.jsx';
 import { toTel } from '../../../core/ui/format.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { cn } from '../../../lib/utils.js';
@@ -15,18 +18,11 @@ import { SHEET_TYPES } from '../lib/drawing.js';
 import { Button } from '../ui/Button.jsx';
 
 const CITY_SHORT = { spb: 'СПб', msk: 'Москва' };
+/** Лист-меню телефона нажатие вне шапки не закрывает — только кнопка, Esc и переход. */
+const STAY_OPEN = ['mobile'];
 
 function CitySwitch({ className }) {
-  const { city, setCity } = useCity();
-  return (
-    <div className={cn('bp-seg bp-seg--city', className)} role="group" aria-label="Город">
-      {CITIES.map((id) => (
-        <button key={id} type="button" aria-pressed={city === id} onClick={() => setCity(id)}>
-          {CITY_SHORT[id] ?? id}
-        </button>
-      ))}
-    </div>
-  );
+  return <CoreCitySwitch className={cn('bp-seg bp-seg--city', className)} labels={CITY_SHORT} />;
 }
 
 function KpLink({ variantId, className }) {
@@ -42,12 +38,12 @@ function KpLink({ variantId, className }) {
   );
 }
 
-/** Выпадающая панель пункта меню: открывается кликом и наведением, Esc закрывает и возвращает фокус. */
-function MenuItem({ item, open, onOpen, onClose, children }) {
-  const panelId = useId();
-  const buttonRef = useRef(null);
+/** Выпадающая панель пункта меню: открывается кликом и наведением; Esc, клик вне и смена страницы — в useHeaderMenu. */
+function MenuItem({ item, open, panelId, triggerProps, onOpen, onClose, children }) {
   const timer = useRef(0);
-  const fine = typeof window !== 'undefined' && window.matchMedia?.('(hover: hover) and (pointer: fine)').matches;
+  const openRef = useRef(open);
+  openRef.current = open;
+  const fine = useFinePointer();
 
   useEffect(() => () => clearTimeout(timer.current), []);
 
@@ -62,23 +58,13 @@ function MenuItem({ item, open, onOpen, onClose, children }) {
       onPointerLeave={() => {
         if (!fine) return;
         clearTimeout(timer.current);
-        timer.current = setTimeout(onClose, 160);
-      }}
-      onKeyDown={(event) => {
-        if (event.key === 'Escape' && open) {
-          onClose();
-          buttonRef.current?.focus();
-        }
+        // Закрывает только своё меню: к этому времени могло открыться соседнее.
+        timer.current = setTimeout(() => {
+          if (openRef.current) onClose();
+        }, 160);
       }}
     >
-      <button
-        ref={buttonRef}
-        type="button"
-        className="bp-hd__link"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={() => (open ? onClose() : onOpen())}
-      >
+      <button type="button" className="bp-hd__link" {...triggerProps} onClick={() => (open ? onClose() : onOpen())}>
         {item.label}
         <ChevronDown className="bp-hd__chev size-3.5" aria-hidden="true" />
       </button>
@@ -166,45 +152,18 @@ export function Header() {
   const { id: variantId } = useVariant();
   const { items, directions } = useNav();
   const { contacts } = useCity();
-  const { pathname } = useLocation();
-  const [menu, setMenu] = useState(null); // 'catalog' | 'solutions' | null
-  const [mobileOpen, setMobileOpen] = useState(false);
   const headerRef = useRef(null);
   const mobileRef = useRef(null);
-  const burgerRef = useRef(null);
   const phone = contacts?.phones?.[0];
   const industries = industryItems(items);
+  // Общее состояние меню шапки (ядро): 'catalog' | 'solutions' | 'mobile' | null. Смена страницы закрывает всё,
+  // Esc закрывает и возвращает фокус на кнопку, клик вне шапки закрывает мега-меню.
+  const { open, show, toggle, close, panelId, triggerProps } = useHeaderMenu({ containerRef: headerRef, keepOnOutsidePress: STAY_OPEN });
+  const mobileOpen = open === 'mobile';
 
-  const close = useCallback(() => setMenu(null), []);
-
-  // Смена страницы закрывает всё.
+  // Лист-меню телефона немодальное: при открытии фокус переходит на его первый пункт.
   useEffect(() => {
-    setMenu(null);
-    setMobileOpen(false);
-  }, [pathname]);
-
-  // Клик вне шапки закрывает мега-меню.
-  useEffect(() => {
-    if (!menu) return undefined;
-    const onDown = (event) => {
-      if (!headerRef.current?.contains(event.target)) setMenu(null);
-    };
-    document.addEventListener('pointerdown', onDown);
-    return () => document.removeEventListener('pointerdown', onDown);
-  }, [menu]);
-
-  // Лист-меню телефона: Esc закрывает, фокус — внутрь и обратно на кнопку.
-  useEffect(() => {
-    if (!mobileOpen) return undefined;
-    mobileRef.current?.querySelector('a, button')?.focus();
-    const onKey = (event) => {
-      if (event.key === 'Escape') {
-        setMobileOpen(false);
-        burgerRef.current?.focus();
-      }
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
+    if (mobileOpen) mobileRef.current?.querySelector('a, button')?.focus();
   }, [mobileOpen]);
 
   const plainItems = items.filter((item) => !['catalog', 'solutions'].includes(item.id));
@@ -221,12 +180,12 @@ export function Header() {
         <nav aria-label="Основная навигация" className="bp-hd__nav">
           <ul className="bp-hd__list">
             {catalogItem ? (
-              <MenuItem item={catalogItem} open={menu === 'catalog'} onOpen={() => setMenu('catalog')} onClose={close}>
+              <MenuItem item={catalogItem} open={open === 'catalog'} panelId={panelId('catalog')} triggerProps={triggerProps('catalog')} onOpen={() => show('catalog')} onClose={close}>
                 <CatalogPanel directions={directions} catalogTo={catalogItem.to} />
               </MenuItem>
             ) : null}
             {solutionsItem ? (
-              <MenuItem item={solutionsItem} open={menu === 'solutions'} onOpen={() => setMenu('solutions')} onClose={close}>
+              <MenuItem item={solutionsItem} open={open === 'solutions'} panelId={panelId('solutions')} triggerProps={triggerProps('solutions')} onOpen={() => show('solutions')} onClose={close}>
                 <SolutionsPanel items={industries} />
               </MenuItem>
             ) : null}
@@ -256,20 +215,13 @@ export function Header() {
           Заявка на подбор
         </Button>
 
-        <button
-          ref={burgerRef}
-          type="button"
-          className="bp-hd__burger"
-          aria-expanded={mobileOpen}
-          aria-controls="bp-mobile-menu"
-          onClick={() => setMobileOpen((value) => !value)}
-        >
+        <button type="button" className="bp-hd__burger" {...triggerProps('mobile')} onClick={() => toggle('mobile')}>
           {mobileOpen ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
           <span className="sr-only">{mobileOpen ? 'Закрыть меню' : 'Открыть меню'}</span>
         </button>
       </div>
 
-      <div id="bp-mobile-menu" ref={mobileRef} className="bp-mob" hidden={!mobileOpen}>
+      <div id={panelId('mobile')} ref={mobileRef} className="bp-mob" hidden={!mobileOpen}>
         <nav aria-label="Меню" className="bp-mob__nav">
           <p className="bp-mob__group font-display">Каталог</p>
           <ul className="bp-mob__rows">

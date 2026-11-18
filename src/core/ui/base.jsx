@@ -2,7 +2,8 @@
 // Только токены варианта (bg-bg, text-fg, font-display…) — перекрашивается сам.
 import { Link } from 'react-router';
 import { LoaderCircle } from 'lucide-react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion } from 'motion/react';
+import { usePrefersReducedMotion } from '../hooks/media.js';
 import { cn } from '../../lib/utils.js';
 import { imageSrc, srcSet } from '../../lib/images.js';
 import { useVariant } from '../variants/VariantContext.jsx';
@@ -164,7 +165,7 @@ export function ProductList({ products = [], onQuickView, layout = 'rail', class
 
 /** ({ children, as='div', delay=0 }) — появление по скроллу; reduced-motion — без движения */
 export function Reveal({ children, as = 'div', delay = 0, className }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   if (reduce) {
     const Tag = as;
     return <Tag className={className}>{children}</Tag>;

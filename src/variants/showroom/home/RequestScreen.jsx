@@ -3,7 +3,7 @@ import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import { getCompany } from '../../../core/catalog/index.js';
 import { CITIES, useCity } from '../../../core/city/index.js';
 import { Quiz } from '../../../core/request/Quiz.jsx';
-import { toTel } from '../../../core/ui/format.js';
+import { UNKNOWN, toTel } from '../../../core/ui/format.js';
 import { SectionHeading } from '../ui.jsx';
 
 export function RequestScreen() {
@@ -50,7 +50,7 @@ export function RequestScreen() {
                   ) : null}
                   <p className="sr-request__row sr-request__row--muted">
                     <Clock className="size-4" aria-hidden="true" />
-                    <span>Режим работы: {place.hours ?? '[уточнить]'}</span>
+                    <span>Режим работы: {place.hours ?? UNKNOWN}</span>
                   </p>
                 </li>
               );

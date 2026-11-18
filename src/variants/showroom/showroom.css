@@ -1436,13 +1436,4 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  [data-variant='showroom'] *,
-  [data-variant='showroom'] *::before,
-  [data-variant='showroom'] *::after {
-    animation-duration: 1ms !important;
-    animation-delay: 0ms !important;
-    transition-duration: 1ms !important;
-    transition-delay: 0ms !important;
-  }
-}
+/* Отключение движения при prefers-reduced-motion — одно правило на все варианты: core/ui/reduced-motion.css (подключено в index.jsx). */

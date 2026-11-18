@@ -8,6 +8,7 @@ import '@fontsource/onest/cyrillic-600.css';
 import '@fontsource/onest/latin-600.css';
 import '@fontsource/jetbrains-mono/cyrillic-400.css';
 import '@fontsource/jetbrains-mono/latin-400.css';
+import '../../core/ui/reduced-motion.css';
 import './ral.css';
 import { Footer } from './Footer.jsx';
 import { Header } from './Header.jsx';

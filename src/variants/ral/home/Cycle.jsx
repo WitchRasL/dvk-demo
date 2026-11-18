@@ -4,7 +4,7 @@
 import { useRef } from 'react';
 import { motion, useMotionTemplate, useScroll, useTransform } from 'motion/react';
 import { getCompany } from '../../../core/catalog/index.js';
-import { useMedia } from '../entrance.js';
+import { useMediaQuery, usePrefersReducedMotion } from '../../../core/hooks/media.js';
 import { SectionHeading } from '../ui.jsx';
 
 const FACTS = ['izhora', 'german-machines', 'own-fleet', 'same-day-measure'];
@@ -50,8 +50,8 @@ export function Cycle() {
   const steps = company.cycle ?? [];
   const facts = FACTS.map((id) => company.facts?.find((fact) => fact.id === id)).filter(Boolean);
   const ref = useRef(null);
-  const wide = useMedia('(min-width: 1024px) and (min-height: 640px)');
-  const reduce = useMedia('(prefers-reduced-motion: reduce)');
+  const wide = useMediaQuery('(min-width: 1024px) and (min-height: 640px)');
+  const reduce = usePrefersReducedMotion();
   const pinned = wide && !reduce;
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   return (

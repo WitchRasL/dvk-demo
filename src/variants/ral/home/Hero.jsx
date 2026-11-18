@@ -4,12 +4,12 @@
 import { memo, useLayoutEffect, useRef } from 'react';
 import { getCompany } from '../../../core/catalog/index.js';
 import { useCity } from '../../../core/city/index.js';
-import { ScrollVideo } from '../../../core/scroll-video/index.js';
+import { ScrollVideo, findScrollVideoStage } from '../../../core/scroll-video/index.js';
 import { toTel } from '../../../core/ui/format.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { cn } from '../../../lib/utils.js';
 import { DirectionSwatch, useFanDirections } from '../Fan.jsx';
-import { useMedia } from '../entrance.js';
+import { useMediaQuery } from '../../../core/hooks/media.js';
 import { heroConfig } from '../hero.js';
 import { Button, FieldCode } from '../ui.jsx';
 
@@ -104,7 +104,7 @@ function useWindowRect(windowRef) {
     // Секция ищется от окна: ref родителя в layout-эффекте ребёнка ещё пуст.
     const section = target?.closest('.ral-hero');
     if (!target || !section || typeof ResizeObserver === 'undefined') return undefined;
-    const stage = target.closest('.scroll-video__stage') ?? section;
+    const stage = findScrollVideoStage(target) ?? section;
     const measure = () => {
       const box = target.getBoundingClientRect();
       const frame = stage.getBoundingClientRect();
@@ -183,7 +183,7 @@ function CalloutTag(callout, { active }) {
 
 export function Hero({ direction }) {
   // Узкое окно рамки: пометка заглушки — одной короткой строкой, чтобы не спорить с ярлыками.
-  const roomy = useMedia('(min-width: 640px)');
+  const roomy = useMediaQuery('(min-width: 640px)');
   return (
     <section className="ral-hero" aria-labelledby="ral-hero-title" data-direction-field={direction ?? 'primer'}>
       <ScrollVideo

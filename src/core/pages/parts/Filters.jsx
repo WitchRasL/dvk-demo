@@ -5,7 +5,6 @@ import { Link } from 'react-router';
 import { ChevronDown, Search, SlidersHorizontal, X } from 'lucide-react';
 import { cn } from '../../../lib/utils.js';
 import { buildCatalogUrl, getDirections } from '../../catalog/index.js';
-import { materialLabel } from '../../ui/format.js';
 import { useVariant } from '../../variants/VariantContext.jsx';
 
 const FACET_GROUPS = [
@@ -191,7 +190,6 @@ function CatalogChips({ query, className }) {
 
 function FacetGroup({ group, items, selected, onChange }) {
   if (!items.length) return null;
-  const labelOf = (item) => (group.key === 'material' ? materialLabel(item.value) : item.label);
   return (
     <details className="group/facet border-t border-line py-3 first:border-t-0" open={items.length <= 8 || Boolean(selected) || undefined}>
       <summary className="flex min-h-9 cursor-pointer list-none items-center justify-between gap-2 text-sm font-medium text-fg [&::-webkit-details-marker]:hidden">
@@ -207,7 +205,7 @@ function FacetGroup({ group, items, selected, onChange }) {
         {items.map((item) => (
           <label key={item.value} className="flex min-h-9 cursor-pointer items-center gap-2.5 text-sm text-fg">
             <input type="radio" name={`facet-${group.key}`} checked={selected === item.value} onChange={() => onChange(group.key, item.value)} />
-            <span className="min-w-0 flex-1 text-pretty">{labelOf(item)}</span>
+            <span className="min-w-0 flex-1 text-pretty">{item.label}</span>
             <span className="tabular text-fg-muted">{item.count}</span>
           </label>
         ))}

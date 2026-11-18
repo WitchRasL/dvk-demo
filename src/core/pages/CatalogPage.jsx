@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router';
 import { ExternalLink, X } from 'lucide-react';
 import {
-  LIGHT_LABELS,
   SORT_LABELS,
   buildCatalogUrl,
   getCategory,
@@ -14,7 +13,7 @@ import {
   getSection,
   useCatalogQuery,
 } from '../catalog/index.js';
-import { materialLabel, plural } from '../ui/format.js';
+import { wordFor } from '../ui/format.js';
 import { fieldClass } from '../ui/form.jsx';
 import { Container } from '../ui/layout.jsx';
 import { useVariant } from '../variants/VariantContext.jsx';
@@ -25,9 +24,6 @@ import { Pagination } from './parts/Pagination.jsx';
 import { useQuickView } from './parts/QuickView.jsx';
 import { RequestCta } from './parts/RequestCta.jsx';
 import { usePageTitle } from './parts/usePageTitle.js';
-
-const PRODUCT_FORMS = ['товар', 'товара', 'товаров'];
-const POSITION_FORMS = ['позиция', 'позиции', 'позиций'];
 
 /** Три направления равного веса: название, суть и разделы с числом позиций на dvk-style.ru. */
 function DirectionOverview({ variantId }) {
@@ -73,8 +69,8 @@ function ActiveFilters({ query, facets, setFilter }) {
   const chips = [];
   if (query.q) chips.push({ key: 'q', text: `Поиск: «${query.q}»` });
   if (query.industry) chips.push({ key: 'industry', text: getIndustry(query.industry)?.name ?? query.industry });
-  if (query.material) chips.push({ key: 'material', text: materialLabel(query.material) });
-  if (query.light) chips.push({ key: 'light', text: LIGHT_LABELS[query.light] ?? label('light', query.light) });
+  if (query.material) chips.push({ key: 'material', text: label('material', query.material) });
+  if (query.light) chips.push({ key: 'light', text: label('light', query.light) });
   if (!chips.length) return null;
   return (
     <ul className="flex flex-wrap gap-2" aria-label="Выбранные фильтры">
@@ -112,7 +108,7 @@ export default function CatalogPage() {
   usePageTitle(`${title} — каталог`);
 
   let lead = 'Выберите направление или найдите товар по названию, материалу и размеру.';
-  if (scope) lead = `${direction?.name ?? ''}. На dvk-style.ru здесь ${scope.count} ${plural(scope.count, POSITION_FORMS)}; в прототипе — характерные товары.`;
+  if (scope) lead = `${direction?.name ?? ''}. На dvk-style.ru здесь ${scope.count} ${wordFor(scope.count, 'position')}; в прототипе — характерные товары.`;
   else if (direction) lead = direction.summary || lead;
 
   const breadcrumbs = [
@@ -151,7 +147,7 @@ export default function CatalogPage() {
           <h2 className="sr-only">Товары</h2>
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
             <p role="status" className="tabular text-base text-fg">
-              Найдено: <strong className="font-semibold">{result.total}</strong> {plural(result.total, PRODUCT_FORMS)}
+              Найдено: <strong className="font-semibold">{result.total}</strong> {wordFor(result.total, 'product')}
             </p>
             <label className="flex items-center gap-2.5 text-sm text-fg-muted">
               Сортировка
@@ -173,7 +169,7 @@ export default function CatalogPage() {
 
           {scope ? (
             <p className="mt-4 max-w-[68ch] text-sm text-pretty text-fg-muted">
-              Показаны характерные товары. Весь раздел «{scope.name}» — {scope.count} {plural(scope.count, POSITION_FORMS)} —{' '}
+              Показаны характерные товары. Весь раздел «{scope.name}» — {scope.count} {wordFor(scope.count, 'position')} —{' '}
               <a href={scope.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-fg underline underline-offset-4 hover:no-underline">
                 на dvk-style.ru
                 <ExternalLink className="size-3.5" aria-hidden="true" />
@@ -219,7 +215,7 @@ export default function CatalogPage() {
               >
                 <p>
                   Для этого раздела товары ещё не перенесены.
-                  {scope ? ` На dvk-style.ru в нём ${scope.count} ${plural(scope.count, POSITION_FORMS)}.` : ''}
+                  {scope ? ` На dvk-style.ru в нём ${scope.count} ${wordFor(scope.count, 'position')}.` : ''}
                 </p>
               </EmptyState>
             )}

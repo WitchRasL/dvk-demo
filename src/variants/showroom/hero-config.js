@@ -1,14 +1,11 @@
 // heroConfig «Шоурума»: ролик, опорный кадр, движение камеры, фазы и пояснения.
 // Тексты пояснений берутся из данных (company.json, projects.json); чего нет — видимая заглушка «[уточнить]».
 // Раскадровка, привязанная к этим отрезкам и точкам, — docs/hero-video/showroom.md.
-import { getCompany, getProject } from '../../core/catalog/index.js';
+import { UNKNOWN, getCompany, getCycleStep, getFactText, getProject } from '../../core/catalog/index.js';
 
-const UNKNOWN = '[уточнить]';
 const POSTER_PROJECT = 'perfume-balashikha';
 
 const company = getCompany();
-const step = (id) => company.cycle?.find((item) => item.id === id);
-const fact = (id) => company.facts?.find((item) => item.id === id)?.text ?? UNKNOWN;
 const posterProject = getProject(POSTER_PROJECT);
 const posterPhoto = company.heroPhotos?.find((photo) => photo.project === POSTER_PROJECT) ?? company.heroPhotos?.[0] ?? null;
 
@@ -33,8 +30,8 @@ export const HERO_PHASES = [
  * поэтому пояснения живут в правой и верхней части кадра.
  */
 export const HERO_CALLOUTS = [
-  { id: 'measure', from: 0.03, to: 0.17, x: 0.66, y: 0.26, title: step('measure')?.title ?? 'Замер', text: fact('same-day-measure') },
-  { id: 'design', from: 0.17, to: 0.33, x: 0.84, y: 0.2, title: step('design')?.title ?? 'Дизайн-проект', text: fact('free-shop-design') },
+  { id: 'measure', from: 0.03, to: 0.17, x: 0.66, y: 0.26, title: getCycleStep('measure')?.title ?? 'Замер', text: getFactText('same-day-measure') },
+  { id: 'design', from: 0.17, to: 0.33, x: 0.84, y: 0.2, title: getCycleStep('design')?.title ?? 'Дизайн-проект', text: getFactText('free-shop-design') },
   {
     id: 'frame',
     from: 0.36,
@@ -44,9 +41,9 @@ export const HERO_CALLOUTS = [
     title: posterProject ? `${posterProject.title}, ${posterProject.city}` : UNKNOWN,
     text: projectSentence(posterProject),
   },
-  { id: 'production', from: 0.5, to: 0.66, x: 0.88, y: 0.5, title: step('production')?.title ?? 'Производство', text: step('production')?.text ?? UNKNOWN },
-  { id: 'delivery', from: 0.69, to: 0.83, x: 0.7, y: 0.56, title: step('delivery')?.title ?? 'Доставка', text: fact('own-fleet') },
-  { id: 'install', from: 0.83, to: 1, x: 0.64, y: 0.22, title: step('install')?.title ?? 'Монтаж', text: fact('night-install') },
+  { id: 'production', from: 0.5, to: 0.66, x: 0.88, y: 0.5, title: getCycleStep('production')?.title ?? 'Производство', text: getCycleStep('production')?.text ?? UNKNOWN },
+  { id: 'delivery', from: 0.69, to: 0.83, x: 0.7, y: 0.56, title: getCycleStep('delivery')?.title ?? 'Доставка', text: getFactText('own-fleet') },
+  { id: 'install', from: 0.83, to: 1, x: 0.64, y: 0.22, title: getCycleStep('install')?.title ?? 'Монтаж', text: getFactText('night-install') },
 ];
 
 /**

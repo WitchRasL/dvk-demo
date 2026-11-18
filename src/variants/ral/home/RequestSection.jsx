@@ -4,7 +4,7 @@ import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import { getCompany } from '../../../core/catalog/index.js';
 import { CITIES, useCity } from '../../../core/city/index.js';
 import { Quiz } from '../../../core/request/Quiz.jsx';
-import { toTel } from '../../../core/ui/format.js';
+import { UNKNOWN, toTel } from '../../../core/ui/format.js';
 import { SectionHeading } from '../ui.jsx';
 
 function CityCard({ city, selected }) {
@@ -32,7 +32,7 @@ function CityCard({ city, selected }) {
         ) : null}
         <li>
           <Clock className="size-4" aria-hidden="true" />
-          <span>Режим работы: {city.hours ?? '[уточнить]'}</span>
+          <span>Режим работы: {city.hours ?? UNKNOWN}</span>
         </li>
       </ul>
     </div>

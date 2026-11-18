@@ -5,10 +5,10 @@
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { Phone } from 'lucide-react';
-import { getCompany, getDirections, buildCatalogUrl } from '../../../core/catalog/index.js';
+import { getCompany, getDirectionTotal, getDirections, buildCatalogUrl } from '../../../core/catalog/index.js';
 import { useCity } from '../../../core/city/index.js';
-import { ScrollVideo } from '../../../core/scroll-video/index.js';
-import { plural, toTel } from '../../../core/ui/format.js';
+import { ScrollVideo, findScrollVideoRoot, findScrollVideoStage } from '../../../core/scroll-video/index.js';
+import { toTel, wordFor } from '../../../core/ui/format.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { heroConfig, mapPhotoPoint } from '../lib/hero.js';
 import { Button } from '../ui/Button.jsx';
@@ -17,15 +17,14 @@ import { Stamp } from './Sheet.jsx';
 const ZONES = 8;
 // ЕСКД: зоны по горизонтали — цифрами справа налево, по вертикали — латинскими буквами снизу вверх.
 const ROWS = ['D', 'C', 'B', 'A'];
-const SECTION_FORMS = ['раздел', 'раздела', 'разделов'];
-const POSITION_FORMS = ['позиция', 'позиции', 'позиций'];
 
 /** Измеряет окно «Вида А» и отдаёт сцене его прямоугольник: постер, ролик и выноски встают ровно в него. */
 function useViewRect(slotRef, onSize) {
   useLayoutEffect(() => {
     const slot = slotRef.current;
-    const track = slot?.closest('.scroll-video');
-    const stage = slot?.closest('.scroll-video__stage');
+    // Корень и сцена ядра — по контракту классов ScrollVideo; на корень ставятся переменные окна вида.
+    const track = findScrollVideoRoot(slot);
+    const stage = findScrollVideoStage(slot);
     if (!slot || !track || !stage) return undefined;
     let frame = 0;
     const measure = () => {
@@ -84,7 +83,7 @@ function DirectionSpec({ variantId }) {
       </p>
       <ul>
         {getDirections().map((direction, index) => {
-          const total = direction.sections.reduce((sum, section) => sum + (section.count ?? 0), 0);
+          const total = getDirectionTotal(direction);
           return (
             <li key={direction.id}>
               <Link to={buildCatalogUrl(variantId, { direction: direction.id })} className="bp-hs__spec-row">
@@ -92,11 +91,11 @@ function DirectionSpec({ variantId }) {
                 <span className="bp-hs__spec-name font-display">{direction.name}</span>
                 <span className="tabular bp-hs__spec-num">
                   {direction.sections.length}
-                  <span className="sr-only"> {plural(direction.sections.length, SECTION_FORMS)}</span>
+                  <span className="sr-only"> {wordFor(direction.sections.length, 'section')}</span>
                 </span>
                 <span className="tabular bp-hs__spec-num">
                   {total}
-                  <span className="sr-only"> {plural(total, POSITION_FORMS)} на dvk-style.ru</span>
+                  <span className="sr-only"> {wordFor(total, 'position')} на dvk-style.ru</span>
                 </span>
               </Link>
             </li>

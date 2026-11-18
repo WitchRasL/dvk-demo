@@ -1,6 +1,7 @@
 // Справочники каталога: деревья направлений, отрасли, товары, проекты, компания.
 // Индексы строятся один раз при загрузке модуля; сами данные приходят из data.js.
 import { categories, company, products, projects } from './data.js';
+import { UNKNOWN } from './labels.js';
 
 /** Дерево с обратными ссылками: у раздела есть directionId, у категории — sectionId и directionId. */
 const directions = (categories?.directions ?? []).map((direction) => ({
@@ -50,6 +51,12 @@ export function getCategory(id, sectionId) {
     return section ? findByIdOrSlug(section.categories, id) : undefined;
   }
   return findByIdOrSlug(allCategories, id);
+}
+
+/** Итог позиций направления на dvk-style.ru: сумма `count` его разделов. Принимает id, slug или сам объект. */
+export function getDirectionTotal(direction) {
+  const source = direction && typeof direction === 'object' ? direction : getDirection(direction);
+  return (source?.sections ?? []).reduce((sum, section) => sum + (Number(section?.count) || 0), 0);
 }
 
 export function getIndustries() {
@@ -110,4 +117,14 @@ export function getProject(slug) {
 
 export function getCompany() {
   return company;
+}
+
+/** Текст факта о компании (`company.facts`) по id; факта нет — видимая заглушка «[уточнить]». */
+export function getFactText(id) {
+  return company?.facts?.find((item) => item.id === id)?.text ?? UNKNOWN;
+}
+
+/** Шаг полного цикла (`company.cycle`) по id или undefined. */
+export function getCycleStep(id) {
+  return company?.cycle?.find((item) => item.id === id);
 }
