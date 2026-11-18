@@ -11,18 +11,19 @@
 
   /* ───────────── Hero ───────────── */
 
-  /* Тёплая цветокоррекция кадра слоем: фото с сайта сняты при дневном нейтральном свете. */
-  .sr-hero__grade {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background: linear-gradient(180deg, #a3622e, #5a2f14);
-    mix-blend-mode: soft-light;
-    opacity: 0.6;
+  /*
+   * Кегль заголовка и правый край блока текста — общие для заголовка и для тени под ним:
+   * тень идёт ровно до конца текста при любой ширине окна, а не до доли экрана.
+   */
+  .sr-hero {
+    --sr-hero-head: clamp(2.05rem, min(0.9rem + 4.3vw, 8.4vh), 5rem);
+    --sr-hero-edge: calc(max(0px, 50% - 40rem) + var(--sr-gutter) + 6.9 * var(--sr-hero-head));
   }
 
-  /* Тень с «окном» под курсором: огромный слой, который двигается transform. Прозрачность — по скроллу. */
+  /*
+   * Тень с «окном»: огромный слой, который двигается transform. Без мыши окно стоит на витрине, которая горит
+   * с первого кадра, — остальной зал в полутени; под курсором окно едет за ним. Прозрачность — по скроллу.
+   */
   .sr-hero__shade {
     position: absolute;
     left: 0;
@@ -35,16 +36,19 @@
     background: radial-gradient(
       circle at center,
       rgb(8 6 4 / 0) 0,
-      rgb(8 6 4 / 0.06) 6vmax,
-      rgb(8 6 4 / 0.6) 16vmax,
-      rgb(8 6 4 / 0.93) 28vmax,
-      #080604 42vmax
+      rgb(8 6 4 / 0.04) 7vmax,
+      rgb(8 6 4 / 0.5) 15vmax,
+      rgb(8 6 4 / 0.9) 26vmax,
+      #080604 40vmax
     );
     transition: opacity var(--dur-base) var(--ease-out);
     will-change: transform, opacity;
   }
 
-  /* Подсветка витрин: тёплые пятна (color-dodge проявляет детали тёмного кадра) включаются кругом от точки. */
+  /*
+   * Светильники заглушки (ролик не загрузился): тёплые пятна на первом кадре включаются кругом от точки,
+   * в том же порядке, что и свет в ролике. color-dodge проявляет детали тёмного кадра.
+   */
   .sr-lamp {
     position: absolute;
     inset: 0;
@@ -53,9 +57,9 @@
     mix-blend-mode: color-dodge;
     background: radial-gradient(
       circle var(--r) at var(--x) var(--y),
-      rgb(var(--sr-lamp) / 0.22) 0%,
-      rgb(var(--sr-lamp) / 0.08) 34%,
-      rgb(var(--sr-lamp) / 0) 72%
+      rgb(var(--sr-lamp) / 0.36) 0%,
+      rgb(var(--sr-lamp) / 0.18) 40%,
+      rgb(var(--sr-lamp) / 0) 100%
     );
     opacity: 0;
     clip-path: circle(0% at var(--x) var(--y));
@@ -70,31 +74,78 @@
     clip-path: circle(150% at var(--x) var(--y));
   }
 
-  /* Луч курсора: тёплое пятно над «окном» тени. */
+  /*
+   * Луч курсора: тёплое пятно с мягким краем, около трети ширины сцены. Два слоя едут вместе:
+   * первый проявляет детали тёмного кадра (color-dodge), второй кладёт поверх тёплый свет (screen) —
+   * пятно читается и на тёмном дереве, и на полу. Виден, только пока курсор в сцене; к освещённому залу слабеет.
+   */
   .sr-hero__beam {
     position: absolute;
     left: 0;
     top: 0;
     z-index: 1;
-    width: 40vmax;
-    height: 40vmax;
-    margin: -20vmax 0 0 -20vmax;
+    width: 34vmax;
+    height: 34vmax;
+    margin: -17vmax 0 0 -17vmax;
     pointer-events: none;
     mix-blend-mode: color-dodge;
-    background: radial-gradient(closest-side, rgb(var(--sr-lamp) / 0.34), rgb(var(--sr-lamp) / 0.1) 50%, rgb(var(--sr-lamp) / 0));
-    transition: opacity var(--dur-base) var(--ease-out);
+    background: radial-gradient(
+      closest-side,
+      rgb(var(--sr-lamp) / 0.6) 0%,
+      rgb(var(--sr-lamp) / 0.5) 32%,
+      rgb(var(--sr-lamp) / 0.24) 64%,
+      rgb(var(--sr-lamp) / 0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out);
   }
 
-  /* Читаемость: сверху — под шапку, снизу и слева — под заголовок и действия. */
+  .sr-hero__beam--glow {
+    mix-blend-mode: screen;
+    background: radial-gradient(
+      closest-side,
+      rgb(var(--sr-glow) / 0.2) 0%,
+      rgb(var(--sr-glow) / 0.13) 36%,
+      rgb(var(--sr-glow) / 0.05) 68%,
+      rgb(var(--sr-glow) / 0) 100%
+    );
+  }
+
+  .sr-hero [data-beam] .sr-hero__beam {
+    opacity: var(--beam, 1);
+  }
+
+  /*
+   * Читаемость: сверху — под шапку, снизу — под входы в направления, слева — постоянная тень под заголовком
+   * и действиями. Левая тень не зависит от прогресса: когда в ролике зажигаются витрины левой стены,
+   * заголовок, подстрока и обещание остаются на тёмном (контраст не ниже 4,5:1).
+   */
   .sr-hero__scrim {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
     background:
-      linear-gradient(180deg, rgb(10 8 6 / 0.78) 0, rgb(10 8 6 / 0) 9rem),
-      linear-gradient(0deg, rgb(10 8 6 / 0.96) 0%, rgb(10 8 6 / 0.6) 32%, rgb(10 8 6 / 0) 58%),
-      linear-gradient(90deg, rgb(10 8 6 / 0.86) 0%, rgb(10 8 6 / 0.62) 30%, rgb(10 8 6 / 0) 64%);
+      linear-gradient(180deg, rgb(10 8 6 / 0.82) 0, rgb(10 8 6 / 0) 9rem),
+      linear-gradient(0deg, rgb(10 8 6 / 0.97) 0, rgb(10 8 6 / 0.93) 8rem, rgb(10 8 6 / 0.84) 12.5rem, rgb(10 8 6 / 0.4) 16rem, rgb(10 8 6 / 0) 21rem),
+      linear-gradient(
+        90deg,
+        rgb(10 8 6 / 0.9) 0,
+        rgb(10 8 6 / 0.86) calc(var(--sr-hero-edge) - 12rem),
+        rgb(10 8 6 / 0.8) var(--sr-hero-edge),
+        rgb(10 8 6 / 0.46) calc(var(--sr-hero-edge) + 6rem),
+        rgb(10 8 6 / 0.13) calc(var(--sr-hero-edge) + 12rem),
+        rgb(10 8 6 / 0) calc(var(--sr-hero-edge) + 17rem)
+      );
+  }
+
+  /* Планшет: строка действий шире заголовка, блок текста стоит внизу — тень под ним идёт снизу вверх. */
+  @media (max-width: 1023px) {
+    .sr-hero__scrim {
+      background:
+        linear-gradient(180deg, rgb(10 8 6 / 0.82) 0, rgb(10 8 6 / 0) 7rem),
+        linear-gradient(0deg, rgb(10 8 6 / 0.97) 0, rgb(10 8 6 / 0.9) 30rem, rgb(10 8 6 / 0.85) 41.5rem, rgb(10 8 6 / 0.3) 46rem, rgb(10 8 6 / 0) 50rem);
+    }
   }
 
   /* Пояснения: точка в кадре, латунная проволока и табличка, которая «загорается» от точки. */
@@ -173,6 +224,30 @@
     clip-path: circle(0% at 100% 1.5rem);
   }
 
+  /* Табличка растёт вверх от проволоки, если под точкой деталь, которую нельзя закрывать. */
+  .sr-callout[data-grow='up'] .sr-callout__card {
+    top: auto;
+    bottom: -1.5rem;
+  }
+
+  .sr-callout[data-grow='up'][data-side='right'] .sr-callout__card {
+    clip-path: circle(0% at 0% calc(100% - 1.5rem));
+  }
+
+  .sr-callout[data-grow='up'][data-side='left'] .sr-callout__card {
+    clip-path: circle(0% at 100% calc(100% - 1.5rem));
+  }
+
+  /* Рядом с деталью места нет (узкое окно): табличка без точки и проволоки, в правом верхнем углу сцены. */
+  .sr-callout:not([data-anchored]) .sr-callout__dot,
+  .sr-callout:not([data-anchored]) .sr-callout__wire {
+    display: none;
+  }
+
+  .sr-callout:not([data-anchored])[data-side='left'] .sr-callout__card {
+    right: 0;
+  }
+
   .sr-callout[data-active] .sr-callout__dot {
     opacity: 1;
     transform: none;
@@ -192,6 +267,14 @@
 
   .sr-callout[data-side='left'][data-active] .sr-callout__card {
     clip-path: circle(160% at 100% 1.5rem);
+  }
+
+  .sr-callout[data-grow='up'][data-side='right'][data-active] .sr-callout__card {
+    clip-path: circle(160% at 0% calc(100% - 1.5rem));
+  }
+
+  .sr-callout[data-grow='up'][data-side='left'][data-active] .sr-callout__card {
+    clip-path: circle(160% at 100% calc(100% - 1.5rem));
   }
 
   .sr-callout__title {
@@ -232,10 +315,11 @@
     color: var(--fg);
   }
 
+  /* Заголовок всегда в три короткие строки: он не выходит из левой тени под текстом на освещённые витрины. */
   .sr-hero__head {
     display: block;
-    max-width: 21ch;
-    font-size: clamp(2.05rem, min(0.9rem + 4.3vw, 8.4vh), 5rem);
+    max-width: 7.4em;
+    font-size: var(--sr-hero-head);
     line-height: 1.02;
     letter-spacing: -0.022em;
     text-wrap: balance;
@@ -290,6 +374,34 @@
   .sr-hero__console {
     margin-top: clamp(1.25rem, 3.5vh, 2.25rem);
     pointer-events: none;
+  }
+
+  /* Строка над входами: слева фазы ролика, справа — подпись кадра (что за интерьер и откуда). */
+  .sr-hero__strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.1rem 2rem;
+  }
+
+  .sr-hero__credit {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-bottom: 0.2rem;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    color: #cdbfa7;
+    text-decoration: underline;
+    text-decoration-color: rgb(226 196 146 / 0.4);
+    text-underline-offset: 0.25em;
+    pointer-events: auto;
+  }
+
+  .sr-hero__credit:hover {
+    color: var(--sr-brass-hi);
+    text-decoration-color: currentColor;
   }
 
   /* Фазы ролика: «ПРОЕКТИРОВАНИЕ / ПРОИЗВОДСТВО / МОНТАЖ». */
@@ -489,6 +601,37 @@
       clip-path: circle(160% at 0% 0%);
     }
 
+    .sr-callout[data-grow='up'] .sr-callout__card {
+      bottom: auto;
+    }
+
+    /* Кадр занимает верх сцены: тень под заголовком идёт снизу вверх и гасит кадр к его нижнему краю. */
+    .sr-hero__scrim {
+      background:
+        linear-gradient(180deg, rgb(10 8 6 / 0.82) 0, rgb(10 8 6 / 0) 5rem),
+        linear-gradient(
+          0deg,
+          #0a0806 0,
+          #0a0806 24.5rem,
+          rgb(10 8 6 / 0.92) 28rem,
+          rgb(10 8 6 / 0.8) 33.5rem,
+          rgb(10 8 6 / 0.3) 37rem,
+          rgb(10 8 6 / 0) 40rem
+        );
+    }
+
+    /* Подпись кадра — в нижнем поле сцены, справа от переключателя вариантов: в колонке текста ей нет места. */
+    .sr-hero__credit {
+      position: absolute;
+      left: 6.5rem;
+      right: var(--sr-gutter);
+      bottom: calc(0.85rem + env(safe-area-inset-bottom));
+      min-height: 2.75rem;
+      padding: 0;
+      font-size: 0.7rem;
+      line-height: 1.4;
+    }
+
     .sr-hero__content {
       padding-top: calc(var(--sr-header-h) + 9rem);
     }
@@ -538,13 +681,6 @@
 
     .sr-hero__dir-arrow {
       display: none;
-    }
-
-    /* Узкий кадр обрезает панораму до светлой витрины — под текст нужна тень плотнее. */
-    .sr-hero__scrim {
-      background:
-        linear-gradient(180deg, rgb(10 8 6 / 0.82) 0, rgb(10 8 6 / 0) 8rem),
-        linear-gradient(0deg, rgb(10 8 6 / 0.97) 0%, rgb(10 8 6 / 0.84) 42%, rgb(10 8 6 / 0.5) 68%, rgb(10 8 6 / 0) 88%);
     }
   }
 
@@ -685,7 +821,7 @@
 
   .sr-tile--sm .sr-tile__media[data-kind='product'] img {
     top: 6%;
-    height: 50%;
+    height: 42%;
   }
 
   .sr-tile__link:hover .sr-tile__media img {
@@ -704,6 +840,18 @@
     background:
       linear-gradient(180deg, rgb(10 8 6 / 0.1) 0%, rgb(10 8 6 / 0.9) 100%),
       rgb(70 40 14 / 0.18);
+  }
+
+  /*
+   * Ниша с товаром: подпись стоит на тёмном цоколе под камнем, а не на самом камне —
+   * кремовый текст на бежевом не читался. У малой плитки цоколь выше: подпись бывает в три строки.
+   */
+  .sr-tile__media[data-kind='product']::after {
+    background: linear-gradient(180deg, rgb(12 9 7 / 0) 44%, rgb(12 9 7 / 0.92) 66%, rgb(12 9 7 / 0.98) 100%);
+  }
+
+  .sr-tile--sm .sr-tile__media[data-kind='product']::after {
+    background: linear-gradient(180deg, rgb(12 9 7 / 0) 38%, rgb(12 9 7 / 0.94) 54%, #0c0907 100%);
   }
 
   /* Свет выключен: полутень над кадром. Зажигается по очереди, когда зал вошёл в окно. */
@@ -930,9 +1078,10 @@
     padding-block: 0;
   }
 
+  /* Около трети экрана прокрутки на шаг: пять шагов сменяются за ~1,75 экрана, а не за три. */
   .sr-cycle__track {
     position: relative;
-    height: calc(var(--steps, 5) * 60vh + 100vh);
+    height: calc(var(--steps, 5) * 35vh + 100vh);
   }
 
   .sr-cycle__stage {
@@ -945,24 +1094,30 @@
     overflow: hidden;
   }
 
+  /* Заголовок, шаг и направляющая — одна группа по центру экрана: шаг стоит прямо над направляющей. */
   .sr-cycle--pinned .sr-cycle__layout {
     display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    grid-template-rows: minmax(0, 1fr) auto;
-    gap: 2rem 4rem;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    grid-template-rows: auto auto;
+    align-content: center;
+    gap: clamp(1.75rem, 5vh, 3.25rem) clamp(2.5rem, 5vw, 5rem);
     height: 100%;
-    padding-top: calc(var(--sr-header-h) + 3rem);
-    padding-bottom: 5.5rem;
+    padding-top: calc(var(--sr-header-h) + 1.5rem);
+    padding-bottom: 4.75rem;
   }
 
   .sr-cycle--pinned .sr-cycle__heading {
-    align-self: center;
+    align-self: end;
+  }
+
+  .sr-cycle--pinned .sr-cycle__heading .sr-heading__title {
+    font-size: clamp(1.9rem, 1.2rem + 2vw, 3.1rem);
   }
 
   .sr-cycle__scene {
     position: relative;
-    align-self: center;
-    min-height: 19rem;
+    align-self: end;
+    min-height: min(21rem, 42vh);
   }
 
   .sr-cycle__panel {
@@ -983,7 +1138,7 @@
   .sr-cycle__num {
     display: block;
     font-family: var(--font-display);
-    font-size: clamp(3rem, 2rem + 4vw, 6.5rem);
+    font-size: clamp(3rem, 2rem + 4vw, 6rem);
     line-height: 1;
     color: var(--sr-brass-text);
   }
@@ -1010,6 +1165,24 @@
     font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
     line-height: 1.6;
     color: var(--fg-muted);
+  }
+
+  /* Закреплённая сцена: блок шага крупнее — он занимает правые две трети экрана. */
+  .sr-cycle--pinned .sr-cycle__num {
+    font-size: clamp(4rem, 2rem + 6vw, 8rem);
+  }
+
+  .sr-cycle--pinned .sr-cycle__title {
+    font-size: clamp(2.2rem, 1rem + 3.4vw, 4.25rem);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .sr-cycle--pinned .sr-cycle__text {
+    max-width: 58ch;
+    font-size: clamp(1.1rem, 0.9rem + 0.55vw, 1.4rem);
+    line-height: 1.5;
+    color: #d3c5ad;
   }
 
   .sr-cycle__rail {
@@ -1853,29 +2026,26 @@
   }
 
   .sr-trust__gov-fact {
-    margin-top: 0.75rem;
+    margin-top: 0.9rem;
     font-size: 1.0625rem;
-    font-weight: 500;
-    line-height: 1.45;
-    color: var(--sr-brass-hi);
-  }
-
-  .sr-trust__gov dl {
-    display: grid;
-    gap: 1.1rem;
-    margin-top: 1.25rem;
-  }
-
-  .sr-trust__gov dt {
-    font-weight: 500;
+    line-height: 1.55;
     color: var(--fg);
+    text-wrap: pretty;
   }
 
-  .sr-trust__gov dd {
-    margin-top: 0.3rem;
-    font-size: 0.92rem;
+  .sr-trust__gov-service {
+    margin-top: 1.1rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.95rem;
     line-height: 1.55;
     color: var(--fg-muted);
+    text-wrap: pretty;
+  }
+
+  .sr-trust__gov-service span {
+    font-weight: 500;
+    color: var(--sr-brass-text);
   }
 
   @media (min-width: 640px) {
@@ -1914,13 +2084,14 @@
   .sr-request__layout {
     position: relative;
     display: grid;
-    gap: 3rem;
+    gap: 2rem;
   }
 
+  /* В документе площадки идут после квиза: на телефоне и планшете квиз сразу под заголовком. */
   .sr-request__places {
     display: grid;
     gap: 1.75rem;
-    margin-top: 2.5rem;
+    margin-top: 1rem;
   }
 
   .sr-request__places li {
@@ -1974,10 +2145,37 @@
       var(--shadow);
   }
 
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .sr-request__places {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2.5rem;
+    }
+  }
+
+  /* Широкий экран: площадки возвращаются в левую колонку под заголовок, квиз занимает правую целиком. */
   @media (min-width: 1024px) {
     .sr-request__layout {
       grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-      gap: 5rem;
+      grid-template-rows: auto 1fr;
+      gap: 2.5rem 5rem;
+    }
+
+    .sr-request__intro {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .sr-request__places {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: start;
+      margin-top: 0;
+    }
+
+    .sr-request__form {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: start;
     }
   }
 }
@@ -1988,8 +2186,10 @@
   background: #0a0806;
 }
 
-.sr-hero .scroll-video__poster {
-  object-position: 50% 46%;
+/* Кадр обрезается поровну с обеих сторон: на этом стоят точки пояснений (HERO_FOCUS в hero-config.js). */
+.sr-hero .scroll-video__poster,
+.sr-hero .scroll-video__video {
+  object-position: 50% 50%;
 }
 
 /* Слой варианта не должен становиться своим контекстом наложения: свет смешивается с кадром под ним. */
@@ -1997,7 +2197,7 @@
   z-index: auto;
 }
 
-/* Пометка заглушки — справа вверху, под шапкой: внизу живут заголовок и переключатель вариантов. */
+/* Пометка «ролик не загрузился» — справа вверху, под шапкой: внизу живут заголовок и переключатель вариантов. */
 .sr-hero .scroll-video__label {
   top: calc(var(--sr-header-h) + 0.75rem);
   right: var(--sr-gutter);
@@ -2047,14 +2247,23 @@
 }
 
 @media (max-width: 767px) {
-  .sr-hero .scroll-video__poster {
-    object-position: 36% 50%;
+  /* Телефон: кадр — в верхней части сцены, сдвинут к правым витринам и стойкам (PHONE_FRAME в Hero.jsx). */
+  .sr-hero .scroll-video__poster,
+  .sr-hero .scroll-video__video {
+    height: calc(100% - 25rem);
+    min-height: 10rem;
+    object-position: 84% 50%;
   }
 
   /* Телефон: пояснение — табличка вверху кадра (места под точки и проволоку нет). */
   .sr-hero .scroll-video__callout {
     left: var(--sr-gutter) !important;
     right: var(--sr-gutter);
-    top: calc(var(--sr-header-h) + 2.9rem) !important;
+    top: calc(var(--sr-header-h) + 0.6rem) !important;
+  }
+
+  /* Пометка «ролик не загрузился» — под табличкой пояснения, а не на её месте. */
+  .sr-hero .scroll-video__label {
+    top: calc(var(--sr-header-h) + 8rem);
   }
 }

@@ -1,10 +1,13 @@
 // Контракт варианта «Шоурум»: heroConfig (ролик, фазы, пояснения из данных), первый экран главной, шапка.
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { cleanup, fireEvent, screen, within } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import company from '../../data/company.json';
 import projects from '../../data/projects.json';
 import products from '../../data/products.json';
 import { installBrowserStubs, renderApp, resetStores } from '../../core/pages/test-utils.jsx';
+import { HERO_FRAME, HERO_LAMPS, frameToStage } from './hero-config.js';
 import showroom from './index.jsx';
 
 installBrowserStubs();
@@ -30,9 +33,13 @@ const fromData = (text) => text.includes('[уточнить]') || DATA_STRINGS.s
 describe('heroConfig «Шоурума»', () => {
   const { heroConfig } = showroom;
 
-  it('ролик лежит в media/showroom, первый кадр — фото проекта из company.heroPhotos', () => {
+  it('ролик лежит в media/showroom, постер — первый кадр ролика рядом с ним, есть версия для телефона', () => {
     expect(heroConfig.sources.desktop).toBe('media/showroom/hero.mp4');
-    expect(company.heroPhotos.map((photo) => photo.base)).toContain(heroConfig.poster.base);
+    expect(heroConfig.sources.mobile).toBe('media/showroom/hero-mobile.mp4');
+    expect(heroConfig.poster.src).toBe('media/showroom/hero-poster.jpg');
+    for (const file of [heroConfig.sources.desktop, heroConfig.sources.mobile, heroConfig.poster.src]) {
+      expect(existsSync(resolve(process.cwd(), 'public', file)), `${file} лежит в public`).toBe(true);
+    }
     expect(heroConfig.poster.alt.length).toBeGreaterThan(0);
     // R06: закреплённая сцена 300–400vh, на телефоне 200–250vh
     expect(heroConfig.lengthVh).toBeGreaterThanOrEqual(300);
@@ -70,6 +77,39 @@ describe('heroConfig «Шоурума»', () => {
       expect(fromData(callout.text), `«${callout.text}» есть в данных`).toBe(true);
     });
   });
+
+  it('точка кадра ролика переводится в точку сцены: кадр закрывает сцену (cover), лишнее обрезается поровну', () => {
+    // Ролик 1280×704. Сцена тех же пропорций — точка на месте.
+    expect(HERO_FRAME).toEqual({ width: 1280, height: 704 });
+    const same = frameToStage({ x: 0.25, y: 0.4 }, { width: 1280, height: 704 });
+    expect(same.x).toBeCloseTo(0.25, 5);
+    expect(same.y).toBeCloseTo(0.4, 5);
+    expect(same.visible).toBe(true);
+    // 1440×900: кадр растянут по высоте до 1636,36 px, слева и справа срезано по 98,18 px.
+    const desktop = frameToStage({ x: 0.89, y: 0.37 }, { width: 1440, height: 900 });
+    expect(desktop.x).toBeCloseTo((0.89 * 1636.3636 - 98.1818) / 1440, 4);
+    expect(desktop.y).toBeCloseTo(0.37, 5);
+    expect(desktop.visible).toBe(true);
+    // 1920×800: кадр растянут по ширине до 1056 px по высоте, сверху и снизу срезано по 128 px.
+    const wide = frameToStage({ x: 0.5, y: 0.25 }, { width: 1920, height: 800 });
+    expect(wide.x).toBeCloseTo(0.5, 5);
+    expect(wide.y).toBeCloseTo((0.25 * 1056 - 128) / 800, 4);
+    // Портрет 390×844: правая витрина остаётся за краем сцены.
+    expect(frameToStage({ x: 0.89, y: 0.37 }, { width: 390, height: 844 }).visible).toBe(false);
+    // Смещение кадра (object-position): 100 % по горизонтали — срезается только слева.
+    const shifted = frameToStage({ x: 1, y: 0.5 }, { width: 1440, height: 900 }, { x: 1, y: 0.5 });
+    expect(shifted.x).toBeCloseTo(1, 5);
+  });
+
+  it('светильники заглушки не спорят с роликом: первая витрина уже горит в кадре, остальные зажигаются справа налево', () => {
+    const byTime = [...HERO_LAMPS].sort((a, b) => a.at - b.at);
+    expect(byTime.length).toBeGreaterThanOrEqual(3);
+    byTime.forEach((lamp, index) => {
+      expect(lamp.at, `${lamp.id} зажигается по скроллу, а не с загрузки`).toBeGreaterThan(0);
+      expect(lamp.at).toBeLessThanOrEqual(0.5); // к середине ролика зал освещён
+      if (index > 0) expect(lamp.x, `${lamp.id} левее предыдущего`).toBeLessThanOrEqual(byTime[index - 1].x);
+    });
+  });
 });
 
 describe('главная «Шоурума»', () => {
@@ -98,6 +138,13 @@ describe('главная «Шоурума»', () => {
       'МОНТАЖ',
     ]);
 
+    // G04: кадр подписан как доработанное фото реального проекта ДВК и ведёт на этот проект
+    const project = projects.find((item) => item.slug === 'perfume-balashikha');
+    const credit = within(hero).getByRole('link', { name: /доработанное фото проекта ДВК/i });
+    expect(credit.getAttribute('href')).toBe('/showroom/projects/perfume-balashikha');
+    expect(credit.textContent).toContain(project.city);
+    expect(within(hero).queryByText('Здесь будет видео-интерьер')).toBeNull();
+
     // R09: главная — 6–8 экранов
     const screens = main.querySelectorAll(':scope > section');
     expect(screens.length).toBeGreaterThanOrEqual(6);
@@ -109,12 +156,37 @@ describe('главная «Шоурума»', () => {
     await screen.findByRole('heading', { level: 1 });
     const showcase = screen.getByRole('heading', { level: 2, name: /Каталог под подсветкой/ }).closest('section');
     const names = within(showcase).getAllByRole('article').map((card) => within(card).getByRole('heading').textContent);
-    const directionsShown = new Set(names.map((name) => products.find((product) => product.name === name)?.direction));
+    // названия выводятся с ёлочками вместо прямых кавычек
+    expect(names.some((name) => name.includes('"'))).toBe(false);
+    expect(names).toContain('Игровой комплекс МГМ-78 «Кораблик»');
+    const plain = (name) => name.replace(/["«»]/g, '');
+    const directionsShown = new Set(names.map((name) => products.find((product) => plain(product.name) === plain(name))?.direction));
     expect(names.length).toBeGreaterThanOrEqual(6);
     expect([...directionsShown].sort()).toEqual(['landscape', 'metal', 'retail']);
 
     fireEvent.click(within(showcase).getAllByRole('button', { name: /В запрос КП/ })[0]);
     expect(JSON.parse(localStorage.getItem('dvk-kp-v1')).length).toBe(1);
+  });
+});
+
+describe('тексты и порядок экранов главной', () => {
+  it('для посетителя нет слов о прототипе, госзаказ — один факт без повтора, заявка: заголовок → квиз → площадки', async () => {
+    const { container } = await renderApp('/showroom');
+    await screen.findByRole('heading', { level: 1 });
+    const mainText = container.querySelector('main').textContent;
+    expect(/в прототипе/i.test(mainText), 'в текстах главной нет слов о прототипе').toBe(false);
+    expect(/равного веса/i.test(mainText), 'в текстах главной нет языка брифа').toBe(false);
+
+    const gov = screen.getByRole('heading', { level: 3, name: 'Госзаказ и тендеры' }).closest('aside');
+    expect(gov.textContent.match(/Более 9 лет/g)).toHaveLength(1);
+    expect(within(gov).getAllByText(/тендер/i).length).toBeGreaterThanOrEqual(1);
+
+    const request = screen.getByRole('heading', { level: 2, name: /Включим свет/ }).closest('section');
+    const quiz = request.querySelector('.sr-request__form');
+    const places = request.querySelector('.sr-request__places');
+    expect(quiz && places).toBeTruthy();
+    // DOCUMENT_POSITION_FOLLOWING: площадки идут в документе после квиза
+    expect(quiz.compareDocumentPosition(places) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });
 

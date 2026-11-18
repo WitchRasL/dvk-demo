@@ -11,6 +11,7 @@ import { formatPrice } from '../../core/ui/format.js';
 import { useVariant } from '../../core/variants/VariantContext.jsx';
 import { useFinePointer, usePrefersReducedMotion } from '../../core/hooks/media.js';
 import { useMagnetic } from './light.js';
+import { displayName, photoKind } from './media-kind.js';
 
 const BUTTON_VARIANTS = ['primary', 'secondary', 'ghost'];
 
@@ -140,9 +141,11 @@ export function ProductCard({ product, onQuickView, className }) {
   const image = product.images?.[0];
   const to = `/${variantId}/product/${product.slug}`;
   const priced = typeof product.price === 'number';
+  const name = displayName(product.name);
   return (
     <article className={cn('sr-card', className)}>
-      <Link to={to} tabIndex={-1} aria-hidden="true" className="sr-card__niche">
+      {/* photo — съёмка в интерьере: кадр во всю рамку; product — предмет на белом: каменная ниша с подиумом */}
+      <Link to={to} tabIndex={-1} aria-hidden="true" className="sr-card__niche" data-kind={image ? photoKind(product) : 'product'}>
         <span className="sr-card__lamp" />
         {image ? (
           <img
@@ -151,7 +154,7 @@ export function ProductCard({ product, onQuickView, className }) {
             sizes="(min-width: 1280px) 26vw, (min-width: 640px) 45vw, 80vw"
             width={image.w}
             height={image.h}
-            alt={image.alt || product.name}
+            alt={displayName(image.alt) || name}
             loading="lazy"
             decoding="async"
             className="sr-card__photo"
@@ -163,7 +166,7 @@ export function ProductCard({ product, onQuickView, className }) {
       </Link>
       <div className="sr-card__body">
         <h3 className="sr-card__name">
-          <Link to={to}>{product.name}</Link>
+          <Link to={to}>{name}</Link>
         </h3>
         <p className={cn('sr-card__price tabular', !priced && 'is-request')}>{formatPrice(product)}</p>
         <div className="sr-card__actions">
@@ -171,7 +174,7 @@ export function ProductCard({ product, onQuickView, className }) {
           {onQuickView ? (
             <ui.Button variant="ghost" size="sm" onClick={() => onQuickView(product)}>
               Быстрый просмотр
-              <span className="sr-only">: {product.name}</span>
+              <span className="sr-only">: {name}</span>
             </ui.Button>
           ) : null}
         </div>

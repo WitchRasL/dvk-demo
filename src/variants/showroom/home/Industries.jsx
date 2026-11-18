@@ -2,11 +2,12 @@
 // новый кадр раскрывается кругом света от точки (clip-path), текст из полутени становится ярким.
 import { Link } from 'react-router';
 import { ArrowUpRight } from 'lucide-react';
-import { buildCatalogUrl, getIndustry, getProduct, getProject, queryProducts } from '../../../core/catalog/index.js';
+import { buildCatalogUrl, getCategory, getIndustry, getProduct, getProject } from '../../../core/catalog/index.js';
 import { useTabs } from '../../../core/hooks/useTabs.js';
 import { countText } from '../../../core/ui/format.js';
 import { imageSrc, srcSet } from '../../../lib/images.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
+import { displayName, photoKind } from '../media-kind.js';
 import { SectionHeading } from '../ui.jsx';
 
 /** Отрасли экрана (спецификация, «Экраны главной») и кадр для каждой: фото объекта ДВК или товар отрасли. */
@@ -29,7 +30,12 @@ function frameOf(entry) {
   }
   const product = getProduct(entry.product);
   const image = product?.images?.[0];
-  return image ? { kind: 'product', image, caption: product.name } : null;
+  return image ? { kind: photoKind(product), image, caption: displayName(product.name) } : null;
+}
+
+/** Сколько позиций в разделах отрасли на dvk-style.ru (сумма по категориям из данных); нет категорий — 0. */
+function positionsOf(industry) {
+  return (industry.categoryIds ?? []).reduce((sum, id) => sum + (Number(getCategory(id)?.count) || 0), 0);
 }
 
 export function Industries() {
@@ -40,7 +46,7 @@ export function Industries() {
   if (!current) return null;
   const { industry } = current;
   const frame = frameOf(current);
-  const found = queryProducts({ industry: industry.id });
+  const positions = positionsOf(industry);
   const series = industry.series?.length ?? 0;
 
   return (
@@ -74,7 +80,7 @@ export function Industries() {
                   sizes="(min-width: 1024px) 46vw, 100vw"
                   width={frame.image.w}
                   height={frame.image.h}
-                  alt={frame.image.alt || frame.caption}
+                  alt={displayName(frame.image.alt) || frame.caption}
                   loading="lazy"
                   decoding="async"
                 />
@@ -94,12 +100,14 @@ export function Industries() {
                     </dd>
                   </div>
                 ) : null}
-                <div>
-                  <dt>В прототипе каталога</dt>
-                  <dd className="tabular">
-                    {countText(found.total, 'product')}
-                  </dd>
-                </div>
+                {positions ? (
+                  <div>
+                    <dt>В разделах отрасли на dvk-style.ru</dt>
+                    <dd className="tabular">
+                      {countText(positions, 'position')}
+                    </dd>
+                  </div>
+                ) : null}
               </dl>
               <div className="sr-industries__links">
                 <Link to={`/${variantId}/solutions/${industry.slug}`} className="sr-link-arrow">

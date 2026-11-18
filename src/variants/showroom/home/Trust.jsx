@@ -8,7 +8,6 @@ import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { SectionHeading } from '../ui.jsx';
 
 const LETTERS_SHOWN = 3;
-const GOV_SERVICES = ['gov-orders', 'tender-specs'];
 
 export function Trust() {
   const { id } = useVariant();
@@ -17,8 +16,10 @@ export function Trust() {
   const withLogo = clients.filter((client) => client.logo);
   const others = clients.filter((client) => !client.logo);
   const letters = (company.letters ?? []).slice(0, LETTERS_SHOWN);
-  const gov = (company.services ?? []).filter((service) => GOV_SERVICES.includes(service.id));
-  const tenders = company.facts?.find((fact) => fact.id === 'tenders');
+  // Госзаказ: один факт (опыт и площадки) и одна услуга — без повтора заголовка и «более 9 лет».
+  const services = company.services ?? [];
+  const govFact = services.find((service) => service.id === 'gov-orders');
+  const tenderSpecs = services.find((service) => service.id === 'tender-specs');
 
   return (
     <section className="sr-screen sr-trust" aria-labelledby="sr-trust-title">
@@ -76,20 +77,17 @@ export function Trust() {
             </p>
           </div>
 
-          {gov.length ? (
+          {govFact || tenderSpecs ? (
             <aside className="sr-trust__gov" aria-labelledby="sr-trust-gov">
               <h3 id="sr-trust-gov" className="sr-trust__subtitle">
                 Госзаказ и тендеры
               </h3>
-              {tenders ? <p className="sr-trust__gov-fact">{tenders.text}</p> : null}
-              <dl>
-                {gov.map((service) => (
-                  <div key={service.id}>
-                    <dt>{service.title}</dt>
-                    <dd>{service.text}</dd>
-                  </div>
-                ))}
-              </dl>
+              {govFact ? <p className="sr-trust__gov-fact">{govFact.text}</p> : null}
+              {tenderSpecs ? (
+                <p className="sr-trust__gov-service">
+                  <span>{tenderSpecs.title}.</span> {tenderSpecs.text}
+                </p>
+              ) : null}
             </aside>
           ) : null}
         </div>

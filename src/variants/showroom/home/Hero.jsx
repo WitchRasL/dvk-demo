@@ -1,29 +1,81 @@
-// Hero «Шоурума» — фишка «Включи витрину». Ночной шоурум: при загрузке зажигается первая витрина,
-// по скроллу — остальные (свет включается: opacity + clip-path круга от точки), курсор — луч света
-// (слой тени с «окном» двигается transform за мышью). На тач-устройствах свет только по скроллу,
-// при reduced-motion всё освещено сразу и без движения.
-import { Fragment, useEffect, useRef, useState } from 'react';
+// Hero «Шоурума» — фишка «Включи витрину». Ночной шоурум: в ролике горит одна витрина, по скроллу
+// подсветка зажигается справа налево; курсор — луч света (тень с «окном» и тёплое пятно едут transform
+// за мышью). На тач-устройствах свет только по скроллу, при reduced-motion — сразу освещённый кадр.
+// Если ролик не загрузился, его первый кадр освещают светильники заглушки в том же порядке.
+import { Fragment, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { Link } from 'react-router';
 import { ArrowUpRight, Phone } from 'lucide-react';
 import { ScrollVideo, cameraTransform, findScrollVideoStage } from '../../../core/scroll-video/index.js';
 import { getCompany, getDirectionTotal } from '../../../core/catalog/index.js';
 import { useCity } from '../../../core/city/index.js';
-import { useFinePointer, usePrefersReducedMotion } from '../../../core/hooks/media.js';
+import { useFinePointer, useMediaQuery, usePrefersReducedMotion } from '../../../core/hooks/media.js';
 import { useNav } from '../../../core/layout/nav.js';
 import { toTel, wordFor } from '../../../core/ui/format.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
-import { HERO_LAMPS, heroConfig } from '../hero-config.js';
+import { HERO_CREDIT, HERO_FOCUS, HERO_LAMPS, HERO_POSTERS, frameToStage, heroConfig } from '../hero-config.js';
 import { Button } from '../ui.jsx';
 
-/** Доля пути hero, за которую шоурум освещается полностью. */
-const LIGHT_UP_UNTIL = 0.45;
-/** Точка, куда смотрит свет без мыши: главная пристенная витрина. */
-const FOCAL = { x: 0.44, y: 0.42 };
+/** Доля пути hero, за которую шоурум освещается полностью (в ролике — к середине). */
+const LIGHT_UP_UNTIL = 0.5;
+/** Точка кадра, куда смотрит свет без мыши: витрина правой стены, которая горит с первого кадра. */
+const FOCAL = { x: 0.87, y: 0.47 };
 const BEAM_TAU_MS = 110;
+/** Телефон: кадр занимает верх сцены (нижние 25rem — заголовок и действия) и сдвинут к правым витринам; то же в home.css. */
+const PHONE_FRAME = { below: 400, minHeight: 160, focus: { x: 0.84, y: 0.5 } };
+/** Место под табличку пояснения рядом с точкой: проволока и ширина таблички, px. */
+const CARD_REACH = 372;
+/** Уже этой ширины заголовок занимает больше половины сцены — табличке рядом с деталью места нет. */
+const ANCHOR_MIN_WIDTH = 1200;
 
 const clamp01 = (value) => Math.min(1, Math.max(0, value));
 const smooth = (value) => value * value * (3 - 2 * value);
 const lerp = (from, to, t) => from + (to - from) * t;
+
+const subscribeResize = (onChange) => {
+  window.addEventListener('resize', onChange);
+  return () => window.removeEventListener('resize', onChange);
+};
+const readViewport = () => `${window.innerWidth}x${window.innerHeight}`;
+
+/** Как точка кадра ролика ложится на сцену при текущем окне: сцена — весь экран, кадр обрезан по краям. */
+function useFrameMapping() {
+  const viewport = useSyncExternalStore(subscribeResize, readViewport, () => '1440x900');
+  const phone = useMediaQuery('(max-width: 767px)');
+  return useMemo(() => {
+    const [width, height] = viewport.split('x').map(Number);
+    if (!phone) return { width, height, map: (point) => frameToStage(point, { width, height }, HERO_FOCUS) };
+    const box = { width, height: Math.max(PHONE_FRAME.minHeight, height - PHONE_FRAME.below) };
+    return {
+      width,
+      height,
+      map: (point) => {
+        const mapped = frameToStage(point, box, PHONE_FRAME.focus);
+        return { ...mapped, y: (mapped.y * box.height) / height };
+      },
+    };
+  }, [viewport, phone]);
+}
+
+/**
+ * Пояснения в координатах сцены. На широком экране точка стоит на детали кадра, табличка — с той стороны,
+ * где ей хватает места и где она не ложится на заголовок (левая половина сцены). Если места рядом с деталью
+ * нет или деталь осталась за краем кадра, табличка встаёт без точки и проволоки в правый верхний угол, под шапку.
+ */
+function placeCallouts(callouts, mapping) {
+  const { width, height } = mapping;
+  const docked = { x: (width - 24) / width, y: 124 / height, side: 'left', grow: 'down', anchored: false };
+  return callouts.map((callout) => {
+    const mapped = mapping.map(callout);
+    if (!mapped.visible || width < ANCHOR_MIN_WIDTH) return { ...callout, ...docked };
+    const px = mapped.x * width;
+    const fits = { right: px + CARD_REACH < width - 16, left: px - CARD_REACH > width * 0.46 };
+    const wanted = callout.side ?? (mapped.x > 0.72 ? 'left' : 'right');
+    const side = fits[wanted] ? wanted : wanted === 'right' && fits.left ? 'left' : wanted === 'left' && fits.right ? 'right' : null;
+    if (!side) return { ...callout, ...docked };
+    const grow = callout.grow === 'up' && mapped.y * height < 260 ? 'down' : (callout.grow ?? 'down');
+    return { ...callout, x: mapped.x, y: mapped.y, side, grow, anchored: true };
+  });
+}
 
 /** «Проектируем, производим и монтируем — от витрины…» → крупная часть с акцентом и хвост. */
 function Positioning({ text }) {
@@ -42,9 +94,14 @@ function Positioning({ text }) {
 }
 
 function Callout({ callout, state }) {
-  const side = callout.x > 0.72 ? 'left' : 'right';
   return (
-    <div className="sr-callout" data-side={side} data-active={state.active || undefined}>
+    <div
+      className="sr-callout"
+      data-side={callout.side ?? 'right'}
+      data-grow={callout.grow ?? 'down'}
+      data-anchored={callout.anchored === false ? undefined : ''}
+      data-active={state.active || undefined}
+    >
       <span className="sr-callout__dot" />
       <span className="sr-callout__wire" />
       <div className="sr-callout__card">
@@ -119,9 +176,10 @@ function Directions() {
  * Свет сцены. Слои — прямые участники наложения в сцене (без своих контекстов наложения у родителя),
  * поэтому color-dodge и soft-light работают с кадром под ними.
  */
-function Lights({ progress, mode }) {
+function Lights({ progress, mode, mapping }) {
   const shadeRef = useRef(null);
   const beamRef = useRef(null);
+  const glowRef = useRef(null);
   const fine = useFinePointer();
   const reduce = usePrefersReducedMotion();
   const [booted, setBooted] = useState(false);
@@ -137,17 +195,20 @@ function Lights({ progress, mode }) {
   // Луч курсора: тень с «окном» и тёплое пятно едут за мышью с лёгкой инерцией.
   useEffect(() => {
     const shade = shadeRef.current;
-    const beam = beamRef.current;
+    const beams = [beamRef.current, glowRef.current].filter(Boolean);
     const stage = findScrollVideoStage(shade);
     if (!shade || !stage) return undefined;
     const place = (x, y) => {
       const value = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
       shade.style.transform = value;
-      if (beam) beam.style.transform = value;
+      beams.forEach((beam) => {
+        beam.style.transform = value;
+      });
     };
     const focal = () => {
       const box = stage.getBoundingClientRect();
-      return { x: box.width * FOCAL.x, y: box.height * FOCAL.y };
+      const point = mapping.map(FOCAL);
+      return { x: box.width * Math.min(1, Math.max(0, point.x)), y: box.height * point.y };
     };
     let current = focal();
     place(current.x, current.y);
@@ -198,41 +259,51 @@ function Lights({ progress, mode }) {
       document.removeEventListener('pointerout', onLeave);
       stage.removeAttribute('data-beam');
     };
-  }, [fine, reduce, isStatic]);
+  }, [fine, reduce, isStatic, mapping]);
 
+  // В ролике свет зажигается сам: тень варианта только собирает взгляд на первой витрине и уходит к середине.
+  // Статичный кадр уже освещён. Заглушка (ролик не загрузился) освещает первый кадр светильниками.
   const lit = isStatic ? 1 : smooth(clamp01(progress / LIGHT_UP_UNTIL));
-  const shade = isStatic ? 0.18 : isVideo ? lerp(0.5, 0.14, lit) : lerp(0.86, 0.34, lit);
-  const camera = mode === 'placeholder' ? cameraTransform(heroConfig.camera, progress) : undefined;
+  const shade = isStatic ? 0 : isVideo ? lerp(0.46, 0, lit) : lerp(0.6, 0.1, lit);
+  const isPlaceholder = mode === 'placeholder';
+  const camera = isPlaceholder ? cameraTransform(heroConfig.camera, progress) : undefined;
 
   return (
     <>
-      <span className="sr-hero__grade" aria-hidden="true" />
-      <span ref={shadeRef} className="sr-hero__shade" aria-hidden="true" style={{ opacity: booted ? shade : 0.97 }} />
-      {!isVideo
-        ? HERO_LAMPS.map((lamp) => (
-            <span
-              key={lamp.id}
-              className="sr-lamp"
-              aria-hidden="true"
-              data-on={isStatic || (booted && progress >= lamp.at) || undefined}
-              style={{ '--x': `${lamp.x * 100}%`, '--y': `${lamp.y * 100}%`, '--r': `${lamp.size * 100}vmax`, transform: camera }}
-            />
-          ))
+      <span ref={shadeRef} className="sr-hero__shade" aria-hidden="true" style={{ opacity: booted ? shade : 0.9 }} />
+      {isPlaceholder
+        ? HERO_LAMPS.map((lamp) => {
+            const point = mapping.map(lamp);
+            return (
+              <span
+                key={lamp.id}
+                className="sr-lamp"
+                aria-hidden="true"
+                data-on={(booted && progress >= lamp.at) || undefined}
+                style={{ '--x': `${(point.x * 100).toFixed(2)}%`, '--y': `${(point.y * 100).toFixed(2)}%`, '--r': `${lamp.size * 100}vmax`, transform: camera }}
+              />
+            );
+          })
         : null}
-      <span ref={beamRef} className="sr-hero__beam" aria-hidden="true" style={{ opacity: isStatic ? 0 : 1 - lit * 0.75 }} />
+      {isStatic ? null : (
+        <>
+          <span ref={beamRef} className="sr-hero__beam" aria-hidden="true" style={{ '--beam': (1 - lit * 0.55).toFixed(3) }} />
+          <span ref={glowRef} className="sr-hero__beam sr-hero__beam--glow" aria-hidden="true" style={{ '--beam': (1 - lit * 0.55).toFixed(3) }} />
+        </>
+      )}
       <span className="sr-hero__scrim" aria-hidden="true" />
     </>
   );
 }
 
-function Overlay({ progress, api }) {
+function Overlay({ progress, api, mapping }) {
   const { id } = useVariant();
   const { contacts } = useCity();
   const company = getCompany();
   const phone = contacts?.phones?.[0];
   return (
     <>
-      <Lights progress={progress} mode={api.mode} />
+      <Lights progress={progress} mode={api.mode} mapping={mapping} />
       <div className="sr-hero__content">
         <div className="sr-hero__lede">
           <Positioning text={company.positioning} />
@@ -252,7 +323,12 @@ function Overlay({ progress, api }) {
           <p className="sr-hero__promise">{company.promise}</p>
         </div>
         <div className="sr-hero__console">
-          <PhaseStrip progress={progress} api={api} />
+          <div className="sr-hero__strip">
+            <PhaseStrip progress={progress} api={api} />
+            <Link to={`/${id}/${HERO_CREDIT.to}`} className="sr-hero__credit">
+              {HERO_CREDIT.text}
+            </Link>
+          </div>
           <Directions />
         </div>
       </div>
@@ -261,15 +337,21 @@ function Overlay({ progress, api }) {
 }
 
 export function Hero() {
+  const reduce = usePrefersReducedMotion();
+  const mapping = useFrameMapping();
+  const callouts = useMemo(() => placeCallouts(heroConfig.callouts, mapping), [mapping]);
   return (
     <section className="sr-hero" aria-labelledby="sr-hero-title">
       <ScrollVideo
         {...heroConfig}
+        // reduced-motion: ролика нет — показываем его последний кадр, где зал уже освещён
+        poster={reduce ? HERO_POSTERS.lit : heroConfig.poster}
+        callouts={callouts}
         className="sr-hero__video"
-        placeholderLabel="Здесь будет видео-интерьер"
+        placeholderLabel="Ролик не загрузился — показан его первый кадр"
         listLabel="Детали интерьера по ходу ролика"
         renderCallout={(callout, state) => <Callout callout={callout} state={state} />}
-        renderOverlay={(progress, api) => <Overlay progress={progress} api={api} />}
+        renderOverlay={(progress, api) => <Overlay progress={progress} api={api} mapping={mapping} />}
       />
     </section>
   );

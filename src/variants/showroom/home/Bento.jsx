@@ -12,15 +12,16 @@ import { imageSrc, srcSet } from '../../../lib/images.js';
 import { cn } from '../../../lib/utils.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { useLitOnView, usePointerLight } from '../light.js';
+import { photoKind } from '../media-kind.js';
 import { Button, SectionHeading } from '../ui.jsx';
 
-/** Какой кадр у раздела: фото реального объекта ДВК (крупная плитка) или товар на подиуме. */
+/** Какой кадр у раздела: фото реального объекта ДВК или товар раздела (на белом — в нише, в интерьере — кадром). */
 const SECTION_MEDIA = {
   'trade-equipment': { project: 'museum-bryansk', image: 1 },
   'pharmacy-equipment': { product: 'vitriny-peredney-linii' },
   'trade-islands': { product: 'torgovyy-modul-tmd-3210' },
   playgrounds: { project: 'playground-voronezh', image: 2 },
-  benches: { product: 'skamya-parkovaya-s-75-v-arkhitekturnoy-kroshke-1' },
+  benches: { product: 'skameyka-na-betonnom-osnovanii-s-222' },
   'small-architectural-forms': { product: 'urna-u-205' },
   'metal-furniture': { project: 'workshop-furniture', image: 0 },
   'metal-cabinets': { product: 'shkaf-instrumentalnyy-hard-2000-062000' },
@@ -37,7 +38,7 @@ function mediaFor(sectionId) {
   }
   const product = getProduct(spec.product);
   const image = product?.images?.[0];
-  return image ? { kind: 'product', image, alt: product.name } : null;
+  return image ? { kind: photoKind(product), image, alt: product.name } : null;
 }
 
 function Tile({ section, size, index }) {
@@ -135,7 +136,7 @@ export function Bento() {
               С чего начнём: <em>витрина</em>, двор или цех?
             </>
           }
-          lead="Три направления равного веса. Внутри — разделы каталога и число позиций на dvk-style.ru: выберите свой зал и идите дальше по разделам."
+          lead="Выберите своё направление — внутри разделы каталога с числом позиций на dvk-style.ru. Не уверены, куда вам, — оставьте заявку, подберём сами."
         />
         <div ref={gridRef} className="sr-bento__grid">
           {directions.map((direction) => (

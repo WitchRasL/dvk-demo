@@ -8,13 +8,17 @@ import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { useLitOnView } from '../light.js';
 import { ProductCard, SectionHeading } from '../ui.jsx';
 
-/** Порядок — по направлениям поочерёдно, чтобы ни одно не выглядело главным. */
+/**
+ * Порядок — по направлениям поочерёдно, чтобы ни одно не выглядело главным.
+ * Благоустройство и металл сняты на белом — стоят в каменных нишах; товары ритейла на dvk-style.ru сняты
+ * только в интерьере — показаны кадрами во всю рамку (см. media-kind.js).
+ */
 const SHOWCASE = [
-  'muzeynaya-vitrina-mvp-30',
+  'vitrina-dlya-chasov-vchyu-23',
   'igrovoy-kompleks-mgm-78-korablik',
   'shkaf-instrumentalnyy-hard-2000-062000',
   'torgovyy-modul-tmd-3210',
-  'skamya-parkovaya-s-75-v-arkhitekturnoy-kroshke-1',
+  'detskaya-gorka-mgs-3-vverkh-nogami',
   'verstak-vl-200-05-s-ekranom-vl-200-e4',
 ];
 
