@@ -1,0 +1,74 @@
+/*
+ * Основа внутренних страниц ядра. Всё остальное — классы Tailwind на токенах варианта.
+ * Здесь только то, чего классами не выразить: подиум под фото, цвет ошибки, поверхности браузера.
+ * Вариант перекрывает любую из этих переменных на `[data-variant="<id>"] .page` или `.page-<name>`.
+ */
+.page {
+  /* Подиум под каталожные фото: исходники сняты на белом фоне, поэтому он белый. */
+  --stage: #ffffff;
+  /* Цвет ошибок: красный, подмешанный к цвету текста варианта, — читается и на тёмном, и на светлом фоне. */
+  --danger: #b3261e;
+  --danger: color-mix(in oklab, #d93a3a 62%, var(--fg));
+
+  accent-color: var(--action);
+  caret-color: var(--action);
+  scroll-margin-top: 1rem;
+}
+
+.page ::selection {
+  background: var(--action);
+  color: var(--action-fg);
+}
+
+.page ::placeholder {
+  color: var(--fg-muted);
+  opacity: 1;
+}
+
+.page input[type='search']::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* Горизонтальные ряды карточек: тонкая полоса прокрутки в цвете варианта. */
+.page .rail {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.page .rail::-webkit-scrollbar {
+  height: 6px;
+}
+
+.page .rail::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
+}
+
+/* Подложка модального окна — в тон варианта, а не серая по умолчанию. */
+.page dialog::backdrop {
+  background: color-mix(in oklab, var(--bg) 35%, black 65%);
+  opacity: 0.86;
+}
+
+.page dialog {
+  color: var(--fg);
+}
+
+/* Цифры в таблицах и счётчиках — табличные: столбцы не «прыгают». */
+.page .tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Появление окна быстрого просмотра: только opacity и transform. */
+@media (prefers-reduced-motion: no-preference) {
+  .page dialog[open] {
+    animation: page-dialog-in var(--dur-base, 300ms) var(--ease-out, ease-out);
+  }
+
+  @keyframes page-dialog-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+}

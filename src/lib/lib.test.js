@@ -5,11 +5,11 @@ import { cn } from './utils.js';
 
 describe('asset', () => {
   it('строит путь от base GitHub Pages', () => {
-    expect(asset('images/products/vitrina/1-800.webp')).toBe('/dvk-style-redesign/images/products/vitrina/1-800.webp');
+    expect(asset('images/products/vitrina/1-800.webp')).toBe('/dvk-demo/images/products/vitrina/1-800.webp');
   });
 
   it('ведущий слэш не ломает путь', () => {
-    expect(asset('/media/showroom/hero.mp4')).toBe('/dvk-style-redesign/media/showroom/hero.mp4');
+    expect(asset('/media/showroom/hero.mp4')).toBe('/dvk-demo/media/showroom/hero.mp4');
   });
 
   it('внешние адреса и data: остаются как есть', () => {
@@ -21,13 +21,13 @@ describe('asset', () => {
 describe('srcSet и imageSrc', () => {
   it('srcset из двух размеров WebP', () => {
     expect(srcSet('images/products/vitrina/1')).toBe(
-      '/dvk-style-redesign/images/products/vitrina/1-800.webp 800w, /dvk-style-redesign/images/products/vitrina/1-1600.webp 1600w',
+      '/dvk-demo/images/products/vitrina/1-800.webp 800w, /dvk-demo/images/products/vitrina/1-1600.webp 1600w',
     );
   });
 
   it('src нужного размера, по умолчанию 800', () => {
-    expect(imageSrc('images/projects/hermitage/2')).toBe('/dvk-style-redesign/images/projects/hermitage/2-800.webp');
-    expect(imageSrc('images/projects/hermitage/2', 1600)).toBe('/dvk-style-redesign/images/projects/hermitage/2-1600.webp');
+    expect(imageSrc('images/projects/hermitage/2')).toBe('/dvk-demo/images/projects/hermitage/2-800.webp');
+    expect(imageSrc('images/projects/hermitage/2', 1600)).toBe('/dvk-demo/images/projects/hermitage/2-1600.webp');
   });
 });
 

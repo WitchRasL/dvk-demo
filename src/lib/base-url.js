@@ -1,4 +1,4 @@
-// Все пути к ассетам — через asset(): на GitHub Pages сайт живёт в /dvk-style-redesign/.
+// Все пути к ассетам — через asset(): на GitHub Pages сайт живёт в /dvk-demo/.
 const EXTERNAL = /^(?:[a-z][a-z\d+.-]*:|\/\/)/i;
 
 /**

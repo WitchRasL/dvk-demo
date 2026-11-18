@@ -14,9 +14,9 @@
 | Команда | Что делает |
 |---|---|
 | `npm install` | установить зависимости |
-| `npm run dev` | локальный сервер: http://localhost:5173/dvk-style-redesign/ |
+| `npm run dev` | локальный сервер: http://localhost:5173/dvk-demo/ |
 | `npm run build` | сборка в `dist/` |
-| `npm run preview` | открыть сборку: http://localhost:4173/dvk-style-redesign/ |
+| `npm run preview` | открыть сборку: http://localhost:4173/dvk-demo/ |
 | `npm test` | тесты (Vitest) |
 | `npm run check` | тесты + сборка — одна команда проверки |
 | `npm run fetch-images` | скачать фото с dvk-style.ru и сконвертировать в WebP 800/1600 |
@@ -50,12 +50,12 @@ Formspree или Web3Forms в `VITE_FORM_ENDPOINT`, затем пересобе�
 
 ## Публикация на GitHub Pages
 
-1. Создайте публичный репозиторий `dvk-style-redesign` и отправьте в него проект
+1. Репозиторий — `WitchRasL/dvk-demo` (публичный); отправьте в него проект
    (вместе с `public/images/` и `package-lock.json`).
 2. Включите Pages с источником GitHub Actions: *Settings → Pages → Source: GitHub Actions*
-   (или `gh api -X POST repos/<owner>/dvk-style-redesign/pages -f build_type=workflow`).
+   (или `gh api -X POST repos/WitchRasL/dvk-demo/pages -f build_type=workflow`).
 3. Каждый push в `main` запускает `.github/workflows/deploy.yml`: `npm ci` → `npm run build` → публикация `dist/`.
-4. Сайт: `https://<owner>.github.io/dvk-style-redesign/`. Адрес задан в `vite.config.js` (`base`);
+4. Сайт: `https://witchrasl.github.io/dvk-demo/`. Адрес задан в `vite.config.js` (`base: '/dvk-demo/'`);
    при другом имени репозитория поменяйте `base`.
 
 Маршрутизация на `HashRouter`, поэтому прямые ссылки вида `/#/showroom/product/<slug>` работают

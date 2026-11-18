@@ -6,7 +6,7 @@ import { ScrollVideo, progressToTime } from './index.js';
 
 const VIEWPORT = 800;
 const STAGE = VIEWPORT; // сцена закреплена на всю высоту окна
-const BASE = '/dvk-style-redesign/';
+const BASE = '/dvk-demo/';
 
 let scrolled = 0; // сколько пикселей страницы уже прокручено до верха трека
 let trackHeight = 2800; // 350vh при окне 800px
