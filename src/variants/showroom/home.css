@@ -1,0 +1,2063 @@
+/*
+ * Главная «Шоурума»: hero со скролл-роликом и фишкой «Включи витрину», bento, полный цикл, отрасли,
+ * каталог-витрина, проекты, доверие, заявка. Анимируются только transform, opacity, clip-path.
+ */
+
+@layer components {
+  /* Главная подъезжает под шапку: интерьер с первого кадра, шапка лежит поверх. */
+  .sr-home {
+    margin-top: calc(-1 * var(--sr-header-h));
+  }
+
+  /* ───────────── Hero ───────────── */
+
+  /* Тёплая цветокоррекция кадра слоем: фото с сайта сняты при дневном нейтральном свете. */
+  .sr-hero__grade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(180deg, #a3622e, #5a2f14);
+    mix-blend-mode: soft-light;
+    opacity: 0.6;
+  }
+
+  /* Тень с «окном» под курсором: огромный слой, который двигается transform. Прозрачность — по скроллу. */
+  .sr-hero__shade {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 240vmax;
+    height: 240vmax;
+    margin: -120vmax 0 0 -120vmax;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at center,
+      rgb(8 6 4 / 0) 0,
+      rgb(8 6 4 / 0.06) 6vmax,
+      rgb(8 6 4 / 0.6) 16vmax,
+      rgb(8 6 4 / 0.93) 28vmax,
+      #080604 42vmax
+    );
+    transition: opacity var(--dur-base) var(--ease-out);
+    will-change: transform, opacity;
+  }
+
+  /* Подсветка витрин: тёплые пятна (color-dodge проявляет детали тёмного кадра) включаются кругом от точки. */
+  .sr-lamp {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    mix-blend-mode: color-dodge;
+    background: radial-gradient(
+      circle var(--r) at var(--x) var(--y),
+      rgb(var(--sr-lamp) / 0.22) 0%,
+      rgb(var(--sr-lamp) / 0.08) 34%,
+      rgb(var(--sr-lamp) / 0) 72%
+    );
+    opacity: 0;
+    clip-path: circle(0% at var(--x) var(--y));
+    transform-origin: 50% 50%;
+    transition:
+      opacity 0.9s var(--ease-out),
+      clip-path 0.9s var(--ease-out);
+  }
+
+  .sr-lamp[data-on] {
+    opacity: 1;
+    clip-path: circle(150% at var(--x) var(--y));
+  }
+
+  /* Луч курсора: тёплое пятно над «окном» тени. */
+  .sr-hero__beam {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 40vmax;
+    height: 40vmax;
+    margin: -20vmax 0 0 -20vmax;
+    pointer-events: none;
+    mix-blend-mode: color-dodge;
+    background: radial-gradient(closest-side, rgb(var(--sr-lamp) / 0.34), rgb(var(--sr-lamp) / 0.1) 50%, rgb(var(--sr-lamp) / 0));
+    transition: opacity var(--dur-base) var(--ease-out);
+  }
+
+  /* Читаемость: сверху — под шапку, снизу и слева — под заголовок и действия. */
+  .sr-hero__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgb(10 8 6 / 0.78) 0, rgb(10 8 6 / 0) 9rem),
+      linear-gradient(0deg, rgb(10 8 6 / 0.96) 0%, rgb(10 8 6 / 0.6) 32%, rgb(10 8 6 / 0) 58%),
+      linear-gradient(90deg, rgb(10 8 6 / 0.86) 0%, rgb(10 8 6 / 0.62) 30%, rgb(10 8 6 / 0) 64%);
+  }
+
+  /* Пояснения: точка в кадре, латунная проволока и табличка, которая «загорается» от точки. */
+  .sr-callout {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .sr-callout__dot {
+    position: absolute;
+    left: -8px;
+    top: -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff4d8 0 28%, rgb(var(--sr-glow) / 0.95) 30% 44%, rgb(var(--sr-glow) / 0) 72%);
+    opacity: 0;
+    transform: scale(0.3);
+    transition:
+      opacity 0.45s var(--ease-out),
+      transform 0.6s var(--ease-out);
+  }
+
+  .sr-callout__dot::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgb(246 223 164 / 0.45);
+  }
+
+  .sr-callout__wire {
+    position: absolute;
+    top: 0;
+    width: 3.5rem;
+    height: 1px;
+    background: linear-gradient(90deg, rgb(246 223 164 / 0.95), rgb(226 196 146 / 0.45));
+    transition: clip-path 0.55s var(--ease-out) 0.08s;
+  }
+
+  .sr-callout[data-side='right'] .sr-callout__wire {
+    left: 12px;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .sr-callout[data-side='left'] .sr-callout__wire {
+    right: 12px;
+    transform: scaleX(-1);
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .sr-callout__card {
+    position: absolute;
+    top: -1.5rem;
+    width: min(18rem, 60vw);
+    padding: 0.85rem 1rem 0.95rem;
+    background: rgb(15 11 8 / 0.92);
+    border-radius: var(--radius);
+    box-shadow:
+      inset 0 0 0 1px rgb(226 196 146 / 0.3),
+      0 20px 40px -18px rgb(0 0 0 / 0.85);
+    opacity: 0;
+    transition:
+      opacity 0.6s var(--ease-out) 0.18s,
+      clip-path 0.75s var(--ease-out) 0.18s;
+  }
+
+  .sr-callout[data-side='right'] .sr-callout__card {
+    left: calc(12px + 3.5rem);
+    clip-path: circle(0% at 0% 1.5rem);
+  }
+
+  .sr-callout[data-side='left'] .sr-callout__card {
+    right: calc(12px + 3.5rem);
+    clip-path: circle(0% at 100% 1.5rem);
+  }
+
+  .sr-callout[data-active] .sr-callout__dot {
+    opacity: 1;
+    transform: none;
+  }
+
+  .sr-callout[data-active] .sr-callout__wire {
+    clip-path: inset(0 0 0 0);
+  }
+
+  .sr-callout[data-active] .sr-callout__card {
+    opacity: 1;
+  }
+
+  .sr-callout[data-side='right'][data-active] .sr-callout__card {
+    clip-path: circle(160% at 0% 1.5rem);
+  }
+
+  .sr-callout[data-side='left'][data-active] .sr-callout__card {
+    clip-path: circle(160% at 100% 1.5rem);
+  }
+
+  .sr-callout__title {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    line-height: 1.25;
+    color: var(--fg);
+  }
+
+  .sr-callout__text {
+    margin-top: 0.35rem;
+    font-size: 0.84rem;
+    line-height: 1.45;
+    color: #d3c5ad;
+  }
+
+  /* Слой с заголовком и действиями: снизу оставлено место под переключатель вариантов. */
+  .sr-hero__content {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding: calc(var(--sr-header-h) + 4.5rem) var(--sr-gutter) calc(4.25rem + env(safe-area-inset-bottom));
+    pointer-events: none;
+  }
+
+  .sr-hero__lede {
+    max-width: 54rem;
+  }
+
+  .sr-hero__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--fg);
+  }
+
+  .sr-hero__head {
+    display: block;
+    max-width: 21ch;
+    font-size: clamp(2.05rem, min(0.9rem + 4.3vw, 8.4vh), 5rem);
+    line-height: 1.02;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  .sr-hero__tail {
+    display: block;
+    margin-top: 0.7rem;
+    max-width: 34ch;
+    font-size: clamp(1.05rem, 0.85rem + 0.9vw, 1.6rem);
+    line-height: 1.3;
+    color: #ddd0b9;
+    text-wrap: balance;
+  }
+
+  .sr-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    margin-top: clamp(1.25rem, 3vh, 2rem);
+  }
+
+  .sr-hero__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--fg);
+    text-decoration: none;
+    pointer-events: auto;
+  }
+
+  .sr-hero__phone svg {
+    color: var(--sr-brass);
+  }
+
+  .sr-hero__phone:hover {
+    color: var(--sr-brass-hi);
+  }
+
+  .sr-hero__promise {
+    margin-top: 0.6rem;
+    max-width: 46ch;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: #cdbfa7;
+  }
+
+  .sr-hero__console {
+    margin-top: clamp(1.25rem, 3.5vh, 2.25rem);
+    pointer-events: none;
+  }
+
+  /* Фазы ролика: «ПРОЕКТИРОВАНИЕ / ПРОИЗВОДСТВО / МОНТАЖ». */
+  .sr-phases {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0 0.85rem;
+  }
+
+  .sr-phases__step {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    min-height: 2.75rem;
+    justify-content: flex-end;
+    padding-bottom: 0.55rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: left;
+    color: rgb(242 234 220 / 0.66);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color var(--dur-base) var(--ease-out);
+  }
+
+  .sr-phases__step:hover {
+    color: var(--fg);
+  }
+
+  .sr-phases__step[data-state='past'] {
+    color: rgb(230 194 126 / 0.9);
+  }
+
+  .sr-phases__step[data-state='active'],
+  .sr-phases__step[data-state='lit'] {
+    color: var(--sr-brass-hi);
+  }
+
+  .sr-phases__track {
+    display: block;
+    width: 100%;
+    height: 1px;
+    overflow: hidden;
+    background: rgb(226 196 146 / 0.22);
+  }
+
+  .sr-phases__fill {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #a87a36, #f6dfa4);
+    transform-origin: left;
+  }
+
+  .sr-phases__slash {
+    padding-bottom: 0.95rem;
+    font-size: 0.8rem;
+    color: rgb(226 196 146 / 0.45);
+  }
+
+  .sr-phases[data-static] .sr-phases__step {
+    cursor: default;
+  }
+
+  /* Три равных входа в направления у нижнего края. */
+  .sr-hero__dirs ul {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 0.4rem;
+    border-top: 1px solid rgb(226 196 146 / 0.22);
+  }
+
+  .sr-hero__dirs li + li {
+    box-shadow: -1px 0 0 rgb(226 196 146 / 0.22);
+  }
+
+  .sr-hero__dir {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.15rem 0.75rem;
+    min-height: 3.25rem;
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    color: var(--fg);
+    text-decoration: none;
+    pointer-events: auto;
+  }
+
+  .sr-hero__dirs li + li .sr-hero__dir {
+    padding-left: 0.75rem;
+  }
+
+  .sr-hero__dir::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, rgb(var(--sr-glow) / 0), rgb(var(--sr-glow) / 1), rgb(var(--sr-glow) / 0));
+    transform: scaleX(0);
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .sr-hero__dir:hover::after,
+  .sr-hero__dir:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .sr-hero__dir-name {
+    font-family: var(--font-display);
+    font-size: 0.86rem;
+    line-height: 1.2;
+  }
+
+  .sr-hero__dir-meta {
+    display: none;
+    font-size: 0.78rem;
+    color: #c2b49c;
+  }
+
+  .sr-hero__dir-arrow {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    width: 1rem;
+    height: 1rem;
+    color: var(--sr-brass);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .sr-hero__dir:hover .sr-hero__dir-arrow {
+    transform: translate(3px, -3px);
+  }
+
+  .sr-hero__dir:hover .sr-hero__dir-name {
+    color: var(--sr-brass-hi);
+  }
+
+  @media (min-width: 768px) {
+    .sr-hero__dir {
+      padding-block: 0.95rem;
+      padding-right: 1.25rem;
+    }
+
+    .sr-hero__dirs li + li .sr-hero__dir {
+      padding-left: 1.25rem;
+    }
+
+    .sr-hero__dir-name {
+      font-size: 1.2rem;
+    }
+
+    .sr-hero__dir-meta {
+      display: block;
+    }
+
+    .sr-hero__dir-arrow {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .sr-phases {
+      gap: 0 1.1rem;
+    }
+
+    .sr-phases__step {
+      font-size: 0.74rem;
+    }
+  }
+
+  /* Телефон: упрощённая версия — пояснение табличкой сверху кадра, свет только по скроллу. */
+  @media (max-width: 767px) {
+    .sr-callout {
+      position: static;
+    }
+
+    .sr-callout__dot,
+    .sr-callout__wire {
+      display: none;
+    }
+
+    .sr-callout__card,
+    .sr-callout[data-side] .sr-callout__card {
+      position: relative;
+      left: auto;
+      right: auto;
+      top: 0;
+      width: auto;
+      max-width: 22rem;
+      clip-path: circle(0% at 0% 0%);
+    }
+
+    .sr-callout[data-side][data-active] .sr-callout__card {
+      clip-path: circle(160% at 0% 0%);
+    }
+
+    .sr-hero__content {
+      padding-top: calc(var(--sr-header-h) + 9rem);
+    }
+
+    .sr-hero__actions .sr-magnet,
+    .sr-hero__cta {
+      width: 100%;
+    }
+
+    .sr-hero__actions {
+      gap: 0.25rem 1rem;
+    }
+
+    /* Полоса фаз — в одну строку на 360 px. */
+    .sr-phases {
+      flex-wrap: nowrap;
+      gap: 0 0.45rem;
+    }
+
+    .sr-phases__step {
+      font-size: 0.62rem;
+      letter-spacing: 0.11em;
+    }
+
+    .sr-phases__slash {
+      font-size: 0.7rem;
+    }
+
+    /* Входы в направления: ширина по названию, без стрелок — три ссылки в ряд без наложений. */
+    .sr-hero__dirs ul {
+      grid-template-columns: auto auto auto;
+      justify-content: space-between;
+    }
+
+    .sr-hero__dir {
+      display: flex;
+      padding-right: 0.6rem;
+    }
+
+    .sr-hero__dirs li + li .sr-hero__dir {
+      padding-left: 0.6rem;
+    }
+
+    .sr-hero__dir-name {
+      font-size: 0.8rem;
+    }
+
+    .sr-hero__dir-arrow {
+      display: none;
+    }
+
+    /* Узкий кадр обрезает панораму до светлой витрины — под текст нужна тень плотнее. */
+    .sr-hero__scrim {
+      background:
+        linear-gradient(180deg, rgb(10 8 6 / 0.82) 0, rgb(10 8 6 / 0) 8rem),
+        linear-gradient(0deg, rgb(10 8 6 / 0.97) 0%, rgb(10 8 6 / 0.84) 42%, rgb(10 8 6 / 0.5) 68%, rgb(10 8 6 / 0) 88%);
+    }
+  }
+
+  .sr-hero .scroll-video__list .sr-callout {
+    position: static;
+  }
+
+  .sr-hero .scroll-video__list :is(.sr-callout__dot, .sr-callout__wire) {
+    display: none;
+  }
+
+  .sr-hero .scroll-video__list .sr-callout__card {
+    position: static;
+    width: auto;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    opacity: 1;
+    clip-path: none;
+  }
+
+  /* ───────────── Bento направлений ───────────── */
+
+  .sr-bento__grid {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+
+  .sr-bay {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 1.25rem;
+    overflow: hidden;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+
+  .sr-bay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--sr-ambient);
+    opacity: 0;
+    transition: opacity 1.2s var(--ease-out);
+  }
+
+  .sr-bay[data-lit]::before {
+    opacity: 1;
+  }
+
+  .sr-bay__head,
+  .sr-bay__tiles,
+  .sr-bay__foot {
+    position: relative;
+  }
+
+  .sr-bay__name {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 1.2rem + 0.6vw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  .sr-bay__name a {
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .sr-bay__name a:hover {
+    color: var(--sr-brass-hi);
+  }
+
+  .sr-bay__summary {
+    margin-top: 0.45rem;
+    max-width: 44ch;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--fg-muted);
+  }
+
+  .sr-bay__tiles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 15rem 12.5rem;
+    gap: 0.6rem;
+  }
+
+  .sr-tile--lg {
+    grid-column: 1 / -1;
+  }
+
+  .sr-tile__link {
+    position: relative;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius);
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .sr-tile__media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #120e0b;
+  }
+
+  .sr-tile__media[data-kind='photo'] img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.02);
+    transition: transform 1.2s var(--ease-out);
+  }
+
+  .sr-tile__media[data-kind='product'] {
+    background:
+      radial-gradient(120% 70% at 50% -12%, #fff9ec 0%, rgb(255 249 236 / 0) 58%),
+      linear-gradient(180deg, var(--sr-stone-hi), var(--sr-stone) 64%, var(--sr-stone-lo));
+  }
+
+  .sr-tile__media[data-kind='product'] img {
+    position: absolute;
+    left: 14%;
+    top: 8%;
+    width: 72%;
+    height: 58%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    transition: transform 1.2s var(--ease-out);
+  }
+
+  .sr-tile--sm .sr-tile__media[data-kind='product'] img {
+    top: 6%;
+    height: 50%;
+  }
+
+  .sr-tile__link:hover .sr-tile__media img {
+    transform: scale(1.06);
+  }
+
+  /* Постоянная тень снизу — под подпись. */
+  .sr-tile__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(10 8 6 / 0) 38%, rgb(10 8 6 / 0.88) 100%);
+  }
+
+  .sr-tile__media[data-kind='photo']::after {
+    background:
+      linear-gradient(180deg, rgb(10 8 6 / 0.1) 0%, rgb(10 8 6 / 0.9) 100%),
+      rgb(70 40 14 / 0.18);
+  }
+
+  /* Свет выключен: полутень над кадром. Зажигается по очереди, когда зал вошёл в окно. */
+  .sr-tile__dark {
+    position: absolute;
+    inset: 0;
+    background: rgb(10 8 6 / 0.6);
+    transition: opacity 0.9s var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 160ms + 120ms);
+  }
+
+  .sr-tile__cone {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    background: radial-gradient(64% 90% at 50% -10%, rgb(var(--sr-glow) / 0.42), rgb(var(--sr-glow) / 0.1) 48%, rgb(var(--sr-glow) / 0) 72%);
+    opacity: 0;
+    clip-path: circle(0% at 50% 0%);
+    transition:
+      opacity 0.9s var(--ease-out),
+      clip-path 0.9s var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 160ms + 120ms);
+  }
+
+  .sr-bay[data-lit] .sr-tile__dark {
+    opacity: 0;
+  }
+
+  .sr-bay[data-lit] .sr-tile__cone {
+    opacity: 1;
+    clip-path: circle(150% at 50% 0%);
+  }
+
+  /* Луч курсора на кадре плитки и латунная Spotlight-рамка. */
+  .sr-tile__beam {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22rem;
+    height: 22rem;
+    margin: -11rem 0 0 -11rem;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+    background: radial-gradient(closest-side, rgb(255 236 200 / 0.85), rgb(255 236 200 / 0));
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out);
+  }
+
+  .sr-tile__ring {
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+    background: rgb(226 196 146 / 0.16);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box exclude,
+      linear-gradient(#000 0 0);
+  }
+
+  .sr-tile__spot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18rem;
+    height: 18rem;
+    margin: -9rem 0 0 -9rem;
+    background: radial-gradient(closest-side, rgb(250 228 176 / 1), rgb(226 176 96 / 0.5) 45%, rgb(226 176 96 / 0));
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out);
+  }
+
+  .sr-bento__grid[data-pointer] .sr-tile__spot,
+  .sr-bento__grid[data-pointer] .sr-tile__beam {
+    opacity: 1;
+  }
+
+  .sr-tile__text {
+    position: absolute;
+    left: 0.9rem;
+    right: 0.9rem;
+    bottom: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .sr-tile__name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  .sr-tile--lg .sr-tile__name {
+    font-size: 1.3rem;
+  }
+
+  .sr-tile__count {
+    font-size: 0.78rem;
+    color: #d9c7a4;
+  }
+
+  .sr-tile__link:hover .sr-tile__name {
+    color: var(--sr-brass-hi);
+  }
+
+  .sr-bay__foot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: auto;
+  }
+
+  .sr-bay__more a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 2.75rem;
+    padding-block: 0.6rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+    color: #e2d7c4;
+    text-decoration: none;
+  }
+
+  .sr-bay__more a:hover {
+    color: var(--sr-brass-hi);
+  }
+
+  .sr-bay__more .tabular {
+    font-size: 0.8rem;
+    color: var(--sr-brass-text);
+  }
+
+  .sr-bay__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 2.75rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--sr-brass-text);
+    text-decoration: none;
+  }
+
+  .sr-bay__all:hover {
+    color: var(--sr-brass-hi);
+  }
+
+  .sr-bay__all svg {
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .sr-bay__all:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  /* Следом — закреплённый экран цикла со своим воздухом: нижний отступ bento короче. */
+  .sr-bento:has(+ .sr-cycle--pinned) {
+    padding-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+
+  .sr-bento__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .sr-bento__cta p {
+    max-width: 44ch;
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.5rem);
+    line-height: 1.3;
+    color: var(--fg);
+  }
+
+  .sr-bento__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 1024px) {
+    .sr-bento__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: auto auto auto;
+      row-gap: 0;
+    }
+
+    /* Подсетка: шапки, плитки и низ трёх залов на одних строках — залы равного веса. */
+    .sr-bay {
+      display: grid;
+      grid-row: span 3;
+      grid-template-rows: subgrid;
+      gap: 1.1rem;
+    }
+
+    .sr-bay__foot {
+      margin-top: 0;
+      justify-content: flex-end;
+    }
+  }
+
+  /* ───────────── Полный цикл ───────────── */
+
+  .sr-cycle {
+    background: linear-gradient(180deg, transparent, #0b0907 18%, #0b0907 82%, transparent);
+  }
+
+  .sr-cycle--pinned {
+    padding-block: 0;
+  }
+
+  .sr-cycle__track {
+    position: relative;
+    height: calc(var(--steps, 5) * 60vh + 100vh);
+  }
+
+  .sr-cycle__stage {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  .sr-cycle--pinned .sr-cycle__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 2rem 4rem;
+    height: 100%;
+    padding-top: calc(var(--sr-header-h) + 3rem);
+    padding-bottom: 5.5rem;
+  }
+
+  .sr-cycle--pinned .sr-cycle__heading {
+    align-self: center;
+  }
+
+  .sr-cycle__scene {
+    position: relative;
+    align-self: center;
+    min-height: 19rem;
+  }
+
+  .sr-cycle__panel {
+    animation: sr-panel-on 0.85s var(--ease-out) both;
+  }
+
+  @keyframes sr-panel-on {
+    from {
+      opacity: 0.2;
+      clip-path: circle(10% at 0% 30%);
+    }
+    to {
+      opacity: 1;
+      clip-path: circle(150% at 0% 30%);
+    }
+  }
+
+  .sr-cycle__num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 4vw, 6.5rem);
+    line-height: 1;
+    color: var(--sr-brass-text);
+  }
+
+  .sr-cycle__num span {
+    margin-left: 0.2em;
+    font-size: 0.32em;
+    vertical-align: top;
+    color: var(--fg-muted);
+  }
+
+  .sr-cycle__title {
+    margin-top: 1.1rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 1.2rem + 1.8vw, 3rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--fg);
+  }
+
+  .sr-cycle__text {
+    margin-top: 0.9rem;
+    max-width: 50ch;
+    font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--fg-muted);
+  }
+
+  .sr-cycle__rail {
+    position: relative;
+    grid-column: 1 / -1;
+    height: 5.5rem;
+  }
+
+  .sr-cycle__line,
+  .sr-cycle__line-fill {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 1.25rem;
+    height: 1px;
+  }
+
+  .sr-cycle__line {
+    background: rgb(226 196 146 / 0.2);
+  }
+
+  .sr-cycle__line-fill {
+    background: linear-gradient(90deg, #8d6730, #f6dfa4);
+    transform-origin: left;
+  }
+
+  .sr-cycle__runner {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* Светильник на направляющей: едет по скроллу. */
+  .sr-cycle__lamp {
+    position: absolute;
+    left: 0;
+    top: 1.25rem;
+    width: 16rem;
+    height: 16rem;
+    margin: -8rem 0 0 -8rem;
+    background: radial-gradient(closest-side, rgb(var(--sr-glow) / 0.42), rgb(var(--sr-glow) / 0.1) 50%, rgb(var(--sr-glow) / 0));
+  }
+
+  .sr-cycle__lamp::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 11px;
+    height: 11px;
+    margin: -5.5px 0 0 -5.5px;
+    border-radius: 50%;
+    background: #fff4d8;
+    box-shadow: 0 0 0 3px rgb(246 223 164 / 0.35);
+  }
+
+  .sr-cycle__stops {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--steps, 5), minmax(0, 1fr));
+  }
+
+  .sr-cycle__stops li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    padding-top: calc(1.25rem - 4.5px);
+  }
+
+  .sr-cycle__stop {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #2a2219;
+    box-shadow: inset 0 0 0 1px rgb(226 196 146 / 0.5);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .sr-cycle__stop-label {
+    max-width: 14ch;
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: 0.14em;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(242 234 220 / 0.6);
+    transition: color var(--dur-base) var(--ease-out);
+  }
+
+  .sr-cycle__stops [data-state='past'] .sr-cycle__stop {
+    background: var(--sr-brass);
+  }
+
+  .sr-cycle__stops [data-state='past'] .sr-cycle__stop-label {
+    color: rgb(230 194 126 / 0.85);
+  }
+
+  .sr-cycle__stops [data-state='active'] .sr-cycle__stop {
+    background: var(--sr-brass-hi);
+    transform: scale(1.4);
+  }
+
+  .sr-cycle__stops [data-state='active'] .sr-cycle__stop-label {
+    color: var(--sr-brass-hi);
+  }
+
+  /* Список (телефон, планшет, reduced-motion): вертикальная направляющая, шаги зажигаются по входу в окно. */
+  .sr-cycle__list {
+    position: relative;
+    margin-top: 2.5rem;
+    padding-left: 2.25rem;
+  }
+
+  .sr-cycle__list::before {
+    content: '';
+    position: absolute;
+    left: 0.55rem;
+    top: 1rem;
+    bottom: 1rem;
+    width: 1px;
+    background: linear-gradient(180deg, rgb(226 196 146 / 0.5), rgb(226 196 146 / 0.12));
+  }
+
+  .sr-cycle__item {
+    position: relative;
+    padding-block: 1.4rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sr-cycle__item:last-child {
+    border-bottom: 0;
+  }
+
+  .sr-cycle__dot {
+    position: absolute;
+    left: calc(-2.25rem + 0.55rem - 6px);
+    top: 2rem;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #2a2219;
+    box-shadow: inset 0 0 0 1px rgb(226 196 146 / 0.55);
+  }
+
+  .sr-cycle__dot::after {
+    content: '';
+    position: absolute;
+    inset: -14px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(var(--sr-glow) / 0.6), rgb(var(--sr-glow) / 0));
+    opacity: 0;
+    transform: scale(0.4);
+    transition:
+      opacity 0.8s var(--ease-out),
+      transform 0.8s var(--ease-out);
+  }
+
+  .sr-cycle__item[data-lit] .sr-cycle__dot {
+    background: var(--sr-brass-hi);
+  }
+
+  .sr-cycle__item[data-lit] .sr-cycle__dot::after {
+    opacity: 1;
+    transform: none;
+  }
+
+  .sr-cycle__layout--list .sr-cycle__num {
+    font-size: 2.25rem;
+  }
+
+  .sr-cycle__layout--list .sr-cycle__title {
+    margin-top: 0.4rem;
+    font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.9rem);
+  }
+
+  @media (min-width: 768px) {
+    .sr-cycle__layout--list .sr-cycle__list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 3rem;
+    }
+  }
+
+  /* ───────────── Решения по отраслям ───────────── */
+
+  .sr-industries__layout {
+    display: grid;
+    gap: 1.75rem;
+    margin-top: clamp(2.25rem, 2rem + 1.5vw, 3.5rem);
+  }
+
+  .sr-industries__tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-inline: calc(-1 * var(--sr-gutter));
+    padding: 0 var(--sr-gutter) 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--sr-gutter);
+    scrollbar-width: thin;
+  }
+
+  .sr-industries__tab {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.7rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.95rem;
+    scroll-snap-align: start;
+    border-radius: var(--radius);
+    box-shadow: inset 0 0 0 1px var(--line);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    line-height: 1.2;
+    text-align: left;
+    white-space: nowrap;
+    color: var(--fg-muted);
+    cursor: pointer;
+    transition: color var(--dur-base) var(--ease-out);
+  }
+
+  .sr-industries__tab:hover {
+    color: var(--fg);
+  }
+
+  .sr-industries__tab[aria-selected='true'] {
+    color: var(--fg);
+    box-shadow: inset 0 0 0 1px rgb(226 196 146 / 0.5);
+  }
+
+  .sr-industries__tab-lamp {
+    position: relative;
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3a2f22;
+    box-shadow: inset 0 0 0 1px rgb(226 196 146 / 0.45);
+  }
+
+  .sr-industries__tab-lamp::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(var(--sr-glow) / 0.7), rgb(var(--sr-glow) / 0));
+    opacity: 0;
+    transform: scale(0.3);
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+
+  .sr-industries__tab[aria-selected='true'] .sr-industries__tab-lamp {
+    background: var(--sr-brass-hi);
+  }
+
+  .sr-industries__tab[aria-selected='true'] .sr-industries__tab-lamp::after {
+    opacity: 1;
+    transform: none;
+  }
+
+  .sr-industries__panel {
+    display: grid;
+    gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .sr-industries__frame {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: #120e0b;
+    box-shadow: inset 0 0 0 1px var(--line);
+    animation: sr-frame-on 0.95s var(--ease-out) both;
+  }
+
+  @keyframes sr-frame-on {
+    from {
+      opacity: 0.35;
+      clip-path: circle(6% at 22% 8%);
+    }
+    to {
+      opacity: 1;
+      clip-path: circle(150% at 22% 8%);
+    }
+  }
+
+  .sr-industries__frame[data-kind='photo'] img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sr-industries__frame[data-kind='product'] {
+    background:
+      radial-gradient(120% 70% at 50% -12%, #fff9ec 0%, rgb(255 249 236 / 0) 58%),
+      linear-gradient(180deg, var(--sr-stone-hi), var(--sr-stone) 64%, var(--sr-stone-lo));
+  }
+
+  .sr-industries__frame[data-kind='product'] img {
+    position: absolute;
+    left: 12%;
+    top: 7%;
+    width: 76%;
+    height: 72%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+
+  .sr-industries__light {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(70% 60% at 22% 0%, rgb(var(--sr-glow) / 0.3), rgb(var(--sr-glow) / 0) 70%),
+      linear-gradient(180deg, rgb(10 8 6 / 0) 55%, rgb(10 8 6 / 0.82) 100%);
+    mix-blend-mode: normal;
+  }
+
+  .sr-industries__frame figcaption {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.85rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #eadbbd;
+  }
+
+  .sr-industries__text {
+    animation: sr-text-on 0.75s var(--ease-out) both;
+  }
+
+  @keyframes sr-text-on {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+
+  .sr-industries__name {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 1.3rem + 1vw, 2.2rem);
+    font-weight: 400;
+    line-height: 1.12;
+  }
+
+  .sr-industries__summary {
+    margin-top: 0.75rem;
+    max-width: 52ch;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--fg-muted);
+  }
+
+  .sr-industries__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .sr-industries__facts dt {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  .sr-industries__facts dd {
+    margin-top: 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--sr-brass-hi);
+  }
+
+  .sr-industries__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.75rem;
+    margin-top: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .sr-industries__panel {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      align-items: end;
+      gap: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sr-industries__layout {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+      gap: 3rem;
+    }
+
+    .sr-industries__tabs {
+      flex-direction: column;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+      border-top: 1px solid var(--line);
+    }
+
+    .sr-industries__tab {
+      min-height: 3.25rem;
+      padding: 0.75rem 0.25rem;
+      border-radius: 0;
+      box-shadow: inset 0 -1px 0 var(--line);
+      font-size: 1.1rem;
+      white-space: normal;
+    }
+
+    .sr-industries__tab[aria-selected='true'] {
+      box-shadow: inset 0 -1px 0 rgb(226 196 146 / 0.55);
+    }
+  }
+
+  /* ───────────── Каталог-витрина ───────────── */
+
+  .sr-showcase__head,
+  .sr-projects__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+  }
+
+  .sr-showcase__stage {
+    position: relative;
+    margin-top: clamp(2.25rem, 2rem + 1.5vw, 3.5rem);
+  }
+
+  .sr-showcase__list {
+    display: flex;
+    gap: 1rem;
+    margin-inline: calc(-1 * var(--sr-gutter));
+    padding: 0 var(--sr-gutter) 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--sr-gutter);
+    scrollbar-width: thin;
+  }
+
+  .sr-showcase__list > li {
+    flex: 0 0 78%;
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  /* Полоса света уезжает за край ряда — секция обрезает её по горизонтали. */
+  .sr-showcase {
+    overflow-x: clip;
+  }
+
+  /* Полоса света проходит вдоль ряда один раз. */
+  .sr-showcase__sweep {
+    position: absolute;
+    inset: -2rem 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      rgb(255 214 150 / 0) 34%,
+      rgb(255 214 150 / 0.14) 46%,
+      rgb(255 236 200 / 0.26) 50%,
+      rgb(255 214 150 / 0.14) 54%,
+      rgb(255 214 150 / 0) 66%
+    );
+    mix-blend-mode: screen;
+    opacity: 0;
+    transform: translateX(-75%);
+  }
+
+  .sr-showcase__stage[data-lit] .sr-showcase__sweep {
+    animation: sr-sweep 1.7s var(--ease-in-out) forwards;
+  }
+
+  @keyframes sr-sweep {
+    0% {
+      opacity: 1;
+      transform: translateX(-75%);
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(75%);
+    }
+  }
+
+  .sr-showcase__stage:not([data-lit]) .sr-card__niche::after {
+    opacity: 1;
+  }
+
+  .sr-showcase__stage:not([data-lit]) .sr-card__lamp {
+    opacity: 0;
+  }
+
+  .sr-showcase__list > li .sr-card__niche::after,
+  .sr-showcase__list > li .sr-card__lamp {
+    transition-delay: 0.25s;
+  }
+
+  @media (min-width: 640px) {
+    .sr-showcase__list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+    }
+
+    .sr-showcase__list > li:nth-child(2n) .sr-card__niche::after,
+    .sr-showcase__list > li:nth-child(2n) .sr-card__lamp {
+      transition-delay: 0.65s;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sr-showcase__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .sr-showcase__list > li:nth-child(3n + 1) .sr-card__niche::after,
+    .sr-showcase__list > li:nth-child(3n + 1) .sr-card__lamp {
+      transition-delay: 0.25s;
+    }
+
+    .sr-showcase__list > li:nth-child(3n + 2) .sr-card__niche::after,
+    .sr-showcase__list > li:nth-child(3n + 2) .sr-card__lamp {
+      transition-delay: 0.6s;
+    }
+
+    .sr-showcase__list > li:nth-child(3n + 3) .sr-card__niche::after,
+    .sr-showcase__list > li:nth-child(3n + 3) .sr-card__lamp {
+      transition-delay: 0.95s;
+    }
+  }
+
+  /* ───────────── Проекты ───────────── */
+
+  .sr-projects__grid {
+    display: flex;
+    gap: 1rem;
+    margin: clamp(2.25rem, 2rem + 1.5vw, 3.5rem) calc(-1 * var(--sr-gutter)) 0;
+    padding: 0 var(--sr-gutter) 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--sr-gutter);
+    scrollbar-width: thin;
+  }
+
+  .sr-proj {
+    flex: 0 0 84%;
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  .sr-proj__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    height: 100%;
+    color: var(--fg);
+    text-decoration: none;
+  }
+
+  .sr-proj__media {
+    position: relative;
+    display: block;
+    flex: 1;
+    min-height: 15rem;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: #120e0b;
+  }
+
+  .sr-proj__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.4s var(--ease-out);
+  }
+
+  .sr-proj__grade {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(90% 80% at 50% 10%, rgb(var(--sr-glow) / 0.12), rgb(var(--sr-glow) / 0) 70%),
+      linear-gradient(180deg, rgb(10 8 6 / 0) 50%, rgb(10 8 6 / 0.5) 100%),
+      rgb(60 34 12 / 0.22);
+    transition: opacity var(--dur-slow) var(--ease-out);
+  }
+
+  /* Створки витрины разъезжаются, когда она входит в окно. */
+  .sr-proj__door {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50.5%;
+    background: linear-gradient(180deg, #19140f, #0e0b09);
+    opacity: 0.92;
+    transition:
+      transform 1.15s var(--ease-in-out) 0.1s,
+      opacity 1.15s var(--ease-out) 0.1s;
+  }
+
+  .sr-proj__door--l {
+    left: 0;
+    box-shadow: inset -1px 0 0 rgb(226 196 146 / 0.5);
+  }
+
+  .sr-proj__door--r {
+    right: 0;
+    box-shadow: inset 1px 0 0 rgb(226 196 146 / 0.5);
+  }
+
+  .sr-proj[data-lit] .sr-proj__door--l {
+    transform: translateX(-101%);
+    opacity: 0.6;
+  }
+
+  .sr-proj[data-lit] .sr-proj__door--r {
+    transform: translateX(101%);
+    opacity: 0.6;
+  }
+
+  .sr-proj__link:hover .sr-proj__media img {
+    transform: scale(1.035);
+  }
+
+  .sr-proj__link:hover .sr-proj__grade {
+    opacity: 0.45;
+  }
+
+  .sr-proj__caption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .sr-proj__title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+
+  .sr-proj__link:hover .sr-proj__title {
+    color: var(--sr-brass-hi);
+  }
+
+  .sr-proj__meta {
+    font-size: 0.85rem;
+    color: var(--fg-muted);
+  }
+
+  @media (min-width: 1024px) {
+    .sr-projects__grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-template-rows: 17rem 17rem 21rem;
+      grid-template-areas:
+        'a a a a a a a b b b b b'
+        'a a a a a a a c c c c c'
+        'd d d d d e e e e e e e';
+      gap: 2rem 1.25rem;
+      margin-inline: 0;
+      padding: 0;
+      overflow: visible;
+    }
+
+    .sr-proj {
+      flex: none;
+    }
+
+    .sr-proj--a {
+      grid-area: a;
+    }
+
+    .sr-proj--b {
+      grid-area: b;
+    }
+
+    .sr-proj--c {
+      grid-area: c;
+    }
+
+    .sr-proj--d {
+      grid-area: d;
+    }
+
+    .sr-proj--e {
+      grid-area: e;
+    }
+
+    .sr-proj__media {
+      min-height: 0;
+    }
+
+    .sr-proj--a .sr-proj__title {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* ───────────── Клиенты, письма, госзаказ (спокойный экран) ───────────── */
+
+  .sr-trust {
+    background: linear-gradient(180deg, transparent, #0b0907 30%, #0b0907 70%, transparent);
+  }
+
+  .sr-trust__logos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: clamp(2.25rem, 2rem + 1.5vw, 3.5rem);
+  }
+
+  .sr-trust__plaque {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3 / 2;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    background:
+      radial-gradient(120% 80% at 50% -20%, #fffaf0, rgb(255 250 240 / 0) 60%),
+      linear-gradient(180deg, var(--sr-stone-hi), var(--sr-stone));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.55),
+      0 14px 28px -18px rgb(0 0 0 / 0.9);
+  }
+
+  .sr-trust__plaque img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+
+  .sr-trust__others {
+    margin-top: 1.25rem;
+    max-width: 80ch;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--fg-muted);
+  }
+
+  .sr-trust__columns {
+    display: grid;
+    gap: 3rem;
+    margin-top: clamp(3rem, 2.5rem + 2vw, 4.5rem);
+  }
+
+  .sr-trust__subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 1.2rem + 0.6vw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--fg);
+  }
+
+  .sr-trust__letters ul {
+    display: grid;
+    gap: 1.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .sr-trust__letters figure {
+    margin: 0;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .sr-trust__letters blockquote {
+    max-width: 60ch;
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 1rem + 0.4vw, 1.35rem);
+    line-height: 1.4;
+    color: var(--fg);
+    text-wrap: pretty;
+  }
+
+  .sr-trust__letters blockquote::before {
+    content: '«';
+    color: var(--sr-brass-text);
+  }
+
+  .sr-trust__letters blockquote::after {
+    content: '»';
+    color: var(--sr-brass-text);
+  }
+
+  .sr-trust__letters figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--fg-muted);
+  }
+
+  .sr-trust__letters figcaption > span:first-child {
+    color: #e2d7c4;
+  }
+
+  .sr-trust__note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 1rem;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--fg-muted);
+  }
+
+  .sr-trust__gov {
+    align-self: start;
+    padding: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+    background:
+      radial-gradient(30rem 14rem at 0% 0%, rgb(var(--sr-glow) / 0.1), transparent 70%),
+      var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+
+  .sr-trust__gov-fact {
+    margin-top: 0.75rem;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--sr-brass-hi);
+  }
+
+  .sr-trust__gov dl {
+    display: grid;
+    gap: 1.1rem;
+    margin-top: 1.25rem;
+  }
+
+  .sr-trust__gov dt {
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  .sr-trust__gov dd {
+    margin-top: 0.3rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--fg-muted);
+  }
+
+  @media (min-width: 640px) {
+    .sr-trust__logos {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sr-trust__logos {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .sr-trust__columns {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 4rem;
+    }
+  }
+
+  /* ───────────── Заявка ───────────── */
+
+  .sr-request {
+    overflow: hidden;
+  }
+
+  .sr-request__light {
+    position: absolute;
+    left: -14%;
+    top: -6rem;
+    width: 72%;
+    height: 40rem;
+    pointer-events: none;
+    background: radial-gradient(closest-side, rgb(var(--sr-glow) / 0.14), rgb(var(--sr-glow) / 0));
+  }
+
+  .sr-request__layout {
+    position: relative;
+    display: grid;
+    gap: 3rem;
+  }
+
+  .sr-request__places {
+    display: grid;
+    gap: 1.75rem;
+    margin-top: 2.5rem;
+  }
+
+  .sr-request__places li {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .sr-request__places li[data-selected] {
+    border-top-color: rgb(226 196 146 / 0.6);
+  }
+
+  .sr-request__places h3 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 400;
+  }
+
+  .sr-request__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-top: 0.55rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #e2d7c4;
+  }
+
+  .sr-request__row svg {
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    color: var(--sr-brass);
+  }
+
+  .sr-request__row a {
+    color: var(--fg);
+  }
+
+  .sr-request__row--muted {
+    color: var(--fg-muted);
+  }
+
+  .sr-request__form {
+    min-width: 0;
+    padding: clamp(1.25rem, 0.75rem + 2.5vw, 2.75rem);
+    background:
+      radial-gradient(40rem 18rem at 100% 0%, rgb(var(--sr-glow) / 0.08), transparent 70%),
+      var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      inset 0 0 0 1px var(--line),
+      var(--shadow);
+  }
+
+  @media (min-width: 1024px) {
+    .sr-request__layout {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 5rem;
+    }
+  }
+}
+
+/* ───────────── Перекрытия механики скролл-видео (её CSS без слоя — и эти правила без слоя) ───────────── */
+
+.sr-hero .scroll-video__stage {
+  background: #0a0806;
+}
+
+.sr-hero .scroll-video__poster {
+  object-position: 50% 46%;
+}
+
+/* Слой варианта не должен становиться своим контекстом наложения: свет смешивается с кадром под ним. */
+.sr-hero .scroll-video__overlay {
+  z-index: auto;
+}
+
+/* Пометка заглушки — справа вверху, под шапкой: внизу живут заголовок и переключатель вариантов. */
+.sr-hero .scroll-video__label {
+  top: calc(var(--sr-header-h) + 0.75rem);
+  right: var(--sr-gutter);
+  bottom: auto;
+  padding: 0.45rem 0.7rem;
+  background: rgb(14 11 9 / 0.82);
+  color: #eadbbd;
+  border: 1px solid rgb(226 196 146 / 0.35);
+  border-radius: var(--radius);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Пояснение видно целиком всегда; появление — у его частей (точка, проволока, табличка). */
+.sr-hero .scroll-video__callout {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Reduced-motion: сцена без закрепления — освещённый кадр на экран, под ним пояснения списком. */
+.sr-hero .scroll-video[data-mode='static'] .scroll-video__stage {
+  height: 100vh;
+  height: 100svh;
+  min-height: 38rem;
+}
+
+.sr-hero .scroll-video__list {
+  display: grid;
+  gap: 1.25rem 2rem;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: 2.5rem var(--sr-gutter) 0;
+}
+
+.sr-hero .scroll-video__list li {
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 768px) {
+  .sr-hero .scroll-video__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .sr-hero .scroll-video__poster {
+    object-position: 36% 50%;
+  }
+
+  /* Телефон: пояснение — табличка вверху кадра (места под точки и проволоку нет). */
+  .sr-hero .scroll-video__callout {
+    left: var(--sr-gutter) !important;
+    right: var(--sr-gutter);
+    top: calc(var(--sr-header-h) + 2.9rem) !important;
+  }
+}

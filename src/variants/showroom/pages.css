@@ -1,0 +1,354 @@
+/*
+ * Внутренние страницы ядра в языке «Шоурума» (по хукам main.page.page-<name>, классам частей и data-direction).
+ * Без слоя: перекрывает утилиты Tailwind и pages.css ядра. Только на [data-variant='showroom'].
+ */
+
+/* ───────────── Общее для всех страниц ───────────── */
+
+[data-variant='showroom'] .page {
+  /* Подиум под каталожные фото — светлый тёплый камень; белый фон снимков растворяется в нём (multiply). */
+  --stage: #e6dac6;
+  --danger: #ff9a86;
+  --page-sticky-top: calc(var(--sr-header-h) + 1.5rem);
+  accent-color: var(--action);
+  caret-color: var(--focus);
+}
+
+[data-variant='showroom'] .page ::selection {
+  background: #e2b866;
+  color: #1a1207;
+}
+
+/* Свет над страницей: тёплое пятно сверху, у направления — своё (сумерки, холодный боковой свет). */
+[data-variant='showroom'] main.page:not(.page-home) {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--bg);
+  animation: sr-page-in 0.7s var(--ease-out) both;
+}
+
+[data-variant='showroom'] main.page:not(.page-home)::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: min(64rem, 130vh);
+  z-index: -1;
+  pointer-events: none;
+  background: var(--sr-ambient);
+  animation: sr-light-on 1.4s var(--ease-out) both;
+}
+
+/* Заголовки блоков страниц — тише, чем на главной. */
+[data-variant='showroom'] .page:not(.page-home) .sr-heading__title {
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.5rem);
+}
+
+/* Каталожные фото на подиуме: камень, блик сверху, утопленная ниша; снимок растворяет белый фон. */
+[data-variant='showroom'] .page [class*='--stage'] {
+  background-color: var(--stage);
+  background-image:
+    radial-gradient(120% 70% at 50% -12%, #fff9ec 0%, rgb(255 249 236 / 0) 58%),
+    linear-gradient(180deg, var(--sr-stone-hi) 0%, var(--sr-stone) 64%, var(--sr-stone-lo) 100%);
+  border-color: rgb(226 196 146 / 0.25);
+  box-shadow: inset 0 18px 28px -20px rgb(40 26 10 / 0.5);
+}
+
+[data-variant='showroom'] .page [class*='--stage'] img {
+  mix-blend-mode: multiply;
+}
+
+/* Поля: тёплая подложка, латунная рамка при фокусе. */
+[data-variant='showroom'] .page :is(input:not([type='radio'], [type='checkbox'], [type='file']), select, textarea) {
+  background-color: rgb(255 240 210 / 0.035);
+  border-color: rgb(226 196 146 / 0.26);
+}
+
+[data-variant='showroom'] .page input[type='file'] {
+  background-color: rgb(255 240 210 / 0.035);
+  border-color: rgb(226 196 146 / 0.26);
+}
+
+[data-variant='showroom'] .page :is(input, select, textarea):hover {
+  border-color: rgb(226 196 146 / 0.45);
+}
+
+[data-variant='showroom'] .page :is(input, select, textarea):focus-visible {
+  border-color: var(--focus);
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+[data-variant='showroom'] .page input[type='file']::file-selector-button {
+  background: rgb(226 196 146 / 0.14);
+  color: var(--fg);
+}
+
+[data-variant='showroom'] .page select option {
+  background: #16120f;
+  color: var(--fg);
+}
+
+/* Ссылки-подчёркивания ядра — латунная линия. */
+[data-variant='showroom'] .page :is(.underline, [class*='hover:underline']) {
+  text-decoration-color: rgb(226 196 146 / 0.6);
+}
+
+/* Тонкая латунная полоса прокрутки у рядов. */
+[data-variant='showroom'] .page .rail {
+  scrollbar-color: #5f4b2f transparent;
+}
+
+[data-variant='showroom'] .page .rail::-webkit-scrollbar-thumb {
+  background: #5f4b2f;
+}
+
+/* Активные «чипы» и ссылки с aria-current — латунь, а не белая рамка. */
+[data-variant='showroom'] .page a[aria-current='page'][class*='border-fg'] {
+  border-color: var(--accent);
+  color: var(--sr-brass-hi);
+  background: rgb(226 184 102 / 0.1);
+}
+
+/* Подложка окна — тёплая ночь. */
+[data-variant='showroom'] .page dialog::backdrop {
+  background: rgb(6 4 3 / 0.84);
+  opacity: 1;
+}
+
+/* Быстрый просмотр: тёмная витрина с латунной кромкой; появляется, как зажжённый свет. */
+[data-variant='showroom'] .page .quick-view {
+  background: var(--surface);
+  border-color: rgb(226 196 146 / 0.32);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 40px 90px -30px rgb(0 0 0 / 0.95);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-variant='showroom'] .page dialog.quick-view[open] {
+    animation: sr-dialog-on 0.6s var(--ease-out) both;
+  }
+
+  @keyframes sr-dialog-on {
+    from {
+      opacity: 0;
+      clip-path: circle(8% at 50% 0%);
+    }
+    to {
+      opacity: 1;
+      clip-path: circle(150% at 50% 0%);
+    }
+  }
+}
+
+/* Нижняя заявка на каждой странице: тёмный зал, свет справа, крупный заголовок. */
+[data-variant='showroom'] .page .request-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: #0b0907;
+  border-top-color: var(--line);
+}
+
+[data-variant='showroom'] .page .request-cta::before {
+  content: '';
+  position: absolute;
+  right: -12%;
+  top: -60%;
+  width: 70%;
+  height: 220%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgb(var(--sr-glow) / 0.16), rgb(var(--sr-glow) / 0));
+}
+
+[data-variant='showroom'] .page .request-cta h2 {
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 3rem);
+  line-height: 1.08;
+}
+
+/* «Как мы работаем» / «Полный цикл»: номера шагов — латунь. */
+[data-variant='showroom'] .page .how-we-work ol > li > span:first-child {
+  color: var(--sr-brass-text);
+}
+
+[data-variant='showroom'] .page .how-we-work ol > li {
+  border-color: var(--line);
+}
+
+/* Характеристики: строки с латунной линией, наведённая строка подсвечена. */
+[data-variant='showroom'] .page .spec-table tr {
+  border-color: var(--line);
+}
+
+[data-variant='showroom'] .page .spec-table tr:hover {
+  background: rgb(226 196 146 / 0.05);
+}
+
+/* Нумерация каталога: текущая страница — золотая. */
+[data-variant='showroom'] .page nav[aria-label='Страницы каталога'] a[aria-current='page'] {
+  background: var(--sr-gold);
+  color: var(--action-fg);
+}
+
+[data-variant='showroom'] .page nav[aria-label='Страницы каталога'] a:not([aria-current]) {
+  border-color: rgb(226 196 146 / 0.3);
+}
+
+/* Пустое состояние — латунные линии. */
+[data-variant='showroom'] .page .border-y {
+  border-color: var(--line);
+}
+
+/* ───────────── Каталог ───────────── */
+
+[data-variant='showroom'] .page-catalog .catalog-filters a[aria-current='page'] {
+  color: var(--sr-brass-hi);
+  background: rgb(226 184 102 / 0.09);
+}
+
+[data-variant='showroom'] .page-catalog .catalog-filters a:hover {
+  background: rgb(226 184 102 / 0.06);
+}
+
+[data-variant='showroom'] .page-catalog .catalog-filters details summary svg {
+  color: var(--sr-brass);
+}
+
+/* Карточки в сетке каталога зажигаются рядом: слева направо по строке. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-variant='showroom'] .page .sr-card__niche::after {
+    animation: sr-niche-on 1s var(--ease-out) both;
+  }
+
+  [data-variant='showroom'] .page li:nth-child(3n + 2) > .sr-card .sr-card__niche::after {
+    animation-delay: 0.14s;
+  }
+
+  [data-variant='showroom'] .page li:nth-child(3n + 3) > .sr-card .sr-card__niche::after {
+    animation-delay: 0.28s;
+  }
+
+  [data-variant='showroom'] .page-home .sr-card__niche::after {
+    animation: none;
+  }
+
+  @keyframes sr-niche-on {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}
+
+/* ───────────── Товар ───────────── */
+
+[data-variant='showroom'] .page-product .gallery [class*='--stage'] {
+  border-radius: var(--radius-lg);
+}
+
+[data-variant='showroom'] .page-product .gallery button[aria-pressed='true'] {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* Цена — латунь, крупно. */
+[data-variant='showroom'] .page-product .tabular.font-display.text-fg {
+  color: var(--sr-brass-hi);
+}
+
+/* ───────────── Отрасль, проекты, кейс ───────────── */
+
+[data-variant='showroom'] .page-solution nav[aria-label='Отрасли'] a[aria-current='page'] {
+  border-color: var(--accent);
+  color: var(--sr-brass-hi);
+}
+
+/* Карточка проекта: фото под тёплым светом, наведение — свет ярче. */
+[data-variant='showroom'] .page .project-card {
+  background: var(--surface);
+  border-color: var(--line);
+}
+
+[data-variant='showroom'] .page .project-card > a:first-child {
+  position: relative;
+}
+
+[data-variant='showroom'] .page .project-card > a:first-child::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(90% 80% at 50% 0%, rgb(var(--sr-glow) / 0.12), rgb(var(--sr-glow) / 0) 70%),
+    linear-gradient(180deg, rgb(10 8 6 / 0) 45%, rgb(10 8 6 / 0.45)),
+    rgb(60 34 12 / 0.2);
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+[data-variant='showroom'] .page .project-card:hover > a:first-child::after {
+  opacity: 0.4;
+}
+
+[data-variant='showroom'] .page-project .gallery li {
+  border-color: var(--line);
+  border-radius: var(--radius-lg);
+}
+
+/* ───────────── Компания ───────────── */
+
+[data-variant='showroom'] .page-about blockquote {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.25rem);
+  line-height: 1.45;
+}
+
+[data-variant='showroom'] .page-about blockquote::before {
+  content: '«';
+  color: var(--sr-brass-text);
+}
+
+[data-variant='showroom'] .page-about blockquote::after {
+  content: '»';
+  color: var(--sr-brass-text);
+}
+
+/* ───────────── Контакты ───────────── */
+
+[data-variant='showroom'] .page-contacts .contacts-city[data-selected] {
+  border-top-color: var(--accent);
+}
+
+[data-variant='showroom'] .page-contacts .contacts-city svg {
+  color: var(--sr-brass);
+}
+
+/* ───────────── Запрос КП и квиз ───────────── */
+
+[data-variant='showroom'] .page .quiz-option {
+  background: rgb(255 240 210 / 0.025);
+}
+
+[data-variant='showroom'] .page .quiz-option:has(:checked) {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, rgb(var(--sr-glow) / 0.12), rgb(var(--sr-glow) / 0.02));
+  box-shadow: inset 0 1px 0 rgb(255 230 180 / 0.14);
+}
+
+[data-variant='showroom'] .page .quiz ol[aria-label='Шаги заявки'] > li[class*='border-fg'] {
+  border-top-color: var(--accent);
+}
+
+[data-variant='showroom'] .page .quiz ol[aria-label='Шаги заявки'] > li[aria-current='step'] span {
+  color: var(--sr-brass-hi);
+}
+
+[data-variant='showroom'] .page .kp-list ul > li {
+  border-color: var(--line);
+}
+
+/* На главной квиз стоит в своей витрине — без лишних линий сверху. */
+[data-variant='showroom'] .sr-request .quiz h2 {
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 2.1rem);
+}

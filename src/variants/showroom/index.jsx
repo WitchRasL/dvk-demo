@@ -1,22 +1,28 @@
-// Рабочая заглушка варианта «Шоурум» (каркас). Таск варианта заменяет этот файл целиком.
+// Вариант 1 «Шоурум»: ночной шоурум ДВК, где свет витрин и есть интерфейс.
+// Шрифты и CSS импортируются здесь — грузятся только вместе с этим вариантом (ленивый чанк).
+// Только нужные начертания: Tenor Sans 400, PT Serif Italic 400 (слово-акцент), Golos Text 400/500 — кириллица + латиница.
 import '@fontsource/tenor-sans/cyrillic-400.css';
 import '@fontsource/tenor-sans/latin-400.css';
+import '@fontsource/pt-serif/cyrillic-400-italic.css';
+import '@fontsource/pt-serif/latin-400-italic.css';
 import '@fontsource/golos-text/cyrillic-400.css';
 import '@fontsource/golos-text/latin-400.css';
-import { createStubVariant } from '../../core/ui/stub-variant.jsx';
+import '@fontsource/golos-text/cyrillic-500.css';
+import '@fontsource/golos-text/latin-500.css';
+import './showroom.css';
+import './home.css';
+import './pages.css';
+import { Footer } from './Footer.jsx';
+import { Header } from './Header.jsx';
+import { heroConfig } from './hero-config.js';
+import { Home } from './Home.jsx';
+import { Button, PageHeader, ProductCard, Reveal, SectionHeading } from './ui.jsx';
 
-const css = `
-[data-variant="showroom"] {
-  --bg: #15120f; --surface: #1d1915; --surface-2: #29231d;
-  --fg: #f2ece3; --fg-muted: #b5ab9c; --line: rgb(242 236 227 / 0.16);
-  --accent: #c9a35b; --accent-fg: #15120f; --action: #d4ad63; --action-fg: #15120f; --focus: #f0c977;
-  --font-display: 'Tenor Sans', 'Times New Roman', serif;
-  --font-body: 'Golos Text', system-ui, sans-serif;
-  --font-mono: ui-monospace, Consolas, monospace;
-  --radius: 2px; --radius-lg: 6px; --shadow: 0 24px 48px rgb(0 0 0 / 0.5);
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 180ms; --dur-base: 400ms; --dur-slow: 800ms;
-  color-scheme: dark;
-}`;
-
-export default createStubVariant({ id: 'showroom', css });
+export default {
+  id: 'showroom',
+  Header,
+  Footer,
+  Home,
+  ui: { Button, ProductCard, SectionHeading, PageHeader, Reveal },
+  heroConfig,
+};
