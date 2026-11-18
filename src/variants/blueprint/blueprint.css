@@ -1,0 +1,3589 @@
+/*
+ * Вариант 3 «Чертёж» — комплект рабочей документации по ЕСКД.
+ * Лист — светлый (не крем), линии — тушь двух толщин: основная S = 2px, тонкая S/2 = 1px.
+ * Один цвет-маркер (киноварь) — подсветка на чертежах и главное действие. Моно — только размеры и обозначения.
+ * Анимируются только transform, opacity, clip-path; у всего движущегося есть вариант reduced-motion.
+ */
+
+/* ——— Лист и поверхности браузера ——— */
+:root:has([data-variant='blueprint']) {
+  background: #fbfbfa;
+  color-scheme: light;
+  scrollbar-color: #141414 #fbfbfa;
+}
+
+:root:has([data-variant='blueprint']) ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+:root:has([data-variant='blueprint']) ::-webkit-scrollbar-track {
+  background: #fbfbfa;
+  border-left: 1px solid #141414;
+}
+:root:has([data-variant='blueprint']) ::-webkit-scrollbar-thumb {
+  background: #141414;
+  border: 3px solid #fbfbfa;
+}
+
+[data-variant='blueprint'] {
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --surface-2: #efefec;
+  --fg: #141414;
+  --fg-muted: #5c5c5a;
+  --line: #141414;
+  --accent: #141414;
+  --accent-fg: #ffffff;
+  --action: #c4321a;
+  --action-fg: #ffffff;
+  --focus: #c4321a;
+  --font-display: 'Fira Sans Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Fira Sans', system-ui, sans-serif;
+  --font-mono: 'PT Mono', ui-monospace, monospace;
+  --radius: 0px;
+  --radius-lg: 0px;
+  --shadow: 0 18px 40px -22px rgb(20 20 20 / 0.45);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 140ms;
+  --dur-base: 320ms;
+  --dur-slow: 720ms;
+
+  /* свои */
+  --bp-s: 2px;
+  --bp-t: 1px;
+  --bp-grid: #d6d6d1;
+  --bp-hatch: repeating-linear-gradient(45deg, transparent 0 5px, rgb(20 20 20 / 0.55) 5px 6px);
+  --bp-hd: 56px;
+  --bp-fl: 22px; /* поле подшивки слева */
+  --bp-fr: 8px;
+  --bp-pad: 1.25rem;
+
+  position: relative;
+  color-scheme: light;
+  caret-color: var(--action);
+  accent-color: var(--fg);
+  -webkit-tap-highlight-color: transparent;
+  font-feature-settings: 'kern' 1;
+}
+
+@media (max-width: 767px) {
+  [data-variant='blueprint'] {
+    --bp-hd: 52px;
+    --bp-fl: 6px;
+    --bp-fr: 4px;
+    --bp-pad: 0.875rem;
+  }
+}
+
+/* Рамка формата: две основные линии по краям листа, сквозь весь сайт. */
+[data-variant='blueprint'].variant-root::before {
+  content: '';
+  position: absolute;
+  inset: 0 var(--bp-fr) 0 var(--bp-fl);
+  border-left: var(--bp-s) solid var(--line);
+  border-right: var(--bp-s) solid var(--line);
+  pointer-events: none;
+  z-index: 25;
+}
+
+[data-variant='blueprint'] ::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+[data-variant='blueprint'] .page ::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+[data-variant='blueprint'] :focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+[data-variant='blueprint'] a {
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+
+[data-variant='blueprint'] .font-display {
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+[data-variant='blueprint'] strong,
+[data-variant='blueprint'] b,
+[data-variant='blueprint'] .font-semibold,
+[data-variant='blueprint'] .font-bold {
+  font-weight: 500;
+}
+
+[data-variant='blueprint'] .bp-mono {
+  font-family: var(--font-mono);
+  font-style: normal;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-variant='blueprint'] .tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+[data-variant='blueprint'] .is-unknown {
+  color: var(--fg-muted);
+}
+
+[data-variant='blueprint'] .is-muted {
+  color: var(--fg-muted);
+}
+
+/* Ссылки: тихая (подчёркивание по наведению) и обычная (подчёркнута тонкой линией). */
+[data-variant='blueprint'] .bp-link-quiet {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+}
+[data-variant='blueprint'] .bp-link-quiet:hover {
+  text-decoration-color: currentColor;
+}
+[data-variant='blueprint'] .bp-link {
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+[data-variant='blueprint'] .bp-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Поля ядра: Container и наши обёртки отступают от рамки. */
+[data-variant='blueprint'] .page .max-w-7xl,
+[data-variant='blueprint'] .bp-wrap {
+  padding-left: calc(var(--bp-fl) + var(--bp-pad));
+  padding-right: calc(var(--bp-fr) + var(--bp-pad));
+}
+[data-variant='blueprint'] .bp-wrap {
+  width: 100%;
+  max-width: 84rem;
+  margin-inline: auto;
+}
+
+/* ——— Кнопка ——— */
+[data-variant='blueprint'] .bp-btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: var(--bp-s) solid var(--fg);
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.15;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform var(--dur-fast) var(--ease-out);
+  -webkit-user-select: none;
+  user-select: none;
+}
+[data-variant='blueprint'] .bp-btn--md {
+  min-height: 2.875rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+}
+[data-variant='blueprint'] .bp-btn--sm {
+  min-height: 2.5rem;
+  padding: 0.4375rem 0.875rem;
+  font-size: 0.875rem;
+}
+[data-variant='blueprint'] .bp-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur-base) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-btn:hover::before,
+[data-variant='blueprint'] .bp-btn:focus-visible::before {
+  clip-path: inset(0 0 0 0);
+}
+[data-variant='blueprint'] .bp-btn:active {
+  transform: translateY(1px);
+}
+[data-variant='blueprint'] .bp-btn--primary {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--action-fg);
+}
+[data-variant='blueprint'] .bp-btn--primary::before {
+  background: var(--fg);
+}
+[data-variant='blueprint'] .bp-btn--primary:hover {
+  border-color: var(--fg);
+}
+[data-variant='blueprint'] .bp-btn--secondary {
+  background: var(--surface);
+  color: var(--fg);
+}
+[data-variant='blueprint'] .bp-btn--secondary::before {
+  background: var(--bp-hatch), var(--surface-2);
+}
+[data-variant='blueprint'] .bp-btn--secondary .bp-btn__label {
+  background: var(--surface);
+  padding: 0 0.25rem;
+  margin: 0 -0.25rem;
+}
+[data-variant='blueprint'] .bp-btn--secondary:hover .bp-btn__label {
+  background: var(--surface-2);
+}
+[data-variant='blueprint'] .bp-btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--fg);
+  padding-inline: 0.25rem;
+}
+[data-variant='blueprint'] .bp-btn--ghost::before {
+  inset: auto 0.25rem 0.375rem;
+  height: 1px;
+  background: currentColor;
+  clip-path: none;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-btn--ghost:hover::before,
+[data-variant='blueprint'] .bp-btn--ghost:focus-visible::before {
+  clip-path: none;
+  transform: scaleX(1);
+}
+[data-variant='blueprint'] .bp-btn__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+[data-variant='blueprint'] .bp-btn.is-inactive,
+[data-variant='blueprint'] .bp-btn:disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  background-image: var(--bp-hatch);
+  opacity: 0.6;
+}
+[data-variant='blueprint'] .bp-btn__spin {
+  animation: bp-spin 0.9s linear infinite;
+}
+@keyframes bp-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+/* «В запросе» у карточки — граница маркером из ядра оставляем, но на тушь */
+[data-variant='blueprint'] .bp-btn.border-action {
+  border-color: var(--fg);
+  background-image: var(--bp-hatch);
+}
+
+[data-variant='blueprint'] .bp-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: var(--bp-t) solid var(--fg);
+  background: var(--surface);
+  color: var(--fg);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-icon-btn:hover {
+  background: var(--bp-hatch), var(--surface-2);
+}
+[data-variant='blueprint'] .bp-icon-btn:active {
+  transform: translateY(1px);
+}
+
+/* Сегменты (город, фото/чертёж) — графы с переключением */
+[data-variant='blueprint'] .bp-seg {
+  display: inline-flex;
+  border: var(--bp-t) solid var(--fg);
+  background: var(--surface);
+}
+[data-variant='blueprint'] .bp-seg > button {
+  min-height: 2.25rem;
+  padding: 0 0.75rem;
+  font: 500 0.8125rem/1 var(--font-body);
+  color: var(--fg);
+  background: transparent;
+  cursor: pointer;
+}
+[data-variant='blueprint'] .bp-seg > button + button {
+  border-left: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-seg > button[aria-pressed='true'] {
+  background: var(--fg);
+  color: var(--bg);
+}
+[data-variant='blueprint'] .bp-seg > button:not([aria-pressed='true']):hover {
+  background: var(--bp-hatch), var(--surface-2);
+}
+
+/* ——— Шапка ——— */
+[data-variant='blueprint'] .bp-hd {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--bg);
+}
+[data-variant='blueprint'] .bp-hd__bar {
+  display: flex;
+  align-items: stretch;
+  height: var(--bp-hd);
+  margin: 0 var(--bp-fr) 0 var(--bp-fl);
+  border: var(--bp-s) solid var(--fg);
+  border-top-width: 0;
+  background: var(--bg);
+}
+[data-variant='blueprint'] .bp-hd__bar > * {
+  border-right: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-hd__bar > *:last-child {
+  border-right: 0;
+}
+[data-variant='blueprint'] .bp-hd__mark {
+  display: flex;
+  align-items: center;
+  padding: 0 1.125rem;
+  font-size: 1.375rem;
+  line-height: 1;
+  color: var(--fg);
+  text-decoration: none;
+  white-space: nowrap;
+}
+[data-variant='blueprint'] .bp-hd__nav {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+}
+[data-variant='blueprint'] .bp-hd__list {
+  display: flex;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+[data-variant='blueprint'] .bp-hd__item {
+  display: flex;
+}
+[data-variant='blueprint'] .bp-hd__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0 0.875rem;
+  font: 400 0.9375rem/1 var(--font-body);
+  color: var(--fg);
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+[data-variant='blueprint'] .bp-hd__link::after {
+  content: '';
+  position: absolute;
+  left: 0.875rem;
+  right: 0.875rem;
+  bottom: -2px;
+  height: var(--bp-s);
+  background: var(--fg);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-hd__link:hover::after,
+[data-variant='blueprint'] .bp-hd__link.active::after,
+[data-variant='blueprint'] .bp-hd__link[aria-expanded='true']::after {
+  transform: scaleX(1);
+}
+[data-variant='blueprint'] .bp-hd__link.active {
+  font-weight: 500;
+}
+[data-variant='blueprint'] .bp-hd__chev {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-hd__link[aria-expanded='true'] .bp-hd__chev {
+  transform: rotate(180deg);
+}
+[data-variant='blueprint'] .bp-hd__city {
+  align-self: center;
+  margin: 0 0.75rem;
+  border-right: var(--bp-t) solid var(--fg) !important;
+}
+[data-variant='blueprint'] .bp-hd__city + .bp-hd__phone {
+  border-left: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-hd__bar > .bp-hd__city {
+  border-right: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-hd__phone,
+[data-variant='blueprint'] .bp-hd__kp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  font: 400 0.9375rem/1 var(--font-body);
+  color: var(--fg);
+  text-decoration: none;
+  white-space: nowrap;
+}
+[data-variant='blueprint'] .bp-hd__phone:hover .bp-hd__phone-num,
+[data-variant='blueprint'] .bp-hd__kp:hover .bp-hd__kp-label {
+  text-decoration: underline;
+}
+[data-variant='blueprint'] .bp-hd__count {
+  display: inline-flex;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.3rem;
+  border: var(--bp-t) solid var(--fg);
+  font: 400 0.8125rem/1 var(--font-mono);
+}
+[data-variant='blueprint'] .bp-hd__cta {
+  align-self: center;
+  margin: 0 0.625rem;
+  border-right-width: var(--bp-s) !important;
+}
+[data-variant='blueprint'] .bp-hd__burger {
+  display: none;
+  width: var(--bp-hd);
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+/* Мега-меню */
+[data-variant='blueprint'] .bp-mega {
+  position: absolute;
+  top: 100%;
+  left: var(--bp-fl);
+  right: var(--bp-fr);
+  z-index: 41;
+  border: var(--bp-s) solid var(--fg);
+  border-top-width: 0;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+[data-variant='blueprint'] .bp-mega:not([hidden]) {
+  animation: bp-drop var(--dur-base) var(--ease-out);
+}
+@keyframes bp-drop {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+[data-variant='blueprint'] .bp-mega__inner {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.75rem 1.25rem;
+}
+[data-variant='blueprint'] .bp-mega__cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-mega__col {
+  padding: 1rem 1.25rem 1.25rem;
+}
+[data-variant='blueprint'] .bp-mega__col + .bp-mega__col {
+  border-left: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-mega__glyph {
+  width: 6.5rem;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+[data-variant='blueprint'] .bp-mega__head {
+  display: block;
+  margin: 0 0 0.625rem;
+  font-size: 1.375rem;
+  line-height: 1.15;
+  color: var(--fg);
+  text-decoration: none;
+}
+[data-variant='blueprint'] a.bp-mega__head:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+[data-variant='blueprint'] .bp-mega__rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-mega__row {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-bottom: var(--bp-t) solid var(--fg);
+  font-size: 0.9375rem;
+  color: var(--fg);
+  text-decoration: none;
+}
+[data-variant='blueprint'] .bp-mega__row:hover {
+  background: linear-gradient(var(--surface-2), var(--surface-2));
+}
+[data-variant='blueprint'] .bp-mega__row:hover .bp-mega__name {
+  text-decoration: underline;
+}
+[data-variant='blueprint'] .bp-mega__rows li:not(:has(.bp-mega__pos)) .bp-mega__row {
+  grid-template-columns: minmax(0, 1fr);
+}
+[data-variant='blueprint'] .bp-mega__pos,
+[data-variant='blueprint'] .bp-mega__count {
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-mega__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  margin: 0.875rem 0 0;
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-mega__foot a {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+/* Лист-меню телефона */
+[data-variant='blueprint'] .bp-mob {
+  position: fixed;
+  top: var(--bp-hd);
+  left: var(--bp-fl);
+  right: var(--bp-fr);
+  bottom: 0;
+  z-index: 39;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: var(--bp-s) solid var(--fg);
+  border-top: 0;
+  background: var(--bg);
+  padding: 1rem 1rem 6rem;
+}
+[data-variant='blueprint'] .bp-mob:not([hidden]) {
+  animation: bp-drop var(--dur-base) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-mob__group {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+[data-variant='blueprint'] .bp-mob__rows {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+  border-top: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-mob__row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3rem;
+  border-bottom: var(--bp-t) solid var(--fg);
+  font-size: 1.0625rem;
+  color: var(--fg);
+  text-decoration: none;
+}
+[data-variant='blueprint'] .bp-mob__row .bp-mono {
+  width: 1.5rem;
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-mob__foot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.875rem;
+}
+[data-variant='blueprint'] .bp-mob__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-size: 1.0625rem;
+  color: var(--fg);
+}
+
+@media (max-width: 1365px) {
+  [data-variant='blueprint'] .bp-hd__kp-label {
+    display: none;
+  }
+}
+@media (max-width: 1279px) {
+  [data-variant='blueprint'] .bp-hd__phone-num {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  [data-variant='blueprint'] .bp-hd__link {
+    padding: 0 0.625rem;
+  }
+  [data-variant='blueprint'] .bp-hd__link::after {
+    left: 0.625rem;
+    right: 0.625rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1151px) {
+  [data-variant='blueprint'] .bp-hd__mark {
+    padding: 0 0.75rem;
+  }
+  [data-variant='blueprint'] .bp-hd__link {
+    padding: 0 0.4375rem;
+    font-size: 0.875rem;
+  }
+  [data-variant='blueprint'] .bp-hd__link::after {
+    left: 0.4375rem;
+    right: 0.4375rem;
+  }
+  [data-variant='blueprint'] .bp-hd__city {
+    margin: 0 0.375rem;
+  }
+  [data-variant='blueprint'] .bp-hd__phone,
+  [data-variant='blueprint'] .bp-hd__kp {
+    padding: 0 0.625rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  [data-variant='blueprint'] .bp-hd__nav,
+  [data-variant='blueprint'] .bp-hd__city,
+  [data-variant='blueprint'] .bp-hd__cta {
+    display: none;
+  }
+  [data-variant='blueprint'] .bp-hd__mark {
+    flex: 1;
+  }
+  [data-variant='blueprint'] .bp-hd__burger {
+    display: inline-flex;
+  }
+  [data-variant='blueprint'] .bp-hd__phone,
+  [data-variant='blueprint'] .bp-hd__kp {
+    padding: 0 0.875rem;
+  }
+}
+
+/* ——— Футер: основная надпись последнего листа ——— */
+[data-variant='blueprint'] .bp-ft {
+  position: relative;
+  padding: 3rem var(--bp-fr) 5.5rem var(--bp-fl);
+}
+[data-variant='blueprint'] .bp-ft__sheet {
+  border-top: var(--bp-s) solid var(--fg);
+  border-bottom: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-ft__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(4, minmax(0, 1fr));
+}
+[data-variant='blueprint'] .bp-ft__cell {
+  margin: 0;
+  padding: 1rem 1.125rem;
+  border-right: var(--bp-t) solid var(--fg);
+  min-width: 0;
+}
+[data-variant='blueprint'] .bp-ft__grid > .bp-ft__cell:last-child,
+[data-variant='blueprint'] .bp-ft__stamp > .bp-ft__cell:last-child {
+  border-right: 0;
+}
+[data-variant='blueprint'] .bp-ft__mark {
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--fg);
+  text-decoration: none;
+}
+[data-variant='blueprint'] .bp-ft__pos {
+  max-width: 34ch;
+  margin: 0.75rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-ft__label {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-ft__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9375rem;
+}
+[data-variant='blueprint'] .bp-ft__links a,
+[data-variant='blueprint'] .bp-ft__addr a {
+  color: var(--fg);
+}
+[data-variant='blueprint'] .bp-ft__addr {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-style: normal;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+[data-variant='blueprint'] .bp-ft__addr span {
+  color: var(--fg-muted);
+  margin-bottom: 0.25rem;
+}
+[data-variant='blueprint'] .bp-ft__stamp {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+  border-top: var(--bp-s) solid var(--fg);
+  font-size: 0.875rem;
+}
+[data-variant='blueprint'] .bp-ft__stamp a {
+  color: var(--fg);
+}
+[data-variant='blueprint'] .bp-ft__concept {
+  font-weight: 500;
+}
+
+@media (max-width: 1023px) {
+  [data-variant='blueprint'] .bp-ft__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  [data-variant='blueprint'] .bp-ft__grid > .bp-ft__cell {
+    border-bottom: var(--bp-t) solid var(--fg);
+  }
+  [data-variant='blueprint'] .bp-ft__grid > .bp-ft__org {
+    grid-column: 1 / -1;
+    border-right: 0;
+  }
+  [data-variant='blueprint'] .bp-ft__grid > .bp-ft__cell:nth-child(odd):not(.bp-ft__org) {
+    border-right: 0;
+  }
+  [data-variant='blueprint'] .bp-ft__stamp {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    border-top: 0;
+  }
+  [data-variant='blueprint'] .bp-ft__stamp > .bp-ft__cell {
+    border-bottom: var(--bp-t) solid var(--fg);
+  }
+  [data-variant='blueprint'] .bp-ft__stamp > .bp-ft__cell:nth-child(even) {
+    border-right: 0;
+  }
+  [data-variant='blueprint'] .bp-ft__stamp > .bp-ft__cell:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+}
+@media (max-width: 767px) {
+  [data-variant='blueprint'] .bp-ft {
+    padding-top: 2rem;
+    padding-bottom: 6rem;
+  }
+}
+
+/* ——— Заголовок секции ——— */
+[data-variant='blueprint'] .bp-sh {
+  max-width: 50rem;
+}
+[data-variant='blueprint'] .bp-sh__title {
+  margin: 0;
+  font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem);
+  line-height: 1.04;
+  text-wrap: balance;
+}
+[data-variant='blueprint'] .bp-sh__lead {
+  max-width: 64ch;
+  margin: 0.875rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+
+/* ——— Шапка внутренней страницы ——— */
+[data-variant='blueprint'] .bp-ph {
+  position: relative;
+  padding-bottom: 1.75rem;
+  border-bottom: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-ph__crumbs {
+  margin-bottom: 1.25rem;
+  font-size: 0.875rem;
+}
+[data-variant='blueprint'] .bp-ph__crumbs a {
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-ph__crumbs a:hover {
+  color: var(--fg);
+}
+[data-variant='blueprint'] .bp-ph__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+}
+[data-variant='blueprint'] .bp-ph__title {
+  max-width: 22ch;
+  margin: 0;
+  font-size: clamp(2.125rem, 1.4rem + 3vw, 4.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+[data-variant='blueprint'] .bp-ph__lead {
+  max-width: 64ch;
+  margin: 1rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+[data-variant='blueprint'] .bp-ph__actions {
+  margin-top: 1.5rem;
+}
+[data-variant='blueprint'] .bp-ph__stamp {
+  display: grid;
+  grid-template-columns: 7.5rem 13rem;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--bg);
+}
+[data-variant='blueprint'] .bp-ph__glyph {
+  width: 100%;
+  height: auto;
+  padding: 0.5rem;
+  border-right: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-ph__fields {
+  display: grid;
+  margin: 0;
+}
+[data-variant='blueprint'] .bp-ph__fields > div {
+  padding: 0.4rem 0.75rem;
+}
+[data-variant='blueprint'] .bp-ph__fields > div + div {
+  border-top: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-ph__fields dt {
+  font-size: 0.6875rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-ph__fields dd {
+  margin: 0.1rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+[data-variant='blueprint'] .bp-ph--void .bp-ph__title {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+@media (max-width: 767px) {
+  [data-variant='blueprint'] .bp-ph__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  [data-variant='blueprint'] .bp-ph__stamp {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    justify-self: stretch;
+  }
+}
+
+/* ——— Чертёж (SVG) ——— */
+[data-variant='blueprint'] .bp-drawing {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--fg);
+  overflow: visible;
+}
+[data-variant='blueprint'] .bp-drawing line,
+[data-variant='blueprint'] .bp-drawing rect,
+[data-variant='blueprint'] .bp-drawing path,
+[data-variant='blueprint'] .bp-drawing circle {
+  vector-effect: non-scaling-stroke;
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: square;
+}
+[data-variant='blueprint'] .bp-d-main {
+  stroke-width: 1.8;
+}
+[data-variant='blueprint'] .bp-d-thin {
+  stroke-width: 0.8;
+}
+[data-variant='blueprint'] .bp-d-hidden {
+  stroke-width: 0.8;
+  stroke-dasharray: 5 3;
+}
+[data-variant='blueprint'] .bp-d-axis {
+  stroke-width: 0.8;
+  stroke-dasharray: 14 3 2 3;
+}
+[data-variant='blueprint'] .bp-drawing .bp-d-dot,
+[data-variant='blueprint'] .bp-drawing .bp-d-arrow,
+[data-variant='blueprint'] .bp-drawing .bp-d-north {
+  fill: currentColor;
+  stroke: none;
+}
+[data-variant='blueprint'] .bp-drawing .bp-d-led-line {
+  stroke: var(--action);
+  stroke-width: 2;
+  stroke-dasharray: 8 3 2 3;
+}
+[data-variant='blueprint'] .bp-drawing .bp-d-led-ray {
+  stroke: var(--action);
+  stroke-width: 0.8;
+}
+[data-variant='blueprint'] .bp-d-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: currentColor;
+  stroke: none;
+}
+[data-variant='blueprint'] .bp-d-text.is-unknown {
+  fill: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-d-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 13px;
+  fill: currentColor;
+  stroke: none;
+}
+[data-variant='blueprint'] .bp-glyph {
+  color: var(--fg);
+}
+
+/* ——— Медиа товара: подиум листа, фото поверх чертежа ——— */
+[data-variant='blueprint'] .bp-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 9% at 50% 84%, rgb(20 20 20 / 0.16), transparent 70%),
+    linear-gradient(180deg, rgb(255 214 170 / 0.22), transparent 22%),
+    var(--surface);
+}
+[data-variant='blueprint'] .bp-media__drawing {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0.25rem;
+  background: var(--surface);
+}
+[data-variant='blueprint'] .bp-media__photo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 8% 10% 13%;
+  background:
+    radial-gradient(55% 8% at 50% 87%, rgb(20 20 20 / 0.18), transparent 70%),
+    linear-gradient(180deg, rgb(255 214 170 / 0.2), transparent 24%),
+    var(--surface);
+  clip-path: inset(0 0 0 0);
+  transition: clip-path var(--dur-slow) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-media__photo img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+[data-variant='blueprint'] .bp-media__nophoto {
+  align-self: center;
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-media.is-drawing .bp-media__photo {
+  clip-path: inset(0 0 0 100%);
+}
+@media (hover: hover) and (pointer: fine) {
+  [data-variant='blueprint'] .bp-media:hover .bp-media__photo {
+    clip-path: inset(0 0 0 100%);
+  }
+  [data-variant='blueprint'] .bp-media.is-drawing:hover .bp-media__photo {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+[data-variant='blueprint'] .bp-media__toggle {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 2rem;
+  padding: 0 0.625rem;
+  border: var(--bp-t) solid var(--fg);
+  background: var(--surface);
+  color: var(--fg);
+  font: 500 0.8125rem/1 var(--font-body);
+  cursor: pointer;
+}
+[data-variant='blueprint'] .bp-media__toggle[aria-pressed='true'] {
+  background: var(--fg);
+  color: var(--bg);
+}
+[data-variant='blueprint'] .bp-media--thumb {
+  aspect-ratio: 1;
+}
+[data-variant='blueprint'] .bp-media--thumb .bp-media__photo {
+  padding: 6%;
+  align-items: center;
+}
+[data-variant='blueprint'] .bp-media--thumb .bp-media__drawing {
+  padding: 0;
+}
+
+/* ——— Карточка ——— */
+[data-variant='blueprint'] .bp-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--surface);
+}
+[data-variant='blueprint'] .bp-card .bp-media {
+  border-bottom: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-card__stamp {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-areas:
+    'code name'
+    'dims name'
+    'price actions';
+}
+[data-variant='blueprint'] .bp-cell {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  min-width: 0;
+}
+[data-variant='blueprint'] .bp-cell__label {
+  display: block;
+  margin-bottom: 0.125rem;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-style: normal;
+  line-height: 1.2;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-card__code {
+  grid-area: code;
+  border-right: var(--bp-t) solid var(--fg);
+  border-bottom: var(--bp-t) solid var(--fg);
+  font-size: 0.875rem;
+}
+[data-variant='blueprint'] .bp-card__dims {
+  grid-area: dims;
+  border-right: var(--bp-t) solid var(--fg);
+  font-size: 0.8125rem;
+}
+[data-variant='blueprint'] .bp-card__name {
+  grid-area: name;
+  align-self: start;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-wrap: pretty;
+}
+[data-variant='blueprint'] .bp-card__name a {
+  color: var(--fg);
+}
+[data-variant='blueprint'] .bp-card__price {
+  grid-area: price;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  border-top: var(--bp-t) solid var(--fg);
+  border-right: var(--bp-t) solid var(--fg);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+[data-variant='blueprint'] .bp-card__actions {
+  grid-area: actions;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.375rem;
+  border-top: var(--bp-t) solid var(--fg);
+  padding: 0.375rem;
+}
+
+/* Ряд карточек (похожие, товары отрасли): телефон — scroll-snap */
+[data-variant='blueprint'] .bp-rail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+[data-variant='blueprint'] .bp-rail__item {
+  min-width: 0;
+}
+@media (max-width: 1023px) {
+  [data-variant='blueprint'] .bp-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 639px) {
+  [data-variant='blueprint'] .bp-rail,
+  [data-variant='blueprint'] .bp-showcase,
+  [data-variant='blueprint'] .bp-projects {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1rem;
+    margin-inline: calc(-1 * var(--bp-pad));
+    padding: 0 var(--bp-pad) 0.75rem;
+  }
+  [data-variant='blueprint'] .bp-rail > li,
+  [data-variant='blueprint'] .bp-showcase > li,
+  [data-variant='blueprint'] .bp-projects > li {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+  }
+}
+[data-variant='blueprint'] .rail {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fg) transparent;
+}
+
+/* ——— Спецификация (каталог) ——— */
+[data-variant='blueprint'] .bp-spec-wrap {
+  overflow-x: auto;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--surface);
+}
+[data-variant='blueprint'] .bp-spec {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+[data-variant='blueprint'] .bp-spec__caption {
+  caption-side: top;
+  display: table-caption;
+  padding: 0.5rem 0.75rem;
+  border-bottom: var(--bp-s) solid var(--fg);
+  text-align: left;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+[data-variant='blueprint'] .bp-spec__sheet {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+  float: right;
+  margin-left: 1rem;
+  line-height: 1.6875rem;
+}
+[data-variant='blueprint'] .bp-spec th {
+  padding: 0.5rem 0.625rem;
+  border-bottom: var(--bp-s) solid var(--fg);
+  font-weight: 400;
+  font-size: 0.75rem;
+  text-align: left;
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+[data-variant='blueprint'] .bp-spec td {
+  padding: 0.5rem 0.625rem;
+  border-bottom: var(--bp-t) solid var(--fg);
+  vertical-align: middle;
+}
+[data-variant='blueprint'] .bp-spec th + th,
+[data-variant='blueprint'] .bp-spec td + td {
+  border-left: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-spec tbody tr:last-child td {
+  border-bottom: 0;
+}
+[data-variant='blueprint'] .bp-spec__row {
+  transition: background-color 0s;
+}
+[data-variant='blueprint'] .bp-spec__row:hover {
+  background: #f6f6f3;
+}
+[data-variant='blueprint'] .bp-spec__pos {
+  width: 2.75rem;
+  text-align: center !important;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-spec__sketch {
+  width: 4.5rem;
+  padding: 0.25rem !important;
+}
+[data-variant='blueprint'] .bp-spec__thumb {
+  position: relative;
+  display: block;
+  width: 3.75rem;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+[data-variant='blueprint'] .bp-spec__zoom {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: inline-flex;
+  padding: 2px;
+  background: var(--fg);
+  color: var(--bg);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-spec__thumb:hover .bp-spec__zoom,
+[data-variant='blueprint'] .bp-spec__thumb:focus-visible .bp-spec__zoom {
+  opacity: 1;
+}
+[data-variant='blueprint'] .bp-spec__code {
+  width: 8rem;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+[data-variant='blueprint'] .bp-spec__name {
+  min-width: 12rem;
+}
+[data-variant='blueprint'] .bp-spec__name a {
+  color: var(--fg);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+[data-variant='blueprint'] .bp-spec__inline-meta {
+  display: none;
+}
+[data-variant='blueprint'] .bp-spec__dims {
+  width: 9.5rem;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+[data-variant='blueprint'] .bp-spec__mat {
+  width: 8rem;
+  font-size: 0.8125rem;
+}
+[data-variant='blueprint'] .bp-spec__price {
+  width: 6.5rem;
+  white-space: nowrap;
+  text-align: right !important;
+}
+[data-variant='blueprint'] .bp-spec__kp {
+  width: 9.75rem;
+}
+[data-variant='blueprint'] .bp-spec__kp .bp-btn {
+  width: 100%;
+}
+@media (max-width: 1279px) {
+  [data-variant='blueprint'] .bp-spec__mat,
+  [data-variant='blueprint'] .bp-spec__sketch {
+    display: none;
+  }
+  [data-variant='blueprint'] .bp-spec__inline-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.125rem 0.75rem;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--fg-muted);
+  }
+  [data-variant='blueprint'] .bp-spec__inline-meta .bp-mono {
+    display: none;
+  }
+}
+@media (max-width: 1099px) {
+  [data-variant='blueprint'] .bp-spec__dims {
+    display: none;
+  }
+  [data-variant='blueprint'] .bp-spec__inline-meta .bp-mono {
+    display: inline;
+  }
+}
+/* Телефон: строки — компактные блоки-штампы */
+@media (max-width: 767px) {
+  [data-variant='blueprint'] .bp-spec,
+  [data-variant='blueprint'] .bp-spec tbody {
+    display: block;
+  }
+  [data-variant='blueprint'] .bp-spec thead {
+    display: none;
+  }
+  [data-variant='blueprint'] .bp-spec__caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  [data-variant='blueprint'] .bp-spec__sheet {
+    float: none;
+    margin-left: 0;
+  }
+  [data-variant='blueprint'] .bp-spec__row {
+    display: grid;
+    grid-template-columns: 2.5rem 4.5rem minmax(0, 1fr);
+    grid-template-areas:
+      'pos sketch name'
+      'code code price'
+      'kp kp kp';
+    border-bottom: var(--bp-s) solid var(--fg);
+  }
+  [data-variant='blueprint'] .bp-spec__row:last-child {
+    border-bottom: 0;
+  }
+  [data-variant='blueprint'] .bp-spec__row td {
+    border: 0 !important;
+    width: auto;
+  }
+  [data-variant='blueprint'] .bp-spec__row .bp-spec__pos {
+    grid-area: pos;
+    padding-top: 0.75rem;
+  }
+  [data-variant='blueprint'] .bp-spec__row .bp-spec__sketch {
+    grid-area: sketch;
+    display: block;
+    padding: 0.5rem 0.25rem !important;
+  }
+  [data-variant='blueprint'] .bp-spec__row .bp-spec__thumb {
+    width: 4rem;
+  }
+  [data-variant='blueprint'] .bp-spec__row .bp-spec__name {
+    grid-area: name;
+    min-width: 0;
+    padding-top: 0.625rem;
+  }
+  [data-variant='blueprint'] .bp-spec__inline-meta .bp-mono {
+    display: inline;
+  }
+  [data-variant='blueprint'] .bp-spec__row .bp-spec__code {
+    grid-area: code;
+    border-top: var(--bp-t) solid var(--fg) !important;
+    border-right: var(--bp-t) solid var(--fg) !important;
+  }
+  [data-variant='blueprint'] .bp-spec__row .bp-spec__price {
+    grid-area: price;
+    border-top: var(--bp-t) solid var(--fg) !important;
+    width: auto;
+  }
+  [data-variant='blueprint'] .bp-spec__row .bp-spec__dims,
+  [data-variant='blueprint'] .bp-spec__row .bp-spec__mat {
+    display: none;
+  }
+  [data-variant='blueprint'] .bp-spec__row .bp-spec__kp {
+    grid-area: kp;
+    width: auto;
+    padding-top: 0;
+  }
+}
+
+/* ——— Страница товара: «Режим чертёж» поверх галереи ——— */
+[data-variant='blueprint'] .page-product .gallery > div:first-child {
+  position: relative;
+  border-width: var(--bp-s);
+}
+[data-variant='blueprint'] .bp-pb {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+[data-variant='blueprint'] .bp-pb__sheet {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--surface);
+  clip-path: inset(0 calc(100% - var(--split, 0%)) 0 0);
+  transition: clip-path var(--dur-slow) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-pb.is-tracking .bp-pb__sheet {
+  transition-duration: 90ms;
+}
+[data-variant='blueprint'] .bp-pb__sheet .bp-drawing {
+  max-height: 100%;
+}
+[data-variant='blueprint'] .bp-pb__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--split, 0%);
+  width: var(--bp-s);
+  margin-left: -1px;
+  background: var(--action);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-pb.is-tracking .bp-pb__handle {
+  opacity: 1;
+}
+[data-variant='blueprint'] .bp-pb-bar {
+  display: grid;
+  grid-template-columns: auto minmax(10rem, 1fr);
+  gap: 0.75rem 1.25rem;
+  align-items: center;
+  padding: 0.75rem 0.875rem;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--surface);
+}
+[data-variant='blueprint'] .bp-pb-bar__modes {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+[data-variant='blueprint'] .bp-pb-bar__title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+[data-variant='blueprint'] .bp-pb-bar__slider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+}
+[data-variant='blueprint'] .bp-pb-bar__slider input {
+  flex: 1;
+}
+[data-variant='blueprint'] .bp-pb-bar__layers {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem 1rem;
+  margin: 0;
+  padding: 0.625rem 0 0;
+  border: 0;
+  border-top: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-pb-bar__note {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+}
+@media (max-width: 639px) {
+  [data-variant='blueprint'] .bp-pb-bar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Флажки и радио — квадрат и круг основной линией, отметка тушью */
+[data-variant='blueprint'] input[type='checkbox'],
+[data-variant='blueprint'] input[type='radio'] {
+  -webkit-appearance: none;
+  appearance: none;
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  border: 1.5px solid var(--fg);
+  background: var(--surface);
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+}
+[data-variant='blueprint'] input[type='radio'] {
+  border-radius: 50%;
+}
+[data-variant='blueprint'] input[type='checkbox']::before {
+  content: '';
+  width: 0.625rem;
+  height: 0.625rem;
+  background: var(--fg);
+  clip-path: polygon(14% 44%, 0 59%, 40% 100%, 100% 22%, 85% 8%, 39% 69%);
+  transform: scale(0);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+[data-variant='blueprint'] input[type='radio']::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--fg);
+  transform: scale(0);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+[data-variant='blueprint'] input[type='checkbox']:checked::before,
+[data-variant='blueprint'] input[type='radio']:checked::before {
+  transform: scale(1);
+}
+[data-variant='blueprint'] input[type='checkbox']:disabled,
+[data-variant='blueprint'] input[type='radio']:disabled {
+  border-color: var(--fg-muted);
+  background: var(--bp-hatch), var(--surface-2);
+  cursor: not-allowed;
+}
+[data-variant='blueprint'] input[type='checkbox'][aria-invalid='true'] {
+  border-color: var(--danger, #b3261e);
+}
+[data-variant='blueprint'] .bp-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+[data-variant='blueprint'] .bp-check.is-disabled {
+  color: var(--fg-muted);
+  cursor: not-allowed;
+}
+[data-variant='blueprint'] .bp-check__note {
+  color: var(--fg-muted);
+}
+
+/* Ползунок: тонкая линия и треугольная засечка */
+[data-variant='blueprint'] input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2rem;
+  background: transparent;
+  cursor: ew-resize;
+}
+[data-variant='blueprint'] input[type='range']::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--fg);
+}
+[data-variant='blueprint'] input[type='range']::-moz-range-track {
+  height: 2px;
+  background: var(--fg);
+}
+[data-variant='blueprint'] input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 22px;
+  margin-top: -10px;
+  border: 2px solid var(--fg);
+  background: var(--action);
+}
+[data-variant='blueprint'] input[type='range']::-moz-range-thumb {
+  width: 12px;
+  height: 20px;
+  border: 2px solid var(--fg);
+  border-radius: 0;
+  background: var(--action);
+}
+
+/* ——— Главная: листы ——— */
+[data-variant='blueprint'] .bp-home {
+  overflow-x: clip;
+}
+[data-variant='blueprint'] .bp-sheet {
+  position: relative;
+  padding: 0 0 clamp(4rem, 8vw, 7rem);
+  scroll-margin-top: var(--bp-hd);
+}
+[data-variant='blueprint'] .bp-sheet__edge {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 var(--bp-fr) clamp(2rem, 4vw, 3.5rem) var(--bp-fl);
+  border-top: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-sheet__no {
+  padding: 0.25rem 0.75rem;
+  border-left: var(--bp-t) solid var(--fg);
+  border-bottom: var(--bp-t) solid var(--fg);
+  font-size: 0.75rem;
+}
+[data-variant='blueprint'] .bp-sheet__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+}
+
+[data-variant='blueprint'] .bp-dirs__go {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 2.5rem;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+[data-variant='blueprint'] .bp-dirs__go svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-dirs__go:hover svg {
+  transform: translateX(4px);
+}
+
+/* Лист 1 — hero */
+[data-variant='blueprint'] .bp-hero-sheet {
+  position: relative;
+}
+[data-variant='blueprint'] .bp-hero {
+  --view-l: 6%;
+  --view-t: 42%;
+  --view-w: 60%;
+  --view-h: 50%;
+}
+[data-variant='blueprint'] .bp-hero .scroll-video__stage {
+  background: var(--bg);
+}
+[data-variant='blueprint'] .bp-hero:not([data-mode='static']) .scroll-video__stage {
+  top: var(--bp-hd);
+  height: calc(100vh - var(--bp-hd));
+  height: calc(100svh - var(--bp-hd));
+}
+/* Окно «Вида А»: постер и ролик — ровно в нём; лишнее (камера заглушки) закрыто листом */
+[data-variant='blueprint'] .bp-hero .scroll-video__poster,
+[data-variant='blueprint'] .bp-hero .scroll-video__video {
+  inset: auto;
+  left: var(--view-l);
+  top: var(--view-t);
+  width: var(--view-w);
+  height: var(--view-h);
+}
+[data-variant='blueprint'] .bp-hero .scroll-video__stage::before {
+  content: '';
+  position: absolute;
+  left: var(--view-l);
+  top: var(--view-t);
+  width: var(--view-w);
+  height: var(--view-h);
+  box-shadow: 0 0 0 200vmax var(--bg);
+  pointer-events: none;
+  z-index: 1;
+}
+[data-variant='blueprint'] .bp-hero .scroll-video__callouts {
+  inset: auto;
+  left: var(--view-l);
+  top: var(--view-t);
+  width: var(--view-w);
+  height: var(--view-h);
+}
+[data-variant='blueprint'] .bp-hero .scroll-video__label {
+  left: calc(var(--view-l) + 0.75rem);
+  top: calc(var(--view-t) + 0.75rem);
+  right: auto;
+  bottom: auto;
+  z-index: 4;
+  padding: 0.25rem 0.5rem;
+  border: var(--bp-t) solid var(--fg);
+  background: var(--surface);
+  font-size: 0.75rem;
+}
+[data-variant='blueprint'] .bp-hero[data-mode='static'] .scroll-video__stage {
+  height: auto;
+  min-height: calc(100svh - var(--bp-hd));
+}
+[data-variant='blueprint'] .bp-hero[data-mode='static'] .scroll-video__overlay {
+  position: relative;
+  inset: auto;
+  min-height: calc(100svh - var(--bp-hd));
+}
+
+[data-variant='blueprint'] .bp-hs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+[data-variant='blueprint'] .bp-hero[data-mode='static'] .bp-hs {
+  position: relative;
+  min-height: calc(100svh - var(--bp-hd));
+  display: flex;
+}
+[data-variant='blueprint'] .bp-hs__frame {
+  position: absolute;
+  top: 0;
+  border-top: 0 !important;
+  bottom: 0.625rem;
+  left: var(--bp-fl);
+  right: var(--bp-fr);
+  border: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-hs__zones {
+  position: absolute;
+  top: 0;
+  bottom: 0.625rem;
+  left: var(--bp-fl);
+  right: var(--bp-fr);
+  font: 400 0.625rem/1 var(--font-mono);
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-hs__zones-x {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: 0.875rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-hs__zones-x li {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+[data-variant='blueprint'] .bp-hs__zones-x li + li {
+  border-left: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-hs__zones-y {
+  position: absolute;
+  top: 0.875rem;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 0.875rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-right: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-hs__zones-y li {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+[data-variant='blueprint'] .bp-hs__zones-y li + li {
+  border-top: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-hs__field {
+  position: absolute;
+  top: calc(0.875rem + clamp(1rem, 2.6vh, 1.75rem));
+  bottom: calc(0.625rem + var(--bp-s));
+  left: calc(var(--bp-fl) + 0.875rem + clamp(1rem, 2vw, 2rem));
+  right: calc(var(--bp-fr) + var(--bp-s));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(20rem, 30vw, 27rem);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'title spec'
+    'view slot'
+    'view stamp';
+  column-gap: clamp(1.5rem, 3vw, 3rem);
+}
+[data-variant='blueprint'] .bp-hero[data-mode='static'] .bp-hs__field {
+  position: relative;
+  inset: auto;
+  flex: 1;
+  margin: calc(0.875rem + 1.25rem) calc(var(--bp-fr) + var(--bp-s)) calc(0.625rem + var(--bp-s)) calc(var(--bp-fl) + 0.875rem + 1.5rem);
+  min-height: 34rem;
+}
+[data-variant='blueprint'] .bp-hs__field a,
+[data-variant='blueprint'] .bp-hs__field button {
+  pointer-events: auto;
+}
+[data-variant='blueprint'] .bp-hs__title {
+  grid-area: title;
+  padding-bottom: clamp(1rem, 3vh, 2rem);
+}
+[data-variant='blueprint'] .bp-hs__h1 {
+  max-width: 17em;
+  margin: 0;
+  font-size: clamp(2.25rem, min(4.2vw, 6.6vh), 5rem);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+[data-variant='blueprint'] .bp-hs__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: clamp(1rem, 2.8vh, 1.75rem);
+}
+[data-variant='blueprint'] .bp-hs__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-size: 1.0625rem;
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+}
+[data-variant='blueprint'] .bp-hs__phone:hover {
+  text-decoration-color: currentColor;
+}
+[data-variant='blueprint'] .bp-hs__promise {
+  flex-basis: 100%;
+  max-width: 46ch;
+  margin: 0;
+  padding-left: 0.75rem;
+  border-left: var(--bp-t) solid var(--fg);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-hs__spec {
+  grid-area: spec;
+  align-self: start;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--bg);
+}
+[data-variant='blueprint'] .bp-hs__spec ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+[data-variant='blueprint'] .bp-hs__spec-head,
+[data-variant='blueprint'] .bp-hs__spec-row {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) 3rem 4.25rem;
+  align-items: center;
+}
+[data-variant='blueprint'] .bp-hs__spec-head {
+  margin: 0;
+  border-bottom: var(--bp-s) solid var(--fg);
+  font-size: 0.6875rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-hs__spec-head span,
+[data-variant='blueprint'] .bp-hs__spec-row > span {
+  padding: 0.375rem 0.5rem;
+}
+[data-variant='blueprint'] .bp-hs__spec-head span + span,
+[data-variant='blueprint'] .bp-hs__spec-row > span + span {
+  border-left: var(--bp-t) solid var(--fg);
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+[data-variant='blueprint'] .bp-hs__spec li + li .bp-hs__spec-row {
+  border-top: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-hs__spec-row {
+  position: relative;
+  min-height: clamp(2.75rem, 7vh, 3.75rem);
+  color: var(--fg);
+  text-decoration: none;
+  isolation: isolate;
+}
+[data-variant='blueprint'] .bp-hs__spec-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--bp-hatch), var(--surface-2);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur-base) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-hs__spec-row:hover::before,
+[data-variant='blueprint'] .bp-hs__spec-row:focus-visible::before {
+  clip-path: inset(0 0 0 0);
+}
+[data-variant='blueprint'] .bp-hs__spec-pos {
+  justify-content: center;
+  font-size: 0.8125rem;
+}
+[data-variant='blueprint'] .bp-hs__spec-name {
+  font-size: clamp(1.0625rem, 1.4vw, 1.375rem);
+  line-height: 1.1;
+}
+[data-variant='blueprint'] .bp-hs__spec-row:hover .bp-hs__spec-name {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+[data-variant='blueprint'] .bp-hs__spec-row .bp-hs__spec-name {
+  background: var(--bg);
+}
+[data-variant='blueprint'] .bp-hs__spec-num {
+  justify-content: flex-end;
+  font-size: 0.875rem;
+}
+[data-variant='blueprint'] .bp-hs__viewbox {
+  grid-area: view;
+  container-type: size;
+  display: flex;
+  align-items: flex-end;
+  min-height: 6rem;
+}
+[data-variant='blueprint'] .bp-hs__view {
+  position: relative;
+  width: min(100cqw, calc(100cqh * var(--ar, 1.78)));
+  aspect-ratio: var(--ar, 1.78);
+  border: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-hs__view-label {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.25rem);
+  font-size: 0.75rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+[data-variant='blueprint'] .bp-hs__slot {
+  grid-area: slot;
+}
+[data-variant='blueprint'] .bp-hs__stamp {
+  grid-area: stamp;
+  align-self: end;
+  margin-right: calc(-1 * var(--bp-s));
+  margin-bottom: calc(-1 * var(--bp-s));
+}
+
+/* Основная надпись */
+[data-variant='blueprint'] .bp-stamp {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.35fr) 3.75rem 3.75rem;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--bg);
+}
+[data-variant='blueprint'] .bp-stamp__cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.375rem 0.5rem;
+  min-height: 3.25rem;
+  font-size: 0.875rem;
+  line-height: 1.2;
+}
+[data-variant='blueprint'] .bp-stamp__cell + .bp-stamp__cell {
+  border-left: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-stamp__label {
+  font-size: 0.6875rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-stamp__org {
+  font-weight: 500;
+}
+[data-variant='blueprint'] .bp-stamp__num .bp-mono {
+  font-size: 1.125rem;
+}
+
+/* Выноски hero: точка на предмете, выносная линия к полке, над полкой — позиция и наименование */
+[data-variant='blueprint'] .bp-co {
+  --ax: var(--cx);
+  --ay: var(--cy);
+  --gap: clamp(1.5rem, 3vw, 3rem);
+  --run: calc((1 - var(--ax)) * var(--view-w) + var(--gap));
+  position: relative;
+  transform: translate(calc((var(--ax) - var(--cx)) * var(--view-w)), calc((var(--ay) - var(--cy)) * var(--view-h)));
+}
+[data-variant='blueprint'] .bp-hero[data-mode='placeholder'] .bp-co {
+  --ax: var(--px);
+  --ay: var(--py);
+}
+[data-variant='blueprint'] .bp-co__dot {
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+  background: var(--fg);
+  box-shadow: 0 0 0 1px var(--fg);
+}
+[data-variant='blueprint'] .bp-co__leader {
+  position: absolute;
+  left: 0;
+  top: -0.5px;
+  width: var(--run);
+  height: 1px;
+  background: var(--fg);
+  box-shadow: 0 0 0 1px rgb(251 251 250 / 0.7);
+  clip-path: inset(0 calc((1 - var(--draw)) * 100%) 0 0);
+}
+[data-variant='blueprint'] .bp-co__shelf {
+  position: absolute;
+  left: var(--run);
+  top: 0;
+  width: clamp(14rem, 26vw, 24rem);
+  border-top: var(--bp-s) solid var(--fg);
+  opacity: clamp(0, calc((var(--draw) - 0.55) * 3), 1);
+  transform: translateX(calc((1 - var(--draw)) * -0.75rem));
+}
+[data-variant='blueprint'] .bp-co__title {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0 0 0.25rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.125rem, 1.5vw, 1.5rem);
+  line-height: 1.05;
+  white-space: nowrap;
+}
+[data-variant='blueprint'] .bp-co__pos {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  border: var(--bp-t) solid var(--fg);
+  font-size: 0.8125rem;
+}
+[data-variant='blueprint'] .bp-co__text {
+  margin: 0.375rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--fg);
+}
+/* Статичный список (reduced-motion): позиции строками спецификации */
+[data-variant='blueprint'] .bp-hero .scroll-video__list {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 1.5rem calc(var(--bp-fr) + var(--bp-pad)) 0 calc(var(--bp-fl) + var(--bp-pad));
+  gap: 0;
+  border-top: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .scroll-video__list .bp-co {
+  display: block;
+  transform: none;
+  padding: 0.75rem 0;
+  border-bottom: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .scroll-video__list .bp-co__dot,
+[data-variant='blueprint'] .scroll-video__list .bp-co__leader {
+  display: none;
+}
+[data-variant='blueprint'] .scroll-video__list .bp-co__shelf {
+  position: static;
+  width: auto;
+  border: 0;
+  opacity: 1;
+  transform: none;
+}
+[data-variant='blueprint'] .scroll-video__list .bp-co__title {
+  position: static;
+  white-space: normal;
+}
+
+@media (max-width: 1023px) {
+  [data-variant='blueprint'] .bp-hs__field {
+    left: calc(var(--bp-fl) + 0.875rem + 0.875rem);
+    right: calc(var(--bp-fr) + 0.875rem);
+    top: calc(0.875rem + 0.875rem);
+    bottom: calc(0.625rem + 0.75rem);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(7rem, 1fr) 4.25rem auto auto;
+    grid-template-areas:
+      'title'
+      'view'
+      'slot'
+      'spec'
+      'stamp';
+    row-gap: 0;
+  }
+  [data-variant='blueprint'] .bp-hs__stamp {
+    margin: 0.625rem 0 0;
+  }
+  [data-variant='blueprint'] .bp-hs__view-label {
+    display: none;
+  }
+  /* выноски на узком экране: вниз из точки, полка — под окном вида */
+  [data-variant='blueprint'] .bp-co {
+    --run-y: calc((1 - var(--ay)) * var(--view-h) + 0.75rem);
+  }
+  [data-variant='blueprint'] .bp-co__leader {
+    left: -0.5px;
+    top: 0;
+    width: 1px;
+    height: var(--run-y);
+    clip-path: inset(0 0 calc((1 - var(--draw)) * 100%) 0);
+  }
+  [data-variant='blueprint'] .bp-co__shelf {
+    left: calc(-1 * var(--ax) * var(--view-w));
+    top: var(--run-y);
+    width: var(--view-w);
+    padding-top: 0.25rem;
+    border-top-width: 1px;
+    transform: translateY(calc((1 - var(--draw)) * -0.5rem));
+  }
+  [data-variant='blueprint'] .bp-co__title {
+    position: static;
+    font-size: 1.0625rem;
+    white-space: normal;
+    margin: 0;
+  }
+  [data-variant='blueprint'] .bp-co__text {
+    margin-top: 0.125rem;
+    font-size: 0.8125rem;
+  }
+}
+@media (max-width: 767px) {
+  [data-variant='blueprint'] .bp-hs__zones,
+  [data-variant='blueprint'] .bp-hs__frame {
+    bottom: 0.375rem;
+  }
+  [data-variant='blueprint'] .bp-hs__zones-y {
+    display: none;
+  }
+  [data-variant='blueprint'] .bp-hs__field {
+    left: calc(var(--bp-fl) + 0.75rem);
+    right: calc(var(--bp-fr) + 0.75rem);
+    top: calc(0.875rem + 0.75rem);
+    bottom: calc(0.375rem + 0.5rem);
+  }
+  [data-variant='blueprint'] .bp-hs__h1 {
+    font-size: clamp(1.875rem, min(8.6vw, 4.6vh), 2.75rem);
+    line-height: 1;
+  }
+  [data-variant='blueprint'] .bp-hs__title {
+    padding-bottom: 0.875rem;
+  }
+  [data-variant='blueprint'] .bp-hs__cta {
+    margin-top: 0.875rem;
+    gap: 0.5rem 1rem;
+  }
+  [data-variant='blueprint'] .bp-hs__promise {
+    font-size: 0.8125rem;
+  }
+  [data-variant='blueprint'] .bp-hs__spec-head {
+    display: none;
+  }
+  [data-variant='blueprint'] .bp-hs__spec-row {
+    grid-template-columns: 2rem minmax(0, 1fr) 2.5rem 3.5rem;
+    min-height: 2.5rem;
+  }
+  [data-variant='blueprint'] .bp-hs__spec-name {
+    font-size: 1rem;
+  }
+  [data-variant='blueprint'] .bp-stamp__cell {
+    min-height: 2.5rem;
+    padding: 0.25rem 0.375rem;
+    font-size: 0.75rem;
+  }
+  [data-variant='blueprint'] .bp-stamp {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 2.75rem 2.75rem;
+  }
+  [data-variant='blueprint'] .bp-stamp__num .bp-mono {
+    font-size: 0.9375rem;
+  }
+  [data-variant='blueprint'] .bp-hero .scroll-video__label {
+    font-size: 0.6875rem;
+  }
+}
+@media (max-height: 760px) and (min-width: 1024px) {
+  [data-variant='blueprint'] .bp-hs__promise {
+    display: none;
+  }
+}
+
+/* Лист 2 — направления */
+[data-variant='blueprint'] .bp-dirs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(2rem, 4vw, 3rem);
+  border: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-dirs__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+[data-variant='blueprint'] .bp-dirs__col + .bp-dirs__col {
+  border-left: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-dirs__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-dirs__glyph {
+  width: 9rem;
+  max-width: 55%;
+}
+[data-variant='blueprint'] .bp-dirs__type {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+  text-align: right;
+}
+[data-variant='blueprint'] .bp-dirs__type .bp-mono {
+  display: inline-flex;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border: var(--bp-t) solid var(--fg);
+  color: var(--fg);
+}
+[data-variant='blueprint'] .bp-dirs__name {
+  margin: 1rem 0 0;
+  font-size: clamp(1.5rem, 2.2vw, 2.125rem);
+  line-height: 1.02;
+}
+[data-variant='blueprint'] .bp-dirs__name a {
+  color: var(--fg);
+}
+[data-variant='blueprint'] .bp-dirs__summary {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+[data-variant='blueprint'] .bp-dirs__table {
+  display: block;
+  width: 100%;
+  font-size: 0.9375rem;
+}
+[data-variant='blueprint'] .bp-dirs__table thead,
+[data-variant='blueprint'] .bp-dirs__table tbody,
+[data-variant='blueprint'] .bp-dirs__table tfoot {
+  display: block;
+}
+[data-variant='blueprint'] .bp-dirs__table tr {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+  align-items: baseline;
+}
+[data-variant='blueprint'] .bp-dirs__table th,
+[data-variant='blueprint'] .bp-dirs__table td {
+  padding: 0.5rem 0.375rem;
+  text-align: left;
+  vertical-align: baseline;
+}
+[data-variant='blueprint'] .bp-dirs__table thead th {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--fg-muted);
+  border-bottom: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-dirs__table td:first-child {
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-dirs__table td:last-child,
+[data-variant='blueprint'] .bp-dirs__table th:last-child {
+  text-align: right;
+}
+[data-variant='blueprint'] .bp-dirs__table tbody tr,
+[data-variant='blueprint'] .bp-dirs__table tfoot tr {
+  background-image: linear-gradient(var(--fg), var(--fg));
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+}
+[data-variant='blueprint'] .bp-dirs__table tfoot tr {
+  background-size: 100% 2px;
+}
+[data-variant='blueprint'] .bp-dirs__table tfoot th {
+  font-weight: 500;
+}
+[data-variant='blueprint'] .bp-dirs__table tfoot td:last-child {
+  font-weight: 500;
+}
+[data-variant='blueprint'] .bp-dirs__table a {
+  color: var(--fg);
+}
+[data-variant='blueprint'] .bp-dirs__col > .bp-dirs__go {
+  margin-top: auto;
+  padding-top: 1rem;
+  align-self: flex-start;
+}
+[data-variant='blueprint'] .bp-dirs__summary {
+  min-height: 2.9em;
+}
+@media (max-width: 1023px) {
+  [data-variant='blueprint'] .bp-dirs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  [data-variant='blueprint'] .bp-dirs__col + .bp-dirs__col {
+    border-left: 0;
+    border-top: var(--bp-s) solid var(--fg);
+  }
+  [data-variant='blueprint'] .bp-dirs__glyph {
+    width: 7rem;
+  }
+  [data-variant='blueprint'] .bp-dirs__summary {
+    min-height: 0;
+  }
+}
+/* спецификация заполняется: знак листа и строки вычерчиваются слева направо, графа за графой */
+@media (prefers-reduced-motion: no-preference) {
+  [data-variant='blueprint'] .bp-dirs__glyph,
+  [data-variant='blueprint'] .bp-dirs__table tbody tr,
+  [data-variant='blueprint'] .bp-dirs__table tfoot tr {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 620ms var(--ease-out);
+    transition-delay: calc(var(--col, 0) * 140ms + var(--i, 0) * 90ms + 260ms);
+  }
+  [data-variant='blueprint'] .bp-dirs__glyph {
+    transition-duration: 900ms;
+    transition-delay: calc(var(--col, 0) * 140ms);
+  }
+  [data-variant='blueprint'] .bp-dirs[data-filled] .bp-dirs__glyph,
+  [data-variant='blueprint'] .bp-dirs[data-filled] .bp-dirs__table tbody tr,
+  [data-variant='blueprint'] .bp-dirs[data-filled] .bp-dirs__table tfoot tr {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Лист 3 — полный цикл */
+[data-variant='blueprint'] .bp-cycle-sheet {
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+[data-variant='blueprint'] .bp-cycle__scheme {
+  position: relative;
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+}
+[data-variant='blueprint'] .bp-cycle__steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--steps), minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 2.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+[data-variant='blueprint'] .bp-cycle__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 2.25rem;
+  height: var(--bp-s);
+  background: repeating-linear-gradient(90deg, var(--fg) 0 6px, transparent 6px 10px);
+  opacity: 0.35;
+}
+[data-variant='blueprint'] .bp-cycle__line-ink {
+  position: absolute;
+  inset: 0;
+  background: var(--fg);
+  clip-path: inset(0 calc((1 - var(--p, 0)) * 100%) 0 0);
+}
+[data-variant='blueprint'] .bp-cycle__step {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+[data-variant='blueprint'] .bp-cycle__block {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  min-height: 4.5rem;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--bg);
+  isolation: isolate;
+}
+[data-variant='blueprint'] .bp-cycle__block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--fg);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur-slow) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-cycle__step.is-current .bp-cycle__block::before {
+  clip-path: inset(0 0 0 0);
+}
+[data-variant='blueprint'] .bp-cycle__step.is-current .bp-cycle__block {
+  color: var(--bg);
+}
+[data-variant='blueprint'] .bp-cycle__n {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: var(--bp-t) solid currentColor;
+  font-size: 0.875rem;
+}
+[data-variant='blueprint'] .bp-cycle__title {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  font-size: clamp(1.125rem, 1.5vw, 1.4375rem);
+  line-height: 1.05;
+}
+[data-variant='blueprint'] .bp-cycle__text {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-cycle__step.is-current .bp-cycle__text {
+  color: var(--fg);
+}
+[data-variant='blueprint'] .bp-cycle__src {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+}
+/* рисунки стадий: общий ряд под текстами, колонки — по блокам схемы */
+[data-variant='blueprint'] .bp-cycle__fig {
+  display: none;
+}
+@media (min-width: 1024px) and (min-height: 860px), (min-width: 1280px) and (min-height: 720px) {
+  [data-variant='blueprint'] .bp-cycle__steps {
+    grid-template-rows: auto auto auto;
+    row-gap: 1rem;
+  }
+  [data-variant='blueprint'] .bp-cycle__step {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    gap: 1rem;
+  }
+  [data-variant='blueprint'] .bp-cycle__fig {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-self: end;
+    margin-top: clamp(0.25rem, 2vh, 1.25rem);
+    padding-top: 0.75rem;
+    border-top: var(--bp-t) solid var(--fg);
+  }
+  [data-variant='blueprint'] .bp-cycle__svg {
+    width: auto;
+    max-width: 100%;
+    height: clamp(6.5rem, 21vh, 12rem);
+    margin-inline: auto;
+  }
+  [data-variant='blueprint'] .bp-cycle__cap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.625rem;
+    font-size: 0.8125rem;
+    line-height: 1.2;
+    color: var(--fg-muted);
+  }
+  [data-variant='blueprint'] .bp-cycle__cap .bp-mono {
+    color: var(--fg);
+  }
+}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  [data-variant='blueprint'] .bp-cycle {
+    height: 260vh;
+  }
+  [data-variant='blueprint'] .bp-cycle__pin {
+    position: sticky;
+    top: var(--bp-hd);
+    min-height: calc(100vh - var(--bp-hd));
+    display: flex;
+    align-items: flex-start;
+    padding-top: clamp(1.5rem, 6vh, 4rem);
+  }
+  /* рисунок вычерчивается слева направо, пока линия связи идёт к своему блоку; первый готов сразу */
+  [data-variant='blueprint'] .bp-cycle__svg {
+    clip-path: inset(-4% calc((1 - clamp(0, (var(--p, 0) * var(--steps) - var(--i) + 0.62) / 0.62, 1)) * 104%) -4% -4%);
+  }
+  [data-variant='blueprint'] .bp-cycle__cap {
+    opacity: clamp(0.001, (var(--p, 0) * var(--steps) - var(--i) + 0.1) * 10, 1);
+  }
+}
+@media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+  [data-variant='blueprint'] .bp-cycle__line {
+    display: none;
+  }
+  [data-variant='blueprint'] .bp-cycle__step .bp-cycle__block::before,
+  [data-variant='blueprint'] .bp-cycle__step.is-current .bp-cycle__block::before {
+    clip-path: inset(0 100% 0 0);
+  }
+  [data-variant='blueprint'] .bp-cycle__step.is-current .bp-cycle__block {
+    color: var(--fg);
+  }
+  [data-variant='blueprint'] .bp-cycle__step .bp-cycle__text {
+    color: var(--fg);
+  }
+}
+@media (max-width: 1023px) {
+  [data-variant='blueprint'] .bp-cycle__steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    border-left: var(--bp-s) solid var(--fg);
+    margin-left: 1.25rem;
+  }
+  [data-variant='blueprint'] .bp-cycle__step {
+    position: relative;
+    gap: 0.5rem;
+    padding: 0 0 1.5rem 1.25rem;
+  }
+  [data-variant='blueprint'] .bp-cycle__step::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2.25rem;
+    width: 1.25rem;
+    height: 1px;
+    background: var(--fg);
+  }
+  [data-variant='blueprint'] .bp-cycle__block {
+    min-height: 3.75rem;
+  }
+}
+
+/* Лист 4 — отрасли */
+[data-variant='blueprint'] .bp-ind {
+  display: grid;
+  grid-template-columns: minmax(14rem, 4fr) minmax(0, 9fr);
+  margin-top: clamp(2rem, 4vw, 3rem);
+  border: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-ind__tabs {
+  display: flex;
+  flex-direction: column;
+  border-right: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-ind__tab {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  align-items: center;
+  min-height: 3.25rem;
+  border: 0;
+  border-bottom: var(--bp-t) solid var(--fg);
+  background: transparent;
+  color: var(--fg);
+  font: 400 1rem/1.2 var(--font-body);
+  text-align: left;
+  cursor: pointer;
+  isolation: isolate;
+}
+[data-variant='blueprint'] .bp-ind__tab:last-child {
+  border-bottom: 0;
+}
+[data-variant='blueprint'] .bp-ind__tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--fg);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur-base) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-ind__tab[aria-selected='true'] {
+  color: var(--bg);
+}
+[data-variant='blueprint'] .bp-ind__tab[aria-selected='true']::before {
+  clip-path: inset(0 0 0 0);
+}
+[data-variant='blueprint'] .bp-ind__tab:not([aria-selected='true']):hover {
+  background: var(--bp-hatch), var(--surface-2);
+}
+[data-variant='blueprint'] .bp-ind__tab:focus-visible {
+  outline-offset: -4px;
+}
+[data-variant='blueprint'] .bp-ind__pos {
+  display: flex;
+  justify-content: center;
+  font-size: 0.8125rem;
+  align-self: stretch;
+  align-items: center;
+  border-right: var(--bp-t) solid currentColor;
+}
+[data-variant='blueprint'] .bp-ind__tab-name {
+  padding: 0.5rem 0.875rem;
+}
+[data-variant='blueprint'] .bp-ind__panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  min-width: 0;
+}
+[data-variant='blueprint'] .bp-ind__panel:focus-visible {
+  outline-offset: -4px;
+}
+[data-variant='blueprint'] .bp-ind__media {
+  position: relative;
+  min-height: 22rem;
+  border-right: var(--bp-t) solid var(--fg);
+  background: var(--surface-2);
+  overflow: hidden;
+  animation: bp-wipe var(--dur-slow) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-ind__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+[data-variant='blueprint'] .bp-ind__media.is-product {
+  background: var(--surface);
+}
+[data-variant='blueprint'] .bp-ind__media.is-product img {
+  object-fit: contain;
+  padding: 8%;
+  mix-blend-mode: multiply;
+}
+[data-variant='blueprint'] .bp-ind__view {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 0.25rem 0.5rem;
+  border-top: var(--bp-t) solid var(--fg);
+  border-right: var(--bp-t) solid var(--fg);
+  background: var(--bg);
+  font-size: 0.6875rem;
+}
+[data-variant='blueprint'] .bp-ind__text {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  animation: bp-fade var(--dur-base) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-ind__name {
+  margin: 0;
+  font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+  line-height: 1;
+}
+[data-variant='blueprint'] .bp-ind__summary {
+  margin: 0.875rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+[data-variant='blueprint'] .bp-ind__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.25rem 0 0;
+  border: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-ind__facts > div {
+  padding: 0.5rem 0.625rem;
+}
+[data-variant='blueprint'] .bp-ind__facts > div + div {
+  border-left: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-ind__facts dt {
+  font-size: 0.6875rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-ind__facts dd {
+  margin: 0.125rem 0 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+[data-variant='blueprint'] .bp-ind__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+[data-variant='blueprint'] .bp-ind__links .bp-dirs__go {
+  margin-top: 0;
+}
+[data-variant='blueprint'] .bp-ind__links .bp-link {
+  font-size: 0.9375rem;
+  color: var(--fg);
+}
+@keyframes bp-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes bp-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@media (max-width: 1023px) {
+  [data-variant='blueprint'] .bp-ind {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  [data-variant='blueprint'] .bp-ind__tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    border-right: 0;
+    border-bottom: var(--bp-t) solid var(--fg);
+    scrollbar-width: thin;
+  }
+  [data-variant='blueprint'] .bp-ind__tab {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    border-bottom: 0;
+    border-right: var(--bp-t) solid var(--fg);
+    white-space: nowrap;
+  }
+  [data-variant='blueprint'] .bp-ind__panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  [data-variant='blueprint'] .bp-ind__media {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+    border-right: 0;
+    border-bottom: var(--bp-t) solid var(--fg);
+  }
+  [data-variant='blueprint'] .bp-ind__text {
+    padding: 1rem;
+  }
+  [data-variant='blueprint'] .bp-ind__facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  [data-variant='blueprint'] .bp-ind__facts > div + div {
+    border-left: 0;
+    border-top: var(--bp-t) solid var(--fg);
+  }
+}
+
+/* Лист 5 — позиции каталога */
+[data-variant='blueprint'] .bp-showcase {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 1023px) {
+  [data-variant='blueprint'] .bp-showcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 639px) {
+  [data-variant='blueprint'] .bp-showcase {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-variant='blueprint'] .bp-showcase .bp-media .bp-drawing {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 900ms var(--ease-out);
+  }
+  [data-variant='blueprint'] .bp-showcase[data-intro='pending'] .bp-media .bp-drawing {
+    clip-path: inset(0 100% 0 0);
+  }
+  [data-variant='blueprint'] .bp-showcase[data-intro='pending'] .bp-media__photo {
+    clip-path: inset(0 0 0 100%);
+  }
+  [data-variant='blueprint'] .bp-showcase[data-intro='done'] .bp-media__photo {
+    transition: clip-path 800ms var(--ease-out) calc(1000ms + var(--col, 0) * 160ms);
+  }
+  [data-variant='blueprint'] .bp-showcase[data-intro='done'] .bp-media:hover .bp-media__photo,
+  [data-variant='blueprint'] .bp-showcase[data-intro='done'] .bp-media.is-drawing .bp-media__photo {
+    transition-delay: 0ms;
+    transition-duration: var(--dur-slow);
+  }
+}
+
+/* Лист 6 — проекты-листы */
+[data-variant='blueprint'] .bp-projects {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+[data-variant='blueprint'] .bp-psheet {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--surface);
+  padding: 0.5rem;
+}
+[data-variant='blueprint'] .bp-psheet__photo {
+  display: block;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border: var(--bp-t) solid var(--fg);
+  background: var(--surface-2);
+}
+[data-variant='blueprint'] .bp-psheet__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-psheet:hover .bp-psheet__photo img {
+  transform: scale(1.025);
+}
+[data-variant='blueprint'] .bp-psheet__stamp {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 3.5rem;
+  grid-template-areas:
+    'title title title'
+    'city dir no'
+    'scope scope scope';
+  margin-top: 0.5rem;
+  border: var(--bp-s) solid var(--fg);
+  font-size: 0.875rem;
+}
+[data-variant='blueprint'] .bp-psheet__title {
+  grid-area: title;
+  margin: 0;
+  padding: 0.5rem 0.625rem;
+  border-bottom: var(--bp-t) solid var(--fg);
+  font-size: 1.375rem;
+  line-height: 1.1;
+}
+[data-variant='blueprint'] .bp-psheet__title a {
+  color: var(--fg);
+}
+[data-variant='blueprint'] .bp-psheet__cell {
+  margin: 0;
+  padding: 0.375rem 0.625rem;
+}
+[data-variant='blueprint'] .bp-psheet__cell:nth-of-type(1) {
+  grid-area: city;
+  border-right: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-psheet__cell:nth-of-type(2) {
+  grid-area: dir;
+  border-right: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-psheet__scope {
+  grid-area: scope;
+  border-top: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-psheet__no {
+  grid-area: no;
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-variant='blueprint'] .bp-projects > li {
+    transition:
+      transform 900ms var(--ease-out) calc(var(--i, 0) * 140ms),
+      opacity 400ms var(--ease-out) calc(var(--i, 0) * 140ms),
+      clip-path 900ms var(--ease-out) calc(var(--i, 0) * 140ms);
+  }
+  [data-variant='blueprint'] .bp-projects:not([data-laid]) > li {
+    opacity: 0;
+    transform: translate3d(0, 2.5rem, 0) rotate(-1.2deg);
+    clip-path: inset(0 0 100% 0);
+  }
+}
+@media (max-width: 767px) {
+  [data-variant='blueprint'] .bp-projects {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+  [data-variant='blueprint'] .bp-psheet__title {
+    font-size: 1.25rem;
+  }
+}
+
+/* Лист 7 — клиенты и письма */
+[data-variant='blueprint'] .bp-clients {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2rem, 4vw, 4rem);
+}
+[data-variant='blueprint'] .bp-clients__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--bp-s) solid var(--fg);
+  border-left: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-clients__cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  min-height: 7rem;
+  padding: 1.5rem 0.625rem 0.5rem;
+  border-right: var(--bp-t) solid var(--fg);
+  border-bottom: var(--bp-t) solid var(--fg);
+  background: var(--surface);
+}
+[data-variant='blueprint'] .bp-clients__cell img {
+  max-width: 82%;
+  max-height: 2.75rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  align-self: center;
+  margin: auto 0;
+  filter: grayscale(1) contrast(1.15);
+  mix-blend-mode: multiply;
+}
+[data-variant='blueprint'] .bp-clients__pos {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.375rem;
+  font-size: 0.6875rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-clients__name {
+  font-size: 0.8125rem;
+  line-height: 1.25;
+}
+[data-variant='blueprint'] .bp-letters {
+  display: flex;
+  flex-direction: column;
+}
+[data-variant='blueprint'] .bp-letters__title {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.05;
+}
+[data-variant='blueprint'] .bp-letters ul {
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-letters__item {
+  padding: 1rem 0;
+  border-bottom: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-letters__item figure {
+  margin: 0;
+}
+[data-variant='blueprint'] .bp-letters__item blockquote {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+[data-variant='blueprint'] .bp-letters__item figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-letters__item figcaption span + span::before {
+  content: '·';
+  margin-right: 0.5rem;
+}
+[data-variant='blueprint'] .bp-letters__from {
+  color: var(--fg);
+}
+[data-variant='blueprint'] .bp-letters__note {
+  margin: 0.75rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-variant='blueprint'] .bp-calm .bp-wrap {
+    animation: bp-calm linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+}
+@keyframes bp-calm {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 1023px) {
+  [data-variant='blueprint'] .bp-clients {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  [data-variant='blueprint'] .bp-clients__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Лист 8 — техническое задание */
+[data-variant='blueprint'] .bp-tz {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+[data-variant='blueprint'] .bp-tz__clauses {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-tz__clauses li {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding: 0.875rem 0;
+  border-bottom: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-tz__n {
+  font-size: 0.875rem;
+  padding-top: 0.25rem;
+}
+[data-variant='blueprint'] .bp-tz__h {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.15;
+}
+[data-variant='blueprint'] .bp-tz__clauses p {
+  margin: 0.375rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+[data-variant='blueprint'] .bp-tz__cities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.75rem;
+  border: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-tz__city {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0.875rem;
+  min-width: 0;
+}
+[data-variant='blueprint'] .bp-tz__city + .bp-tz__city {
+  border-left: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-tz__city-name {
+  margin: 0;
+  font-size: 1.25rem;
+}
+[data-variant='blueprint'] .bp-tz__addr {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+  line-height: 1.4;
+}
+[data-variant='blueprint'] .bp-tz__line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 2rem;
+  font-size: 0.9375rem;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 1023px) {
+  [data-variant='blueprint'] .bp-tz {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 479px) {
+  [data-variant='blueprint'] .bp-tz__cities {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  [data-variant='blueprint'] .bp-tz__city + .bp-tz__city {
+    border-left: 0;
+    border-top: var(--bp-t) solid var(--fg);
+  }
+}
+
+/* Штамп в углу главной */
+[data-variant='blueprint'] .bp-corner {
+  position: fixed;
+  right: calc(var(--bp-fr) + 0.5rem);
+  bottom: 0.75rem;
+  z-index: 35;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: min(22rem, calc(100vw - 7rem));
+  opacity: 0;
+  transform: translateY(0.75rem);
+  pointer-events: none;
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-corner.is-shown {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+[data-variant='blueprint'] .bp-corner__stamp {
+  max-width: 100%;
+  display: flex;
+  align-items: stretch;
+  min-height: 2.75rem;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+[data-variant='blueprint'] .bp-corner__cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.875rem;
+  min-width: 0;
+}
+[data-variant='blueprint'] .bp-corner__name {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+[data-variant='blueprint'] .bp-corner__num {
+  border-left: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .bp-corner__label {
+  font-size: 0.625rem;
+  color: var(--fg-muted);
+}
+[data-variant='blueprint'] .bp-corner__chev {
+  align-self: center;
+  margin: 0 0.5rem;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+[data-variant='blueprint'] .bp-corner__stamp[aria-expanded='true'] .bp-corner__chev {
+  transform: rotate(180deg);
+}
+[data-variant='blueprint'] .bp-corner__list {
+  margin: 0 0 0.375rem;
+  padding: 0;
+  list-style: none;
+  min-width: 16rem;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+[data-variant='blueprint'] .bp-corner__list:not([hidden]) {
+  animation: bp-rise var(--dur-base) var(--ease-out);
+}
+@keyframes bp-rise {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+[data-variant='blueprint'] .bp-corner__list button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0 0.75rem;
+  border: 0;
+  border-bottom: var(--bp-t) solid var(--fg);
+  background: transparent;
+  color: var(--fg);
+  font: 400 0.9375rem/1.2 var(--font-body);
+  text-align: left;
+  cursor: pointer;
+}
+[data-variant='blueprint'] .bp-corner__list li:last-child button {
+  border-bottom: 0;
+}
+[data-variant='blueprint'] .bp-corner__list button:hover {
+  background: var(--bp-hatch), var(--surface-2);
+}
+[data-variant='blueprint'] .bp-corner__list button[aria-current='true'] {
+  background: var(--fg);
+  color: var(--bg);
+}
+[data-variant='blueprint'] .bp-corner__list .bp-mono {
+  width: 1.25rem;
+  font-size: 0.8125rem;
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  [data-variant='blueprint'] .bp-corner {
+    max-width: calc(100vw - 32rem);
+  }
+}
+@media (min-width: 640px) and (max-width: 899px) {
+  [data-variant='blueprint'] .bp-corner__name {
+    display: none;
+  }
+  [data-variant='blueprint'] .bp-corner__num {
+    border-left: 0;
+  }
+}
+@media (max-width: 639px) {
+  [data-variant='blueprint'] .bp-corner {
+    max-width: calc(100vw - 6.5rem);
+  }
+  [data-variant='blueprint'] .bp-corner__cell {
+    font-size: 0.8125rem;
+  }
+}
+
+/* ——— Внутренние страницы ядра в языке листа ——— */
+[data-variant='blueprint'] .page {
+  --stage: #ffffff;
+  --page-sticky-top: calc(var(--bp-hd) + 1.25rem);
+  accent-color: var(--fg);
+  caret-color: var(--action);
+}
+
+/* Смена страницы: лист выходит из плоттера — шторка сверху вниз */
+@media (prefers-reduced-motion: no-preference) {
+  [data-variant='blueprint'] main.page:not(.page-home) {
+    animation: bp-sheet-in 560ms var(--ease-out) both;
+  }
+}
+@keyframes bp-sheet-in {
+  from {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0.4;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+/* Поля ввода — ячейки бланка */
+[data-variant='blueprint'] .page input[type='text'],
+[data-variant='blueprint'] .page input[type='search'],
+[data-variant='blueprint'] .page input[type='tel'],
+[data-variant='blueprint'] .page input[type='email'],
+[data-variant='blueprint'] .page select,
+[data-variant='blueprint'] .page textarea {
+  border-color: var(--fg);
+  background-color: var(--surface);
+}
+[data-variant='blueprint'] .page input[type='text']:hover,
+[data-variant='blueprint'] .page input[type='search']:hover,
+[data-variant='blueprint'] .page input[type='tel']:hover,
+[data-variant='blueprint'] .page input[type='email']:hover,
+[data-variant='blueprint'] .page select:hover,
+[data-variant='blueprint'] .page textarea:hover {
+  box-shadow: inset 0 -2px 0 var(--fg);
+}
+[data-variant='blueprint'] .page input:focus-visible,
+[data-variant='blueprint'] .page select:focus-visible,
+[data-variant='blueprint'] .page textarea:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 0;
+}
+[data-variant='blueprint'] .page select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 2.25rem;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--fg) 50%), linear-gradient(-45deg, transparent 50%, var(--fg) 50%),
+    linear-gradient(var(--fg), var(--fg));
+  background-position:
+    right 1rem center,
+    right 0.6rem center,
+    right 2.1rem center;
+  background-size:
+    0.4rem 0.4rem,
+    0.4rem 0.4rem,
+    1px 60%;
+  background-repeat: no-repeat;
+}
+[data-variant='blueprint'] .page input[type='file']::file-selector-button {
+  border: var(--bp-t) solid var(--fg);
+  background: var(--surface-2);
+  cursor: pointer;
+}
+
+/* Крошки */
+[data-variant='blueprint'] nav[aria-label='Хлебные крошки'] svg {
+  opacity: 1;
+  color: var(--fg-muted);
+}
+
+/* Каталог: фильтры — таблица параметров */
+[data-variant='blueprint'] .catalog-filters {
+  padding: 0.875rem;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--surface);
+}
+[data-variant='blueprint'] .catalog-filters details {
+  border-color: var(--fg);
+}
+[data-variant='blueprint'] .catalog-filters summary {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.0625rem;
+}
+[data-variant='blueprint'] .catalog-filters nav a[aria-current='page'] {
+  background: var(--fg);
+  color: var(--bg);
+}
+[data-variant='blueprint'] .catalog-filters nav a[aria-current='page'] span {
+  color: inherit;
+}
+[data-variant='blueprint'] .page a[aria-current='page'].border-fg,
+[data-variant='blueprint'] .page-projects nav a[aria-current='page'] {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+[data-variant='blueprint'] .page-projects nav a[aria-current='page'] span {
+  color: inherit;
+}
+[data-variant='blueprint'] nav[aria-label='Страницы каталога'] a[aria-current='page'] {
+  background: var(--fg);
+  color: var(--bg);
+}
+[data-variant='blueprint'] nav[aria-label='Страницы каталога'] a {
+  border-color: var(--fg);
+  font-family: var(--font-mono);
+}
+[data-variant='blueprint'] .page-catalog [role='status'] {
+  font-family: var(--font-body);
+}
+
+/* Быстрый просмотр — лист на кальке */
+[data-variant='blueprint'] .page dialog {
+  border: var(--bp-s) solid var(--fg);
+  box-shadow: var(--shadow);
+}
+[data-variant='blueprint'] .page dialog::backdrop {
+  background: rgb(251 251 250 / 0.8);
+  opacity: 1;
+}
+
+/* Характеристики — таблица с основной рамкой */
+[data-variant='blueprint'] .spec-table {
+  border: var(--bp-s) solid var(--fg);
+  background: var(--surface);
+}
+[data-variant='blueprint'] .spec-table tr {
+  border-color: var(--fg);
+}
+[data-variant='blueprint'] .spec-table th {
+  padding-left: 0.75rem;
+  border-right: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .spec-table td {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+/* Как мы работаем — номера этапов в графах */
+[data-variant='blueprint'] .how-we-work ol > li > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: var(--bp-s) solid var(--fg);
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 1rem;
+  color: var(--fg);
+}
+[data-variant='blueprint'] .how-we-work ol {
+  border-top: var(--bp-s) solid var(--fg);
+  padding-top: 1.25rem;
+}
+
+/* Заявка внизу страниц — основная надпись */
+[data-variant='blueprint'] .request-cta {
+  margin-left: var(--bp-fl);
+  margin-right: var(--bp-fr);
+  border-top: var(--bp-s) solid var(--fg);
+  border-bottom: var(--bp-s) solid var(--fg);
+  background:
+    linear-gradient(var(--fg), var(--fg)) left 0 top 0 / 100% 0 no-repeat,
+    var(--surface);
+}
+[data-variant='blueprint'] .request-cta .max-w-7xl {
+  padding-left: var(--bp-pad);
+  padding-right: var(--bp-pad);
+}
+[data-variant='blueprint'] .request-cta h2 {
+  font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem);
+  line-height: 1.04;
+}
+
+/* Пустые состояния */
+[data-variant='blueprint'] .page .border-y.border-line {
+  border-top-width: var(--bp-s);
+}
+
+/* Квиз — техническое задание */
+[data-variant='blueprint'] .quiz {
+  padding: 1.25rem;
+  border: var(--bp-s) solid var(--fg);
+  background: var(--surface);
+}
+[data-variant='blueprint'] .quiz ol[aria-label='Шаги заявки'] {
+  gap: 0;
+  border: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .quiz ol[aria-label='Шаги заявки'] > li {
+  padding: 0.375rem 0.5rem;
+  border-top: 0;
+  border-left: var(--bp-t) solid var(--fg);
+  position: relative;
+  isolation: isolate;
+}
+[data-variant='blueprint'] .quiz ol[aria-label='Шаги заявки'] > li:first-child {
+  border-left: 0;
+}
+[data-variant='blueprint'] .quiz ol[aria-label='Шаги заявки'] > li[aria-current='step'] {
+  background: var(--fg);
+}
+[data-variant='blueprint'] .quiz ol[aria-label='Шаги заявки'] > li[aria-current='step'] span {
+  color: var(--bg);
+}
+[data-variant='blueprint'] .quiz ol[aria-label='Шаги заявки'] > li .tabular {
+  font-family: var(--font-mono);
+}
+[data-variant='blueprint'] .quiz-option {
+  border-color: var(--fg) !important;
+  border-width: var(--bp-t);
+  background: var(--surface);
+}
+[data-variant='blueprint'] .quiz-option:hover {
+  background: var(--bp-hatch), var(--surface-2);
+}
+[data-variant='blueprint'] .quiz-option:has(:checked) {
+  outline: var(--bp-s) solid var(--fg);
+  outline-offset: -2px;
+  background: var(--surface);
+}
+[data-variant='blueprint'] .quiz-option:has(:focus-visible) {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+[data-variant='blueprint'] .quiz legend {
+  font-style: italic;
+}
+[data-variant='blueprint'] .quiz [role='alert'].border {
+  border-width: var(--bp-s);
+}
+[data-variant='blueprint'] .bp-tz__form .quiz {
+  background: var(--surface);
+}
+
+/* Запрос КП — ведомость */
+[data-variant='blueprint'] .kp-list ul {
+  border-top-width: var(--bp-s);
+}
+[data-variant='blueprint'] .kp-list ul > li > div:first-child {
+  border-color: var(--fg);
+}
+
+/* Проекты — листы с основной надписью */
+[data-variant='blueprint'] .project-card {
+  border-width: var(--bp-s);
+  border-color: var(--fg);
+  padding: 0.5rem;
+}
+[data-variant='blueprint'] .project-card > a:first-child {
+  border: var(--bp-t) solid var(--fg);
+}
+[data-variant='blueprint'] .project-card > div {
+  margin-top: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  border: var(--bp-s) solid var(--fg);
+}
+[data-variant='blueprint'] .page-project .gallery li {
+  border-width: var(--bp-s);
+  border-color: var(--fg);
+}
+
+/* Контакты: выбранный город — основной линией */
+[data-variant='blueprint'] .contacts-city {
+  border-top-width: var(--bp-t);
+}
+[data-variant='blueprint'] .contacts-city[data-selected] {
+  border-top-width: var(--bp-s);
+}
+
+/* Галерея товара — подиум листа */
+[data-variant='blueprint'] .page-product .gallery > div:first-child {
+  background:
+    radial-gradient(55% 8% at 50% 88%, rgb(20 20 20 / 0.14), transparent 70%),
+    linear-gradient(180deg, rgb(255 214 170 / 0.2), transparent 22%),
+    var(--surface);
+}
+[data-variant='blueprint'] .page-product .gallery > div:first-child img {
+  mix-blend-mode: multiply;
+}
+[data-variant='blueprint'] .page-product .gallery ul button {
+  border-color: var(--fg);
+}
+
+/* Сертификаты и логотипы на странице компании — графы ведомости */
+[data-variant='blueprint'] .page-about li.rounded-lg {
+  border-color: var(--fg);
+}
+[data-variant='blueprint'] .page-about li.rounded-lg img {
+  filter: grayscale(1) contrast(1.1);
+  mix-blend-mode: multiply;
+}
+
+/* ——— Тип листа по направлению ——— */
+/* Благоустройство — генплан: координатная сетка крестами */
+[data-variant='blueprint'] main.page[data-direction='landscape'] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cpath d='M44 48h8M48 44v8' stroke='%23b9b9b3' stroke-width='1'/%3E%3C/svg%3E");
+  background-position: calc(var(--bp-fl) - 48px) 0;
+}
+/* Металл — деталировка: шапки таблиц со штриховкой сечения */
+[data-variant='blueprint'] main.page[data-direction='metal'] .bp-spec thead th,
+[data-variant='blueprint'] main.page[data-direction='metal'] .spec-table th {
+  background: repeating-linear-gradient(45deg, transparent 0 6px, rgb(20 20 20 / 0.12) 6px 7px);
+}
+/* Ритейл — фасады и узлы: отметка уровня ±0,000 под шапкой листа */
+[data-variant='blueprint'] main.page[data-direction='retail'] .bp-ph::after {
+  content: '±0,000';
+  position: absolute;
+  right: 0;
+  bottom: -1.375rem;
+  padding-left: 1.25rem;
+  font: 400 0.6875rem/1 var(--font-mono);
+  color: var(--fg-muted);
+  background: linear-gradient(135deg, transparent 50%, var(--fg) 50% calc(50% + 1px), transparent calc(50% + 1px)) left 0.25rem center / 0.625rem 0.625rem no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-variant='blueprint'] *,
+  [data-variant='blueprint'] *::before,
+  [data-variant='blueprint'] *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+    animation-delay: 0ms !important;
+  }
+}
