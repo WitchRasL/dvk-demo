@@ -1,0 +1,50 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/kassovyy-prilavok-bolshoy/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/bff/bff80aa2668dd1c1f6a4d79daf4edff5.jpg",
+      "width": 1000,
+      "height": 828,
+      "original": {
+        "width": 1000,
+        "height": 828
+      }
+    },
+    {
+      "base": "images/products/kassovyy-prilavok-bolshoy/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/a4a/a4ac0b2a197785e227255245c255ca1a.jpg",
+      "width": 1500,
+      "height": 1000,
+      "original": {
+        "width": 1500,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/products/kassovyy-prilavok-bolshoy/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/iblock/467/4679ceaaef72f3bc6cfca8138ef85a3e.jpg",
+      "width": 1500,
+      "height": 1000,
+      "original": {
+        "width": 1500,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/products/kassovyy-prilavok-bolshoy/4",
+      "n": "4",
+      "source": "https://dvk-style.ru/upload/iblock/a05/a0553e225d1bbdf0d2d0ddec3e9747b3.jpg",
+      "width": 1500,
+      "height": 1000,
+      "original": {
+        "width": 1500,
+        "height": 1000
+      }
+    }
+  ]
+}

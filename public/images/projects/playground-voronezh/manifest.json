@@ -1,0 +1,50 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/projects/playground-voronezh/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/medialibrary/615/615be7a3a02ba78abdd512ab526588d5.jpg",
+      "width": 1188,
+      "height": 550,
+      "original": {
+        "width": 1188,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/playground-voronezh/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/medialibrary/5db/5dbffb1875236df8a5b749435a2f8ea0.jpg",
+      "width": 830,
+      "height": 550,
+      "original": {
+        "width": 830,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/playground-voronezh/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/medialibrary/9f6/9f62287ff06089cd7b471b6e357d12e9.jpg",
+      "width": 830,
+      "height": 550,
+      "original": {
+        "width": 830,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/playground-voronezh/4",
+      "n": "4",
+      "source": "https://dvk-style.ru/upload/medialibrary/42f/42f215ebafe3d27ecef39f9f01f1a06e.jpg",
+      "width": 830,
+      "height": 550,
+      "original": {
+        "width": 830,
+        "height": 550
+      }
+    }
+  ]
+}

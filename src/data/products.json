@@ -1,1 +1,2124 @@
-[]
+[
+  {
+    "id": "muzeynaya-vitrina-mvp-30",
+    "slug": "muzeynaya-vitrina-mvp-30",
+    "name": "Музейная витрина МВП-30",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "museum-equipment",
+    "industries": [
+      "museums"
+    ],
+    "materials": [
+      "glass",
+      "ldsp"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 900,
+      "h": 2000,
+      "d": 400,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "2000х900х400"
+      },
+      {
+        "label": "Материалы",
+        "value": "ДСП 16мм, стекло 5мм, фурнитура импортная, платик по заказу, золочёные накладные элементы."
+      }
+    ],
+    "price": 69734,
+    "priceNote": null,
+    "description": "Музейная витрина МВП-30 представляет собой современную дизайнерскую разработку витрин для музеев современности, установленную возле стены или в центре зала. Идеальна для тематических подборок экспонатов.\nМузейная витрина МВП-30, для различных экспозиций и экспонатов выполнена из ЛДСП 16мм, стекла и пластика с золочёными накладными элементами.\nБольшой выбор цвета.\nДополнительно можно заказать:\n- закалку стекол витрины,\n- установка светодиодной или галогеновой подсветки\n- добавление приборного сукна,\n- установку зеркала,\n- запирающее устройство,\n- изменение размеров изделий при заказа от 10 штук",
+    "images": [
+      {
+        "base": "images/products/muzeynaya-vitrina-mvp-30/1",
+        "alt": "Музейная витрина МВП-30",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "kind": "showcase",
+    "sourceUrl": "https://dvk-style.ru/catalog/muzeynoe-oborudovanie/muzeynaya-vitrina-mvp-30/"
+  },
+  {
+    "id": "muzeynoe-oborudovanie-vt-10-k-1",
+    "slug": "muzeynoe-oborudovanie-vt-10-k-1",
+    "name": "Музейное оборудование ВТ-К-1",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "showcases",
+    "industries": [
+      "museums"
+    ],
+    "materials": [
+      "glass",
+      "ldsp"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 1000,
+      "h": 2500,
+      "d": 1000,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "2500x1000x1000"
+      },
+      {
+        "label": "Материалы",
+        "value": "противоударная кромка АБС 2мм, крепеж, фурнитура МДМ, стекло полированное 5 - 6 мм, подпятники регулируемые, ламинированное ДСП 16 мм; Полированное стекло 5мм, меламин цветной ламинированный, фурнитура МДМ"
+      }
+    ],
+    "price": 96350,
+    "priceNote": null,
+    "description": "Оборудование для музея изготавливается из цветного меламина толщиной 16 мм под “дерево” или в однотонных цветах с отделкой цветной кромочной лентой.\nВитрины можно изготавливать по размерам, предоставленным заказчиком, с использованием любой цветовой гаммы, с применением металлизированного пластика для создания своеобразного интерьера музея.\nДополнительно возможно оборудовать витрины подсветкой, зеркалами, замками, защитной противоударной пленкой для стекол.\nСтоимость дополнительного\nоборудования узнавайте у наших менеджеров.",
+    "images": [
+      {
+        "base": "images/products/muzeynoe-oborudovanie-vt-10-k-1/1",
+        "alt": "Музейное оборудование ВТ-К-1",
+        "w": 1051,
+        "h": 1400
+      }
+    ],
+    "kind": "showcase",
+    "sourceUrl": "https://dvk-style.ru/catalog/vitriny-dlya-muzeya/muzeynoe-oborudovanie-vt-10-k-1/"
+  },
+  {
+    "id": "vitrina-dlya-chasov-vchyu-23",
+    "slug": "vitrina-dlya-chasov-vchyu-23",
+    "name": "Витрина для часов ВЧЮ-23",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "jewelry-equipment",
+    "industries": [
+      "jewelry"
+    ],
+    "materials": [
+      "ldsp",
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 800,
+      "h": 1800,
+      "d": 400,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "1800х800х400"
+      },
+      {
+        "label": "Материалы",
+        "value": "ДСП ламинированное 16 мм, пластик, противоударная кромка, фурнитура МДМ"
+      }
+    ],
+    "price": 11260,
+    "priceNote": null,
+    "description": "В наших ювелирных витринах и прилавках заложен основной принцип продажи в ювелирных магазинах. Выкладка — это виртуозно подготовленный вариант для каждого магази­на демонстрации ювелирных изделий и часов на оригинальном торговом ювелирном оборудовании. Основная цель обратить внимание покупателей к цепочке, кольцу, колье, перстню и затем продать его, с максимальной торговой наценкой.\nГрамотно расположенная выкладка на витрине ювелирного салона мгновенно притягивает взгляд покупателя. Она устанавливает выигрышный зрительный контакт покупателя с ювелирными изделиями!\nУвеличение продаж на наших стеклянных ювелирных витринах и прилавках заметны сразу. Этому способствует и подсветка ювелирных витрин светодиодной подсветкой. Клиенты в таких случаях прекрасно видят товар, им удобно ориентироваться в товарных группах и они положительно откликаются на сигналы, которые посылают им современные выкладка и подсветка.",
+    "images": [
+      {
+        "base": "images/products/vitrina-dlya-chasov-vchyu-23/1",
+        "alt": "Витрина для часов ВЧЮ-23",
+        "w": 1000,
+        "h": 825
+      },
+      {
+        "base": "images/products/vitrina-dlya-chasov-vchyu-23/2",
+        "alt": "Витрина для часов ВЧЮ-23, фото 2",
+        "w": 1000,
+        "h": 750
+      }
+    ],
+    "kind": "showcase",
+    "sourceUrl": "https://dvk-style.ru/catalog/yuvelirnoe-torgovoe-oborudovanie/vitrina-dlya-chasov-vchyu-23/"
+  },
+  {
+    "id": "vitrina-pristennaya-s-nakopitelem-vod-24",
+    "slug": "vitrina-pristennaya-s-nakopitelem-vod-24",
+    "name": "Витрина пристенная с накопителем ВОД-24",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "optics-equipment",
+    "industries": [
+      "optics"
+    ],
+    "materials": [
+      "glass",
+      "ldsp"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "Рассчитывается индивидуально"
+      },
+      {
+        "label": "Материалы",
+        "value": "ламинированное ДСП 16 мм; кромка противоударная; стекло полированное 5 мм; крепеж и фурнитура"
+      }
+    ],
+    "price": 14020,
+    "priceNote": null,
+    "description": "Для создания неповторимой атмосферы вашего салона оптики, дизайнеры «ДВК Стиль» разработают торговое оборудование оптики под заказ непосредственно только для Вас.\nДля изготовления мы используем только качественные материалы и комплектующие, большинство из которых имеют сертификаты качества.\nПри подготовке дизайн и 3D- модели наши дизайнеры учтут особенности вашего помещения и пожелания. Из материалов используемых у нас на производстве стоит присмотреться к различным моделям галогеновых светильников, прожекторов и светодиодных ламп, которые точечно заострят внимание покупателя на достоинствах отдельных оправ и линз.",
+    "images": [
+      {
+        "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/1",
+        "alt": "Витрина пристенная с накопителем ВОД-24",
+        "w": 1038,
+        "h": 864
+      },
+      {
+        "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/2",
+        "alt": "Витрина пристенная с накопителем ВОД-24, фото 2",
+        "w": 1152,
+        "h": 864
+      },
+      {
+        "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/3",
+        "alt": "Витрина пристенная с накопителем ВОД-24, фото 3",
+        "w": 1152,
+        "h": 864
+      },
+      {
+        "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/4",
+        "alt": "Витрина пристенная с накопителем ВОД-24, фото 4",
+        "w": 1152,
+        "h": 864
+      },
+      {
+        "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/5",
+        "alt": "Витрина пристенная с накопителем ВОД-24, фото 5",
+        "w": 1152,
+        "h": 864
+      },
+      {
+        "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/6",
+        "alt": "Витрина пристенная с накопителем ВОД-24, фото 6",
+        "w": 1152,
+        "h": 864
+      }
+    ],
+    "kind": "showcase",
+    "sourceUrl": "https://dvk-style.ru/catalog/oborudovanie-dlya-optiki-i-ochkov/vitrina-pristennaya-s-nakopitelem-vod-24/"
+  },
+  {
+    "id": "prilavok-dlya-optiki-pod-20",
+    "slug": "prilavok-dlya-optiki-pod-20",
+    "name": "Прилавок для оптики ПОД-20",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "counters",
+    "industries": [
+      "optics"
+    ],
+    "materials": [
+      "glass",
+      "ldsp"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [
+      {
+        "label": "Дополнительные опции",
+        "value": "подсветка витрин, замки, противоударная кромка для стекла"
+      },
+      {
+        "label": "Материалы",
+        "value": "ламинированное ДСП 16 мм; стекло 5 мм; фурнитура; кромка противоударная"
+      }
+    ],
+    "price": 17800,
+    "priceNote": null,
+    "description": "Для создания неповторимой атмосферы вашего салона оптики, дизайнеры «ДВК Стиль» разработают торговое оборудование оптики под заказ непосредственно только для Вас.\nДля изготовления мы используем только качественные материалы и комплектующие, большинство из которых имеют сертификаты качества.\nПри подготовке дизайн и 3D- модели наши дизайнеры учтут особенности вашего помещения и пожелания. Из материалов используемых у нас на производстве стоит присмотреться к различным моделям галогеновых светильников, прожекторов и светодиодных ламп, которые точечно заострят внимание покупателя на достоинствах отдельных оправ и линз.",
+    "images": [
+      {
+        "base": "images/products/prilavok-dlya-optiki-pod-20/1",
+        "alt": "Прилавок для оптики ПОД-20",
+        "w": 1000,
+        "h": 834
+      },
+      {
+        "base": "images/products/prilavok-dlya-optiki-pod-20/2",
+        "alt": "Прилавок для оптики ПОД-20, фото 2",
+        "w": 1000,
+        "h": 563
+      }
+    ],
+    "kind": "counter",
+    "sourceUrl": "https://dvk-style.ru/catalog/prilavki/prilavok-dlya-optiki-pod-20/"
+  },
+  {
+    "id": "vitriny-peredney-linii",
+    "slug": "vitriny-peredney-linii",
+    "name": "Витрины передней линии ВПЛ-51",
+    "direction": "retail",
+    "sectionId": "pharmacy-equipment",
+    "categoryId": "pharmacy-showcases",
+    "industries": [
+      "pharmacy"
+    ],
+    "materials": [
+      "glass",
+      "ldsp"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 800,
+      "h": 2400,
+      "d": 600,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "2400х800х600"
+      },
+      {
+        "label": "Материалы",
+        "value": "Меламин цветной 16мм, кромочная лента 2мм, полированное стекло 5мм"
+      }
+    ],
+    "price": 10370,
+    "priceNote": null,
+    "description": "Рабочие места оснащены персональными компьютерами, подключёнными к кассовому аппарату, находящемуся в межкассовой витрине. Сверху изделия оснащены фризом, перед которым возможно выставить рекламные материалы.",
+    "images": [
+      {
+        "base": "images/products/vitriny-peredney-linii/1",
+        "alt": "Витрины передней линии ВПЛ-51",
+        "w": 1000,
+        "h": 836
+      },
+      {
+        "base": "images/products/vitriny-peredney-linii/2",
+        "alt": "Витрины передней линии ВПЛ-51, фото 2",
+        "w": 750,
+        "h": 1000
+      },
+      {
+        "base": "images/products/vitriny-peredney-linii/3",
+        "alt": "Витрины передней линии ВПЛ-51, фото 3",
+        "w": 750,
+        "h": 1000
+      },
+      {
+        "base": "images/products/vitriny-peredney-linii/4",
+        "alt": "Витрины передней линии ВПЛ-51, фото 4",
+        "w": 750,
+        "h": 1000
+      },
+      {
+        "base": "images/products/vitriny-peredney-linii/5",
+        "alt": "Витрины передней линии ВПЛ-51, фото 5",
+        "w": 750,
+        "h": 1000
+      },
+      {
+        "base": "images/products/vitriny-peredney-linii/6",
+        "alt": "Витрины передней линии ВПЛ-51, фото 6",
+        "w": 750,
+        "h": 1000
+      }
+    ],
+    "kind": "showcase",
+    "sourceUrl": "https://dvk-style.ru/catalog/vitriny-dlya-aptek/vitriny-peredney-linii/"
+  },
+  {
+    "id": "kassovyy-prilavok-bolshoy",
+    "slug": "kassovyy-prilavok-bolshoy",
+    "name": "Кассовый прилавок большой КПБ-40",
+    "direction": "retail",
+    "sectionId": "pharmacy-equipment",
+    "categoryId": "pharmacy-counters",
+    "industries": [
+      "pharmacy"
+    ],
+    "materials": [
+      "ldsp"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "Подбираются индивидуально"
+      },
+      {
+        "label": "Материалы",
+        "value": "Меламин цветной 16мм, кромочная лента 2мм"
+      }
+    ],
+    "price": 14260,
+    "priceNote": null,
+    "description": "Рабочие места оснащены персональными компьютерами, подключёнными к кассовому аппарату, находящемуся в межкассовой витрине. Сверху изделия оснащены фризом, перед которым возможно выставить рекламные материалы.",
+    "images": [
+      {
+        "base": "images/products/kassovyy-prilavok-bolshoy/1",
+        "alt": "Кассовый прилавок большой КПБ-40",
+        "w": 1000,
+        "h": 828
+      },
+      {
+        "base": "images/products/kassovyy-prilavok-bolshoy/2",
+        "alt": "Кассовый прилавок большой КПБ-40, фото 2",
+        "w": 1500,
+        "h": 1000
+      },
+      {
+        "base": "images/products/kassovyy-prilavok-bolshoy/3",
+        "alt": "Кассовый прилавок большой КПБ-40, фото 3",
+        "w": 1500,
+        "h": 1000
+      },
+      {
+        "base": "images/products/kassovyy-prilavok-bolshoy/4",
+        "alt": "Кассовый прилавок большой КПБ-40, фото 4",
+        "w": 1500,
+        "h": 1000
+      }
+    ],
+    "kind": "counter",
+    "sourceUrl": "https://dvk-style.ru/catalog/aptechnye-prilavki/kassovyy-prilavok-bolshoy/"
+  },
+  {
+    "id": "ostrovnoy-stellazh-osf-22",
+    "slug": "ostrovnoy-stellazh-osf-22",
+    "name": "Островной стеллаж ОСФ-22",
+    "direction": "retail",
+    "sectionId": "pharmacy-equipment",
+    "categoryId": "pharmacy-racks",
+    "industries": [
+      "pharmacy"
+    ],
+    "materials": [
+      "metal",
+      "glass",
+      "ldsp"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 1000,
+      "h": 1400,
+      "d": 600,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "1400х1000х600"
+      },
+      {
+        "label": "Материалы",
+        "value": "противоударная кромка АБС 2мм, крепеж, фурнитура МДМ, стекло полированное 5 - 6 мм, фурнитура импортного производства в 'хроме' или 'золоте', ламинированное ДСП 16 мм"
+      }
+    ],
+    "price": 19700,
+    "priceNote": null,
+    "description": "Островной стеллаж ОСФ-22 с крючками.\nОборудование для аптек предназначено для любых видов аптечной торговли: закрытый вид или открытый.\nОно представлено в нескольких деловых нишах: от \"эконом-класса\" до аптек, позиционирующих себя как элитного класса по продаже дорогостоящих и поэтому натурально чистых лекарств.\nСтоимость изделий представлена без дополнительных опций.\nИзделия дополнительно могут комплектоваться:\nзамками\nрекламными лайтбоксами\nподсветкой\nв различной цветовой гамме",
+    "images": [
+      {
+        "base": "images/products/ostrovnoy-stellazh-osf-22/1",
+        "alt": "Островной стеллаж ОСФ-22",
+        "w": 775,
+        "h": 600
+      },
+      {
+        "base": "images/products/ostrovnoy-stellazh-osf-22/2",
+        "alt": "Островной стеллаж ОСФ-22, фото 2",
+        "w": 750,
+        "h": 1000
+      }
+    ],
+    "kind": "rack",
+    "sourceUrl": "https://dvk-style.ru/catalog/stellazhi-dlya-aptek/ostrovnoy-stellazh-osf-22/"
+  },
+  {
+    "id": "stellazh-dlya-odezhdy-sp-4",
+    "slug": "stellazh-dlya-odezhdy-sp-4",
+    "name": "Стеллаж для одежды СП-4",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "apparel-equipment",
+    "industries": [
+      "apparel"
+    ],
+    "materials": [
+      "metal",
+      "glass",
+      "ldsp"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 1000,
+      "h": 2000,
+      "d": 300,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "2000x1000х300"
+      },
+      {
+        "label": "Материалы",
+        "value": "ДСП ламинированное 16мм, Кромка противоударная, Труба 20 мм \"Джокер\" (хром), Стекло матированное полированное 5мм, Фурнитура МДМ."
+      }
+    ],
+    "price": 13680,
+    "priceNote": null,
+    "description": "Стеллаж СП-4 достаточно компактный и при этом - многофункциональный. Может быть изготовлен и на основе ДСП, и на основе эконом-панелей.\nДополнительно можно заказать подсветку, вешалки, бортценники и т.д.",
+    "images": [
+      {
+        "base": "images/products/stellazh-dlya-odezhdy-sp-4/1",
+        "alt": "Стеллаж для одежды СП-4",
+        "w": 1024,
+        "h": 768
+      },
+      {
+        "base": "images/products/stellazh-dlya-odezhdy-sp-4/2",
+        "alt": "Стеллаж для одежды СП-4, фото 2",
+        "w": 768,
+        "h": 1024
+      },
+      {
+        "base": "images/products/stellazh-dlya-odezhdy-sp-4/3",
+        "alt": "Стеллаж для одежды СП-4, фото 3",
+        "w": 1024,
+        "h": 768
+      }
+    ],
+    "kind": "rack",
+    "sourceUrl": "https://dvk-style.ru/catalog/oborudovanie-dlya-odezhdy/stellazh-dlya-odezhdy-sp-4/"
+  },
+  {
+    "id": "stellazh-demonstratsionnyy-sd-12",
+    "slug": "stellazh-demonstratsionnyy-sd-12",
+    "name": "Стеллаж демонстрационный СД-12",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "cosmetics-store-equipment",
+    "industries": [
+      "cosmetics"
+    ],
+    "materials": [
+      "ldsp"
+    ],
+    "lighting": "warm",
+    "dimensions": {
+      "w": 800,
+      "h": 1300,
+      "d": 800,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "1300х800х800"
+      },
+      {
+        "label": "Материалы",
+        "value": "ДСП ламинированное 16мм, кромка противоударная 2мм, лампы галогеновые"
+      }
+    ],
+    "price": 17793,
+    "priceNote": null,
+    "description": "Яркий и привлекающий внимание, этот стеллаж - незаменимый атрибут любого магазина косметики. Изделие может быть выполнено в эконо-варианте. Рекламные постеры в стоимость изделия не входят.\nВыигрышный случай приобрести стойки для косметики для торговых центров у нас. Они подчеркнут ваш отдел на фоне броской рекламы других торговых площадей.\nОригинальная дизайнерская расстановка наглядно покажет, эксклюзивность только для вас созданной обстановки магазина.\nВысокие пристенные витрины с выдвинутыми кубическими тумбами в сочетании с островными стеллажами создают ощущение элитности и приватности.\nВ каждом сегменте магазина косметики – создаётся отдельная группа парфюмерии и косметики, с наглядным выделением зоны каждого бренда. Каштановые цвета оборудования для парфюмерии с небольшим преобладанием бежевого фона стоек и витрин для парфюмерии подчеркивают элегантность и состоятельность человека пришедшего купить парфюмерию и косметику.\nСветодиодная подсветка, являющейся самой\nсовременной подсветкой для витрин и стоек\nдля косметики, позволяет красиво обыграть все\nтоварные группы..",
+    "images": [
+      {
+        "base": "images/products/stellazh-demonstratsionnyy-sd-12/1",
+        "alt": "Стеллаж демонстрационный СД-12",
+        "w": 576,
+        "h": 480
+      }
+    ],
+    "kind": "rack",
+    "sourceUrl": "https://dvk-style.ru/catalog/dlya-magazinov-kosmetiki-i-parfyumerii/stellazh-demonstratsionnyy-sd-12/"
+  },
+  {
+    "id": "torgovyy-modul-tmd-3210",
+    "slug": "torgovyy-modul-tmd-3210",
+    "name": "Торговый островок ТМД-3210",
+    "direction": "retail",
+    "sectionId": "trade-islands",
+    "categoryId": "islands-jewelry",
+    "industries": [
+      "jewelry",
+      "mall-islands"
+    ],
+    "materials": [
+      "glass",
+      "ldsp"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 2800,
+      "h": 1200,
+      "d": 2000,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "1200х2800х2000"
+      },
+      {
+        "label": "Материалы",
+        "value": "противоударная кромка АБС 2мм, крепеж, фурнитура МДМ, зеркало 4 мм, стекло полированное 5 - 6 мм, подпятники регулируемые, ламинированное ДСП 16 мм"
+      },
+      {
+        "label": "Страна производитель",
+        "value": "Россия"
+      }
+    ],
+    "price": 140730,
+    "priceNote": null,
+    "description": "Торговый модуль может быть изготовлен:\nв \"эконом - классе\" из ламинированного ДСП ( производство Россия), по желанию заказчика возможно изготовление из ламинированного ДСП импортного производства.\nв \"бизнес - классе\" будет изготовлен из пластика фирмы \"АВET\" ( производство Италия) по технологии \"POSTFORMING\".\nв \"элит - классе\" изготовлен из МДФ и окрашен в глянцевом или матовом исполнении.\nДополнительные опции:\nзамки в прилавки и витрины;\nподсветка: светодиодная ( двух видов), галогеновая, люменисцентная\nпротивоударная пленка для стекол или стекло - триплекс\nлайтбоксы с подсветкой,\nдекоративные элементы: объёмные буквы, буквы подсвеченные, вывески из оргстекла.\nПо желанию Заказчика возможно изготовление по любым размерам и с изменением цветовой гаммы оборудования.\nСтоимость изделия на сайте представлена в «Эконом- классе» без дополнительных опций.",
+    "images": [
+      {
+        "base": "images/products/torgovyy-modul-tmd-3210/1",
+        "alt": "Торговый островок ТМД-3210",
+        "w": 1000,
+        "h": 750
+      },
+      {
+        "base": "images/products/torgovyy-modul-tmd-3210/2",
+        "alt": "Торговый островок ТМД-3210, фото 2",
+        "w": 1000,
+        "h": 725
+      },
+      {
+        "base": "images/products/torgovyy-modul-tmd-3210/3",
+        "alt": "Торговый островок ТМД-3210, фото 3",
+        "w": 1000,
+        "h": 706
+      }
+    ],
+    "kind": "island",
+    "sourceUrl": "https://dvk-style.ru/catalog/yuvelirnye/torgovyy-modul-tmd-3210/"
+  },
+  {
+    "id": "mobilnyy-vystavochnyy-stend-svm-67",
+    "slug": "mobilnyy-vystavochnyy-stend-svm-67",
+    "name": "Мобильный выставочный стенд СВМ-67",
+    "direction": "retail",
+    "sectionId": "trade-equipment",
+    "categoryId": "exhibition-stands",
+    "industries": [
+      "museums"
+    ],
+    "materials": [
+      "metal",
+      "ldsp"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 250,
+      "h": 2000,
+      "d": 2000,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "2000x250x2000"
+      },
+      {
+        "label": "Материалы",
+        "value": "ДСП ламинированное 16мм, ДСП ламинированное 20мм, кромка противоударная 2мм, труба металлическая 20x20мм, лампы галогеновые поставляются дополнительно"
+      },
+      {
+        "label": "Цвет",
+        "value": "выбирается по желанию заказчика"
+      }
+    ],
+    "price": 26415,
+    "priceNote": null,
+    "description": "Простой и эффективный способ продемонстрировать товары. Модули изготовляются на заказ и могут быть полностью изменены или дополнены в соответствии с Вашими пожеланиями. Стоимость может варьироваться в зависимости от размеров и комплектации.\nНа производстве, оснащенном современным оборудованием импортного производства: форматно - раскроечными и автоматическими фрезерными станками, производится раскрой и ламинирование всех деталей для сборки мобильных выставочных стендов и витрин.\nОкраска элементов мобильных выставочных стендов проводится в автоматической камере запекания по трибостатическому методу напыления. Благодаря этому и тщательной проверке продукции сотрудника ОТК предприятия с конвейера предприятия выходит готовая продукция самого высокого качества.\nРазнообразный выбор мобильных выставочных конструкций изготовленных нашими сотрудниками поможет найти оптимальное решение для выставочной экспозиции.",
+    "images": [
+      {
+        "base": "images/products/mobilnyy-vystavochnyy-stend-svm-67/1",
+        "alt": "Мобильный выставочный стенд СВМ-67",
+        "w": 690,
+        "h": 570
+      }
+    ],
+    "kind": "other",
+    "sourceUrl": "https://dvk-style.ru/catalog/vystavochnye-stendy/mobilnyy-vystavochnyy-stend-svm-67/"
+  },
+  {
+    "id": "igrovoy-kompleks-d-24-akula",
+    "slug": "igrovoy-kompleks-d-24-akula",
+    "name": "Игровой комплекс Д-24 \"Акула\"",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "play-complexes",
+    "industries": [
+      "yards-schools"
+    ],
+    "materials": [
+      "metal",
+      "wood"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 9535,
+      "h": 3750,
+      "d": 3230,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ДхШхВ, мм",
+        "value": "9535х3230х3750"
+      },
+      {
+        "label": "Возрастная группа",
+        "value": "от 7 до 14 лет"
+      },
+      {
+        "label": "Высота горки, мм",
+        "value": "1010"
+      },
+      {
+        "label": "Материалы",
+        "value": "Сталь нержавеющая; крепеж, фурнитура; брус хвойных пород"
+      }
+    ],
+    "price": null,
+    "priceNote": "по запросу",
+    "description": null,
+    "images": [
+      {
+        "base": "images/products/igrovoy-kompleks-d-24-akula/1",
+        "alt": "Игровой комплекс Д-24 \"Акула\"",
+        "w": 1000,
+        "h": 600
+      },
+      {
+        "base": "images/products/igrovoy-kompleks-d-24-akula/2",
+        "alt": "Игровой комплекс Д-24 \"Акула\", фото 2",
+        "w": 1280,
+        "h": 768
+      },
+      {
+        "base": "images/products/igrovoy-kompleks-d-24-akula/3",
+        "alt": "Игровой комплекс Д-24 \"Акула\", фото 3",
+        "w": 1280,
+        "h": 768
+      }
+    ],
+    "kind": "playground",
+    "sourceUrl": "https://dvk-style.ru/catalog/detskie-kompleksy-korabliki/igrovoy-kompleks-d-24-akula/"
+  },
+  {
+    "id": "igrovoy-kompleks-mgm-78-korablik",
+    "slug": "igrovoy-kompleks-mgm-78-korablik",
+    "name": "Игровой комплекс МГМ-78 \"Кораблик\"",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "play-complexes",
+    "industries": [
+      "yards-schools"
+    ],
+    "materials": [
+      "metal",
+      "wood"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 5010,
+      "h": 2325,
+      "d": 2410,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ДхШхВ, мм",
+        "value": "5010х2410х2325"
+      },
+      {
+        "label": "Возрастная группа",
+        "value": "от 3 до 6 лет"
+      },
+      {
+        "label": "Материалы",
+        "value": "Сталь нержавеющая; крепеж, фурнитура; брус хвойных пород"
+      }
+    ],
+    "price": 297800,
+    "priceNote": null,
+    "description": null,
+    "images": [
+      {
+        "base": "images/products/igrovoy-kompleks-mgm-78-korablik/1",
+        "alt": "Игровой комплекс МГМ-78 \"Кораблик\"",
+        "w": 1000,
+        "h": 600
+      },
+      {
+        "base": "images/products/igrovoy-kompleks-mgm-78-korablik/2",
+        "alt": "Игровой комплекс МГМ-78 \"Кораблик\", фото 2",
+        "w": 1000,
+        "h": 600
+      }
+    ],
+    "kind": "playground",
+    "sourceUrl": "https://dvk-style.ru/catalog/detskie-kompleksy-korabliki/igrovoy-kompleks-mgm-78-korablik/"
+  },
+  {
+    "id": "detskiy-gorodok-mgk-202-rusich-skazka-s-kachelyami-gnezdo",
+    "slug": "detskiy-gorodok-mgk-202-rusich-skazka-s-kachelyami-gnezdo",
+    "name": "Детский городок МГК-202 \"Русич Сказка\" с качелями \"Гнездо\"",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "play-towns",
+    "industries": [
+      "yards-schools"
+    ],
+    "materials": [
+      "metal",
+      "wood"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 5520,
+      "h": 3610,
+      "d": 3810,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ДхШхВ, мм",
+        "value": "5520х3810х3610"
+      },
+      {
+        "label": "Возрастная группа",
+        "value": "от 7 до 14 лет"
+      },
+      {
+        "label": "Материалы",
+        "value": "Сталь нержавеющая; крепеж, фурнитура; брус хвойных пород"
+      }
+    ],
+    "price": null,
+    "priceNote": "по запросу",
+    "description": null,
+    "images": [
+      {
+        "base": "images/products/detskiy-gorodok-mgk-202-rusich-skazka-s-kachelyami-gnezdo/1",
+        "alt": "Детский городок МГК-202 \"Русич Сказка\" с качелями \"Гнездо\"",
+        "w": 1000,
+        "h": 600
+      }
+    ],
+    "kind": "playground",
+    "sourceUrl": "https://dvk-style.ru/catalog/detskie-gorodki-s-kachelyami/detskiy-gorodok-mgk-202-rusich-skazka-s-kachelyami-gnezdo/"
+  },
+  {
+    "id": "detskie-mayatnikovye-kacheli-next-k-2013-s-tsepnym-podvesom-tip-2",
+    "slug": "detskie-mayatnikovye-kacheli-next-k-2013-s-tsepnym-podvesom-tip-2",
+    "name": "Детские маятниковые качели NEXT К-2013 с цепным подвесом Тип-2",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "swings",
+    "industries": [
+      "yards-schools"
+    ],
+    "materials": [
+      "metal",
+      "wood"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 2580,
+      "h": 2520,
+      "d": 1455,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ДхШхВ, мм",
+        "value": "2580х1455х2520"
+      },
+      {
+        "label": "Возрастная группа",
+        "value": "от 3 до 12 лет"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "93"
+      },
+      {
+        "label": "Материалы",
+        "value": "Сталь нержавеющая; крепеж, фурнитура; брус хвойных пород"
+      }
+    ],
+    "price": null,
+    "priceNote": "по запросу",
+    "description": null,
+    "images": [
+      {
+        "base": "images/products/detskie-mayatnikovye-kacheli-next-k-2013-s-tsepnym-podvesom-tip-2/1",
+        "alt": "Детские маятниковые качели NEXT К-2013 с цепным подвесом Тип-2",
+        "w": 1000,
+        "h": 600
+      },
+      {
+        "base": "images/products/detskie-mayatnikovye-kacheli-next-k-2013-s-tsepnym-podvesom-tip-2/2",
+        "alt": "Детские маятниковые качели NEXT К-2013 с цепным подвесом Тип-2, фото 2",
+        "w": 1280,
+        "h": 768
+      },
+      {
+        "base": "images/products/detskie-mayatnikovye-kacheli-next-k-2013-s-tsepnym-podvesom-tip-2/3",
+        "alt": "Детские маятниковые качели NEXT К-2013 с цепным подвесом Тип-2, фото 3",
+        "w": 1000,
+        "h": 600
+      }
+    ],
+    "kind": "playground",
+    "sourceUrl": "https://dvk-style.ru/catalog/mayatnikovye-kacheli/detskie-mayatnikovye-kacheli-next-k-2013-s-tsepnym-podvesom-tip-2/"
+  },
+  {
+    "id": "karusel-next-mk-27",
+    "slug": "karusel-next-mk-27",
+    "name": "Карусель NEXT МК-27",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "carousels",
+    "industries": [
+      "yards-schools"
+    ],
+    "materials": [
+      "metal",
+      "wood"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 1920,
+      "h": 630,
+      "d": 1920,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ДхШхВ, мм",
+        "value": "1920х1920х630"
+      },
+      {
+        "label": "Возрастная группа",
+        "value": "от 3 до 6 лет"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "129"
+      },
+      {
+        "label": "Материалы",
+        "value": "Сталь нержавеющая; крепеж, фурнитура; брус хвойных пород"
+      }
+    ],
+    "price": null,
+    "priceNote": "по запросу",
+    "description": null,
+    "images": [
+      {
+        "base": "images/products/karusel-next-mk-27/1",
+        "alt": "Карусель NEXT МК-27",
+        "w": 1000,
+        "h": 600
+      },
+      {
+        "base": "images/products/karusel-next-mk-27/2",
+        "alt": "Карусель NEXT МК-27, фото 2",
+        "w": 1000,
+        "h": 600
+      }
+    ],
+    "kind": "playground",
+    "sourceUrl": "https://dvk-style.ru/catalog/karuseli-detskie/karusel-next-mk-27/"
+  },
+  {
+    "id": "detskaya-gorka-mgs-3-vverkh-nogami",
+    "slug": "detskaya-gorka-mgs-3-vverkh-nogami",
+    "name": "Детская горка МГС-3 \"Вверх ногами\"",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "slides",
+    "industries": [
+      "yards-schools"
+    ],
+    "materials": [
+      "metal",
+      "wood"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 2400,
+      "h": 1600,
+      "d": 850,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ДхШхВ, мм",
+        "value": "2400х850х1600"
+      },
+      {
+        "label": "Возрастная группа",
+        "value": "от 3 до 6 лет"
+      },
+      {
+        "label": "Материалы",
+        "value": "Сталь нержавеющая; крепеж, фурнитура; брус хвойных пород"
+      }
+    ],
+    "price": 57200,
+    "priceNote": null,
+    "description": null,
+    "images": [
+      {
+        "base": "images/products/detskaya-gorka-mgs-3-vverkh-nogami/1",
+        "alt": "Детская горка МГС-3 \"Вверх ногами\"",
+        "w": 1000,
+        "h": 600
+      }
+    ],
+    "kind": "playground",
+    "sourceUrl": "https://dvk-style.ru/catalog/detskie-gorki-dlya-dachi/detskaya-gorka-mgs-3-vverkh-nogami/"
+  },
+  {
+    "id": "interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25",
+    "slug": "interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25",
+    "name": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25",
+    "direction": "landscape",
+    "sectionId": "playgrounds",
+    "categoryId": "sandboxes",
+    "industries": [
+      "yards-schools"
+    ],
+    "materials": [
+      "metal",
+      "wood"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 3500,
+      "h": 2500,
+      "d": 3220,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ДхШхВ, мм",
+        "value": "3500х3220х2500"
+      },
+      {
+        "label": "Возрастная группа",
+        "value": "от 3 до 6 лет"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "316"
+      },
+      {
+        "label": "Материалы",
+        "value": "Сталь нержавеющая; крепеж, фурнитура; брус хвойных пород"
+      }
+    ],
+    "price": null,
+    "priceNote": "по запросу",
+    "description": null,
+    "images": [
+      {
+        "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/1",
+        "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25",
+        "w": 1000,
+        "h": 600
+      },
+      {
+        "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/2",
+        "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 2",
+        "w": 1000,
+        "h": 600
+      },
+      {
+        "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/3",
+        "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 3",
+        "w": 1280,
+        "h": 768
+      },
+      {
+        "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/4",
+        "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 4",
+        "w": 1280,
+        "h": 768
+      },
+      {
+        "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/5",
+        "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 5",
+        "w": 1280,
+        "h": 768
+      },
+      {
+        "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/6",
+        "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 6",
+        "w": 1280,
+        "h": 768
+      },
+      {
+        "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/7",
+        "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 7",
+        "w": 1280,
+        "h": 768
+      }
+    ],
+    "kind": "playground",
+    "sourceUrl": "https://dvk-style.ru/catalog/pesochnitsa-dlya-detskogo-sada/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/"
+  },
+  {
+    "id": "skamya-parkovaya-s-75-v-arkhitekturnoy-kroshke-1",
+    "slug": "skamya-parkovaya-s-75-v-arkhitekturnoy-kroshke-1",
+    "name": "Скамейка бетонная парковая С-75 в архитектурной крошке №1",
+    "direction": "landscape",
+    "sectionId": "benches",
+    "categoryId": "park-benches",
+    "industries": [
+      "public-spaces"
+    ],
+    "materials": [
+      "concrete"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 2050,
+      "h": 450,
+      "d": 2050,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ДхШхВ, мм",
+        "value": "2050 х 2050 х 450"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "437"
+      }
+    ],
+    "price": 21000,
+    "priceNote": null,
+    "description": "Скамейки могут быть изготовлены:\n- с применением архитектурной крошки (5 вариантов отделки):\n- поверхность архитектурной крошки может быть заполирована\n- из бетона\n- из бетона с напыление защитного покрытия ( 4 варианта колора)\n- крашеные (4 варианта цвета).\nСкамейки предназначены для установки на улице во дворах, парках, скверах, возле школ и детских садов.\nНекоторые из образцов скамеек имеют емкости для цветов, которые выполняют роль комбинации скамейка – цветочница.",
+    "images": [
+      {
+        "base": "images/products/skamya-parkovaya-s-75-v-arkhitekturnoy-kroshke-1/1",
+        "alt": "Скамейка бетонная парковая С-75 в архитектурной крошке №1",
+        "w": 600,
+        "h": 498
+      }
+    ],
+    "kind": "bench",
+    "sourceUrl": "https://dvk-style.ru/catalog/skameyki-ulichnye-parkovye/skamya-parkovaya-s-75-v-arkhitekturnoy-kroshke-1/"
+  },
+  {
+    "id": "skameyka-na-betonnom-osnovanii-s-222",
+    "slug": "skameyka-na-betonnom-osnovanii-s-222",
+    "name": "Скамейка на бетонном основании С-222",
+    "direction": "landscape",
+    "sectionId": "benches",
+    "categoryId": "concrete-benches",
+    "industries": [
+      "public-spaces"
+    ],
+    "materials": [
+      "wood",
+      "concrete"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 1460,
+      "h": 450,
+      "d": 590,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ДхШхВ, мм",
+        "value": "1460х590х450"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "244"
+      },
+      {
+        "label": "Материалы",
+        "value": "Бетон, брус хвойных пород"
+      }
+    ],
+    "price": null,
+    "priceNote": "по запросу",
+    "description": "Высота сиденья: 450 мм",
+    "images": [
+      {
+        "base": "images/products/skameyka-na-betonnom-osnovanii-s-222/1",
+        "alt": "Скамейка на бетонном основании С-222",
+        "w": 1000,
+        "h": 600
+      }
+    ],
+    "kind": "bench",
+    "sourceUrl": "https://dvk-style.ru/catalog/skameyki-betonnye/skameyka-na-betonnom-osnovanii-s-222/"
+  },
+  {
+    "id": "urna-u-205",
+    "slug": "urna-u-205",
+    "name": "Урна бетонная У-205",
+    "direction": "landscape",
+    "sectionId": "small-architectural-forms",
+    "categoryId": "street-bins",
+    "industries": [
+      "public-spaces"
+    ],
+    "materials": [
+      "metal",
+      "concrete"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 400,
+      "h": 610,
+      "d": 400,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ДхШхВ, мм",
+        "value": "400х400х610"
+      },
+      {
+        "label": "Материалы",
+        "value": "армированный фибробетон улучшенной марки с присадками для усиления прочностных характеристик, в комплект входит оцинкованное ведро – вставка. По желанию Заказчика окрашивается атмосферостойкими красками любого цвета, или краситель добавляется в бетонный раствор на этапе приготовления этого компонента."
+      }
+    ],
+    "price": null,
+    "priceNote": "по запросу",
+    "description": "Бетонная уличная урна с романтическим мотивом Питерских фонарей.\nДля поддержания чистоты на улицах города, во дворах, парках и скверах мы изготавливаем урны с металлическими вкладышами. Существует множество видов урн, отличающихся друг от друга как рисунками на стенках, так и размерами, которые производит наше предприятие.\nШирокое распространение получили антивандальные урны, которые имеют больший запас прочности и устойчивости по сравнению с обычными. Это достигается за счёт больших геометрических размеров, толщины стенок и дна, что делает ее устойчивее и тяжелее, препятствует поломке, краже, переносу с места на место.",
+    "images": [
+      {
+        "base": "images/products/urna-u-205/1",
+        "alt": "Урна бетонная У-205",
+        "w": 640,
+        "h": 528
+      }
+    ],
+    "kind": "other",
+    "sourceUrl": "https://dvk-style.ru/catalog/urny-ulichnye/urna-u-205/"
+  },
+  {
+    "id": "trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame",
+    "slug": "trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame",
+    "name": "Тренажерная беседка ТРК-1.1 из 10 тренажеров на раме",
+    "direction": "landscape",
+    "sectionId": "small-architectural-forms",
+    "categoryId": "outdoor-fitness",
+    "industries": [
+      "public-spaces",
+      "yards-schools"
+    ],
+    "materials": [
+      "metal",
+      "plywood",
+      "plastic"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "6000х4000"
+      },
+      {
+        "label": "Возрастная группа",
+        "value": "от 14 лет"
+      },
+      {
+        "label": "Количество тренажеров",
+        "value": "10"
+      },
+      {
+        "label": "Материалы",
+        "value": "цельнометаллические стальные балки ; листовая сталь; шариковые подшипники закрытого типа; усиленная рёбрами жёсткости пластмасса; пластиковые заглушки; порошковая краска на полиэфирной основе; сотовый поликарбонат 8 мм; атмосферостойкий полиэтилен; многослойная ламинированная фанера с износостойким перфорированным слоем"
+      },
+      {
+        "label": "Общая высота, мм",
+        "value": "3200"
+      },
+      {
+        "label": "Площадь основания, м2",
+        "value": "24"
+      }
+    ],
+    "price": null,
+    "priceNote": "по запросу",
+    "description": "Тренажерная беседка ТРК-1.1 - это комплексное решение, включающее в себя основные уличные тренажёры. В таком виде тренажёры могут эксплуатироваться круглогодично во всех климатических зонах. В составе 10 прекрасных инструментов для занятий силовыми упражнениями на свежем воздухе, подходящее и взрослым и детям.",
+    "images": [
+      {
+        "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/1",
+        "alt": "Тренажерная беседка ТРК-1.1 из 10 тренажеров на раме",
+        "w": 645,
+        "h": 533
+      },
+      {
+        "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/2",
+        "alt": "Тренажерная беседка ТРК-1.1 из 10 тренажеров на раме, фото 2",
+        "w": 800,
+        "h": 533
+      },
+      {
+        "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/3",
+        "alt": "Тренажерная беседка ТРК-1.1 из 10 тренажеров на раме, фото 3",
+        "w": 800,
+        "h": 533
+      },
+      {
+        "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/4",
+        "alt": "Тренажерная беседка ТРК-1.1 из 10 тренажеров на раме, фото 4",
+        "w": 800,
+        "h": 533
+      },
+      {
+        "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/5",
+        "alt": "Тренажерная беседка ТРК-1.1 из 10 тренажеров на раме, фото 5",
+        "w": 800,
+        "h": 533
+      }
+    ],
+    "kind": "playground",
+    "sourceUrl": "https://dvk-style.ru/catalog/ulichnye-trenazhery/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/"
+  },
+  {
+    "id": "vorkaut-w-07-008",
+    "slug": "vorkaut-w-07-008",
+    "name": "Воркаут площадка W-07-008",
+    "direction": "landscape",
+    "sectionId": "small-architectural-forms",
+    "categoryId": "workout",
+    "industries": [
+      "public-spaces",
+      "yards-schools"
+    ],
+    "materials": [
+      "metal",
+      "wood"
+    ],
+    "lighting": null,
+    "dimensions": null,
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "4200х4700"
+      },
+      {
+        "label": "Материалы",
+        "value": "покрытые порошковыми красками металлические элементы; клееный брус 100х100 мм; оцинкованный крепеж; двухкомпонентная краска для деревянных элементов; покрытые порошковыми красками опорные столбы d=108 мм"
+      },
+      {
+        "label": "Общая высота, мм",
+        "value": "2600"
+      },
+      {
+        "label": "Площадь зоны безопасности, м2",
+        "value": "43"
+      }
+    ],
+    "price": null,
+    "priceNote": "по запросу",
+    "description": "Пять классических турников, брусья разноуровневые, шведская стенка, наклонная скамья для пресса, скамья горизонтальная для отдыха. Данный WORKOUT подходит для занятий людям в инвалидных креслах.\nЧаще всего применяется словосочетание « Стрит Воркаут», что означает уличная тренировка. Турники, брусья, лавки, перекладины, лесенки в уличном исполнении применяются при выполнении физических упражнений.\nНаправление «Стрит Воркаут» подразумевает основной упор в работе с собственным весом, повышение силы и выносливости. Также этот вид спорта получил название « уличный фитнес», с каждым годом находит всё больше последователей по всему миру.",
+    "images": [
+      {
+        "base": "images/products/vorkaut-w-07-008/1",
+        "alt": "Воркаут площадка W-07-008",
+        "w": 645,
+        "h": 533
+      },
+      {
+        "base": "images/products/vorkaut-w-07-008/2",
+        "alt": "Воркаут площадка W-07-008, фото 2",
+        "w": 800,
+        "h": 533
+      },
+      {
+        "base": "images/products/vorkaut-w-07-008/3",
+        "alt": "Воркаут площадка W-07-008, фото 3",
+        "w": 450,
+        "h": 405
+      }
+    ],
+    "kind": "playground",
+    "sourceUrl": "https://dvk-style.ru/catalog/varkaut/vorkaut-w-07-008/"
+  },
+  {
+    "id": "shkaf-arkhivnyy-sham-11-920",
+    "slug": "shkaf-arkhivnyy-sham-11-920",
+    "name": "Шкаф архивный ШАМ-11-920 11/920",
+    "direction": "metal",
+    "sectionId": "metal-cabinets",
+    "categoryId": "archive-cabinets",
+    "industries": [
+      "offices-archives"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 450,
+      "h": 1830,
+      "d": 920,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "1830x450x920"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "51"
+      },
+      {
+        "label": "Цвет",
+        "value": "Серый-полуматовый (RAL 7035)"
+      }
+    ],
+    "price": 13310,
+    "priceNote": null,
+    "description": "Производитель: ПАКС-металл\nВнешние размеры (ВхШхГ): 1830x920x450 мм\nВес, кг: 51 кг\nТип замка: замок повышенной секретности (ригельная система).\nЦвет корпуса: Серый полуматовый (RAL 7035)\nТип покрытия: Порошковое\nКоличество полок: 4\nШкаф металлический архивный.\nПредназначен для хранения архивов, офисной и бухгалтерской документации.\nТри регулируемых по высоте полки.\nДвери архивного шкафа ШАМ-11-920 оснащены замком повышенной секретности (ригельная система).\nПокрытие - полимерное порошковое серого цвета (RAL 7035).\nВ стандартную комплектацию шкафа ШАМ-11-920 включены 3 полки и 1 ригельный замок.",
+    "images": [
+      {
+        "base": "images/products/shkaf-arkhivnyy-sham-11-920/1",
+        "alt": "Шкаф архивный ШАМ-11-920 11/920",
+        "w": 600,
+        "h": 600
+      },
+      {
+        "base": "images/products/shkaf-arkhivnyy-sham-11-920/2",
+        "alt": "Шкаф архивный ШАМ-11-920 11/920, фото 2",
+        "w": 600,
+        "h": 600
+      }
+    ],
+    "kind": "cabinet",
+    "sourceUrl": "https://dvk-style.ru/catalog/shkafy-metallicheskie-arkhivnye/shkaf-arkhivnyy-sham-11-920/"
+  },
+  {
+    "id": "shkaf-kartotechnyy-shk-8-a4",
+    "slug": "shkaf-kartotechnyy-shk-8-a4",
+    "name": "Шкаф картотечный ШК-8(A4)",
+    "direction": "metal",
+    "sectionId": "metal-cabinets",
+    "categoryId": "card-index-cabinets",
+    "industries": [
+      "offices-archives"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 680,
+      "h": 1740,
+      "d": 600,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "1740x680x600"
+      },
+      {
+        "label": "Материалы",
+        "value": "Металл"
+      }
+    ],
+    "price": 49817,
+    "priceNote": null,
+    "description": "Металлический шкаф картотечный ШК-8(A4).\nПредназначен для хранения документов формата А4.\nВосемь ящиков на телескопических направляющих.\nЦентральный замок закрывает все ящики.\nОкрашен порошковой краской светло-серого цвета.\nПоставляется в собранном виде.",
+    "images": [
+      {
+        "base": "images/products/shkaf-kartotechnyy-shk-8-a4/1",
+        "alt": "Шкаф картотечный ШК-8(A4)",
+        "w": 473,
+        "h": 800
+      },
+      {
+        "base": "images/products/shkaf-kartotechnyy-shk-8-a4/2",
+        "alt": "Шкаф картотечный ШК-8(A4), фото 2",
+        "w": 473,
+        "h": 800
+      },
+      {
+        "base": "images/products/shkaf-kartotechnyy-shk-8-a4/3",
+        "alt": "Шкаф картотечный ШК-8(A4), фото 3",
+        "w": 473,
+        "h": 800
+      },
+      {
+        "base": "images/products/shkaf-kartotechnyy-shk-8-a4/4",
+        "alt": "Шкаф картотечный ШК-8(A4), фото 4",
+        "w": 473,
+        "h": 800
+      }
+    ],
+    "kind": "cabinet",
+    "sourceUrl": "https://dvk-style.ru/catalog/shkafy-kartotechnye-metall-zavod-/shkaf-kartotechnyy-shk-8-a4/"
+  },
+  {
+    "id": "shkaf-dlya-odezhdy-nobilis-nl-04",
+    "slug": "shkaf-dlya-odezhdy-nobilis-nl-04",
+    "name": "Шкаф для одежды Nobilis NL-04",
+    "direction": "metal",
+    "sectionId": "metal-cabinets",
+    "categoryId": "clothes-cabinets",
+    "industries": [
+      "locker-rooms"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 360,
+      "h": 1900,
+      "d": 590,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "1900x360x590"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "38"
+      },
+      {
+        "label": "Цвет",
+        "value": "Светло-серый (RAL 7035)"
+      }
+    ],
+    "price": 12100,
+    "priceNote": null,
+    "description": "Производитель: Промет\nВнешние размеры (ВхШхГ): 1900x360x590\nВнутренние размеры (В*Ш*Г): 4x410x290x570\nВес, кг: 38 кг\nЦвет корпуса: Cветло-серый (RAL 7035)\nТип покрытия: Порошковое\nГарантия: 5 лет\nКоличество секций: 4\nКоличество дверей: 4\nПредназначены для хранения сменной одежды в производственных, спортивных и других помещениях\nУникальное сочетание привлекательного дизайна и высоких эксплуатационных характеристик\nВысококачественная сталь толщиной 0,8мм\nНаличие вентиляционных отверстий\nОборудованы полками, перекладиной для плечиков, крючками для одежды и рамками для информации\nКлючевой замок EURO-LOCKS (Германия) повышенной секретности на 10 000 комбинаций\nСистема ригелей из нержавеющей стали\nСпециальная обработка шкафов перед покраской повышает коррозийную стойкость шкафов. При покраске локеров используется\nГладкое порошковое покрытие, стойкое к появлению царапин\nКонструкция шкафов позволяет скреплять их между собой\nОпция*: окраска дверей в другие цвета из палитры производителя (при заказе от 30 шт.)\nДекларация о соответствии: Техническому регламенту Таможенного союза. «О безопасности мебельной продукции ТР ТС 025/2012»\nСертификат соответствия Ростест\nИнструкция по сборке картотеки\nЦветовая схема под заказ",
+    "images": [
+      {
+        "base": "images/products/shkaf-dlya-odezhdy-nobilis-nl-04/1",
+        "alt": "Шкаф для одежды Nobilis NL-04",
+        "w": 600,
+        "h": 600
+      }
+    ],
+    "kind": "cabinet",
+    "sourceUrl": "https://dvk-style.ru/catalog/shkafy-dlya-odezhdy/shkaf-dlya-odezhdy-nobilis-nl-04/"
+  },
+  {
+    "id": "seyf-ofisnyy-ls-052f",
+    "slug": "seyf-ofisnyy-ls-052f",
+    "name": "Сейф офисный LS-052F",
+    "direction": "metal",
+    "sectionId": "metal-furniture",
+    "categoryId": "safes",
+    "industries": [
+      "offices-archives"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 440,
+      "h": 1339,
+      "d": 380,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "1339х440х380"
+      },
+      {
+        "label": "Внутренние размеры ВхШхГ, мм",
+        "value": "858х414х300"
+      },
+      {
+        "label": "Замок",
+        "value": "ключевой"
+      },
+      {
+        "label": "Страна-производитель",
+        "value": "Россия"
+      },
+      {
+        "label": "Гарантия",
+        "value": "6 лет"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "111,7"
+      },
+      {
+        "label": "Количество полок",
+        "value": "3"
+      },
+      {
+        "label": "Взломостойкость",
+        "value": "0 класс ГОСТ-Р 50862-2005"
+      }
+    ],
+    "price": 36000,
+    "priceNote": null,
+    "description": "Сейф офисный LS-052F 0 класса взломостойкости имеет 3 полки. Полезный объем 111,9 л. Дополнительно можно оборудовать трейзером. Окрашен порошковой краской. Крепление анкерное к стене и полу.",
+    "images": [
+      {
+        "base": "images/products/seyf-ofisnyy-ls-052f/1",
+        "alt": "Сейф офисный LS-052F",
+        "w": 1000,
+        "h": 750
+      },
+      {
+        "base": "images/products/seyf-ofisnyy-ls-052f/2",
+        "alt": "Сейф офисный LS-052F, фото 2",
+        "w": 686,
+        "h": 514
+      },
+      {
+        "base": "images/products/seyf-ofisnyy-ls-052f/3",
+        "alt": "Сейф офисный LS-052F, фото 3",
+        "w": 1000,
+        "h": 750
+      }
+    ],
+    "kind": "cabinet",
+    "sourceUrl": "https://dvk-style.ru/catalog/seyfy/seyf-ofisnyy-ls-052f/"
+  },
+  {
+    "id": "stellazh-metallicheskiy-ms-pro-2500-1010x800-4",
+    "slug": "stellazh-metallicheskiy-ms-pro-2500-1010x800-4",
+    "name": "Стеллаж металлический MS Pro 2500/1010x800/4",
+    "direction": "metal",
+    "sectionId": "metal-racks",
+    "categoryId": "medium-duty-racks",
+    "industries": [
+      "warehouses"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 1010,
+      "h": 2500,
+      "d": 800,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "2500x1010x800"
+      },
+      {
+        "label": "Цвет",
+        "value": "Серый полуматовый (RAL 7038)"
+      }
+    ],
+    "price": 13670,
+    "priceNote": null,
+    "description": "Металлический стеллаж ПРАКТИК MS PRO 250/90x80/4 относится к числу среднегрузовых и способен выдерживать максимальную нагрузку до 3000 кг на одну секцию. Изделие выполнено из оцинкованного металла высокого качества и представляет собой конструкцию из вертикальных рам и прикрепляемых к ним балок, к которым крепятся полки из металлического профиля, тем самым образуя сборные настилы - ярусы. Стеллажи ПРАКТИК MS PRO 250/90x80/4 могут применяться как на крупных производственных площадях, так и в небольших помещениях – мастерских, гаражах, торговых точках и т.д. Простая конструкция позволяет быстро и без посторонней помощи собирать/разбирать изделия, а также соединять их друг с другом.\nОСОБЕННОСТИ МЕТАЛЛИЧЕСКОГО СТЕЛЛАЖА MS PRO 250/90x80/4\nпредельный вес на ярус – 600 кг, на секцию – 3000 кг (зависит от расстояния между ярусами).\nтолщина стали, из которой изготовлены стойки – 1.2 мм\nстойки имеют усиленный угловой профиль с сечением 55х30 мм\n4 регулируемых по высоте яруса с металлическим настилом\nшаг регулировки высоты яруса - 50 мм\nчтобы исключить возможность случайного подъема или опрокидывания балки, она закрепляется к стойкам специальными фиксаторами\nконструкция балки позволяет использовать в качестве настила ДСП толщиной 16 мм\nпростая сборка – без болтов, на зацепах\nпредусмотрено анкерное крепление к полу\nпоставляется в разобранном виде\nРЕКОМЕНДАЦИИ ПО УСТАНОВКЕ\nрекомендуемое число ярусов для стеллажа MS PRO – не менее 3\nнижний ярус стеллажа рекомендуется устанавливать на высоте от пола не более 250 мм\nкаждую стойку стеллажа MS PRO рекомендуется закрепить анкерными болтами к полу\nбалки стеллажей должны быть закреплены к стойкам фиксаторами\nнагрузка на полку должна быть равномерной и не превышать 600 кг\nначинать заполнение стеллажа следуют с нижних секций\nдля большей устойчивости рекомендуется скреплять ряды стеллажей между собой",
+    "images": [
+      {
+        "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/1",
+        "alt": "Стеллаж металлический MS Pro 2500/1010x800/4",
+        "w": 748,
+        "h": 748
+      },
+      {
+        "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/2",
+        "alt": "Стеллаж металлический MS Pro 2500/1010x800/4, фото 2",
+        "w": 1024,
+        "h": 768
+      },
+      {
+        "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/3",
+        "alt": "Стеллаж металлический MS Pro 2500/1010x800/4, фото 3",
+        "w": 1024,
+        "h": 768
+      },
+      {
+        "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/4",
+        "alt": "Стеллаж металлический MS Pro 2500/1010x800/4, фото 4",
+        "w": 1024,
+        "h": 757
+      }
+    ],
+    "kind": "rack",
+    "sourceUrl": "https://dvk-style.ru/catalog/stellazhi-srednegruzovye/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/"
+  },
+  {
+    "id": "stellazh-arkhivnyy-stf-1034-2-5",
+    "slug": "stellazh-arkhivnyy-stf-1034-2-5",
+    "name": "Стеллаж архивный СТФ 1034-2.5",
+    "direction": "metal",
+    "sectionId": "metal-racks",
+    "categoryId": "archive-racks",
+    "industries": [
+      "offices-archives"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 1000,
+      "h": 2500,
+      "d": 300,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "2500х1000х300"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "22"
+      }
+    ],
+    "price": 4500,
+    "priceNote": null,
+    "description": "Производитель: Металлзавод\nГабариты внешние (ВхШхГ)мм: 2500х1000х300\nКоличество полок: 4\nВес, кг.: 22\nМеталлические стеллажи для компактного хранения предметов в архивах, складах, гаражах, офисах или домах! Доступные цены, проверенное качество.\nВнешние габариты (ВхШхГ)мм: 2500х1000х300\nНавести порядок в архиве или складе теперь стало легче легкого благодаря стеллажам СТФ - их легко собрать, они стабильны и прочны, и из них можно формировать многосекционные стеллажи разной длины в зависимости от размеров помещения и его планировки.\nСтеллажи СТФЛ - максимальная распределенная нагрузка на полку длиной не более 1 м включительно максимально 120кг, на полку длиной 1,5 м с усиленным ребром жесткости - не более 100 кг.\nРекомендованная распределенная нагрузка на верхнюю полку - 60 кг.\nУсиление полок ребром жесткости.\nМинимальное количество полок - 4 штуки.\nУстановка нижней полки не выше 150 мм от пола.\nОптимальный вариант для хранения различных докуметов и товаров в складских помещениях, на предприятиях, в домах, гаражах и т.д.\nКонструкция позволяет создавать многосекционные стеллажи необходимой вам длины.\nМаксимальная грузоподъемность односекционного стеллажа (высота до 2 м включительно) составляет не более 600 кг, свыше 2 м - 580 кг.\nГрузоподъемность многосекционного стеллажа (с общей смежной стойкой и высотой до 2 м включительно) - не более 500 кг, свыше 2 м - 440 кг.\nПрочные стойки сложного профиля повышают надежность конструкции. Шаг перфорации - 25 мм, диаметр перфорации - 7 мм.\nДля защиты пола от повреждений используются подпятники.\nОкраска порошковой краской. Перед покраской все детали стеллажа обрабатываются обезжиривающим и антикоррозийным веществом.\nВ комплект входят: 4 полки, 4 стойки, 4 подпятники, уголки жесткости, крепежа.\nПоставляется в разобранном виде.",
+    "images": [
+      {
+        "base": "images/products/stellazh-arkhivnyy-stf-1034-2-5/1",
+        "alt": "Стеллаж архивный СТФ 1034-2.5",
+        "w": 600,
+        "h": 600
+      },
+      {
+        "base": "images/products/stellazh-arkhivnyy-stf-1034-2-5/2",
+        "alt": "Стеллаж архивный СТФ 1034-2.5, фото 2",
+        "w": 600,
+        "h": 600
+      },
+      {
+        "base": "images/products/stellazh-arkhivnyy-stf-1034-2-5/3",
+        "alt": "Стеллаж архивный СТФ 1034-2.5, фото 3",
+        "w": 600,
+        "h": 600
+      }
+    ],
+    "kind": "rack",
+    "sourceUrl": "https://dvk-style.ru/catalog/arkhivnye-stellazhi/stellazh-arkhivnyy-stf-1034-2-5/"
+  },
+  {
+    "id": "verstak-vl-200-05-s-ekranom-vl-200-e4",
+    "slug": "verstak-vl-200-05-s-ekranom-vl-200-e4",
+    "name": "Верстак слесарный ВЛ-200-05 с экраном ВЛ-200-Э4",
+    "direction": "metal",
+    "sectionId": "metal-furniture",
+    "categoryId": "workbenches",
+    "industries": [
+      "workshops"
+    ],
+    "materials": [
+      "metal",
+      "plywood"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 2000,
+      "h": 2052,
+      "d": 700,
+      "unit": "mm"
+    },
+    "load": 1000,
+    "specs": [
+      {
+        "label": "Ширина верстака, мм",
+        "value": "2000"
+      },
+      {
+        "label": "Размеры ВШГ, мм",
+        "value": "2052 х 2000 х 700"
+      },
+      {
+        "label": "Наличие экрана",
+        "value": "есть"
+      },
+      {
+        "label": "Конструкция",
+        "value": "сборно-разборная модульная"
+      },
+      {
+        "label": "Максимальная нагрузка, кг",
+        "value": "1000"
+      },
+      {
+        "label": "Максимально допустимая нагрузка на ящик тумбы, кг",
+        "value": "60"
+      },
+      {
+        "label": "Максимально допустимая нагрузка на экран, кг",
+        "value": "50"
+      },
+      {
+        "label": "Вариант столешницы Ф",
+        "value": "фанера 24 мм"
+      },
+      {
+        "label": "Вариант столешницы ЦФ",
+        "value": "фанера 24 мм покрытая оцинкованным листовым металлом"
+      },
+      {
+        "label": "Вариант столешницы МФ",
+        "value": "фанера 24 мм со стальным листом сверху (3 мм, окрашен порошковой краской"
+      },
+      {
+        "label": "Окраска",
+        "value": "эпоксидная порошковая краска"
+      },
+      {
+        "label": "Замок",
+        "value": "EURO-LOCKS Германия"
+      },
+      {
+        "label": "Страна-производитель",
+        "value": "Россия"
+      },
+      {
+        "label": "Гарантия",
+        "value": "12 месяцев"
+      },
+      {
+        "label": "Максимальная нагрузка на пару консолей, кг",
+        "value": "дополнительно"
+      }
+    ],
+    "price": 44300,
+    "priceNote": null,
+    "description": "Металлический верстак ВЛ-200-05 с подвесной тумбой укомплектован перфорированным экраном ВЛ-200-Э4 с консолью и применяется в гаражах, мастерских, на производстве для слесарных и сборочных работ.\nМаксимальная равномерно распределенная нагрузка на верстак 1000 кг.\nСтолешница установлена на опору и инструментальную тумбу ВЛ-010.\nТумба оснащена двумя полками и распашной запирающейся дверью.\nСтолешница верстака выполняется в трех вариантах: фанера 24 мм, фанера 24 мм с оцинкованным листовым металлом, фанера 24 мм со стальным листом 3 мм.\nДополнительно на экран можно навесить различные аксессуары с помощью зацепов. На консоль устанавливается бегунок или освещение.",
+    "images": [
+      {
+        "base": "images/products/verstak-vl-200-05-s-ekranom-vl-200-e4/1",
+        "alt": "Верстак слесарный ВЛ-200-05 с экраном ВЛ-200-Э4",
+        "w": 722,
+        "h": 600
+      }
+    ],
+    "kind": "workbench",
+    "sourceUrl": "https://dvk-style.ru/catalog/verstaki-metallicheskie-serii-vl-do-1500-kg/verstak-vl-200-05-s-ekranom-vl-200-e4/"
+  },
+  {
+    "id": "verstak-vs-100-01",
+    "slug": "verstak-vs-100-01",
+    "name": "Верстак слесарный ВС-100-01",
+    "direction": "metal",
+    "sectionId": "metal-furniture",
+    "categoryId": "workbenches",
+    "industries": [
+      "workshops"
+    ],
+    "materials": [
+      "metal",
+      "plywood",
+      "wood"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 1000,
+      "h": 840,
+      "d": 700,
+      "unit": "mm"
+    },
+    "load": 1500,
+    "specs": [
+      {
+        "label": "Ширина верстака, мм",
+        "value": "1000"
+      },
+      {
+        "label": "Размеры ВШГ, мм",
+        "value": "840 х 1000 х 700"
+      },
+      {
+        "label": "Наличие экрана",
+        "value": "нет"
+      },
+      {
+        "label": "Конструкция",
+        "value": "сборно-разборная модульная"
+      },
+      {
+        "label": "Максимальная нагрузка, кг",
+        "value": "1500"
+      },
+      {
+        "label": "Комплектация",
+        "value": "столешница, опоры"
+      },
+      {
+        "label": "Вариант столешницы Ф",
+        "value": "фанера 40 мм"
+      },
+      {
+        "label": "Вариант столешницы ЯСЕНЬ",
+        "value": "массив ясеня 40 мм"
+      },
+      {
+        "label": "Вариант столешницы МФ",
+        "value": "фанера 40 мм с предустановленным стальным листом 3 мм"
+      },
+      {
+        "label": "Окраска",
+        "value": "эпоксидная порошковая краска"
+      },
+      {
+        "label": "Страна-производитель",
+        "value": "Россия"
+      },
+      {
+        "label": "Гарантия",
+        "value": "12 месяцев"
+      },
+      {
+        "label": "Максимальная нагрузка на пару консолей, кг",
+        "value": "дополнительно"
+      }
+    ],
+    "price": 19700,
+    "priceNote": null,
+    "description": "Верстак ВС-100-01 используется на промышленных предприятиях и предприятиях тяжелого машиностроения.\nВсе элементы верстака сварные. Максимальная равномерно распределенная нагрузка на верстак – 1500 кг.\nСтолешница установлена на опоры и выполняется в трех вариантах: из фанеры 40 мм, из массива ясеня 40 мм и из фанеры 40 мм с предустановленным стальным листом 3 мм. металлические части верстака окрашены устойчивой к агрессивным жидкостям и механическим воздействиям эпоксидной порошковой краской. Столешница покрыта лаком цвета натурального дерева.\nВозможна установка под верстак дополнительной полки из фанеры 24 мм с максимальной нагрузкой 100 кг.",
+    "images": [
+      {
+        "base": "images/products/verstak-vs-100-01/1",
+        "alt": "Верстак слесарный ВС-100-01",
+        "w": 580,
+        "h": 600
+      }
+    ],
+    "kind": "workbench",
+    "sourceUrl": "https://dvk-style.ru/catalog/verstaki-metallicheskie-serii-vs-do-3000-kg/verstak-vs-100-01/"
+  },
+  {
+    "id": "shkaf-instrumentalnyy-hard-2000-062000",
+    "slug": "shkaf-instrumentalnyy-hard-2000-062000",
+    "name": "Шкаф инструментальный HARD 2000-062000",
+    "direction": "metal",
+    "sectionId": "metal-furniture",
+    "categoryId": "tool-cabinets",
+    "industries": [
+      "workshops"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 1150,
+      "h": 1998,
+      "d": 650,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "1998x1150x650"
+      },
+      {
+        "label": "Страна-производитель",
+        "value": "Россия"
+      },
+      {
+        "label": "Гарантия",
+        "value": "1 год"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "105"
+      }
+    ],
+    "price": 64460,
+    "priceNote": null,
+    "description": "предназначены для хранения инструментов, оснастки, тяжелых грузов на производственных площадках;\nконструкция шкафа сборно-разборная, состоящая из двух рам среднегрузового стеллажа;\nтолщина дверей - 1 мм;\n2 - сторонняя ригельная система запирания ( диаметр ригеля - 15 мм);\nключевой замок Kaba Mauer (Германия), класс А;\nмаксимальная нагрузка на шкаф HARD 2000 - 2000 кг;\nполки выполнены из оцинкованной стали, толщиной 1,5 мм; максимальная нагрузка на полку - 400 кг;\nящики могут комплектоваться перегородками; максимальная нагрузка на ящик - 80 кг;\nвозможность комплектации полками для держателей инструмента размерами SK 50b SK 40; NSK 63;\nвозможность анкерного крепления к полу (анкерные болты в комплекте);\nстандартный цвет: серый полуматовый (RAL 7038), двери синие (RAL 5002);\nтип покрытия: порошковое;\nгабаритные размеры HARD 2000: Д 1150мм*Ш 650*В 2000мм;\nпоставляются в разобранном виде;\nКомплектация:\nКорпус шкафа HARD 2000 - 1 шт.\nРама HARD 2000 - 2 шт.\nПолка HARD - 2 шт.\nЭкран к шкафу HARD (перфорированный) - 3 шт.",
+    "images": [
+      {
+        "base": "images/products/shkaf-instrumentalnyy-hard-2000-062000/1",
+        "alt": "Шкаф инструментальный HARD 2000-062000",
+        "w": 1024,
+        "h": 768
+      }
+    ],
+    "kind": "cabinet",
+    "sourceUrl": "https://dvk-style.ru/catalog/tyazhelye-modulnye-shkafy-serii-hard/shkaf-instrumentalnyy-hard-2000-062000/"
+  },
+  {
+    "id": "tumba-instrumentalnaya-ti-7-006",
+    "slug": "tumba-instrumentalnaya-ti-7-006",
+    "name": "Тумба инструментальная ТИ-7.006",
+    "direction": "metal",
+    "sectionId": "metal-furniture",
+    "categoryId": "tool-pedestals",
+    "industries": [
+      "workshops"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 500,
+      "h": 1010,
+      "d": 482,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "1010 x 500 x 482"
+      },
+      {
+        "label": "Максимально допустимая нагрузка на ящик тумбы, кг",
+        "value": "20"
+      },
+      {
+        "label": "Страна-производитель",
+        "value": "Россия"
+      },
+      {
+        "label": "Гарантия",
+        "value": "1 год"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "48,5"
+      },
+      {
+        "label": "Цвет",
+        "value": "комбинированный (синий RAL5005/серый RAL7035)"
+      }
+    ],
+    "price": 18431,
+    "priceNote": null,
+    "description": "Комплектация: выдвижные ящики с пластиковыми ручками и антискользящими ковриками - 6шт.;металлическая ручка на пластиковых кронштейнах -1шт.;коврик резиновый маслобензостойкий -1шт.;колеса, два из которых имеют стояночный тормоз.\nДополнительная комплектация: ТИ-3 лоток пластиковый, ТИ- навески\nНагрузка на ящик: 20кг\nТип покрытия: порошковое\nГарантия: 1год\nПроизводитель, страна: ДВК (Россия)",
+    "images": [
+      {
+        "base": "images/products/tumba-instrumentalnaya-ti-7-006/1",
+        "alt": "Тумба инструментальная ТИ-7.006",
+        "w": 600,
+        "h": 450
+      }
+    ],
+    "kind": "cabinet",
+    "sourceUrl": "https://dvk-style.ru/catalog/tumby-instrumentalnye/tumba-instrumentalnaya-ti-7-006/"
+  },
+  {
+    "id": "sistema-khraneniya-boxes-1-2",
+    "slug": "sistema-khraneniya-boxes-1-2",
+    "name": "Система хранения инструмента BOXES №1-2",
+    "direction": "metal",
+    "sectionId": "metal-furniture",
+    "categoryId": "tool-storage",
+    "industries": [
+      "workshops"
+    ],
+    "materials": [
+      "metal"
+    ],
+    "lighting": null,
+    "dimensions": {
+      "w": 1370,
+      "h": 2000,
+      "d": 530,
+      "unit": "mm"
+    },
+    "load": null,
+    "specs": [
+      {
+        "label": "Размеры ВхШхГ, мм",
+        "value": "2000 x 1370 x 530"
+      },
+      {
+        "label": "Вес, кг",
+        "value": "123,2"
+      },
+      {
+        "label": "Цвет",
+        "value": "комбинированный (синий RAL5005/серый RAL7035)"
+      }
+    ],
+    "price": 55166,
+    "priceNote": null,
+    "description": "Предназначены для оснащения материальных кладовых и других мест, где требуется хранение большого объема мелкого разносортного груза. -- Рама выполнена из цельногнутого металлического профиля и имеет прочную сварную конструкцию, состоящую из горизонтальных и диагональных связей .\n--Шаг перфорации рамы равен 50 мм.\n--Секции могут собираться из отдельных элементов под различные требования в одну линию по принципу «основная+дополнительная».\n--Нагрузка на секцию может достигать 2000 кг, на ярус хранения до 400 кг. --Ярус хранения может комплектоваться как полками (2 шт.) с фиксатором по одной стороне, так и направляющими для пластиковых контейнеров (12.405, 12.406).\n--Полки выполнены из оцинкованной стали и могут устанавливаться на ригеля как в горизонтальном положении (фиксатор сзади), так и наклоном (фиксатор спереди).\n--Ригель выполнен из цельногнутого металлического профиля с прорезями, которые позволяют отгибать фрагмент ригеля, служащий фиксатором для пластиковых контейнеров, когда они находятся в выдвинутом положении в наклоном виде.\n--Фиксация контейнера в наклоном виде предусмотрена для двух типоразмеров контейнеров 12.405 (150х225х500) и 12.406 (200х300х500).\n--Выдвижная полка может использоваться как рабочий стол, т.к. имеет возможность фиксации в выдвинутом положении на две задвижки, нагрузка на полку до 105 кг.\n--Имеется возможность анкерного крепления рам к полу (анкерные болты в комплекте) .\n--Тип покрытия: порошковое\n-- Цвета отделки: светло-серый (RAL 7035), темно-серый (RAL 7046)\n-- Гарантия: 2 года\n-- Производитель, страна: ДВК (Россия)",
+    "images": [
+      {
+        "base": "images/products/sistema-khraneniya-boxes-1-2/1",
+        "alt": "Система хранения инструмента BOXES №1-2",
+        "w": 1600,
+        "h": 1200
+      },
+      {
+        "base": "images/products/sistema-khraneniya-boxes-1-2/2",
+        "alt": "Система хранения инструмента BOXES №1-2, фото 2",
+        "w": 1600,
+        "h": 1200
+      },
+      {
+        "base": "images/products/sistema-khraneniya-boxes-1-2/3",
+        "alt": "Система хранения инструмента BOXES №1-2, фото 3",
+        "w": 1600,
+        "h": 1200
+      }
+    ],
+    "kind": "other",
+    "sourceUrl": "https://dvk-style.ru/catalog/sistema-khraneniya-instrumenta/sistema-khraneniya-boxes-1-2/"
+  }
+]

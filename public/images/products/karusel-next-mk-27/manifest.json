@@ -1,0 +1,28 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/karusel-next-mk-27/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/ea8/bpb53ozs7q36kujy3no3btput0hfmeg0/%D0%9A%D0%B0%D1%80%D1%83%D1%81%D0%B5%D0%BB%D1%8C%20NEXT%20%D0%9C%D0%9A-27.jpg",
+      "width": 1000,
+      "height": 600,
+      "original": {
+        "width": 1000,
+        "height": 600
+      }
+    },
+    {
+      "base": "images/products/karusel-next-mk-27/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/986/22qpbq7f7mfp61l5ozhbhim0wr1fjcv5/%D0%9A%D0%B0%D1%80%D1%83%D1%81%D0%B5%D0%BB%D1%8C%20NEXT%20%D0%9C%D0%9A-271.jpg",
+      "width": 1000,
+      "height": 600,
+      "original": {
+        "width": 1000,
+        "height": 600
+      }
+    }
+  ]
+}

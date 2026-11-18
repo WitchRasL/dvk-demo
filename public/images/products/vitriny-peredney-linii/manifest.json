@@ -1,0 +1,72 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/vitriny-peredney-linii/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/ae2/ae22344b1881074790ffc516b9025f7e.jpg",
+      "width": 1000,
+      "height": 836,
+      "original": {
+        "width": 1000,
+        "height": 836
+      }
+    },
+    {
+      "base": "images/products/vitriny-peredney-linii/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/5b1/5b12fb1e18eed42d7048d60aa50dd081.jpg",
+      "width": 750,
+      "height": 1000,
+      "original": {
+        "width": 750,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/products/vitriny-peredney-linii/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/iblock/e11/e114520c50bb98ba09440b6e6e91a491.jpg",
+      "width": 750,
+      "height": 1000,
+      "original": {
+        "width": 750,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/products/vitriny-peredney-linii/4",
+      "n": "4",
+      "source": "https://dvk-style.ru/upload/iblock/9e9/9e9c1393559d774486f1a6f13b98dcf3.jpg",
+      "width": 750,
+      "height": 1000,
+      "original": {
+        "width": 750,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/products/vitriny-peredney-linii/5",
+      "n": "5",
+      "source": "https://dvk-style.ru/upload/iblock/54d/54d175b41c6fa4d6e3d797c2ed39213a.jpg",
+      "width": 750,
+      "height": 1000,
+      "original": {
+        "width": 750,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/products/vitriny-peredney-linii/6",
+      "n": "6",
+      "source": "https://dvk-style.ru/upload/iblock/dee/dee492937d32205cc65647fc2dd4d03b.jpg",
+      "width": 750,
+      "height": 1000,
+      "original": {
+        "width": 750,
+        "height": 1000
+      }
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/27e/27e377a94eb09bb67144b5481a5b5be0.jpg",
+      "width": 645,
+      "height": 533,
+      "original": {
+        "width": 645,
+        "height": 533
+      }
+    },
+    {
+      "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/ee8/ee8efb6ddea542ccd662e9ee5a83cfb1.jpg",
+      "width": 800,
+      "height": 533,
+      "original": {
+        "width": 800,
+        "height": 533
+      }
+    },
+    {
+      "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/iblock/014/0147a2ab5d69736730982e828f096246.jpg",
+      "width": 800,
+      "height": 533,
+      "original": {
+        "width": 800,
+        "height": 533
+      }
+    },
+    {
+      "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/4",
+      "n": "4",
+      "source": "https://dvk-style.ru/upload/iblock/58d/58d417fda34df7387d547c597a53c226.jpg",
+      "width": 800,
+      "height": 533,
+      "original": {
+        "width": 800,
+        "height": 533
+      }
+    },
+    {
+      "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/5",
+      "n": "5",
+      "source": "https://dvk-style.ru/upload/iblock/b6c/b6cfccfbd8c88b85f11899d313d64707.jpg",
+      "width": 800,
+      "height": 533,
+      "original": {
+        "width": 800,
+        "height": 533
+      }
+    }
+  ]
+}

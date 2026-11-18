@@ -1,0 +1,28 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/shkaf-arkhivnyy-sham-11-920/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/053/05329043d488e7f00e4135623575b4b6.jpg",
+      "width": 600,
+      "height": 600,
+      "original": {
+        "width": 600,
+        "height": 600
+      }
+    },
+    {
+      "base": "images/products/shkaf-arkhivnyy-sham-11-920/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/351/35181e83b6fbcfe8211ed6ba22c3cfdb.jpg",
+      "width": 600,
+      "height": 600,
+      "original": {
+        "width": 600,
+        "height": 600
+      }
+    }
+  ]
+}

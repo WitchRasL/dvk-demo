@@ -1,0 +1,28 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/projects/perfume-balashikha/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/medialibrary/b66/b6645506ca6644b7b52f65d394af779a.jpg",
+      "width": 1586,
+      "height": 550,
+      "original": {
+        "width": 1586,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/perfume-balashikha/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/medialibrary/3a8/3a895d319c4a5c0ed4a1bfdc33a8463c.jpg",
+      "width": 977,
+      "height": 550,
+      "original": {
+        "width": 977,
+        "height": 550
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/prilavok-dlya-optiki-pod-20/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/7f2/7f2cedd319626eca3b61ca7dd726cb1c.jpg",
+      "width": 1000,
+      "height": 834,
+      "original": {
+        "width": 1000,
+        "height": 834
+      }
+    },
+    {
+      "base": "images/products/prilavok-dlya-optiki-pod-20/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/b94/b94eb090027700790fa610bc3edadcba.jpg",
+      "width": 1000,
+      "height": 563,
+      "original": {
+        "width": 1000,
+        "height": 563
+      }
+    }
+  ]
+}

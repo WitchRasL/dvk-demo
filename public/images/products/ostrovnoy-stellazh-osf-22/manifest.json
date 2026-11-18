@@ -1,0 +1,28 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/ostrovnoy-stellazh-osf-22/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/e02/e02cedcb7fab70280e4ea1266ba93879.jpg",
+      "width": 775,
+      "height": 600,
+      "original": {
+        "width": 775,
+        "height": 600
+      }
+    },
+    {
+      "base": "images/products/ostrovnoy-stellazh-osf-22/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/244/2443f5c8ca5b7c98f5f672ee6f9997c0.jpg",
+      "width": 750,
+      "height": 1000,
+      "original": {
+        "width": 750,
+        "height": 1000
+      }
+    }
+  ]
+}

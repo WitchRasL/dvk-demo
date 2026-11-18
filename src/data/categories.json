@@ -4,22 +4,92 @@
       "id": "retail",
       "name": "Ритейл и экспозиция",
       "slug": "retail",
-      "summary": "[уточнить]",
+      "summary": "Торговое оборудование, торговая мебель, оборудование для аптек и торговые островки",
       "sections": [
         {
           "id": "trade-equipment",
           "name": "Торговое оборудование",
           "slug": "trade-equipment",
           "count": 408,
-          "sourceUrl": null,
+          "sourceUrl": "https://dvk-style.ru/catalog/torgovoe-oborudovanie/",
           "categories": [
-            { "id": "showcases", "name": "Витрины", "slug": "showcases", "count": 178, "sourceUrl": null },
-            { "id": "counters", "name": "Прилавки", "slug": "counters", "count": 81, "sourceUrl": null },
-            { "id": "shoe-equipment", "name": "Оборудование для обуви", "slug": "shoe-equipment", "count": 58, "sourceUrl": null },
-            { "id": "jewelry-equipment", "name": "Ювелирное оборудование", "slug": "jewelry-equipment", "count": 54, "sourceUrl": null },
-            { "id": "optics-equipment", "name": "Оборудование для оптики", "slug": "optics-equipment", "count": 27, "sourceUrl": null },
-            { "id": "museum-equipment", "name": "Музейное оборудование", "slug": "museum-equipment", "count": 84, "sourceUrl": null },
-            { "id": "exhibition-stands", "name": "Выставочные стенды", "slug": "exhibition-stands", "count": 54, "sourceUrl": null }
+            {
+              "id": "showcases",
+              "name": "Витрины",
+              "slug": "showcases",
+              "count": 178,
+              "sourceUrl": "https://dvk-style.ru/catalog/vitriny/"
+            },
+            {
+              "id": "counters",
+              "name": "Прилавки",
+              "slug": "counters",
+              "count": 81,
+              "sourceUrl": "https://dvk-style.ru/catalog/prilavki/"
+            },
+            {
+              "id": "appliance-store-equipment",
+              "name": "Оборудование для магазинов бытовой техники",
+              "slug": "appliance-store-equipment",
+              "count": 42,
+              "sourceUrl": "https://dvk-style.ru/catalog/dlya-magazinov-bytovoy-tekhniki/"
+            },
+            {
+              "id": "lingerie-store-equipment",
+              "name": "Оборудование для магазинов нижнего белья",
+              "slug": "lingerie-store-equipment",
+              "count": 27,
+              "sourceUrl": "https://dvk-style.ru/catalog/dlya-magazinov-nizhnego-belya/"
+            },
+            {
+              "id": "apparel-equipment",
+              "name": "Оборудование для одежды",
+              "slug": "apparel-equipment",
+              "count": 18,
+              "sourceUrl": "https://dvk-style.ru/catalog/oborudovanie-dlya-odezhdy/"
+            },
+            {
+              "id": "jewelry-equipment",
+              "name": "Ювелирное торговое оборудование",
+              "slug": "jewelry-equipment",
+              "count": 54,
+              "sourceUrl": "https://dvk-style.ru/catalog/yuvelirnoe-torgovoe-oborudovanie/"
+            },
+            {
+              "id": "optics-equipment",
+              "name": "Оборудование для оптики и очков",
+              "slug": "optics-equipment",
+              "count": 27,
+              "sourceUrl": "https://dvk-style.ru/catalog/oborudovanie-dlya-optiki-i-ochkov/"
+            },
+            {
+              "id": "museum-equipment",
+              "name": "Музейное оборудование",
+              "slug": "museum-equipment",
+              "count": 84,
+              "sourceUrl": "https://dvk-style.ru/catalog/muzeynoe-oborudovanie/"
+            },
+            {
+              "id": "exhibition-stands",
+              "name": "Выставочные стенды",
+              "slug": "exhibition-stands",
+              "count": 54,
+              "sourceUrl": "https://dvk-style.ru/catalog/vystavochnye-stendy/"
+            },
+            {
+              "id": "cosmetics-store-equipment",
+              "name": "Оборудование для магазинов косметики и парфюмерии",
+              "slug": "cosmetics-store-equipment",
+              "count": 26,
+              "sourceUrl": "https://dvk-style.ru/catalog/dlya-magazinov-kosmetiki-i-parfyumerii/"
+            },
+            {
+              "id": "shoe-equipment",
+              "name": "Оборудование для обувного магазина",
+              "slug": "shoe-equipment",
+              "count": 58,
+              "sourceUrl": "https://dvk-style.ru/catalog/dlya-obuvnogo-magazina/"
+            }
           ]
         },
         {
@@ -27,24 +97,209 @@
           "name": "Торговая мебель",
           "slug": "trade-furniture",
           "count": 159,
-          "sourceUrl": null,
-          "categories": []
+          "sourceUrl": "https://dvk-style.ru/catalog/torgovaya-mebel/",
+          "categories": [
+            {
+              "id": "branded-equipment",
+              "name": "Брендирование торгового оборудования",
+              "slug": "branded-equipment",
+              "count": 24,
+              "sourceUrl": "https://dvk-style.ru/catalog/brendirovanie-oborudovaniya/"
+            },
+            {
+              "id": "retail-equipment",
+              "name": "Оборудование для торговли",
+              "slug": "retail-equipment",
+              "count": 50,
+              "sourceUrl": "https://dvk-style.ru/catalog/oborudovanie-dlya-torgovli/"
+            },
+            {
+              "id": "sports-store-equipment",
+              "name": "Оборудование для спорттоваров",
+              "slug": "sports-store-equipment",
+              "count": 30,
+              "sourceUrl": "https://dvk-style.ru/catalog/oborudovanie-dlya-sporttovarov/"
+            },
+            {
+              "id": "hardware-store-equipment",
+              "name": "Оборудование для строительных магазинов",
+              "slug": "hardware-store-equipment",
+              "count": 55,
+              "sourceUrl": "https://dvk-style.ru/catalog/oborudovanie-dlya-stroitelnykh-magazinov/"
+            }
+          ]
         },
         {
           "id": "pharmacy-equipment",
           "name": "Оборудование для аптек",
           "slug": "pharmacy-equipment",
           "count": 151,
-          "sourceUrl": null,
-          "categories": []
+          "sourceUrl": "https://dvk-style.ru/catalog/oborudovanie-dlya-aptek/",
+          "categories": [
+            {
+              "id": "pharmacy-showcases",
+              "name": "Витрины для аптек",
+              "slug": "pharmacy-showcases",
+              "count": 58,
+              "sourceUrl": "https://dvk-style.ru/catalog/vitriny-dlya-aptek/"
+            },
+            {
+              "id": "pharmacy-cabinets",
+              "name": "Шкафы для аптек",
+              "slug": "pharmacy-cabinets",
+              "count": 20,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-dlya-aptek/"
+            },
+            {
+              "id": "pharmacy-counters",
+              "name": "Аптечные прилавки",
+              "slug": "pharmacy-counters",
+              "count": 9,
+              "sourceUrl": "https://dvk-style.ru/catalog/aptechnye-prilavki/"
+            },
+            {
+              "id": "pharmacy-racks",
+              "name": "Стеллажи для аптек",
+              "slug": "pharmacy-racks",
+              "count": 41,
+              "sourceUrl": "https://dvk-style.ru/catalog/stellazhi-dlya-aptek/"
+            }
+          ]
         },
         {
           "id": "trade-islands",
           "name": "Торговые островки",
           "slug": "trade-islands",
           "count": 69,
-          "sourceUrl": null,
-          "categories": []
+          "sourceUrl": "https://dvk-style.ru/catalog/torgovye-ostrovki/",
+          "categories": [
+            {
+              "id": "islands-costume-jewelry",
+              "name": "Островки для бижутерии",
+              "slug": "islands-costume-jewelry",
+              "count": 36,
+              "sourceUrl": "https://dvk-style.ru/catalog/bizhuteriya/"
+            },
+            {
+              "id": "islands-haberdashery",
+              "name": "Островки для галантереи",
+              "slug": "islands-haberdashery",
+              "count": 22,
+              "sourceUrl": "https://dvk-style.ru/catalog/galantereynaya-produktsiya/"
+            },
+            {
+              "id": "islands-kids-goods",
+              "name": "Островки для детских товаров",
+              "slug": "islands-kids-goods",
+              "count": 18,
+              "sourceUrl": "https://dvk-style.ru/catalog/detskie-tovary/"
+            },
+            {
+              "id": "islands-toys",
+              "name": "Островки для игрушек",
+              "slug": "islands-toys",
+              "count": 18,
+              "sourceUrl": "https://dvk-style.ru/catalog/igrushki/"
+            },
+            {
+              "id": "islands-stationery",
+              "name": "Островки для канцелярских товаров",
+              "slug": "islands-stationery",
+              "count": 23,
+              "sourceUrl": "https://dvk-style.ru/catalog/kantselyarskie-tovary/"
+            },
+            {
+              "id": "islands-cosmetics",
+              "name": "Островки для косметики и парфюмерии",
+              "slug": "islands-cosmetics",
+              "count": 30,
+              "sourceUrl": "https://dvk-style.ru/catalog/kosmetika-parfyumeriya/"
+            },
+            {
+              "id": "islands-mobile",
+              "name": "Островки для мобильной связи и аксессуаров",
+              "slug": "islands-mobile",
+              "count": 45,
+              "sourceUrl": "https://dvk-style.ru/catalog/mobilnaya-svyaz/"
+            },
+            {
+              "id": "islands-food",
+              "name": "Островки для напитков и продуктов",
+              "slug": "islands-food",
+              "count": 15,
+              "sourceUrl": "https://dvk-style.ru/catalog/napitki-produkty/"
+            },
+            {
+              "id": "islands-glasses",
+              "name": "Островки для очков",
+              "slug": "islands-glasses",
+              "count": 31,
+              "sourceUrl": "https://dvk-style.ru/catalog/ochki/"
+            },
+            {
+              "id": "service-desks",
+              "name": "Сервисные стойки",
+              "slug": "service-desks",
+              "count": 19,
+              "sourceUrl": "https://dvk-style.ru/catalog/servisnye-stoyki/"
+            },
+            {
+              "id": "islands-souvenirs",
+              "name": "Островки для сувениров и подарков",
+              "slug": "islands-souvenirs",
+              "count": 41,
+              "sourceUrl": "https://dvk-style.ru/catalog/suveniry-i-podarki/"
+            },
+            {
+              "id": "islands-watches",
+              "name": "Островки для часов",
+              "slug": "islands-watches",
+              "count": 30,
+              "sourceUrl": "https://dvk-style.ru/catalog/chasy/"
+            },
+            {
+              "id": "islands-manicure",
+              "name": "Островки для экспресс-маникюра",
+              "slug": "islands-manicure",
+              "count": 1,
+              "sourceUrl": "https://dvk-style.ru/catalog/ekspress-manikyur/"
+            },
+            {
+              "id": "islands-express-services",
+              "name": "Островки для экспресс-услуг",
+              "slug": "islands-express-services",
+              "count": 19,
+              "sourceUrl": "https://dvk-style.ru/catalog/ekspress-uslugi/"
+            },
+            {
+              "id": "islands-electronics",
+              "name": "Островки для электроники и бытовой техники",
+              "slug": "islands-electronics",
+              "count": 23,
+              "sourceUrl": "https://dvk-style.ru/catalog/elektronika-bytovaya-tekhnika/"
+            },
+            {
+              "id": "islands-jewelry",
+              "name": "Островки для ювелирных изделий",
+              "slug": "islands-jewelry",
+              "count": 19,
+              "sourceUrl": "https://dvk-style.ru/catalog/yuvelirnye/"
+            },
+            {
+              "id": "mall-pavilions",
+              "name": "Павильоны для торгового центра",
+              "slug": "mall-pavilions",
+              "count": 66,
+              "sourceUrl": "https://dvk-style.ru/catalog/pavilony-dlya-torgovogo-tsentra/"
+            },
+            {
+              "id": "trade-modules",
+              "name": "Торговые модули",
+              "slug": "trade-modules",
+              "count": 66,
+              "sourceUrl": "https://dvk-style.ru/catalog/torgovye-moduli/"
+            }
+          ]
         }
       ]
     },
@@ -52,31 +307,181 @@
       "id": "landscape",
       "name": "Благоустройство",
       "slug": "landscape",
-      "summary": "[уточнить]",
+      "summary": "Детские игровые площадки, скамейки и малые архитектурные формы",
       "sections": [
         {
           "id": "playgrounds",
           "name": "Детские игровые площадки",
           "slug": "playgrounds",
           "count": 1133,
-          "sourceUrl": null,
-          "categories": []
+          "sourceUrl": "https://dvk-style.ru/catalog/detskie-ploshchadki/",
+          "categories": [
+            {
+              "id": "play-towns",
+              "name": "Детские городки",
+              "slug": "play-towns",
+              "count": 340,
+              "sourceUrl": "https://dvk-style.ru/catalog/detskie-gorodki/"
+            },
+            {
+              "id": "play-complexes",
+              "name": "Детские игровые комплексы",
+              "slug": "play-complexes",
+              "count": 494,
+              "sourceUrl": "https://dvk-style.ru/catalog/detskie-igrovye-kompleksy/"
+            },
+            {
+              "id": "swings",
+              "name": "Детские качели",
+              "slug": "swings",
+              "count": 254,
+              "sourceUrl": "https://dvk-style.ru/catalog/kacheli/"
+            },
+            {
+              "id": "carousels",
+              "name": "Детские карусели",
+              "slug": "carousels",
+              "count": 90,
+              "sourceUrl": "https://dvk-style.ru/catalog/karuseli-detskie/"
+            },
+            {
+              "id": "slides",
+              "name": "Детские горки",
+              "slug": "slides",
+              "count": 59,
+              "sourceUrl": "https://dvk-style.ru/catalog/gorki-detskie/"
+            },
+            {
+              "id": "sandboxes",
+              "name": "Детские песочницы",
+              "slug": "sandboxes",
+              "count": 185,
+              "sourceUrl": "https://dvk-style.ru/catalog/pesochnitsy-detskie/"
+            }
+          ]
         },
         {
           "id": "benches",
           "name": "Скамейки",
           "slug": "benches",
           "count": 508,
-          "sourceUrl": null,
-          "categories": []
+          "sourceUrl": "https://dvk-style.ru/catalog/skameyki/",
+          "categories": [
+            {
+              "id": "locker-room-benches",
+              "name": "Скамейки для раздевалок",
+              "slug": "locker-room-benches",
+              "count": 28,
+              "sourceUrl": "https://dvk-style.ru/catalog/skameyki-v-razdevalku/"
+            },
+            {
+              "id": "benches-with-backrest",
+              "name": "Скамейки со спинкой",
+              "slug": "benches-with-backrest",
+              "count": 48,
+              "sourceUrl": "https://dvk-style.ru/catalog/skameyki-so-spinkoy/"
+            },
+            {
+              "id": "park-benches",
+              "name": "Уличные парковые скамейки",
+              "slug": "park-benches",
+              "count": 99,
+              "sourceUrl": "https://dvk-style.ru/catalog/skameyki-ulichnye-parkovye/"
+            },
+            {
+              "id": "kids-benches",
+              "name": "Детские скамейки",
+              "slug": "kids-benches",
+              "count": 40,
+              "sourceUrl": "https://dvk-style.ru/catalog/detskie-skameyki/"
+            },
+            {
+              "id": "store-benches",
+              "name": "Скамейки для магазинов",
+              "slug": "store-benches",
+              "count": 79,
+              "sourceUrl": "https://dvk-style.ru/catalog/skameyki-dlya-magazinov/"
+            },
+            {
+              "id": "design-benches",
+              "name": "Красивые скамейки",
+              "slug": "design-benches",
+              "count": 159,
+              "sourceUrl": "https://dvk-style.ru/catalog/krasivye-skameyki/"
+            },
+            {
+              "id": "lavki",
+              "name": "Лавки",
+              "slug": "lavki",
+              "count": 162,
+              "sourceUrl": "https://dvk-style.ru/catalog/lavki-skameyki/"
+            },
+            {
+              "id": "metal-benches",
+              "name": "Металлические скамейки",
+              "slug": "metal-benches",
+              "count": 252,
+              "sourceUrl": "https://dvk-style.ru/catalog/metallicheskie-skameyki/"
+            },
+            {
+              "id": "garden-benches",
+              "name": "Садовые скамейки",
+              "slug": "garden-benches",
+              "count": 185,
+              "sourceUrl": "https://dvk-style.ru/catalog/sadovye-skameyki/"
+            },
+            {
+              "id": "concrete-benches",
+              "name": "Бетонные скамейки",
+              "slug": "concrete-benches",
+              "count": 109,
+              "sourceUrl": "https://dvk-style.ru/catalog/skameyki-betonnye/"
+            },
+            {
+              "id": "plastic-benches",
+              "name": "Пластиковые скамейки",
+              "slug": "plastic-benches",
+              "count": 23,
+              "sourceUrl": "https://dvk-style.ru/catalog/skameyki-plastikovye/"
+            }
+          ]
         },
         {
           "id": "small-architectural-forms",
           "name": "Малые архитектурные формы",
           "slug": "small-architectural-forms",
           "count": 290,
-          "sourceUrl": null,
-          "categories": []
+          "sourceUrl": "https://dvk-style.ru/catalog/malye-arkhitekturnye-formy/",
+          "categories": [
+            {
+              "id": "street-bins",
+              "name": "Уличные бетонные урны",
+              "slug": "street-bins",
+              "count": 56,
+              "sourceUrl": "https://dvk-style.ru/catalog/urny-ulichnye/"
+            },
+            {
+              "id": "outdoor-fitness",
+              "name": "Уличные тренажёры",
+              "slug": "outdoor-fitness",
+              "count": 24,
+              "sourceUrl": "https://dvk-style.ru/catalog/ulichnye-trenazhery/"
+            },
+            {
+              "id": "workout",
+              "name": "Воркаут",
+              "slug": "workout",
+              "count": 70,
+              "sourceUrl": "https://dvk-style.ru/catalog/varkaut/"
+            },
+            {
+              "id": "planters",
+              "name": "Вазоны и цветочницы",
+              "slug": "planters",
+              "count": 140,
+              "sourceUrl": "https://dvk-style.ru/catalog/vazony-tsvetochnitsy/"
+            }
+          ]
         }
       ]
     },
@@ -84,32 +489,257 @@
       "id": "metal",
       "name": "Металлическая мебель",
       "slug": "metal",
-      "summary": "[уточнить]",
+      "summary": "Металлические шкафы, металлические стеллажи и металлическая мебель",
       "sections": [
         {
           "id": "metal-cabinets",
           "name": "Металлические шкафы",
           "slug": "metal-cabinets",
           "count": 434,
-          "sourceUrl": null,
-          "categories": []
+          "sourceUrl": "https://dvk-style.ru/catalog/metallicheskie-shkafy/",
+          "categories": [
+            {
+              "id": "document-cabinets",
+              "name": "Шкафы для документов",
+              "slug": "document-cabinets",
+              "count": 48,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-dlya-dokumentov/"
+            },
+            {
+              "id": "archive-cabinets",
+              "name": "Архивные шкафы",
+              "slug": "archive-cabinets",
+              "count": 81,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-metallicheskie-arkhivnye/"
+            },
+            {
+              "id": "office-cabinets",
+              "name": "Офисные шкафы",
+              "slug": "office-cabinets",
+              "count": 12,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-ofisnye-/"
+            },
+            {
+              "id": "card-index-cabinets",
+              "name": "Картотечные шкафы",
+              "slug": "card-index-cabinets",
+              "count": 72,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-kartotechnye/"
+            },
+            {
+              "id": "subscriber-cabinets",
+              "name": "Абонентские шкафы",
+              "slug": "subscriber-cabinets",
+              "count": 78,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-dlya-abonentov/"
+            },
+            {
+              "id": "clothes-cabinets",
+              "name": "Шкафы для одежды",
+              "slug": "clothes-cabinets",
+              "count": 91,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-dlya-odezhdy/"
+            },
+            {
+              "id": "sectional-cabinets",
+              "name": "Секционные шкафы",
+              "slug": "sectional-cabinets",
+              "count": 18,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-sektsionnye/"
+            },
+            {
+              "id": "locker-room-cabinets",
+              "name": "Шкафы для раздевалок",
+              "slug": "locker-room-cabinets",
+              "count": 93,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-dlya-razdevalok/"
+            },
+            {
+              "id": "drying-cabinets",
+              "name": "Шкафы для сушки одежды",
+              "slug": "drying-cabinets",
+              "count": 4,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-dlya-sushki-odezhdy/"
+            },
+            {
+              "id": "phone-lockers",
+              "name": "Шкафы для мобильных телефонов",
+              "slug": "phone-lockers",
+              "count": 28,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-dlya-mobilnykh-telefonov/"
+            },
+            {
+              "id": "two-section-cabinets",
+              "name": "Двухсекционные шкафы",
+              "slug": "two-section-cabinets",
+              "count": 102,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-metallicheskie-dvukhsektsionnye/"
+            },
+            {
+              "id": "floor-cabinets",
+              "name": "Напольные шкафы",
+              "slug": "floor-cabinets",
+              "count": 179,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-metallicheskie-napolnye/"
+            },
+            {
+              "id": "wardrobe-cabinets",
+              "name": "Гардеробные шкафы",
+              "slug": "wardrobe-cabinets",
+              "count": 91,
+              "sourceUrl": "https://dvk-style.ru/catalog/metallicheskie-garderobnye-shkafy/"
+            }
+          ]
         },
         {
           "id": "metal-racks",
           "name": "Металлические стеллажи",
           "slug": "metal-racks",
           "count": 103,
-          "sourceUrl": null,
-          "categories": []
+          "sourceUrl": "https://dvk-style.ru/catalog/metallicheskie-stellazhi/",
+          "categories": [
+            {
+              "id": "mobile-racks",
+              "name": "Передвижные стеллажи",
+              "slug": "mobile-racks",
+              "count": 3,
+              "sourceUrl": "https://dvk-style.ru/catalog/stellazhi-peredvizhnye/"
+            },
+            {
+              "id": "tire-racks",
+              "name": "Стеллажи для колёс",
+              "slug": "tire-racks",
+              "count": 1,
+              "sourceUrl": "https://dvk-style.ru/catalog/stellazhi-dlya-kolyes/"
+            },
+            {
+              "id": "inclined-shelf-racks",
+              "name": "Стеллажи с наклонными полками",
+              "slug": "inclined-shelf-racks",
+              "count": 12,
+              "sourceUrl": "https://dvk-style.ru/catalog/stellazhi-s-naklonnymi-polkami/"
+            },
+            {
+              "id": "medium-duty-racks",
+              "name": "Среднегрузовые стеллажи",
+              "slug": "medium-duty-racks",
+              "count": 30,
+              "sourceUrl": "https://dvk-style.ru/catalog/stellazhi-srednegruzovye/"
+            },
+            {
+              "id": "roll-out-racks",
+              "name": "Стеллажи с выкатными платформами",
+              "slug": "roll-out-racks",
+              "count": 1,
+              "sourceUrl": "https://dvk-style.ru/catalog/stellazhi-s-vykatnymi-platformami/"
+            },
+            {
+              "id": "cantilever-racks",
+              "name": "Консольные стеллажи",
+              "slug": "cantilever-racks",
+              "count": 7,
+              "sourceUrl": "https://dvk-style.ru/catalog/stellazhi-s-konsolyami/"
+            },
+            {
+              "id": "archive-racks",
+              "name": "Архивные стеллажи",
+              "slug": "archive-racks",
+              "count": 49,
+              "sourceUrl": "https://dvk-style.ru/catalog/arkhivnye-stellazhi/"
+            },
+            {
+              "id": "warehouse-racks",
+              "name": "Складские стеллажи",
+              "slug": "warehouse-racks",
+              "count": 103,
+              "sourceUrl": "https://dvk-style.ru/catalog/skladskie-stellazhi/"
+            }
+          ]
         },
         {
           "id": "metal-furniture",
           "name": "Металлическая мебель",
           "slug": "metal-furniture",
           "count": 682,
-          "sourceUrl": null,
+          "sourceUrl": "https://dvk-style.ru/catalog/metallicheskaya-mebel/",
           "categories": [
-            { "id": "workbenches", "name": "Верстаки", "slug": "workbenches", "count": 272, "sourceUrl": null }
+            {
+              "id": "workbenches",
+              "name": "Верстаки",
+              "slug": "workbenches",
+              "count": 272,
+              "sourceUrl": "https://dvk-style.ru/catalog/verstaki/"
+            },
+            {
+              "id": "tool-cabinets",
+              "name": "Инструментальные шкафы",
+              "slug": "tool-cabinets",
+              "count": 133,
+              "sourceUrl": "https://dvk-style.ru/catalog/shkafy-instrumentalnye/"
+            },
+            {
+              "id": "tool-storage",
+              "name": "Системы хранения инструмента",
+              "slug": "tool-storage",
+              "count": 89,
+              "sourceUrl": "https://dvk-style.ru/catalog/sistema-khraneniya-instrumenta/"
+            },
+            {
+              "id": "tool-pedestals",
+              "name": "Инструментальные тумбы",
+              "slug": "tool-pedestals",
+              "count": 27,
+              "sourceUrl": "https://dvk-style.ru/catalog/tumby-instrumentalnye/"
+            },
+            {
+              "id": "tool-trolleys",
+              "name": "Инструментальные тележки",
+              "slug": "tool-trolleys",
+              "count": 38,
+              "sourceUrl": "https://dvk-style.ru/catalog/telezhki-instrumentalnye/"
+            },
+            {
+              "id": "cassette-cabinets",
+              "name": "Кассетницы",
+              "slug": "cassette-cabinets",
+              "count": 7,
+              "sourceUrl": "https://dvk-style.ru/catalog/kassetnitsy/"
+            },
+            {
+              "id": "roll-stands",
+              "name": "Подкатные стойки",
+              "slug": "roll-stands",
+              "count": 6,
+              "sourceUrl": "https://dvk-style.ru/catalog/stoyki-podkatnye/"
+            },
+            {
+              "id": "computer-pedestals",
+              "name": "Компьютерные тумбы",
+              "slug": "computer-pedestals",
+              "count": 10,
+              "sourceUrl": "https://dvk-style.ru/catalog/tumby-kompyuternye/"
+            },
+            {
+              "id": "computer-trolleys",
+              "name": "Компьютерные тележки",
+              "slug": "computer-trolleys",
+              "count": 12,
+              "sourceUrl": "https://dvk-style.ru/catalog/telezhki-kompyuternye/"
+            },
+            {
+              "id": "safes",
+              "name": "Сейфы",
+              "slug": "safes",
+              "count": 13,
+              "sourceUrl": "https://dvk-style.ru/catalog/seyfy/"
+            },
+            {
+              "id": "card-files",
+              "name": "Картотеки и драйверы",
+              "slug": "card-files",
+              "count": 75,
+              "sourceUrl": "https://dvk-style.ru/catalog/kartoteki-drayvera/"
+            }
           ]
         }
       ]
@@ -120,25 +750,565 @@
       "id": "pharmacy",
       "name": "Аптеки",
       "slug": "pharmacy",
-      "directions": ["retail"],
-      "summary": "[уточнить]",
-      "sourceUrl": null,
+      "directions": [
+        "retail"
+      ],
+      "summary": "Компания «ДВК Стиль» в Санкт-Петербурге и Москве специализируется на производстве аптечных витрин и другого торгового оборудования.",
+      "sourceUrl": "https://dvk-style.ru/catalog/oborudovanie-dlya-aptek/",
+      "categoryIds": [
+        "pharmacy-showcases",
+        "pharmacy-cabinets",
+        "pharmacy-counters",
+        "pharmacy-racks"
+      ],
+      "equipmentTypes": [
+        {
+          "name": "Аптечная витрина",
+          "text": "мебель, предназначенная для демонстрации товара. Представляет собой невысокую конструкцию со стеклянным верхом. Она позволяет покупателям хорошо рассмотреть имеющиеся лекарства и ценники к ним."
+        },
+        {
+          "name": "Витрина-касса",
+          "text": "это оборудование, за которым человек покупает медикаменты. Конструкционно она состоит из двух частей. Первая отведена под кассовый аппарат и оснащена воздушно-капельным барьером, так как за ней работает фармацевт. Вторая часть представляет собой пространство с полками, которые закрыты стеклом."
+        },
+        {
+          "name": "Рецептурный шкаф",
+          "text": "это торговая мебель, предназначенная для хранения и сортировки медикаментов по фармацевтическим группам. Она имеет простое устройство: каркас с выдвижными ящиками."
+        },
+        {
+          "name": "Стеллаж",
+          "text": "это шкаф, оснащенный глухими или стеклянными дверцами. Дополнительно в его конструкции могут быть предусмотрены выдвижные ящики."
+        }
+      ],
       "series": [
-        { "name": "ORANGE", "sourceUrl": null },
-        { "name": "АМПИР", "sourceUrl": null },
-        { "name": "ДОКТОР", "sourceUrl": null },
-        { "name": "ОЗЕРКИ", "sourceUrl": null },
-        { "name": "РОДНИК ЗДОРОВЬЯ", "sourceUrl": null }
+        {
+          "name": "Orange",
+          "slug": "orange",
+          "count": 16,
+          "image": {
+            "base": "images/company/pharmacy-series/orange",
+            "alt": "Серия аптек «Orange»",
+            "w": 1000,
+            "h": 1000
+          },
+          "sourceUrl": "https://dvk-style.ru/catalog/seriya-aptek-orange/"
+        },
+        {
+          "name": "Ампир",
+          "slug": "ampir",
+          "count": 18,
+          "image": {
+            "base": "images/company/pharmacy-series/ampir",
+            "alt": "Серия аптек «Ампир»",
+            "w": 1000,
+            "h": 1000
+          },
+          "sourceUrl": "https://dvk-style.ru/catalog/seriya-aptek-ampir/"
+        },
+        {
+          "name": "Доктор",
+          "slug": "doktor",
+          "count": 22,
+          "image": {
+            "base": "images/company/pharmacy-series/doktor",
+            "alt": "Серия аптек «Доктор»",
+            "w": 1000,
+            "h": 1000
+          },
+          "sourceUrl": "https://dvk-style.ru/catalog/seriya-aptek-doktor/"
+        },
+        {
+          "name": "Интерфарм",
+          "slug": "interfarm",
+          "count": 15,
+          "image": {
+            "base": "images/company/pharmacy-series/interfarm",
+            "alt": "Серия аптек «Интерфарм»",
+            "w": 1000,
+            "h": 1000
+          },
+          "sourceUrl": "https://dvk-style.ru/catalog/set-aptek-interfarm/"
+        },
+        {
+          "name": "Модерн",
+          "slug": "modern",
+          "count": 13,
+          "image": {
+            "base": "images/company/pharmacy-series/modern",
+            "alt": "Серия аптек «Модерн»",
+            "w": 1000,
+            "h": 1000
+          },
+          "sourceUrl": "https://dvk-style.ru/catalog/seriya-aptek-modern/"
+        },
+        {
+          "name": "Натурель",
+          "slug": "naturel",
+          "count": 3,
+          "image": {
+            "base": "images/company/pharmacy-series/naturel",
+            "alt": "Серия аптек «Натурель»",
+            "w": 1000,
+            "h": 1000
+          },
+          "sourceUrl": "https://dvk-style.ru/catalog/seriya-aptek-naturel/"
+        },
+        {
+          "name": "Озерки",
+          "slug": "ozerki",
+          "count": 14,
+          "image": {
+            "base": "images/company/pharmacy-series/ozerki",
+            "alt": "Серия аптек «Озерки»",
+            "w": 1000,
+            "h": 1000
+          },
+          "sourceUrl": "https://dvk-style.ru/catalog/seriya-aptek-ozerki/"
+        },
+        {
+          "name": "Ортека",
+          "slug": "orteka",
+          "count": 8,
+          "image": {
+            "base": "images/company/pharmacy-series/orteka",
+            "alt": "Серия аптек «Ортека»",
+            "w": 1000,
+            "h": 1000
+          },
+          "sourceUrl": "https://dvk-style.ru/catalog/seriya-aptek-orteka/"
+        },
+        {
+          "name": "Первая помощь",
+          "slug": "pervaya-pomoshch",
+          "count": 10,
+          "image": {
+            "base": "images/company/pharmacy-series/pervaya-pomoshch",
+            "alt": "Серия аптек «Первая помощь»",
+            "w": 1000,
+            "h": 1000
+          },
+          "sourceUrl": "https://dvk-style.ru/catalog/seriya-pervaya-pomoshch/"
+        },
+        {
+          "name": "Родник здоровья",
+          "slug": "rodnik-zdorovya",
+          "count": 26,
+          "image": {
+            "base": "images/company/pharmacy-series/rodnik-zdorovya",
+            "alt": "Серия аптек «Родник здоровья»",
+            "w": 1000,
+            "h": 1000
+          },
+          "sourceUrl": "https://dvk-style.ru/catalog/seriya-rodnik-zdorovya/"
+        },
+        {
+          "name": "Фиалка",
+          "slug": "fialka",
+          "count": 5,
+          "image": {
+            "base": "images/company/pharmacy-series/fialka",
+            "alt": "Серия аптек «Фиалка»",
+            "w": 1000,
+            "h": 1000
+          },
+          "sourceUrl": "https://dvk-style.ru/catalog/seriya-aptek-fialka/"
+        }
       ]
     },
-    { "id": "jewelry", "name": "Ювелирные салоны", "slug": "jewelry", "directions": ["retail"], "summary": "[уточнить]", "sourceUrl": null },
-    { "id": "optics", "name": "Оптика", "slug": "optics", "directions": ["retail"], "summary": "[уточнить]", "sourceUrl": null },
-    { "id": "museums", "name": "Музеи и выставки", "slug": "museums", "directions": ["retail"], "summary": "[уточнить]", "sourceUrl": null },
-    { "id": "apparel", "name": "Одежда и обувь", "slug": "apparel", "directions": ["retail"], "summary": "[уточнить]", "sourceUrl": null },
-    { "id": "mall-islands", "name": "Островки в ТЦ", "slug": "mall-islands", "directions": ["retail"], "summary": "[уточнить]", "sourceUrl": null },
-    { "id": "yards-schools", "name": "Дворы, детские сады и школы", "slug": "yards-schools", "directions": ["landscape"], "summary": "[уточнить]", "sourceUrl": null },
-    { "id": "warehouses", "name": "Склады и цеха", "slug": "warehouses", "directions": ["metal"], "summary": "[уточнить]", "sourceUrl": null }
+    {
+      "id": "jewelry",
+      "name": "Ювелирные салоны",
+      "slug": "jewelry",
+      "directions": [
+        "retail"
+      ],
+      "summary": "Наша компания — производитель оборудования для ювелирного магазина, а не дилер.",
+      "sourceUrl": "https://dvk-style.ru/catalog/yuvelirnoe-torgovoe-oborudovanie/",
+      "categoryIds": [
+        "jewelry-equipment",
+        "islands-jewelry"
+      ]
+    },
+    {
+      "id": "optics",
+      "name": "Оптика",
+      "slug": "optics",
+      "directions": [
+        "retail"
+      ],
+      "summary": "Торговое оборудование для очков производится из ламинированного ДСП, полированного стекла с противоударной кромкой и износостойкого и экологически безопасного пластика.",
+      "sourceUrl": "https://dvk-style.ru/catalog/oborudovanie-dlya-optiki-i-ochkov/",
+      "categoryIds": [
+        "optics-equipment",
+        "islands-glasses"
+      ]
+    },
+    {
+      "id": "museums",
+      "name": "Музеи и выставки",
+      "slug": "museums",
+      "directions": [
+        "retail"
+      ],
+      "summary": "Наша компания — производитель музейного оборудования, а не дилер.",
+      "sourceUrl": "https://dvk-style.ru/catalog/muzeynoe-oborudovanie/",
+      "categoryIds": [
+        "museum-equipment",
+        "exhibition-stands"
+      ]
+    },
+    {
+      "id": "apparel",
+      "name": "Одежда и обувь",
+      "slug": "apparel",
+      "directions": [
+        "retail"
+      ],
+      "summary": "Для залов и магазинов, продающих обувь, представлено актуальное оборудование, выполнено в самых различных цветах и решениях дизайнеров, а в некоторых комбинациях показано как уникальное.",
+      "sourceUrl": "https://dvk-style.ru/catalog/dlya-obuvnogo-magazina/",
+      "categoryIds": [
+        "apparel-equipment",
+        "shoe-equipment",
+        "lingerie-store-equipment"
+      ]
+    },
+    {
+      "id": "cosmetics",
+      "name": "Косметика и парфюмерия",
+      "slug": "cosmetics",
+      "directions": [
+        "retail"
+      ],
+      "summary": "Наиболее удобная для покупателя демонстрация косметики – главная функция торгового оборудования для магазина парфюма..",
+      "sourceUrl": "https://dvk-style.ru/catalog/dlya-magazinov-kosmetiki-i-parfyumerii/",
+      "categoryIds": [
+        "cosmetics-store-equipment",
+        "islands-cosmetics"
+      ]
+    },
+    {
+      "id": "mall-islands",
+      "name": "Островки в ТЦ",
+      "slug": "mall-islands",
+      "directions": [
+        "retail"
+      ],
+      "summary": "Наша компания представляет Вам торговые островки на заказ и стандартные.",
+      "sourceUrl": "https://dvk-style.ru/catalog/torgovye-ostrovki/",
+      "categoryIds": []
+    },
+    {
+      "id": "yards-schools",
+      "name": "Дворы, детские сады и школы",
+      "slug": "yards-schools",
+      "directions": [
+        "landscape"
+      ],
+      "summary": "Компания «ДВК Стиль» проектирует и производит игровые комплексы, оформленные в разных стилях, и отдельные конструкции для развлечений на свежем воздухе с учетом ГОСТ и СНиП.",
+      "sourceUrl": "https://dvk-style.ru/catalog/detskie-ploshchadki/",
+      "categoryIds": []
+    },
+    {
+      "id": "public-spaces",
+      "name": "Парки и общественные пространства",
+      "slug": "public-spaces",
+      "directions": [
+        "landscape"
+      ],
+      "summary": "Их роль двоякая: формирование общего настроения от окружающего пространства и выполнение определенных практических задач.",
+      "sourceUrl": "https://dvk-style.ru/catalog/malye-arkhitekturnye-formy/",
+      "categoryIds": [
+        "park-benches",
+        "street-bins",
+        "planters",
+        "outdoor-fitness",
+        "workout"
+      ]
+    },
+    {
+      "id": "offices-archives",
+      "name": "Офисы и архивы",
+      "slug": "offices-archives",
+      "directions": [
+        "metal"
+      ],
+      "summary": "Архивные шкафы (канцелярские) решат все вопросы, связанные с хранением различной документации, архивов и иных вещей.",
+      "sourceUrl": "https://dvk-style.ru/catalog/shkafy-metallicheskie-arkhivnye/",
+      "categoryIds": [
+        "document-cabinets",
+        "archive-cabinets",
+        "office-cabinets",
+        "card-index-cabinets",
+        "archive-racks",
+        "safes",
+        "card-files"
+      ]
+    },
+    {
+      "id": "warehouses",
+      "name": "Склады и цеха",
+      "slug": "warehouses",
+      "directions": [
+        "metal"
+      ],
+      "summary": "Металлические стеллажи используются для хранения предметов в разных помещениях: на складах, производствах, магазинах, офисах и т. д.",
+      "sourceUrl": "https://dvk-style.ru/catalog/skladskie-stellazhi/",
+      "categoryIds": [
+        "warehouse-racks",
+        "medium-duty-racks",
+        "cantilever-racks",
+        "tire-racks"
+      ]
+    },
+    {
+      "id": "workshops",
+      "name": "Автосервисы и мастерские",
+      "slug": "workshops",
+      "directions": [
+        "metal"
+      ],
+      "summary": "Металлические верстаки слесарные используют для эффективной организации рабочего пространства в автосервисах, мастерских, на производственных предприятиях и т. д.",
+      "sourceUrl": "https://dvk-style.ru/catalog/verstaki/",
+      "categoryIds": [
+        "workbenches",
+        "tool-cabinets",
+        "tool-storage",
+        "tool-pedestals",
+        "tool-trolleys"
+      ]
+    },
+    {
+      "id": "locker-rooms",
+      "name": "Раздевалки",
+      "slug": "locker-rooms",
+      "directions": [
+        "metal",
+        "landscape"
+      ],
+      "summary": "Шкафчики для раздевалок необходимы во многих общественных местах: спортзалах, бассейнах, офисах, а также на производстве.",
+      "sourceUrl": "https://dvk-style.ru/catalog/shkafy-dlya-razdevalok/",
+      "categoryIds": [
+        "locker-room-cabinets",
+        "clothes-cabinets",
+        "drying-cabinets",
+        "locker-room-benches"
+      ]
+    }
   ],
-  "aliases": {},
-  "meta": { "source": "https://dvk-style.ru", "collectedAt": null }
+  "aliases": {
+    "ТОРГОВОЕ ОБОРУДОВАНИЕ": "trade-equipment",
+    "ВИТРИНЫ": "showcases",
+    "ПРИЛАВКИ": "counters",
+    "ДЛЯ МАГАЗИНОВ БЫТОВОЙ ТЕХНИКИ": "appliance-store-equipment",
+    "ДЛЯ МАГАЗИНОВ НИЖНЕГО БЕЛЬЯ": "lingerie-store-equipment",
+    "ОБОРУДОВАНИЕ ДЛЯ ОДЕЖДЫ": "apparel-equipment",
+    "ЮВЕЛИРНОЕ ТОРГОВОЕ ОБОРУДОВАНИЕ": "jewelry-equipment",
+    "ОБОРУДОВАНИЕ ДЛЯ ОПТИКИ И ОЧКОВ": "optics-equipment",
+    "МУЗЕЙНОЕ ОБОРУДОВАНИЕ": "museum-equipment",
+    "ВЫСТАВОЧНЫЕ СТЕНДЫ": "exhibition-stands",
+    "ДЛЯ МАГАЗИНОВ КОСМЕТИКИ И ПАРФЮМЕРИИ": "cosmetics-store-equipment",
+    "ДЛЯ ОБУВНОГО МАГАЗИНА": "shoe-equipment",
+    "ТОРГОВАЯ МЕБЕЛЬ": "trade-furniture",
+    "БРЕНДИРОВАНИЕ ТОРГОВОГО ОБОРУДОВАНИЯ": "branded-equipment",
+    "ОБОРУДОВАНИЕ ДЛЯ ТОРГОВЛИ": "retail-equipment",
+    "ОБОРУДОВАНИЕ ДЛЯ СПОРТТОВАРОВ": "sports-store-equipment",
+    "ОБОРУДОВАНИЕ ДЛЯ СТРОИТЕЛЬНЫХ МАГАЗИНОВ": "hardware-store-equipment",
+    "ОБОРУДОВАНИЕ ДЛЯ АПТЕК": "pharmacy-equipment",
+    "ВИТРИНЫ ДЛЯ АПТЕК": "pharmacy-showcases",
+    "ШКАФЫ ДЛЯ АПТЕК": "pharmacy-cabinets",
+    "АПТЕЧНЫЕ ПРИЛАВКИ": "pharmacy-counters",
+    "Серия аптек \"ORANGE\"": "pharmacy-equipment",
+    "Серия аптек \"АМПИР\"": "pharmacy-equipment",
+    "Серия аптек \"ГРИН\"": "pharmacy-equipment",
+    "Серия аптек \"ДОКТОР\"": "pharmacy-equipment",
+    "Серия аптек \"ИНТЕРФАРМ\"": "pharmacy-equipment",
+    "Серия аптек \"МОДЕРН\"": "pharmacy-equipment",
+    "Серия аптек \"НАТУРЕЛЬ\"": "pharmacy-equipment",
+    "Серия аптек \"ОЗЕРКИ\"": "pharmacy-equipment",
+    "Серия аптек \"ОРТЕКА\"": "pharmacy-equipment",
+    "Серия аптек \"ПЕРВАЯ ПОМОЩЬ\"": "pharmacy-equipment",
+    "Серия аптек \"РОДНИК ЗДОРОВЬЯ\"": "pharmacy-equipment",
+    "Серия аптек \"ФИАЛКА\"": "pharmacy-equipment",
+    "СТЕЛЛАЖИ ДЛЯ АПТЕК": "pharmacy-racks",
+    "ТОРГОВЫЕ ОСТРОВКИ": "trade-islands",
+    "БИЖУТЕРИЯ": "islands-costume-jewelry",
+    "ГАЛАНТЕРЕЙНАЯ ПРОДУКЦИЯ": "islands-haberdashery",
+    "ДЕТСКИЕ ТОВАРЫ": "islands-kids-goods",
+    "ИГРУШКИ": "islands-toys",
+    "КАНЦЕЛЯРСКИЕ ТОВАРЫ": "islands-stationery",
+    "КОСМЕТИКА, ПАРФЮМЕРИЯ": "islands-cosmetics",
+    "МОБИЛЬНАЯ СВЯЗЬ, АКСЕССУАРЫ": "islands-mobile",
+    "НАПИТКИ, ПРОДУКТЫ": "islands-food",
+    "ОЧКИ": "islands-glasses",
+    "СЕРВИСНЫЕ СТОЙКИ": "service-desks",
+    "СУВЕНИРЫ, ПОДАРКИ": "islands-souvenirs",
+    "ЧАСЫ": "islands-watches",
+    "ЭКСПРЕСС - МАНИКЮР": "islands-manicure",
+    "ЭКСПРЕСС - УСЛУГИ": "islands-express-services",
+    "ЭЛЕКТРОНИКА, БЫТОВАЯ ТЕХНИКА": "islands-electronics",
+    "ЮВЕЛИРНЫЕ ИЗДЕЛИЯ": "islands-jewelry",
+    "ПАВИЛЬОНЫ ДЛЯ ТОРГОВОГО ЦЕНТРА": "mall-pavilions",
+    "ТОРГОВЫЕ МОДУЛИ": "trade-modules",
+    "ДЕТСКИЕ ИГРОВЫЕ ПЛОЩАДКИ": "playgrounds",
+    "ДЕТСКИЕ ГОРОДКИ": "play-towns",
+    "ДЕТСКИЕ ИГРОВЫЕ КОМПЛЕКСЫ": "play-complexes",
+    "ДЕТСКИЕ КАЧЕЛИ": "swings",
+    "КАРУСЕЛИ ДЕТСКИЕ": "carousels",
+    "ГОРКИ ДЕТСКИЕ": "slides",
+    "ПЕСОЧНИЦЫ ДЕТСКИЕ": "sandboxes",
+    "СКАМЕЙКИ": "benches",
+    "СКАМЕЙКИ В РАЗДЕВАЛКУ": "locker-room-benches",
+    "СКАМЕЙКИ СО СПИНКОЙ": "benches-with-backrest",
+    "СКАМЕЙКИ УЛИЧНЫЕ ПАРКОВЫЕ": "park-benches",
+    "ДЕТСКИЕ СКАМЕЙКИ": "kids-benches",
+    "СКАМЕЙКИ ДЛЯ МАГАЗИНОВ": "store-benches",
+    "КРАСИВЫЕ СКАМЕЙКИ": "design-benches",
+    "ЛАВКИ СКАМЕЙКИ": "lavki",
+    "МЕТАЛЛИЧЕСКИЕ СКАМЕЙКИ": "metal-benches",
+    "САДОВЫЕ СКАМЕЙКИ": "garden-benches",
+    "СКАМЕЙКИ БЕТОННЫЕ": "concrete-benches",
+    "СКАМЕЙКИ ПЛАСТИКОВЫЕ": "plastic-benches",
+    "МАЛЫЕ АРХИТЕКТУРНЫЕ ФОРМЫ": "small-architectural-forms",
+    "УЛИЧНЫЕ БЕТОННЫЕ УРНЫ": "street-bins",
+    "УЛИЧНЫЕ ТРЕНАЖЕРЫ": "outdoor-fitness",
+    "ВОРКАУТ": "workout",
+    "ВАЗОНЫ-ЦВЕТОЧНИЦЫ": "planters",
+    "МЕТАЛЛИЧЕСКИЕ ШКАФЫ": "metal-cabinets",
+    "ШКАФЫ ДЛЯ ДОКУМЕНТОВ": "document-cabinets",
+    "ШКАФЫ МЕТАЛЛИЧЕСКИЕ АРХИВНЫЕ": "archive-cabinets",
+    "ШКАФЫ ОФИСНЫЕ": "office-cabinets",
+    "ШКАФЫ КАРТОТЕЧНЫЕ": "card-index-cabinets",
+    "ШКАФЫ ДЛЯ АБОНЕНТОВ": "subscriber-cabinets",
+    "ШКАФЫ ДЛЯ ОДЕЖДЫ": "clothes-cabinets",
+    "ШКАФЫ СЕКЦИОННЫЕ": "sectional-cabinets",
+    "ШКАФЫ ДЛЯ РАЗДЕВАЛОК": "locker-room-cabinets",
+    "ШКАФЫ ДЛЯ СУШКИ ОДЕЖДЫ": "drying-cabinets",
+    "МЕБЕЛЬ ДЛЯ ФИТНЕСА": "metal-cabinets",
+    "ШКАФЫ ДЛЯ МОБИЛЬНЫХ ТЕЛЕФОНОВ": "phone-lockers",
+    "ШКАФЫ МЕТАЛЛИЧЕСКИЕ ДВУХСЕКЦИОННЫЕ": "two-section-cabinets",
+    "ШКАФЫ МЕТАЛЛИЧЕСКИЕ НАПОЛЬНЫЕ": "floor-cabinets",
+    "МЕТАЛЛИЧЕСКИЕ ГАРДЕРОБНЫЕ ШКАФЫ": "wardrobe-cabinets",
+    "МЕТАЛЛИЧЕСКИЕ СТЕЛЛАЖИ": "metal-racks",
+    "СТЕЛЛАЖИ ПЕРЕДВИЖНЫЕ": "mobile-racks",
+    "СТЕЛЛАЖИ ДЛЯ КОЛЕС": "tire-racks",
+    "СТЕЛЛАЖИ С НАКЛОННЫМИ ПОЛКАМИ": "inclined-shelf-racks",
+    "СТЕЛЛАЖИ СРЕДНЕГРУЗОВЫЕ": "medium-duty-racks",
+    "СТЕЛЛАЖИ ФРОНТАЛЬНЫЕ": "metal-racks",
+    "СТЕЛЛАЖИ С ВЫКАТНЫМИ ПЛАТФОРМАМИ": "roll-out-racks",
+    "СТЕЛЛАЖИ С КОНСОЛЯМИ": "cantilever-racks",
+    "АРХИВНЫЕ СТЕЛЛАЖИ": "archive-racks",
+    "СКЛАДСКИЕ СТЕЛЛАЖИ": "warehouse-racks",
+    "МЕТАЛЛИЧЕСКАЯ МЕБЕЛЬ": "metal-furniture",
+    "ВЕРСТАКИ": "workbenches",
+    "ШКАФЫ ИНСТРУМЕНТАЛЬНЫЕ": "tool-cabinets",
+    "СИСТЕМЫ ХРАНЕНИЯ ИНСТРУМЕНТА": "tool-storage",
+    "ТУМБЫ ДЛЯ ИНСТРУМЕНТА": "tool-pedestals",
+    "ТЕЛЕЖКИ ИНСТРУМЕНТАЛЬНЫЕ": "tool-trolleys",
+    "КАССЕТНИЦЫ": "cassette-cabinets",
+    "СТОЙКИ ПОДКАТНЫЕ": "roll-stands",
+    "ТУМБЫ КОМПЬЮТЕРНЫЕ": "computer-pedestals",
+    "ТЕЛЕЖКИ КОМПЬЮТЕРНЫЕ": "computer-trolleys",
+    "СЕЙФЫ": "safes",
+    "КАРТОТЕКИ, ДРАЙВЕРА": "card-files",
+    "ПРОМЫШЛЕННАЯ МЕБЕЛЬ": "metal-furniture",
+    "Верстаки": "workbenches",
+    "Шкафы инструментальные": "tool-cabinets",
+    "Система хранения инструмента": "tool-storage",
+    "Тумбы инструментальные": "tool-pedestals",
+    "Тележки инструментальные": "tool-trolleys",
+    "Кассетницы": "cassette-cabinets",
+    "Стойки подкатные": "roll-stands",
+    "Тумбы компьютерные": "computer-pedestals",
+    "Тележки компьютерные": "computer-trolleys",
+    "Сейфы": "safes",
+    "Картотеки, драйвера": "card-files",
+    "ВИТРИНЫ ДЛЯ МУЗЕЯ": "showcases",
+    "ВИТРИНЫ СТЕКЛЯННЫЕ": "showcases",
+    "ВИТРИНЫ ОТКРЫТЫЕ": "showcases",
+    "ВИТРИНЫ С ПОДСВЕТКОЙ": "showcases",
+    "ПРИЛАВКИ - ВИТРИНЫ": "counters",
+    "ГОРИЗОНТАЛЬНЫЕ МУЗЕЙНЫЕ ВИТРИНЫ": "museum-equipment",
+    "Музейные комплексы": "museum-equipment",
+    "СТЕЛЛАЖИ ДЛЯ ХОЗТОВАРОВ": "hardware-store-equipment",
+    "СТОЙКИ ДЛЯ СМЕСИТЕЛЕЙ": "hardware-store-equipment",
+    "ГОРОДКИ ДЛЯ ДАЧИ": "play-towns",
+    "ДЕТСКИЕ ГОРОДКИ С КАЧЕЛЯМИ": "play-towns",
+    "ДЕТСКИЕ ГОРОДКИ-МАШИНКИ": "play-towns",
+    "УЛИЧНЫЕ ГОРОДКИ С ГОРКОЙ": "play-towns",
+    "ДЕТСКИЕ КОМПЛЕКСЫ - КОРАБЛИКИ": "play-complexes",
+    "КОМПЛЕКСЫ С БАСКЕТБОЛЬНЫМ ЩИТОМ": "play-complexes",
+    "КОМПЛЕКСЫ СО СПОРТИВНЫМИ ЭЛЕМЕНТАМИ": "play-complexes",
+    "ДВОЙНЫЕ КАЧЕЛИ": "swings",
+    "ДЕТСКИЕ КАЧЕЛИ ИЗ ДЕРЕВА": "swings",
+    "КАЧАЛКИ НА ПРУЖИНЕ": "swings",
+    "КАЧЕЛИ - БАЛАНСИРЫ": "swings",
+    "МАЯТНИКОВЫЕ КАЧЕЛИ": "swings",
+    "УЛИЧНЫЕ КАЧЕЛИ": "swings",
+    "КАРУСЕЛИ ДЛЯ ДЕТСКОЙ ПЛОЩАДКИ": "carousels",
+    "КАРУСЕЛИ ДЕТСКИЕ УЛИЧНЫЕ": "carousels",
+    "ГОРКИ ДЛЯ ДЕТСКИХ САДОВ": "slides",
+    "ГОРКИ ДЛЯ ДЕТСКОЙ ПЛОЩАДКИ": "slides",
+    "ДЕТСКИЕ ГОРКИ ДЛЯ ДАЧИ": "slides",
+    "ДЕТСКИЕ ГОРКИ ДЛЯ УЛИЦЫ": "slides",
+    "ДЕТСКИЕ ПЕСОЧНИЦЫ КОМПЛЕКСЫ": "sandboxes",
+    "ДЕТСКИЕ ПЕСОЧНИЦЫ С КРЫШКОЙ": "sandboxes",
+    "ПЕСОЧНИЦА ДЕТСКАЯ ДЕРЕВЯННАЯ": "sandboxes",
+    "ПЕСОЧНИЦА ДЛЯ ДЕТСКОГО САДА": "sandboxes",
+    "ПЕСОЧНИЦЫ ДЛЯ ДЕТСКИХ ПЛОЩАДОК": "sandboxes",
+    "УЛИЧНЫЕ СИЛОВЫЕ ТРЕНАЖЁРЫ": "outdoor-fitness",
+    "ЦВЕТОЧНИЦЫ МЕТАЛЛИЧЕСКИЕ": "planters",
+    "ВАЗОНЫ БЕТОННЫЕ": "planters",
+    "ВАЗОНЫ ПЛАСТИКОВЫЕ": "planters",
+    "ШКАФЫ АРХИВНЫЕ мз": "document-cabinets",
+    "ШКАФЫ АРХИВНЫЕ па": "document-cabinets",
+    "ШКАФЫ ОФИСНЫЕ дв": "document-cabinets",
+    "ШКАФЫ ОФИСНЫЕ ди": "document-cabinets",
+    "ШКАФЫ ОФИСНЫЕ пр": "document-cabinets",
+    "ШКАФЫ КАРТОТЕЧНЫЕ диком": "card-index-cabinets",
+    "ШКАФЫ КАРТОТЕЧНЫЕ металл - завод": "card-index-cabinets",
+    "ШКАФЫ КАРТОТЕЧНЫЕ пакс": "card-index-cabinets",
+    "ШКАФЫ КАРТОТЕЧНЫЕ промет": "card-index-cabinets",
+    "ШКАФЫ АБОНЕНТСКИЕ версия": "subscriber-cabinets",
+    "ШКАФЫ АБОНЕНТСКИЕ ДиКом": "subscriber-cabinets",
+    "ШКАФЫ АБОНЕНТСКИЕ промет": "subscriber-cabinets",
+    "ШКАФЫ ДЕПОЗИТНЫЕ двк": "subscriber-cabinets",
+    "ШКАФЫ ДЛЯ МОБИЛЬНЫХ ТЕЛЕФОНОВ версия": "phone-lockers",
+    "ШКАФЫ ДЛЯ МОБИЛЬНЫХ ТЕЛЕФОНОВ двк": "phone-lockers",
+    "ВЕРСТАКИ металлические серии ВС до 3000 кг": "workbenches",
+    "Верстаки металлические серии ВЛ до 1500 кг": "workbenches",
+    "Верстаки металлические WOKER до 1000 кг": "workbenches",
+    "Верстаки металлические серии 22 до 500 кг": "workbenches",
+    "Верстаки металлические серии 21 до 400 кг": "workbenches",
+    "Верстаки металлические серии PROFI": "workbenches",
+    "Верстаки металлические серии EXPERT WS": "workbenches",
+    "Верстаки металлические серии MASTER": "workbenches",
+    "Верстаки металлические серии SMART": "workbenches",
+    "Верстаки металлические серии ВП": "workbenches",
+    "Верстаки для гаража": "workbenches",
+    "Шкафы инструментальные серии MODUL и ERGO": "tool-cabinets",
+    "Шкафы инструментальные серии ТС, АМН ТС и HARD": "tool-cabinets",
+    "Шкафы инструментальные серии ВС и ВЛ": "tool-cabinets"
+  },
+  "facetLabels": {
+    "material": {
+      "metal": "Металл",
+      "glass": "Стекло",
+      "ldsp": "ЛДСП",
+      "mdf": "МДФ",
+      "wood": "Дерево",
+      "plywood": "Фанера",
+      "plastic": "Пластик",
+      "concrete": "Бетон",
+      "stone": "Камень"
+    },
+    "light": {
+      "warm": "Тёплая подсветка",
+      "cold": "Холодная подсветка",
+      "rgb": "RGB-подсветка",
+      "none": "Без подсветки"
+    }
+  },
+  "meta": {
+    "source": "https://dvk-style.ru",
+    "collectedAt": "2026-11-18"
+  }
 }

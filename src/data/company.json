@@ -6,56 +6,696 @@
   "promise": "Бесплатный подбор оборудования, ответ на заявку в течение 2 часов",
   "positioning": "Проектируем, производим и монтируем — от витрины до детской площадки, по всей России",
   "cycle": [
-    { "id": "measure", "title": "Замер и планировка", "text": "Выезд специалиста бесплатный" },
-    { "id": "design", "title": "Дизайн-проект", "text": "[уточнить]" },
-    { "id": "production", "title": "Собственное производство", "text": "[уточнить]" },
-    { "id": "delivery", "title": "Доставка", "text": "Своим транспортом по России, транспортной компанией или самовывоз" },
-    { "id": "install", "title": "Монтаж и такелаж", "text": "[уточнить]" }
+    {
+      "id": "measure",
+      "title": "Замер и планировка",
+      "text": "Выезд специалиста на замер в тот же день; выезд на место монтажа для ознакомления с помещением — бесплатно.",
+      "sourceUrl": "https://dvk-style.ru/services/zamer/zamer-i-planirovka/"
+    },
+    {
+      "id": "design",
+      "title": "Дизайн-проект",
+      "text": "Дизайн-проект любой сложности; при заказе оборудования для магазина дизайн-проект магазина предоставляется бесплатно.",
+      "sourceUrl": "https://dvk-style.ru/services/dizayn-proekt/dizayn-magazina/"
+    },
+    {
+      "id": "production",
+      "title": "Собственное производство",
+      "text": "Производство в одном из цехов «Ижорских заводов» в Колпино, на современном немецком оборудовании.",
+      "sourceUrl": "https://dvk-style.ru/company/nashe-proizvodstvo/"
+    },
+    {
+      "id": "delivery",
+      "title": "Доставка",
+      "text": "Свой парк грузового автотранспорта и доставка по всей России; транспортные компании или самовывоз со склада в Санкт-Петербурге и Москве.",
+      "sourceUrl": "https://dvk-style.ru/services/transportnye-uslugi/dostavka-transportom-dvk-elit/"
+    },
+    {
+      "id": "install",
+      "title": "Монтаж и такелаж",
+      "text": "Монтаж (сборка) и такелаж торгового оборудования, сейфов, металлической мебели и стеллажей силами обученных сотрудников.",
+      "sourceUrl": "https://dvk-style.ru/services/montazh-takelazh/montazh/"
+    }
   ],
   "services": [
-    { "id": "branding", "title": "Брендирование оборудования", "text": "[уточнить]" },
-    { "id": "gov-orders", "title": "Работа с госзаказами", "text": "[уточнить]" },
-    { "id": "tender-specs", "title": "ТЗ к тендерам", "text": "[уточнить]" }
+    {
+      "id": "branding",
+      "title": "Брендирование оборудования",
+      "text": "Оформление торгового оборудования позволяет привлечь внимание покупателей, бренд-дизайн оборудования в этом значительно повышает продажи каждого предприятия, способствует дальнейшему процветанию вашего бизнеса.",
+      "sourceUrl": "https://dvk-style.ru/catalog/brendirovanie-oborudovaniya/"
+    },
+    {
+      "id": "gov-orders",
+      "title": "Госзаказы и тендеры",
+      "text": "Более 9 лет участвует в тендерах, аукционах и конкурсах государственных и частных компаний; зарегистрированы на «ЭТП ГПБ», «Сбербанк-АСТ», в тендерах ОАО «РЖД».",
+      "sourceUrl": "https://dvk-style.ru/services/goszakazy-tendery/podgotovka-tekhzadaniya/"
+    },
+    {
+      "id": "tender-specs",
+      "title": "ТЗ к тендерам",
+      "text": "Подготовка технического задания к тендерам и аукционам по заявкам государственных предприятий, в том числе по 44-ФЗ.",
+      "sourceUrl": "https://dvk-style.ru/services/goszakazy-tendery/podgotovka-tekhzadaniya/"
+    },
+    {
+      "id": "shop-design",
+      "title": "Дизайн магазина",
+      "text": "Чертежи по пожеланиям заказчика, 3D-моделирование и выезд дизайнера на место.",
+      "sourceUrl": "https://dvk-style.ru/projects/dizayn_magazinov/"
+    }
   ],
   "clients": [
-    { "name": "Сбербанк", "logo": null },
-    { "name": "Эрмитаж", "logo": null },
-    { "name": "Газпром", "logo": null },
-    { "name": "Северсталь", "logo": null },
-    { "name": "Knauf", "logo": null },
-    { "name": "Makita", "logo": null },
-    { "name": "Ford", "logo": null },
-    { "name": "Tikkurila", "logo": null },
-    { "name": "Natur Produkt", "logo": null },
-    { "name": "Театр Ленсовета", "logo": null }
+    {
+      "name": "Сбербанк",
+      "logo": {
+        "base": "images/company/clients/sberbank",
+        "alt": "Логотип: Сбербанк",
+        "w": 199,
+        "h": 199
+      },
+      "sourceUrl": "https://dvk-style.ru/"
+    },
+    {
+      "name": "Эрмитаж",
+      "logo": {
+        "base": "images/company/clients/hermitage",
+        "alt": "Логотип: Эрмитаж",
+        "w": 350,
+        "h": 350
+      },
+      "sourceUrl": "https://dvk-style.ru/"
+    },
+    {
+      "name": "Natur Produkt",
+      "logo": {
+        "base": "images/company/clients/natur-produkt",
+        "alt": "Логотип: Natur Produkt",
+        "w": 350,
+        "h": 350
+      },
+      "sourceUrl": "https://dvk-style.ru/"
+    },
+    {
+      "name": "Makita",
+      "logo": {
+        "base": "images/company/clients/makita",
+        "alt": "Логотип: Makita",
+        "w": 350,
+        "h": 350
+      },
+      "sourceUrl": "https://dvk-style.ru/"
+    },
+    {
+      "name": "Knauf",
+      "logo": {
+        "base": "images/company/clients/knauf",
+        "alt": "Логотип: Knauf",
+        "w": 350,
+        "h": 350
+      },
+      "sourceUrl": "https://dvk-style.ru/"
+    },
+    {
+      "name": "Газпром",
+      "logo": {
+        "base": "images/company/clients/gazprom",
+        "alt": "Логотип: Газпром",
+        "w": 350,
+        "h": 350
+      },
+      "sourceUrl": "https://dvk-style.ru/"
+    },
+    {
+      "name": "Ford",
+      "logo": {
+        "base": "images/company/clients/ford",
+        "alt": "Логотип: Ford",
+        "w": 350,
+        "h": 350
+      },
+      "sourceUrl": "https://dvk-style.ru/"
+    },
+    {
+      "name": "Tikkurila",
+      "logo": {
+        "base": "images/company/clients/tikkurila",
+        "alt": "Логотип: Tikkurila",
+        "w": 120,
+        "h": 120
+      },
+      "sourceUrl": "https://dvk-style.ru/"
+    },
+    {
+      "name": "Театр Ленсовета",
+      "logo": {
+        "base": "images/company/clients/lensovet-theatre",
+        "alt": "Логотип: Театр Ленсовета",
+        "w": 120,
+        "h": 120
+      },
+      "sourceUrl": "https://dvk-style.ru/"
+    },
+    {
+      "name": "Северсталь",
+      "logo": {
+        "base": "images/company/clients/severstal",
+        "alt": "Логотип: Северсталь",
+        "w": 197,
+        "h": 197
+      },
+      "sourceUrl": "https://dvk-style.ru/"
+    },
+    {
+      "name": "ВТБ 24",
+      "logo": null,
+      "sourceUrl": "https://dvk-style.ru/company/"
+    },
+    {
+      "name": "Санкт-Петербургский метрополитен",
+      "logo": null,
+      "sourceUrl": "https://dvk-style.ru/company/"
+    },
+    {
+      "name": "К-Раута",
+      "logo": null,
+      "sourceUrl": "https://dvk-style.ru/company/"
+    },
+    {
+      "name": "ПИТ Продукт",
+      "logo": null,
+      "sourceUrl": "https://dvk-style.ru/company/"
+    },
+    {
+      "name": "ФГУП «Гознак»",
+      "logo": null,
+      "sourceUrl": "https://dvk-style.ru/company/"
+    }
   ],
-  "letters": [],
+  "letters": [
+    {
+      "from": "Виак Я.Ю., генеральный директор ООО «Ла Страда Ко»",
+      "person": "Виак Я.Ю.",
+      "position": "Генеральный директор ООО «Ла Страда Ко»",
+      "date": "30 ноября 2024",
+      "summary": "Выражаем Вам и вашему коллективу благодарность за хорошее качество и кратчайшие сроки изготовления мебели для нашего салона оптики.",
+      "image": null,
+      "sourceUrl": "https://dvk-style.ru/reviews/"
+    },
+    {
+      "from": "Шикалов С.А., глава администрации Никольского р.п. Тосненского р. ЛО",
+      "person": "Шикалов С.А.",
+      "position": "Глава администрации Никольского р.п. Тосненского р. ЛО",
+      "date": "21 сентября 2024",
+      "summary": "Благодарность за качественно проделанную работу по устройству детского оборудования в Никольском городском поселении",
+      "image": null,
+      "sourceUrl": "https://dvk-style.ru/reviews/"
+    },
+    {
+      "from": "Решетов Д.Г., директор краеведческого музея г. Энгельс",
+      "person": "Решетов Д.Г.",
+      "position": "Директор краеведческого музея г. Энгельс",
+      "date": "24 марта 2024",
+      "summary": "Благодарность ведущему дизайнеру ООО «ДВК Стиль» за высокий уровень исполнения своих обязательств, профессиональную, добросовестную работу.",
+      "image": null,
+      "sourceUrl": "https://dvk-style.ru/reviews/"
+    },
+    {
+      "from": "Константинов Л.И., генеральный директор ЗАО«МЕГАМАРТ»",
+      "person": "Константинов Л.И.",
+      "position": "Генеральный директор ЗАО«МЕГАМАРТ»",
+      "date": "17 ноября 2023",
+      "summary": "Выражаем благодарность коллективу ООО «ДВК Стиль» за выполненные работы, произведенные с высоким качеством и в срок.",
+      "image": null,
+      "sourceUrl": "https://dvk-style.ru/reviews/"
+    },
+    {
+      "from": "Доронин А.В., технический директор ЗАО «Мостэк»",
+      "person": "Доронин А.В.",
+      "position": "Технический директор ЗАО «Мостэк»",
+      "date": "23 марта 2023",
+      "summary": "Благодарность коллективу ООО «ДВК Стиль» за выполненные работы, произведенные с высоким качеством и в срок.",
+      "image": null,
+      "sourceUrl": "https://dvk-style.ru/reviews/"
+    },
+    {
+      "from": "Зыцарь А.В., главный инженер Троицкого рынка",
+      "person": "Зыцарь А.В.",
+      "position": "Главный инженер Троицкого рынка",
+      "date": "29 сентября 2022",
+      "summary": "Благодарю Вас и коллектив ООО «ДВК Стиль» за выполненные работы, произведенные с высоким качеством и в срок.",
+      "image": null,
+      "sourceUrl": "https://dvk-style.ru/reviews/"
+    },
+    {
+      "from": "Решетов Д.Г., директор краеведческого музея г. Энгельс",
+      "person": "Решетов Д.Г.",
+      "position": "Директор краеведческого музея г. Энгельс",
+      "date": "7 июля 2022",
+      "summary": "Благодарственное письмо за профессионализм и оперативность, добросовестное и качественное исполнение выпускаемой продукции.",
+      "image": null,
+      "sourceUrl": "https://dvk-style.ru/reviews/"
+    },
+    {
+      "from": "Москалев С.О., коммерческий директор ЗАО «Победа Knauf»",
+      "person": "Москалев С.О.",
+      "position": "Коммерческий директор ЗАО «Победа Knauf»",
+      "date": "14 января 2022",
+      "summary": "Благодарность коллективу ООО«ДВК Стиль» и лично Глебову О.Е. и надеемся на дальнейшее взаимовыгодное сотрудничество.",
+      "image": null,
+      "sourceUrl": "https://dvk-style.ru/reviews/"
+    }
+  ],
   "cities": {
     "spb": {
       "label": "Санкт-Петербург",
-      "address": "Колпино, бульвар Победы, д. 1, лит. АЕ, помещ. 1Н",
-      "phones": ["+7 (812) 461-97-51"],
-      "emails": ["dvkstyle@inbox.ru"],
+      "address": "Санкт-Петербург, Колпино, бульвар Победы, дом 1, литера АЕ, помещение 1Н",
+      "phones": [
+        "+7 (812) 461-97-51",
+        "+7 (812) 460-83-55",
+        "+7 (931) 236-70-23"
+      ],
+      "emails": [
+        "dvkstyle@inbox.ru"
+      ],
       "hours": null,
-      "mapUrl": null
+      "mapUrl": "https://yandex.ru/maps/?text=%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3%2C%20%D0%9A%D0%BE%D0%BB%D0%BF%D0%B8%D0%BD%D0%BE%2C%20%D0%B1%D1%83%D0%BB%D1%8C%D0%B2%D0%B0%D1%80%20%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D1%8B%2C%20%D0%B4%D0%BE%D0%BC%201%2C%20%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%20%D0%90%D0%95%2C%20%D0%BF%D0%BE%D0%BC%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D0%B5%201%D0%9D",
+      "note": "Производство",
+      "extraAddresses": [
+        {
+          "address": "Санкт-Петербург, ул. Ново-Рыбинская, 21, ТЦ «Квартал», м. «Московские ворота»",
+          "phones": [
+            "+7 (931) 236-70-23"
+          ],
+          "note": null
+        }
+      ],
+      "sourceUrl": "https://dvk-style.ru/company/contacts/"
     },
     "msk": {
       "label": "Москва",
-      "address": null,
-      "phones": ["+7 (495) 268-15-21"],
-      "emails": ["dvkstyle1@yandex.ru"],
+      "address": "Москва, пер. Вадковского, д. 12, помещение 1",
+      "phones": [
+        "+7 (495) 268-15-21",
+        "+7 (931) 236-70-23"
+      ],
+      "emails": [
+        "dvkstyle1@yandex.ru"
+      ],
       "hours": null,
-      "mapUrl": null
+      "mapUrl": "https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%BF%D0%B5%D1%80.%20%D0%92%D0%B0%D0%B4%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%2C%20%D0%B4.%2012%2C%20%D0%BF%D0%BE%D0%BC%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D0%B5%201",
+      "site": "https://msk.dvk-style.ru/",
+      "sourceUrl": "https://dvk-style.ru/company/contacts/"
     }
   },
-  "requisites": null,
-  "certificates": [],
-  "heroPhotos": [],
+  "representativeOffices": [
+    {
+      "city": "Южно-Сахалинск",
+      "address": "Южно-Сахалинск, проспект Мира, дом 56, корпус 3, офис 308",
+      "phones": [
+        "+7 (931) 236-70-23"
+      ],
+      "emails": [
+        "dvkstyle@inbox.ru"
+      ],
+      "sourceUrl": "https://dvk-style.ru/company/contacts/"
+    },
+    {
+      "city": "Краснодар",
+      "address": "Краснодар, ул. Севастопольская, 2, корп. 3, офис 31 (цоколь подъезда 3)",
+      "phones": [
+        "+7 (931) 236-70-23"
+      ],
+      "emails": [
+        "dvkstyle1@yandex.ru"
+      ],
+      "sourceUrl": "https://dvk-style.ru/company/contacts/"
+    }
+  ],
+  "requisites": {
+    "fullName": "Общество с ограниченной ответственностью ДВК Элит",
+    "shortName": "ООО ДВК Элит",
+    "legalAddress": "196650, г. Санкт-Петербург, вн.тер.г. город Колпино, территория Ижорский завод, д.92 строение 1 помещение 37",
+    "postalAddress": "196650, г. Санкт-Петербург, Колпино, б-р Победы, д.1",
+    "inn": "7817113879",
+    "kpp": "781701001",
+    "registrationNumber": "1217800053900",
+    "okpo": "54854419",
+    "okato": "40277000000",
+    "okopf": "12300",
+    "bank": "ООО «Банк Точка»",
+    "account": "40702810801500089114",
+    "corrAccount": "30101810745374525104",
+    "bik": "044525104",
+    "phones": [
+      "+7 (812) 460-83-55",
+      "+7 (812) 461-97-51"
+    ],
+    "email": "dvkstyle@inbox.ru",
+    "sourceUrl": "https://dvk-style.ru/company/requisites/"
+  },
+  "certificates": [
+    {
+      "title": "Дилерский сертификат Промет",
+      "kind": "dealer",
+      "image": {
+        "base": "images/company/certificates/1",
+        "alt": "Дилерский сертификат Промет",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Дилерское свидетельство ДВК",
+      "kind": "dealer",
+      "image": {
+        "base": "images/company/certificates/2",
+        "alt": "Дилерское свидетельство ДВК",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Дилерское свидетельство ДИКОМ",
+      "kind": "dealer",
+      "image": {
+        "base": "images/company/certificates/3",
+        "alt": "Дилерское свидетельство ДИКОМ",
+        "w": 704,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Дилерское свидетельство МЕТАЛЛ-ЗАВОД",
+      "kind": "dealer",
+      "image": {
+        "base": "images/company/certificates/4",
+        "alt": "Дилерское свидетельство МЕТАЛЛ-ЗАВОД",
+        "w": 704,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Дилерское свидетельство ПТК-Спорт",
+      "kind": "dealer",
+      "image": {
+        "base": "images/company/certificates/5",
+        "alt": "Дилерское свидетельство ПТК-Спорт",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Санитарно гигиенический сертификат",
+      "kind": "sanitary",
+      "image": {
+        "base": "images/company/certificates/6",
+        "alt": "Санитарно гигиенический сертификат",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на металлическую мебель",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/7",
+        "alt": "Сертификат соответствия на металлическую мебель",
+        "w": 685,
+        "h": 887
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия ДВК",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/8",
+        "alt": "Сертификат соответствия ДВК",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия ДВК",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/9",
+        "alt": "Сертификат соответствия ДВК",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на мебель для общественных помещений",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/10",
+        "alt": "Сертификат соответствия на мебель для общественных помещений",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на мебель для общественных помещений",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/11",
+        "alt": "Сертификат соответствия на мебель для общественных помещений",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на мебель для общественных помещений",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/12",
+        "alt": "Сертификат соответствия на мебель для общественных помещений",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на мебель для общественных помещений",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/13",
+        "alt": "Сертификат соответствия на мебель для общественных помещений",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на металлическую мебель",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/14",
+        "alt": "Сертификат соответствия на металлическую мебель",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на металлическую мебель",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/15",
+        "alt": "Сертификат соответствия на металлическую мебель",
+        "w": 623,
+        "h": 887
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на металлическую мебель ПАКС-ТРЕЙД",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/16",
+        "alt": "Сертификат соответствия на металлическую мебель ПАКС-ТРЕЙД",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на сейфы",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/17",
+        "alt": "Сертификат соответствия на сейфы",
+        "w": 704,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на шкафы",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/18",
+        "alt": "Сертификат соответствия на шкафы",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на стеллажи среднегрузовые",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/19",
+        "alt": "Сертификат соответствия на стеллажи среднегрузовые",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    },
+    {
+      "title": "Сертификат соответствия на стеллажи среднегрузовые",
+      "kind": "conformity",
+      "image": {
+        "base": "images/company/certificates/20",
+        "alt": "Сертификат соответствия на стеллажи среднегрузовые",
+        "w": 703,
+        "h": 1000
+      },
+      "sourceUrl": "https://dvk-style.ru/company/licenses/"
+    }
+  ],
+  "heroPhotos": [
+    {
+      "base": "images/projects/perfume-balashikha/1",
+      "alt": "Дизайн торгового оборудования для парфюмерии в г. Балашиха",
+      "w": 1586,
+      "h": 550,
+      "direction": "retail",
+      "project": "perfume-balashikha",
+      "sourceUrl": "https://dvk-style.ru/projects/dizayn-torgovogo-oborudovaniya/"
+    },
+    {
+      "base": "images/projects/museum-bryansk/1",
+      "alt": "Дизайн торгового оборудования для музеев в г. Брянск",
+      "w": 1466,
+      "h": 550,
+      "direction": "retail",
+      "project": "museum-bryansk",
+      "sourceUrl": "https://dvk-style.ru/projects/dizayn-torgovogo-oborudovaniya/"
+    },
+    {
+      "base": "images/projects/playground-voronezh/1",
+      "alt": "Детская площадка в городе Воронеж",
+      "w": 1188,
+      "h": 550,
+      "direction": "landscape",
+      "project": "playground-voronezh",
+      "sourceUrl": "https://dvk-style.ru/projects/detskie-igrovye-ploshchadki/"
+    },
+    {
+      "base": "images/projects/playground-moscow/1",
+      "alt": "Детская площадка в Москве",
+      "w": 1000,
+      "h": 589,
+      "direction": "landscape",
+      "project": "playground-moscow",
+      "sourceUrl": "https://dvk-style.ru/projects/detskie-igrovye-ploshchadki/"
+    },
+    {
+      "base": "images/projects/workshop-furniture/1",
+      "alt": "Металлическая мебель для мастерской",
+      "w": 1000,
+      "h": 589,
+      "direction": "metal",
+      "project": "workshop-furniture",
+      "sourceUrl": "https://dvk-style.ru/projects/metallicheskaya-mebel/"
+    },
+    {
+      "base": "images/projects/pallet-racks/1",
+      "alt": "Паллетные стеллажи",
+      "w": 1000,
+      "h": 589,
+      "direction": "metal",
+      "project": "pallet-racks",
+      "sourceUrl": "https://dvk-style.ru/projects/metallicheskaya-mebel/"
+    }
+  ],
+  "facts": [
+    {
+      "id": "izhora",
+      "text": "Производство — в одном из цехов «Ижорских заводов» в Колпино",
+      "sourceUrl": "https://dvk-style.ru/company/nashe-proizvodstvo/"
+    },
+    {
+      "id": "german-machines",
+      "text": "Продукция производится на современном немецком оборудовании",
+      "sourceUrl": "https://dvk-style.ru/company/nashe-proizvodstvo/"
+    },
+    {
+      "id": "own-fleet",
+      "text": "Свой парк грузового автотранспорта, доставка по всей России",
+      "sourceUrl": "https://dvk-style.ru/services/transportnye-uslugi/dostavka-transportom-dvk-elit/"
+    },
+    {
+      "id": "same-day-measure",
+      "text": "Выезд специалиста на замер в тот же день",
+      "sourceUrl": "https://dvk-style.ru/services/zamer/zamer-i-planirovka/"
+    },
+    {
+      "id": "free-shop-design",
+      "text": "При заказе оборудования для магазина дизайн-проект магазина — бесплатно",
+      "sourceUrl": "https://dvk-style.ru/projects/dizayn_magazinov/"
+    },
+    {
+      "id": "tenders",
+      "text": "Более 9 лет участия в тендерах и аукционах",
+      "sourceUrl": "https://dvk-style.ru/services/goszakazy-tendery/podgotovka-tekhzadaniya/"
+    },
+    {
+      "id": "moscow-office",
+      "text": "Представительство в Москве — с конца 2012 года",
+      "sourceUrl": "https://dvk-style.ru/company/"
+    },
+    {
+      "id": "night-install",
+      "text": "Монтаж в торговых центрах — в том числе ночью",
+      "sourceUrl": "https://dvk-style.ru/services/transportnye-uslugi/dostavka-transportom-dvk-elit/"
+    }
+  ],
+  "sources": {
+    "promise": "https://dvk-style.ru/",
+    "positioning": "бриф (R13), формулировка редакции",
+    "about": "https://dvk-style.ru/company/",
+    "production": "https://dvk-style.ru/company/nashe-proizvodstvo/",
+    "contacts": "https://dvk-style.ru/company/contacts/",
+    "requisites": "https://dvk-style.ru/company/requisites/",
+    "reviews": "https://dvk-style.ru/reviews/",
+    "licenses": "https://dvk-style.ru/company/licenses/"
+  },
   "todo": [
-    "[уточнить] год основания: в футере сайта «© 1998–2026», подтвердить на странице «О компании»",
-    "[уточнить] адрес и режим работы московской площадки",
-    "[уточнить] режим работы петербургской площадки",
-    "[уточнить] реквизиты компании",
-    "[уточнить] тексты благодарственных писем"
+    "[уточнить] год основания и стаж: на странице «О компании» года основания нет; там же «за прошедшие 25 лет», на «Наше производство» — «за прошедшие 20 лет», в подвале сайта — «© 1998 - 2026»; нужен год основания и одна цифра стажа",
+    "[уточнить] юридическое лицо: в реквизитах — ООО «ДВК Элит» (ИНН 7817113879), в подвале и текстах — ООО «ДВК Стиль»; какое наименование показывать на сайте",
+    "[уточнить] режим работы: в разметке страницы «Контакты» — «С Понедельника по Пятницу 9-20, Суббота, Воскресенье круглосуточно», похоже на ошибку шаблона; нужен режим работы СПб и Москвы",
+    "[уточнить] стоимость замера: на странице «Замер и планировка» сразу «выезд … бесплатно*» и «Выезд на замеры и подготовка проекта оснащения — 1000 рублей»; какая формулировка верна",
+    "[уточнить] благодарственные письма: на сайте только тексты, сканов нет; нужны сканы или фото писем",
+    "[уточнить] клиенты: на главной 10 логотипов, страница «Партнёры и клиенты» закрыта в robots.txt; нужен полный список клиентов, которых можно показывать",
+    "[уточнить] проекты: у фото на сайте есть только подпись и город; нужны год, заказчик и состав работ по каждому проекту",
+    "[уточнить] фото для hero: оригиналы фото проектов на сайте не крупнее 1586×550 px; для первого экрана нужны фото интерьеров от 1920 px по ширине",
+    "[уточнить] адрес «ул. Ново-Рыбинская, 21, ТЦ «Квартал»» в контактах указан без пояснения; что там — шоурум, офис или склад",
+    "[уточнить] текст политики обработки персональных данных: /company/konfid.php закрыт в robots.txt, текст не взят",
+    "[уточнить] гарантия: общих гарантийных сроков на сайте нет (у части товаров в характеристиках — свои: 12 месяцев, 5–6 лет); нужна формулировка гарантии компании",
+    "[уточнить] число выполненных объектов и сроки производства: на сайте не указаны",
+    "[уточнить] тендеры: на странице «Госзаказы, тендеры» — «согласно Федеральному закону №43 и №223», вероятно опечатка (44-ФЗ); подтвердить",
+    "[уточнить] представительства в Южно-Сахалинске и Краснодаре: показывать ли их на сайте"
   ]
 }

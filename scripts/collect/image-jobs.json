@@ -1,0 +1,742 @@
+[
+  {
+    "base": "images/company/pharmacy-series/orange",
+    "source": "https://dvk-style.ru/upload/iblock/af3/af3cc9a89b970042149c3554764d729d.png",
+    "alt": "Серия аптек «Orange»"
+  },
+  {
+    "base": "images/company/pharmacy-series/ampir",
+    "source": "https://dvk-style.ru/upload/iblock/0d4/0d45def5ab526a85b09f07397e2762f0.png",
+    "alt": "Серия аптек «Ампир»"
+  },
+  {
+    "base": "images/company/pharmacy-series/doktor",
+    "source": "https://dvk-style.ru/upload/iblock/119/119b90231ae24dde74f2d408dda5ac05.png",
+    "alt": "Серия аптек «Доктор»"
+  },
+  {
+    "base": "images/company/pharmacy-series/interfarm",
+    "source": "https://dvk-style.ru/upload/iblock/7f7/7f7f4c109d596d8eca53c974c959c869.png",
+    "alt": "Серия аптек «Интерфарм»"
+  },
+  {
+    "base": "images/company/pharmacy-series/modern",
+    "source": "https://dvk-style.ru/upload/iblock/b72/b72ae3c458dc6048641005aca3540b5c.png",
+    "alt": "Серия аптек «Модерн»"
+  },
+  {
+    "base": "images/company/pharmacy-series/naturel",
+    "source": "https://dvk-style.ru/upload/iblock/2fd/2fdda3591d7c4c95cc5f7fb79a9ff4bb.png",
+    "alt": "Серия аптек «Натурель»"
+  },
+  {
+    "base": "images/company/pharmacy-series/ozerki",
+    "source": "https://dvk-style.ru/upload/iblock/160/1606630d2efe4c4b636fde3ca324ef77.png",
+    "alt": "Серия аптек «Озерки»"
+  },
+  {
+    "base": "images/company/pharmacy-series/orteka",
+    "source": "https://dvk-style.ru/upload/iblock/60d/60d20c45d97ab117df75c0bb47d9ae1a.png",
+    "alt": "Серия аптек «Ортека»"
+  },
+  {
+    "base": "images/company/pharmacy-series/pervaya-pomoshch",
+    "source": "https://dvk-style.ru/upload/iblock/f8d/f8d806ac3c707764be9cc13f16b94bbd.png",
+    "alt": "Серия аптек «Первая помощь»"
+  },
+  {
+    "base": "images/company/pharmacy-series/rodnik-zdorovya",
+    "source": "https://dvk-style.ru/upload/iblock/750/75090ee46e5a1d3b23bde2c060b218e3.png",
+    "alt": "Серия аптек «Родник здоровья»"
+  },
+  {
+    "base": "images/company/pharmacy-series/fialka",
+    "source": "https://dvk-style.ru/upload/iblock/808/8086b8032c5474535c327f7b9ad8df04.png",
+    "alt": "Серия аптек «Фиалка»"
+  },
+  {
+    "base": "images/products/muzeynaya-vitrina-mvp-30/1",
+    "source": "https://dvk-style.ru/upload/iblock/595/qcsaev6chfse1rhj4bfu4n6qs4irsq56/%D0%B2%D0%B8%D1%82%D1%80%D0%B8%D0%BD%D0%B0_1.jpg",
+    "alt": "Музейная витрина МВП-30"
+  },
+  {
+    "base": "images/products/muzeynoe-oborudovanie-vt-10-k-1/1",
+    "source": "https://dvk-style.ru/upload/iblock/cde/6xmw2hr4f8e5cu010u28htpogkuankbd/muzeynoe-oborudovanie-vt-k-1.jpg",
+    "alt": "Музейное оборудование ВТ-К-1"
+  },
+  {
+    "base": "images/products/vitrina-dlya-chasov-vchyu-23/1",
+    "source": "https://dvk-style.ru/upload/iblock/a0c/a0c1641c560269dda923c90f43332346.jpg",
+    "alt": "Витрина для часов ВЧЮ-23"
+  },
+  {
+    "base": "images/products/vitrina-dlya-chasov-vchyu-23/2",
+    "source": "https://dvk-style.ru/upload/iblock/61b/61bd78692c7aff6b3b052baaf68108ee.jpg",
+    "alt": "Витрина для часов ВЧЮ-23, фото 2"
+  },
+  {
+    "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/1",
+    "source": "https://dvk-style.ru/upload/iblock/610/610f3191a5f47696d38403ce9b195d28.jpg",
+    "alt": "Витрина пристенная с накопителем ВОД-24"
+  },
+  {
+    "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/2",
+    "source": "https://dvk-style.ru/upload/iblock/12c/12cd386dc114f92ac2e534b6845e6251.jpg",
+    "alt": "Витрина пристенная с накопителем ВОД-24, фото 2"
+  },
+  {
+    "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/3",
+    "source": "https://dvk-style.ru/upload/iblock/5c8/5c854fb69e86585db1b9872760be2dce.jpg",
+    "alt": "Витрина пристенная с накопителем ВОД-24, фото 3"
+  },
+  {
+    "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/4",
+    "source": "https://dvk-style.ru/upload/iblock/6b8/6b81f71fc38e3af00f44f40ce0f99025.jpg",
+    "alt": "Витрина пристенная с накопителем ВОД-24, фото 4"
+  },
+  {
+    "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/5",
+    "source": "https://dvk-style.ru/upload/iblock/635/63503798c589ec8eaf4d92b540ddd6f8.jpg",
+    "alt": "Витрина пристенная с накопителем ВОД-24, фото 5"
+  },
+  {
+    "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/6",
+    "source": "https://dvk-style.ru/upload/iblock/e5f/e5ff0984fdd4a441ca159985edfcfd56.jpg",
+    "alt": "Витрина пристенная с накопителем ВОД-24, фото 6"
+  },
+  {
+    "base": "images/products/prilavok-dlya-optiki-pod-20/1",
+    "source": "https://dvk-style.ru/upload/iblock/7f2/7f2cedd319626eca3b61ca7dd726cb1c.jpg",
+    "alt": "Прилавок для оптики ПОД-20"
+  },
+  {
+    "base": "images/products/prilavok-dlya-optiki-pod-20/2",
+    "source": "https://dvk-style.ru/upload/iblock/b94/b94eb090027700790fa610bc3edadcba.jpg",
+    "alt": "Прилавок для оптики ПОД-20, фото 2"
+  },
+  {
+    "base": "images/products/vitriny-peredney-linii/1",
+    "source": "https://dvk-style.ru/upload/iblock/ae2/ae22344b1881074790ffc516b9025f7e.jpg",
+    "alt": "Витрины передней линии ВПЛ-51"
+  },
+  {
+    "base": "images/products/vitriny-peredney-linii/2",
+    "source": "https://dvk-style.ru/upload/iblock/5b1/5b12fb1e18eed42d7048d60aa50dd081.jpg",
+    "alt": "Витрины передней линии ВПЛ-51, фото 2"
+  },
+  {
+    "base": "images/products/vitriny-peredney-linii/3",
+    "source": "https://dvk-style.ru/upload/iblock/e11/e114520c50bb98ba09440b6e6e91a491.jpg",
+    "alt": "Витрины передней линии ВПЛ-51, фото 3"
+  },
+  {
+    "base": "images/products/vitriny-peredney-linii/4",
+    "source": "https://dvk-style.ru/upload/iblock/9e9/9e9c1393559d774486f1a6f13b98dcf3.jpg",
+    "alt": "Витрины передней линии ВПЛ-51, фото 4"
+  },
+  {
+    "base": "images/products/vitriny-peredney-linii/5",
+    "source": "https://dvk-style.ru/upload/iblock/54d/54d175b41c6fa4d6e3d797c2ed39213a.jpg",
+    "alt": "Витрины передней линии ВПЛ-51, фото 5"
+  },
+  {
+    "base": "images/products/vitriny-peredney-linii/6",
+    "source": "https://dvk-style.ru/upload/iblock/dee/dee492937d32205cc65647fc2dd4d03b.jpg",
+    "alt": "Витрины передней линии ВПЛ-51, фото 6"
+  },
+  {
+    "base": "images/products/kassovyy-prilavok-bolshoy/1",
+    "source": "https://dvk-style.ru/upload/iblock/bff/bff80aa2668dd1c1f6a4d79daf4edff5.jpg",
+    "alt": "Кассовый прилавок большой КПБ-40"
+  },
+  {
+    "base": "images/products/kassovyy-prilavok-bolshoy/2",
+    "source": "https://dvk-style.ru/upload/iblock/a4a/a4ac0b2a197785e227255245c255ca1a.jpg",
+    "alt": "Кассовый прилавок большой КПБ-40, фото 2"
+  },
+  {
+    "base": "images/products/kassovyy-prilavok-bolshoy/3",
+    "source": "https://dvk-style.ru/upload/iblock/467/4679ceaaef72f3bc6cfca8138ef85a3e.jpg",
+    "alt": "Кассовый прилавок большой КПБ-40, фото 3"
+  },
+  {
+    "base": "images/products/kassovyy-prilavok-bolshoy/4",
+    "source": "https://dvk-style.ru/upload/iblock/a05/a0553e225d1bbdf0d2d0ddec3e9747b3.jpg",
+    "alt": "Кассовый прилавок большой КПБ-40, фото 4"
+  },
+  {
+    "base": "images/products/ostrovnoy-stellazh-osf-22/1",
+    "source": "https://dvk-style.ru/upload/iblock/e02/e02cedcb7fab70280e4ea1266ba93879.jpg",
+    "alt": "Островной стеллаж ОСФ-22"
+  },
+  {
+    "base": "images/products/ostrovnoy-stellazh-osf-22/2",
+    "source": "https://dvk-style.ru/upload/iblock/244/2443f5c8ca5b7c98f5f672ee6f9997c0.jpg",
+    "alt": "Островной стеллаж ОСФ-22, фото 2"
+  },
+  {
+    "base": "images/products/stellazh-dlya-odezhdy-sp-4/1",
+    "source": "https://dvk-style.ru/upload/iblock/55a/55a5ffbe4bdd021b8afb8d451eeffa53.jpg",
+    "alt": "Стеллаж для одежды СП-4"
+  },
+  {
+    "base": "images/products/stellazh-dlya-odezhdy-sp-4/2",
+    "source": "https://dvk-style.ru/upload/iblock/71a/71a96b0138770de6bb213fc4e97575b5.jpg",
+    "alt": "Стеллаж для одежды СП-4, фото 2"
+  },
+  {
+    "base": "images/products/stellazh-dlya-odezhdy-sp-4/3",
+    "source": "https://dvk-style.ru/upload/iblock/df6/df64e5fd7b77b0b0889c32984e34c8a0.jpg",
+    "alt": "Стеллаж для одежды СП-4, фото 3"
+  },
+  {
+    "base": "images/products/stellazh-demonstratsionnyy-sd-12/1",
+    "source": "https://dvk-style.ru/upload/iblock/c8b/c8b6878e8d65d70111ba882546942c2e.jpg",
+    "alt": "Стеллаж демонстрационный СД-12"
+  },
+  {
+    "base": "images/products/torgovyy-modul-tmd-3210/1",
+    "source": "https://dvk-style.ru/upload/iblock/dd6/dd66a831084093fe2d75d1ebccad8bc1.jpg",
+    "alt": "Торговый островок ТМД-3210"
+  },
+  {
+    "base": "images/products/torgovyy-modul-tmd-3210/2",
+    "source": "https://dvk-style.ru/upload/iblock/d54/d548f3bd0e67ee524ddbfda99a61dfb9.jpg",
+    "alt": "Торговый островок ТМД-3210, фото 2"
+  },
+  {
+    "base": "images/products/torgovyy-modul-tmd-3210/3",
+    "source": "https://dvk-style.ru/upload/iblock/75e/75ef75bf454b33395b51fa8945b7b905.jpg",
+    "alt": "Торговый островок ТМД-3210, фото 3"
+  },
+  {
+    "base": "images/products/mobilnyy-vystavochnyy-stend-svm-67/1",
+    "source": "https://dvk-style.ru/upload/iblock/109/109ace0bbcdb1b5cd53465ecaffcf07e.JPG",
+    "alt": "Мобильный выставочный стенд СВМ-67"
+  },
+  {
+    "base": "images/products/igrovoy-kompleks-d-24-akula/1",
+    "source": "https://dvk-style.ru/upload/iblock/44b/1shfc2whwvpssi5gucpu4lg0z82lwn8z/%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D0%94-24%20%D0%90%D0%BA%D1%83%D0%BB%D0%B0.jpg",
+    "alt": "Игровой комплекс Д-24 \"Акула\""
+  },
+  {
+    "base": "images/products/igrovoy-kompleks-d-24-akula/2",
+    "source": "https://dvk-style.ru/upload/iblock/9b7/4ekrmiq07cof480nkeepa5kpaik207cx/%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D0%94-24%20%D0%90%D0%BA%D1%83%D0%BB%D0%B02.jpg",
+    "alt": "Игровой комплекс Д-24 \"Акула\", фото 2"
+  },
+  {
+    "base": "images/products/igrovoy-kompleks-d-24-akula/3",
+    "source": "https://dvk-style.ru/upload/iblock/16f/lpfg0ywp5xi1xx9xh21vgezll50tv5ko/%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D0%94-24%20%D0%90%D0%BA%D1%83%D0%BB%D0%B01.jpg",
+    "alt": "Игровой комплекс Д-24 \"Акула\", фото 3"
+  },
+  {
+    "base": "images/products/igrovoy-kompleks-mgm-78-korablik/1",
+    "source": "https://dvk-style.ru/upload/iblock/224/78yhrlkw8xxr4o01s1an9gy6ccmr6eek/%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D0%9C%D0%93%D0%9C-78%20%D0%9A%D0%BE%D1%80%D0%B0%D0%B1%D0%BB%D0%B8%D0%BA.jpg",
+    "alt": "Игровой комплекс МГМ-78 \"Кораблик\""
+  },
+  {
+    "base": "images/products/igrovoy-kompleks-mgm-78-korablik/2",
+    "source": "https://dvk-style.ru/upload/iblock/268/3jytm0ajxk35qid9n34mh87fo0u8rfp1/%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D0%9C%D0%93%D0%9C-78%20%D0%9A%D0%BE%D1%80%D0%B0%D0%B1%D0%BB%D0%B8%D0%BA1.jpg",
+    "alt": "Игровой комплекс МГМ-78 \"Кораблик\", фото 2"
+  },
+  {
+    "base": "images/products/detskiy-gorodok-mgk-202-rusich-skazka-s-kachelyami-gnezdo/1",
+    "source": "https://dvk-style.ru/upload/iblock/f22/3h0xrrx8y4swn6uocxe4j88rx5ko0fyu/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%D0%B9%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%BE%D0%BA%20%D0%9C%D0%93%D0%9A-202%20%D0%A0%D1%83%D1%81%D0%B8%D1%87%20%D0%A1%D0%BA%D0%B0%D0%B7%D0%BA%D0%B0%20%D1%81%20%D0%BA%D0%B0%D1%87%D0%B5%D0%BB%D1%8F%D0%BC%D0%B8%20%D0%93%D0%BD%D0%B5%D0%B7%D0%B4%D0%BE.jpg",
+    "alt": "Детский городок МГК-202 \"Русич Сказка\" с качелями \"Гнездо\""
+  },
+  {
+    "base": "images/products/detskie-mayatnikovye-kacheli-next-k-2013-s-tsepnym-podvesom-tip-2/1",
+    "source": "https://dvk-style.ru/upload/iblock/40a/0o2iu1pphmax5gvlw86jpl908sk2h4f3/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BC%D0%B0%D1%8F%D1%82%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5%20%D0%BA%D0%B0%D1%87%D0%B5%D0%BB%D0%B8%20NEXT%20%D0%9A-2013%20%D1%81%20%D1%86%D0%B5%D0%BF%D0%BD%D1%8B%D0%BC%20%D0%BF%D0%BE%D0%B4%D0%B2%D0%B5%D1%81%D0%BE%D0%BC%20%D0%A2%D0%B8%D0%BF-2.jpg",
+    "alt": "Детские маятниковые качели NEXT К-2013 с цепным подвесом Тип-2"
+  },
+  {
+    "base": "images/products/detskie-mayatnikovye-kacheli-next-k-2013-s-tsepnym-podvesom-tip-2/2",
+    "source": "https://dvk-style.ru/upload/iblock/0aa/ksr261q1ltlwmm0gw7mxxdtytwi4veip/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BC%D0%B0%D1%8F%D1%82%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5%20%D0%BA%D0%B0%D1%87%D0%B5%D0%BB%D0%B8%20NEXT%20%D0%9A-2013%20%D1%81%20%D1%86%D0%B5%D0%BF%D0%BD%D1%8B%D0%BC%20%D0%BF%D0%BE%D0%B4%D0%B2%D0%B5%D1%81%D0%BE%D0%BC%20%D0%A2%D0%B8%D0%BF-23.jpg",
+    "alt": "Детские маятниковые качели NEXT К-2013 с цепным подвесом Тип-2, фото 2"
+  },
+  {
+    "base": "images/products/detskie-mayatnikovye-kacheli-next-k-2013-s-tsepnym-podvesom-tip-2/3",
+    "source": "https://dvk-style.ru/upload/iblock/184/1wms17m5a4o979yunqcavz1ru0b53130/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BC%D0%B0%D1%8F%D1%82%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5%20%D0%BA%D0%B0%D1%87%D0%B5%D0%BB%D0%B8%20NEXT%20%D0%9A-2013%20%D1%81%20%D1%86%D0%B5%D0%BF%D0%BD%D1%8B%D0%BC%20%D0%BF%D0%BE%D0%B4%D0%B2%D0%B5%D1%81%D0%BE%D0%BC%20%D0%A2%D0%B8%D0%BF-21.jpg",
+    "alt": "Детские маятниковые качели NEXT К-2013 с цепным подвесом Тип-2, фото 3"
+  },
+  {
+    "base": "images/products/karusel-next-mk-27/1",
+    "source": "https://dvk-style.ru/upload/iblock/ea8/bpb53ozs7q36kujy3no3btput0hfmeg0/%D0%9A%D0%B0%D1%80%D1%83%D1%81%D0%B5%D0%BB%D1%8C%20NEXT%20%D0%9C%D0%9A-27.jpg",
+    "alt": "Карусель NEXT МК-27"
+  },
+  {
+    "base": "images/products/karusel-next-mk-27/2",
+    "source": "https://dvk-style.ru/upload/iblock/986/22qpbq7f7mfp61l5ozhbhim0wr1fjcv5/%D0%9A%D0%B0%D1%80%D1%83%D1%81%D0%B5%D0%BB%D1%8C%20NEXT%20%D0%9C%D0%9A-271.jpg",
+    "alt": "Карусель NEXT МК-27, фото 2"
+  },
+  {
+    "base": "images/products/detskaya-gorka-mgs-3-vverkh-nogami/1",
+    "source": "https://dvk-style.ru/upload/iblock/e80/1ml0ucsatpqaj8i7pq50jqwfnsh1e36k/%D0%94%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B3%D0%BE%D1%80%D0%BA%D0%B0%20%D0%9C%D0%93%D0%A1-3%20%D0%92%D0%B2%D0%B5%D1%80%D1%85%20%D0%BD%D0%BE%D0%B3%D0%B0%D0%BC%D0%B8.jpg",
+    "alt": "Детская горка МГС-3 \"Вверх ногами\""
+  },
+  {
+    "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/1",
+    "source": "https://dvk-style.ru/upload/iblock/200/pwe0aed2kju03apdd1mku3fgb5pwb40q/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9%20%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D1%81%20%D0%BF%D0%B5%D1%81%D0%BE%D1%87%D0%BD%D0%B8%D1%86%D0%B5%D0%B9%20%D0%A5%D0%BE%D0%B1%D0%B1%D0%B8%D1%82%D1%8B%20%D0%A0%D0%9A-25.jpg",
+    "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25"
+  },
+  {
+    "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/2",
+    "source": "https://dvk-style.ru/upload/iblock/85f/rksh3xl7xe4dboqyuoju3wzfm4547wng/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9%20%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D1%81%20%D0%BF%D0%B5%D1%81%D0%BE%D1%87%D0%BD%D0%B8%D1%86%D0%B5%D0%B9%20%D0%A5%D0%BE%D0%B1%D0%B1%D0%B8%D1%82%D1%8B%20%D0%A0%D0%9A-251.jpg",
+    "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 2"
+  },
+  {
+    "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/3",
+    "source": "https://dvk-style.ru/upload/iblock/3ca/tmmedzbw8m076hqnvner7p7ar8szmw44/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9%20%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D1%81%20%D0%BF%D0%B5%D1%81%D0%BE%D1%87%D0%BD%D0%B8%D1%86%D0%B5%D0%B9%20%D0%A5%D0%BE%D0%B1%D0%B1%D0%B8%D1%82%D1%8B%20%D0%A0%D0%9A-252.jpg",
+    "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 3"
+  },
+  {
+    "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/4",
+    "source": "https://dvk-style.ru/upload/iblock/7db/c2368fuppey4apto54c1pntyppe82oia/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9%20%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D1%81%20%D0%BF%D0%B5%D1%81%D0%BE%D1%87%D0%BD%D0%B8%D1%86%D0%B5%D0%B9%20%D0%A5%D0%BE%D0%B1%D0%B1%D0%B8%D1%82%D1%8B%20%D0%A0%D0%9A-253.jpg",
+    "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 4"
+  },
+  {
+    "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/5",
+    "source": "https://dvk-style.ru/upload/iblock/467/ep4v6gf594fuczus3tg00r72zie969ke/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9%20%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D1%81%20%D0%BF%D0%B5%D1%81%D0%BE%D1%87%D0%BD%D0%B8%D1%86%D0%B5%D0%B9%20%D0%A5%D0%BE%D0%B1%D0%B1%D0%B8%D1%82%D1%8B%20%D0%A0%D0%9A-256.jpg",
+    "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 5"
+  },
+  {
+    "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/6",
+    "source": "https://dvk-style.ru/upload/iblock/655/us0vlnkam66x7cgobubh3b3k15eiag9u/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9%20%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D1%81%20%D0%BF%D0%B5%D1%81%D0%BE%D1%87%D0%BD%D0%B8%D1%86%D0%B5%D0%B9%20%D0%A5%D0%BE%D0%B1%D0%B1%D0%B8%D1%82%D1%8B%20%D0%A0%D0%9A-255.jpg",
+    "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 6"
+  },
+  {
+    "base": "images/products/interaktivnyy-igrovoy-kompleks-s-pesochnitsey-khobbity-rk-25/7",
+    "source": "https://dvk-style.ru/upload/iblock/828/vxfjowrvimhespus9ia1aljx8ua9s1vh/%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9%20%D0%B8%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D1%81%20%D0%BF%D0%B5%D1%81%D0%BE%D1%87%D0%BD%D0%B8%D1%86%D0%B5%D0%B9%20%D0%A5%D0%BE%D0%B1%D0%B1%D0%B8%D1%82%D1%8B%20%D0%A0%D0%9A-254.jpg",
+    "alt": "Интерактивный игровой комплекс с песочницей Хоббиты РК-25, фото 7"
+  },
+  {
+    "base": "images/products/skamya-parkovaya-s-75-v-arkhitekturnoy-kroshke-1/1",
+    "source": "https://dvk-style.ru/upload/iblock/7dc/7dcccd4bd7363448844174ec920026d8.jpg",
+    "alt": "Скамейка бетонная парковая С-75 в архитектурной крошке №1"
+  },
+  {
+    "base": "images/products/skameyka-na-betonnom-osnovanii-s-222/1",
+    "source": "https://dvk-style.ru/upload/iblock/5ec/ei81m37ct392bksomj4o584h0hbqnap5/%D0%A1%D0%BA%D0%B0%D0%BC%D0%B5%D0%B9%D0%BA%D0%B0%20%D0%BD%D0%B0%20%D0%B1%D0%B5%D1%82%D0%BE%D0%BD%D0%BD%D0%BE%D0%BC%20%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B8%20%D0%A1-222.jpg",
+    "alt": "Скамейка на бетонном основании С-222"
+  },
+  {
+    "base": "images/products/urna-u-205/1",
+    "source": "https://dvk-style.ru/upload/iblock/d84/d84b16ee1ec7f9db7638557949d2abd7.jpg",
+    "alt": "Урна бетонная У-205"
+  },
+  {
+    "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/1",
+    "source": "https://dvk-style.ru/upload/iblock/27e/27e377a94eb09bb67144b5481a5b5be0.jpg",
+    "alt": "Тренажерная беседка ТРК-1.1 из 10 тренажеров на раме"
+  },
+  {
+    "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/2",
+    "source": "https://dvk-style.ru/upload/iblock/ee8/ee8efb6ddea542ccd662e9ee5a83cfb1.jpg",
+    "alt": "Тренажерная беседка ТРК-1.1 из 10 тренажеров на раме, фото 2"
+  },
+  {
+    "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/3",
+    "source": "https://dvk-style.ru/upload/iblock/014/0147a2ab5d69736730982e828f096246.jpg",
+    "alt": "Тренажерная беседка ТРК-1.1 из 10 тренажеров на раме, фото 3"
+  },
+  {
+    "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/4",
+    "source": "https://dvk-style.ru/upload/iblock/58d/58d417fda34df7387d547c597a53c226.jpg",
+    "alt": "Тренажерная беседка ТРК-1.1 из 10 тренажеров на раме, фото 4"
+  },
+  {
+    "base": "images/products/trk-1-1-trenazhernaya-besedka-iz-10-trenazherov-na-rame/5",
+    "source": "https://dvk-style.ru/upload/iblock/b6c/b6cfccfbd8c88b85f11899d313d64707.jpg",
+    "alt": "Тренажерная беседка ТРК-1.1 из 10 тренажеров на раме, фото 5"
+  },
+  {
+    "base": "images/products/vorkaut-w-07-008/1",
+    "source": "https://dvk-style.ru/upload/iblock/d64/d6412e023020c5aa6dcfe5d1ed558dde.jpg",
+    "alt": "Воркаут площадка W-07-008"
+  },
+  {
+    "base": "images/products/vorkaut-w-07-008/2",
+    "source": "https://dvk-style.ru/upload/iblock/5fb/5fb2347d4685830451a62a6926a15ccc.jpg",
+    "alt": "Воркаут площадка W-07-008, фото 2"
+  },
+  {
+    "base": "images/products/vorkaut-w-07-008/3",
+    "source": "https://dvk-style.ru/upload/iblock/e09/e09e7dc5d4359f5eaa9f4eb9bad2c5ac.jpg",
+    "alt": "Воркаут площадка W-07-008, фото 3"
+  },
+  {
+    "base": "images/products/shkaf-arkhivnyy-sham-11-920/1",
+    "source": "https://dvk-style.ru/upload/iblock/053/05329043d488e7f00e4135623575b4b6.jpg",
+    "alt": "Шкаф архивный ШАМ-11-920 11/920"
+  },
+  {
+    "base": "images/products/shkaf-arkhivnyy-sham-11-920/2",
+    "source": "https://dvk-style.ru/upload/iblock/351/35181e83b6fbcfe8211ed6ba22c3cfdb.jpg",
+    "alt": "Шкаф архивный ШАМ-11-920 11/920, фото 2"
+  },
+  {
+    "base": "images/products/shkaf-kartotechnyy-shk-8-a4/1",
+    "source": "https://dvk-style.ru/upload/iblock/8b8/hdhjmc4aopfd47agllkhh465mdf9hr9x/%D0%A8%D0%BA%D0%B0%D1%84%20%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D1%82%D0%B5%D1%87%D0%BD%D1%8B%D0%B9%20%D0%A8%D0%9A-8(A4).png",
+    "alt": "Шкаф картотечный ШК-8(A4)"
+  },
+  {
+    "base": "images/products/shkaf-kartotechnyy-shk-8-a4/2",
+    "source": "https://dvk-style.ru/upload/iblock/48a/4lfkvze2g1jvoho3syolk9citgc1soc6/%D0%A8%D0%BA%D0%B0%D1%84%20%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D1%82%D0%B5%D1%87%D0%BD%D1%8B%D0%B9%20%D0%A8%D0%9A-8(A4)3.png",
+    "alt": "Шкаф картотечный ШК-8(A4), фото 2"
+  },
+  {
+    "base": "images/products/shkaf-kartotechnyy-shk-8-a4/3",
+    "source": "https://dvk-style.ru/upload/iblock/ea0/54to5ytqj2bw5h0kq2vyyzc5i2belxqb/%D0%A8%D0%BA%D0%B0%D1%84%20%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D1%82%D0%B5%D1%87%D0%BD%D1%8B%D0%B9%20%D0%A8%D0%9A-8(A4)2.png",
+    "alt": "Шкаф картотечный ШК-8(A4), фото 3"
+  },
+  {
+    "base": "images/products/shkaf-kartotechnyy-shk-8-a4/4",
+    "source": "https://dvk-style.ru/upload/iblock/8b7/er5etx35gvgr7isl3r0euo5vjkohquvb/%D0%A8%D0%BA%D0%B0%D1%84%20%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D1%82%D0%B5%D1%87%D0%BD%D1%8B%D0%B9%20%D0%A8%D0%9A-8(A4)1.png",
+    "alt": "Шкаф картотечный ШК-8(A4), фото 4"
+  },
+  {
+    "base": "images/products/shkaf-dlya-odezhdy-nobilis-nl-04/1",
+    "source": "https://dvk-style.ru/upload/iblock/f9c/f9c14d62e316a0e93e4c714d07ec305d.jpg",
+    "alt": "Шкаф для одежды Nobilis NL-04"
+  },
+  {
+    "base": "images/products/seyf-ofisnyy-ls-052f/1",
+    "source": "https://dvk-style.ru/upload/iblock/f7f/f7f6bfd9b93e36696494b16fce367bae.jpg",
+    "alt": "Сейф офисный LS-052F"
+  },
+  {
+    "base": "images/products/seyf-ofisnyy-ls-052f/2",
+    "source": "https://dvk-style.ru/upload/iblock/58d/58d948c63e46c43d2d3d40a6a0227646.jpg",
+    "alt": "Сейф офисный LS-052F, фото 2"
+  },
+  {
+    "base": "images/products/seyf-ofisnyy-ls-052f/3",
+    "source": "https://dvk-style.ru/upload/iblock/30e/30e4236aee0fd4862d6dca2fe968020b.jpg",
+    "alt": "Сейф офисный LS-052F, фото 3"
+  },
+  {
+    "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/1",
+    "source": "https://dvk-style.ru/upload/iblock/3a0/3a0d5ca69d1613296cdef6ce765ddf42.jpg",
+    "alt": "Стеллаж металлический MS Pro 2500/1010x800/4"
+  },
+  {
+    "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/2",
+    "source": "https://dvk-style.ru/upload/iblock/053/053d11cd232babb6b3d661e9a3bd0725.jpg",
+    "alt": "Стеллаж металлический MS Pro 2500/1010x800/4, фото 2"
+  },
+  {
+    "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/3",
+    "source": "https://dvk-style.ru/upload/iblock/7bb/7bb9668e3b817996df8964e381294a9f.jpg",
+    "alt": "Стеллаж металлический MS Pro 2500/1010x800/4, фото 3"
+  },
+  {
+    "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/4",
+    "source": "https://dvk-style.ru/upload/iblock/a7c/a7c4c3fc8a67bfbb3825d58d20e89dba.jpg",
+    "alt": "Стеллаж металлический MS Pro 2500/1010x800/4, фото 4"
+  },
+  {
+    "base": "images/products/stellazh-arkhivnyy-stf-1034-2-5/1",
+    "source": "https://dvk-style.ru/upload/iblock/fd1/fd10a2dae2d1b222b0b1ec6f8a3c82a1.jpg",
+    "alt": "Стеллаж архивный СТФ 1034-2.5"
+  },
+  {
+    "base": "images/products/stellazh-arkhivnyy-stf-1034-2-5/2",
+    "source": "https://dvk-style.ru/upload/iblock/67a/67ac31b617402242d4d9ce2d617ceed2.jpg",
+    "alt": "Стеллаж архивный СТФ 1034-2.5, фото 2"
+  },
+  {
+    "base": "images/products/stellazh-arkhivnyy-stf-1034-2-5/3",
+    "source": "https://dvk-style.ru/upload/iblock/4fd/4fd67c58524f17dbafb71a96b685281a.jpg",
+    "alt": "Стеллаж архивный СТФ 1034-2.5, фото 3"
+  },
+  {
+    "base": "images/products/verstak-vl-200-05-s-ekranom-vl-200-e4/1",
+    "source": "https://dvk-style.ru/upload/iblock/392/3925c06c050b96ebccb48545ce8cff16.jpg",
+    "alt": "Верстак слесарный ВЛ-200-05 с экраном ВЛ-200-Э4"
+  },
+  {
+    "base": "images/products/verstak-vs-100-01/1",
+    "source": "https://dvk-style.ru/upload/iblock/d6e/d6ecbb8c2af681c1e8b00fb5c0437b8e.jpg",
+    "alt": "Верстак слесарный ВС-100-01"
+  },
+  {
+    "base": "images/products/shkaf-instrumentalnyy-hard-2000-062000/1",
+    "source": "https://dvk-style.ru/upload/iblock/794/794a3e776fa4ec997bdedb221776887c.jpg",
+    "alt": "Шкаф инструментальный HARD 2000-062000"
+  },
+  {
+    "base": "images/products/tumba-instrumentalnaya-ti-7-006/1",
+    "source": "https://dvk-style.ru/upload/iblock/7f1/7f10a376c4e167fca6c9d57ae25b10e6.jpg",
+    "alt": "Тумба инструментальная ТИ-7.006"
+  },
+  {
+    "base": "images/products/sistema-khraneniya-boxes-1-2/1",
+    "source": "https://dvk-style.ru/upload/iblock/a37/a37d54816ef6d657c353fa8ff47e911b.jpg",
+    "alt": "Система хранения инструмента BOXES №1-2"
+  },
+  {
+    "base": "images/products/sistema-khraneniya-boxes-1-2/2",
+    "source": "https://dvk-style.ru/upload/iblock/e33/e33a87e89612a2a5319a62369bc8c3a2.jpg",
+    "alt": "Система хранения инструмента BOXES №1-2, фото 2"
+  },
+  {
+    "base": "images/products/sistema-khraneniya-boxes-1-2/3",
+    "source": "https://dvk-style.ru/upload/iblock/1c9/1c9b9e252d4ab26aeed7563fd77cf992.jpg",
+    "alt": "Система хранения инструмента BOXES №1-2, фото 3"
+  },
+  {
+    "base": "images/projects/perfume-balashikha/1",
+    "source": "https://dvk-style.ru/upload/medialibrary/b66/b6645506ca6644b7b52f65d394af779a.jpg",
+    "alt": "Дизайн торгового оборудования для парфюмерии в г. Балашиха"
+  },
+  {
+    "base": "images/projects/perfume-balashikha/2",
+    "source": "https://dvk-style.ru/upload/medialibrary/3a8/3a895d319c4a5c0ed4a1bfdc33a8463c.jpg",
+    "alt": "Дизайн торгового оборудования для парфюмерии в г. Балашиха, фото 2"
+  },
+  {
+    "base": "images/projects/museum-bryansk/1",
+    "source": "https://dvk-style.ru/upload/medialibrary/ac1/ac119496ba76311a6d95d122af30d6a5.jpg",
+    "alt": "Дизайн торгового оборудования для музеев в г. Брянск"
+  },
+  {
+    "base": "images/projects/museum-bryansk/2",
+    "source": "https://dvk-style.ru/upload/medialibrary/19e/19e8dbabc3782e957265526963a55fcd.jpg",
+    "alt": "Дизайн торгового оборудования для музеев в г. Брянск, фото 2"
+  },
+  {
+    "base": "images/projects/duty-free-spb/1",
+    "source": "https://dvk-style.ru/upload/medialibrary/60a/60aadb23e71c61249025c4b8a37bd9ab.jpg",
+    "alt": "Дизайн торгового оборудования для магазинов «ДЮТИ ФРИ» в г. Санкт-Петербург"
+  },
+  {
+    "base": "images/projects/duty-free-spb/2",
+    "source": "https://dvk-style.ru/upload/medialibrary/686/686d6de0e0a997f7813283ec0fbad973.jpg",
+    "alt": "Дизайн торгового оборудования для магазинов «ДЮТИ ФРИ» в г. Санкт-Петербург, фото 2"
+  },
+  {
+    "base": "images/projects/duty-free-spb/3",
+    "source": "https://dvk-style.ru/upload/medialibrary/462/4620ffabe17dc18d0eedebb81ec77fab.jpg",
+    "alt": "Дизайн торгового оборудования для магазинов «ДЮТИ ФРИ» в г. Санкт-Петербург, фото 3"
+  },
+  {
+    "base": "images/projects/duty-free-spb/4",
+    "source": "https://dvk-style.ru/upload/medialibrary/f68/f68a339e87de513e7a19273a06cccd29.jpg",
+    "alt": "Дизайн торгового оборудования для магазинов «ДЮТИ ФРИ» в г. Санкт-Петербург, фото 4"
+  },
+  {
+    "base": "images/projects/shoes-perm/1",
+    "source": "https://dvk-style.ru/upload/medialibrary/e12/e1222ad816c9291833a2c5769ffee53a.jpg",
+    "alt": "Дизайн торгового оборудования для обуви в г. Пермь"
+  },
+  {
+    "base": "images/projects/shoes-perm/2",
+    "source": "https://dvk-style.ru/upload/medialibrary/03c/03cf16d6891f6a204825749cadee5843.jpg",
+    "alt": "Дизайн торгового оборудования для обуви в г. Пермь, фото 2"
+  },
+  {
+    "base": "images/projects/shoes-perm/3",
+    "source": "https://dvk-style.ru/upload/medialibrary/949/94902558e3bcf6e05315f3487295e17f.jpg",
+    "alt": "Дизайн торгового оборудования для обуви в г. Пермь, фото 3"
+  },
+  {
+    "base": "images/projects/pharmacy-vladivostok/1",
+    "source": "https://dvk-style.ru/upload/medialibrary/e0c/e0c0007fd524197266291210d6667b68.jpg",
+    "alt": "Дизайн оборудования для аптек в городе Владивосток"
+  },
+  {
+    "base": "images/projects/pharmacy-vladivostok/2",
+    "source": "https://dvk-style.ru/upload/medialibrary/69b/69b3f58ac6be871c4fce0f5615a08450.jpg",
+    "alt": "Дизайн оборудования для аптек в городе Владивосток, фото 2"
+  },
+  {
+    "base": "images/projects/pharmacy-vladivostok/3",
+    "source": "https://dvk-style.ru/upload/medialibrary/416/4162c54834eafe749024ebb8a3d8dac9.jpg",
+    "alt": "Дизайн оборудования для аптек в городе Владивосток, фото 3"
+  },
+  {
+    "base": "images/projects/playground-voronezh/1",
+    "source": "https://dvk-style.ru/upload/medialibrary/615/615be7a3a02ba78abdd512ab526588d5.jpg",
+    "alt": "Детская площадка в городе Воронеж"
+  },
+  {
+    "base": "images/projects/playground-voronezh/2",
+    "source": "https://dvk-style.ru/upload/medialibrary/5db/5dbffb1875236df8a5b749435a2f8ea0.jpg",
+    "alt": "Детская площадка в городе Воронеж, фото 2"
+  },
+  {
+    "base": "images/projects/playground-voronezh/3",
+    "source": "https://dvk-style.ru/upload/medialibrary/9f6/9f62287ff06089cd7b471b6e357d12e9.jpg",
+    "alt": "Детская площадка в городе Воронеж, фото 3"
+  },
+  {
+    "base": "images/projects/playground-voronezh/4",
+    "source": "https://dvk-style.ru/upload/medialibrary/42f/42f215ebafe3d27ecef39f9f01f1a06e.jpg",
+    "alt": "Детская площадка в городе Воронеж, фото 4"
+  },
+  {
+    "base": "images/projects/playground-moscow/1",
+    "source": "https://dvk-style.ru/upload/medialibrary/cdb/cdb4b58f06aea1aa7de6e12fd7d79d08.jpg",
+    "alt": "Детская площадка в Москве"
+  },
+  {
+    "base": "images/projects/workshop-furniture/1",
+    "source": "https://dvk-style.ru/upload/medialibrary/106/10618157c52561c9d0b046456febd94c.jpg",
+    "alt": "Металлическая мебель для мастерской"
+  },
+  {
+    "base": "images/projects/pallet-racks/1",
+    "source": "https://dvk-style.ru/upload/medialibrary/4a5/4a550fe1de49561968f613bf44300037.jpg",
+    "alt": "Паллетные стеллажи"
+  },
+  {
+    "base": "images/company/clients/sberbank",
+    "source": "https://dvk-style.ru/upload/iblock/17d/17d1e50e47c6a087f3e14ad5c953821b.jpg",
+    "alt": "Логотип: Сбербанк"
+  },
+  {
+    "base": "images/company/clients/hermitage",
+    "source": "https://dvk-style.ru/upload/iblock/4c8/4c8c40d1d04b9004f51f4cb13da2348a.jpg",
+    "alt": "Логотип: Эрмитаж"
+  },
+  {
+    "base": "images/company/clients/natur-produkt",
+    "source": "https://dvk-style.ru/upload/iblock/e9b/e9ba3a3eb9e80e99a012bbef291079d6.jpg",
+    "alt": "Логотип: Natur Produkt"
+  },
+  {
+    "base": "images/company/clients/makita",
+    "source": "https://dvk-style.ru/upload/iblock/81b/81b6ee4de2ba19b46ecf5361296ae907.jpg",
+    "alt": "Логотип: Makita"
+  },
+  {
+    "base": "images/company/clients/knauf",
+    "source": "https://dvk-style.ru/upload/iblock/309/309d69c1770ceb53f60e50d91ed6f8f5.jpg",
+    "alt": "Логотип: Knauf"
+  },
+  {
+    "base": "images/company/clients/gazprom",
+    "source": "https://dvk-style.ru/upload/iblock/71a/71acf303818831fb7295fcacc4fdbcee.jpg",
+    "alt": "Логотип: Газпром"
+  },
+  {
+    "base": "images/company/clients/ford",
+    "source": "https://dvk-style.ru/upload/iblock/a14/a14a22a03fa4133199af81a6310948de.jpg",
+    "alt": "Логотип: Ford"
+  },
+  {
+    "base": "images/company/clients/tikkurila",
+    "source": "https://dvk-style.ru/upload/iblock/c72/c7215da325185d08d7fbfc7f5ea7ebd1.jpg",
+    "alt": "Логотип: Tikkurila"
+  },
+  {
+    "base": "images/company/clients/lensovet-theatre",
+    "source": "https://dvk-style.ru/upload/iblock/c02/c023b0af43a677caef62530f820d056c.png",
+    "alt": "Логотип: Театр Ленсовета"
+  },
+  {
+    "base": "images/company/clients/severstal",
+    "source": "https://dvk-style.ru/upload/iblock/bc5/bc5eaa292cca375943e18e050769f083.jpg",
+    "alt": "Логотип: Северсталь"
+  },
+  {
+    "base": "images/company/certificates/1",
+    "source": "https://dvk-style.ru/upload/iblock/7fb/7fb74cb9ee86d47660cb5097a9ced360.jpg",
+    "alt": "Дилерский сертификат Промет"
+  },
+  {
+    "base": "images/company/certificates/2",
+    "source": "https://dvk-style.ru/upload/iblock/49e/49e1fb2e6df49003a304ae0016e695bb.jpg",
+    "alt": "Дилерское свидетельство ДВК"
+  },
+  {
+    "base": "images/company/certificates/3",
+    "source": "https://dvk-style.ru/upload/iblock/58a/58a1e75710800debccdea0003c925e38.jpg",
+    "alt": "Дилерское свидетельство ДИКОМ"
+  },
+  {
+    "base": "images/company/certificates/4",
+    "source": "https://dvk-style.ru/upload/iblock/137/13734c96aae60fc3b3847668c878c941.jpg",
+    "alt": "Дилерское свидетельство МЕТАЛЛ-ЗАВОД"
+  },
+  {
+    "base": "images/company/certificates/5",
+    "source": "https://dvk-style.ru/upload/iblock/abb/abb5514c90cd9a4157dc4f24895ddc45.jpg",
+    "alt": "Дилерское свидетельство ПТК-Спорт"
+  },
+  {
+    "base": "images/company/certificates/6",
+    "source": "https://dvk-style.ru/upload/iblock/ca0/ca0e72e65d7b949ea0cc7d716860b8fe.jpg",
+    "alt": "Санитарно гигиенический сертификат"
+  },
+  {
+    "base": "images/company/certificates/7",
+    "source": "https://dvk-style.ru/upload/iblock/5b6/5b64baa6c82c1d441f315ec99e96a8eb.jpg",
+    "alt": "Сертификат соответствия на металлическую мебель"
+  },
+  {
+    "base": "images/company/certificates/8",
+    "source": "https://dvk-style.ru/upload/iblock/010/01007678ef8a3f429866d1294d8673d9.jpg",
+    "alt": "Сертификат соответствия ДВК"
+  },
+  {
+    "base": "images/company/certificates/9",
+    "source": "https://dvk-style.ru/upload/iblock/a0c/a0cabf14818887e9372574f5d503ea40.jpg",
+    "alt": "Сертификат соответствия ДВК"
+  },
+  {
+    "base": "images/company/certificates/10",
+    "source": "https://dvk-style.ru/upload/iblock/5cd/5cd1a2a5f255d033745e948abffb9bbe.jpg",
+    "alt": "Сертификат соответствия на мебель для общественных помещений"
+  },
+  {
+    "base": "images/company/certificates/11",
+    "source": "https://dvk-style.ru/upload/iblock/39f/39fa7b7c71ed2068429fa9762ab06aa2.jpg",
+    "alt": "Сертификат соответствия на мебель для общественных помещений"
+  },
+  {
+    "base": "images/company/certificates/12",
+    "source": "https://dvk-style.ru/upload/iblock/156/1565ddc3d07c2458d55e635bebc7981a.jpg",
+    "alt": "Сертификат соответствия на мебель для общественных помещений"
+  },
+  {
+    "base": "images/company/certificates/13",
+    "source": "https://dvk-style.ru/upload/iblock/716/716d19d52a552b5776c5b38a870a0fa7.jpg",
+    "alt": "Сертификат соответствия на мебель для общественных помещений"
+  },
+  {
+    "base": "images/company/certificates/14",
+    "source": "https://dvk-style.ru/upload/iblock/6f1/6f127cd088105f4a0d3fc312f656085d.jpg",
+    "alt": "Сертификат соответствия на металлическую мебель"
+  },
+  {
+    "base": "images/company/certificates/15",
+    "source": "https://dvk-style.ru/upload/iblock/ae5/ae5d993cd5a6ca9a00c44a772bd2e780.jpg",
+    "alt": "Сертификат соответствия на металлическую мебель"
+  },
+  {
+    "base": "images/company/certificates/16",
+    "source": "https://dvk-style.ru/upload/iblock/f9a/f9ae231343d38a6d59009b163f6cb55e.jpg",
+    "alt": "Сертификат соответствия на металлическую мебель ПАКС-ТРЕЙД"
+  },
+  {
+    "base": "images/company/certificates/17",
+    "source": "https://dvk-style.ru/upload/iblock/548/5487dcf752ff026c709c54659786094b.jpg",
+    "alt": "Сертификат соответствия на сейфы"
+  },
+  {
+    "base": "images/company/certificates/18",
+    "source": "https://dvk-style.ru/upload/iblock/185/185c01b11f269995b9ef1e0028d162c7.jpg",
+    "alt": "Сертификат соответствия на шкафы"
+  },
+  {
+    "base": "images/company/certificates/19",
+    "source": "https://dvk-style.ru/upload/iblock/953/953a384d25682ef2b100059f6b1da553.jpg",
+    "alt": "Сертификат соответствия на стеллажи среднегрузовые"
+  },
+  {
+    "base": "images/company/certificates/20",
+    "source": "https://dvk-style.ru/upload/iblock/494/494db620fb1677942e6d1e17e0680eaa.jpg",
+    "alt": "Сертификат соответствия на стеллажи среднегрузовые"
+  }
+]

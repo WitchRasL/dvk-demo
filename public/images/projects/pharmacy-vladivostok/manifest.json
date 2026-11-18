@@ -1,0 +1,39 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/projects/pharmacy-vladivostok/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/medialibrary/e0c/e0c0007fd524197266291210d6667b68.jpg",
+      "width": 1000,
+      "height": 550,
+      "original": {
+        "width": 1000,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/pharmacy-vladivostok/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/medialibrary/69b/69b3f58ac6be871c4fce0f5615a08450.jpg",
+      "width": 1000,
+      "height": 550,
+      "original": {
+        "width": 1000,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/pharmacy-vladivostok/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/medialibrary/416/4162c54834eafe749024ebb8a3d8dac9.jpg",
+      "width": 1000,
+      "height": 550,
+      "original": {
+        "width": 1000,
+        "height": 550
+      }
+    }
+  ]
+}

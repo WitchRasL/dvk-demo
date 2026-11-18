@@ -1,0 +1,50 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/projects/duty-free-spb/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/medialibrary/60a/60aadb23e71c61249025c4b8a37bd9ab.jpg",
+      "width": 1100,
+      "height": 550,
+      "original": {
+        "width": 1100,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/duty-free-spb/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/medialibrary/686/686d6de0e0a997f7813283ec0fbad973.jpg",
+      "width": 1100,
+      "height": 550,
+      "original": {
+        "width": 1100,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/duty-free-spb/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/medialibrary/462/4620ffabe17dc18d0eedebb81ec77fab.jpg",
+      "width": 1100,
+      "height": 550,
+      "original": {
+        "width": 1100,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/duty-free-spb/4",
+      "n": "4",
+      "source": "https://dvk-style.ru/upload/medialibrary/f68/f68a339e87de513e7a19273a06cccd29.jpg",
+      "width": 1100,
+      "height": 550,
+      "original": {
+        "width": 1100,
+        "height": 550
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/torgovyy-modul-tmd-3210/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/dd6/dd66a831084093fe2d75d1ebccad8bc1.jpg",
+      "width": 1000,
+      "height": 750,
+      "original": {
+        "width": 1000,
+        "height": 750
+      }
+    },
+    {
+      "base": "images/products/torgovyy-modul-tmd-3210/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/d54/d548f3bd0e67ee524ddbfda99a61dfb9.jpg",
+      "width": 1000,
+      "height": 725,
+      "original": {
+        "width": 1000,
+        "height": 725
+      }
+    },
+    {
+      "base": "images/products/torgovyy-modul-tmd-3210/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/iblock/75e/75ef75bf454b33395b51fa8945b7b905.jpg",
+      "width": 1000,
+      "height": 706,
+      "original": {
+        "width": 1000,
+        "height": 706
+      }
+    }
+  ]
+}

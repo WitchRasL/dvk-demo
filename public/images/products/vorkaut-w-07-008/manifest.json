@@ -1,0 +1,39 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/vorkaut-w-07-008/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/d64/d6412e023020c5aa6dcfe5d1ed558dde.jpg",
+      "width": 645,
+      "height": 533,
+      "original": {
+        "width": 645,
+        "height": 533
+      }
+    },
+    {
+      "base": "images/products/vorkaut-w-07-008/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/5fb/5fb2347d4685830451a62a6926a15ccc.jpg",
+      "width": 800,
+      "height": 533,
+      "original": {
+        "width": 800,
+        "height": 533
+      }
+    },
+    {
+      "base": "images/products/vorkaut-w-07-008/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/iblock/e09/e09e7dc5d4359f5eaa9f4eb9bad2c5ac.jpg",
+      "width": 450,
+      "height": 405,
+      "original": {
+        "width": 450,
+        "height": 405
+      }
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/610/610f3191a5f47696d38403ce9b195d28.jpg",
+      "width": 1038,
+      "height": 864,
+      "original": {
+        "width": 1038,
+        "height": 864
+      }
+    },
+    {
+      "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/12c/12cd386dc114f92ac2e534b6845e6251.jpg",
+      "width": 1152,
+      "height": 864,
+      "original": {
+        "width": 1152,
+        "height": 864
+      }
+    },
+    {
+      "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/iblock/5c8/5c854fb69e86585db1b9872760be2dce.jpg",
+      "width": 1152,
+      "height": 864,
+      "original": {
+        "width": 1152,
+        "height": 864
+      }
+    },
+    {
+      "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/4",
+      "n": "4",
+      "source": "https://dvk-style.ru/upload/iblock/6b8/6b81f71fc38e3af00f44f40ce0f99025.jpg",
+      "width": 1152,
+      "height": 864,
+      "original": {
+        "width": 1152,
+        "height": 864
+      }
+    },
+    {
+      "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/5",
+      "n": "5",
+      "source": "https://dvk-style.ru/upload/iblock/635/63503798c589ec8eaf4d92b540ddd6f8.jpg",
+      "width": 1152,
+      "height": 864,
+      "original": {
+        "width": 1152,
+        "height": 864
+      }
+    },
+    {
+      "base": "images/products/vitrina-pristennaya-s-nakopitelem-vod-24/6",
+      "n": "6",
+      "source": "https://dvk-style.ru/upload/iblock/e5f/e5ff0984fdd4a441ca159985edfcfd56.jpg",
+      "width": 1152,
+      "height": 864,
+      "original": {
+        "width": 1152,
+        "height": 864
+      }
+    }
+  ]
+}

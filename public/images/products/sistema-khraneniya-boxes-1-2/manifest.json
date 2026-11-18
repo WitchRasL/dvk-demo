@@ -1,0 +1,39 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/sistema-khraneniya-boxes-1-2/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/a37/a37d54816ef6d657c353fa8ff47e911b.jpg",
+      "width": 1600,
+      "height": 1200,
+      "original": {
+        "width": 2000,
+        "height": 1500
+      }
+    },
+    {
+      "base": "images/products/sistema-khraneniya-boxes-1-2/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/e33/e33a87e89612a2a5319a62369bc8c3a2.jpg",
+      "width": 1600,
+      "height": 1200,
+      "original": {
+        "width": 2000,
+        "height": 1500
+      }
+    },
+    {
+      "base": "images/products/sistema-khraneniya-boxes-1-2/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/iblock/1c9/1c9b9e252d4ab26aeed7563fd77cf992.jpg",
+      "width": 1600,
+      "height": 1200,
+      "original": {
+        "width": 2000,
+        "height": 1500
+      }
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/company/pharmacy-series/orange",
+      "n": "orange",
+      "source": "https://dvk-style.ru/upload/iblock/af3/af3cc9a89b970042149c3554764d729d.png",
+      "width": 1000,
+      "height": 1000,
+      "original": {
+        "width": 1000,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/company/pharmacy-series/ampir",
+      "n": "ampir",
+      "source": "https://dvk-style.ru/upload/iblock/0d4/0d45def5ab526a85b09f07397e2762f0.png",
+      "width": 1000,
+      "height": 1000,
+      "original": {
+        "width": 1000,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/company/pharmacy-series/doktor",
+      "n": "doktor",
+      "source": "https://dvk-style.ru/upload/iblock/119/119b90231ae24dde74f2d408dda5ac05.png",
+      "width": 1000,
+      "height": 1000,
+      "original": {
+        "width": 1000,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/company/pharmacy-series/interfarm",
+      "n": "interfarm",
+      "source": "https://dvk-style.ru/upload/iblock/7f7/7f7f4c109d596d8eca53c974c959c869.png",
+      "width": 1000,
+      "height": 1000,
+      "original": {
+        "width": 1000,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/company/pharmacy-series/modern",
+      "n": "modern",
+      "source": "https://dvk-style.ru/upload/iblock/b72/b72ae3c458dc6048641005aca3540b5c.png",
+      "width": 1000,
+      "height": 1000,
+      "original": {
+        "width": 1000,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/company/pharmacy-series/naturel",
+      "n": "naturel",
+      "source": "https://dvk-style.ru/upload/iblock/2fd/2fdda3591d7c4c95cc5f7fb79a9ff4bb.png",
+      "width": 1000,
+      "height": 1000,
+      "original": {
+        "width": 1000,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/company/pharmacy-series/ozerki",
+      "n": "ozerki",
+      "source": "https://dvk-style.ru/upload/iblock/160/1606630d2efe4c4b636fde3ca324ef77.png",
+      "width": 1000,
+      "height": 1000,
+      "original": {
+        "width": 1000,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/company/pharmacy-series/orteka",
+      "n": "orteka",
+      "source": "https://dvk-style.ru/upload/iblock/60d/60d20c45d97ab117df75c0bb47d9ae1a.png",
+      "width": 1000,
+      "height": 1000,
+      "original": {
+        "width": 1000,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/company/pharmacy-series/pervaya-pomoshch",
+      "n": "pervaya-pomoshch",
+      "source": "https://dvk-style.ru/upload/iblock/f8d/f8d806ac3c707764be9cc13f16b94bbd.png",
+      "width": 1000,
+      "height": 1000,
+      "original": {
+        "width": 1000,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/company/pharmacy-series/rodnik-zdorovya",
+      "n": "rodnik-zdorovya",
+      "source": "https://dvk-style.ru/upload/iblock/750/75090ee46e5a1d3b23bde2c060b218e3.png",
+      "width": 1000,
+      "height": 1000,
+      "original": {
+        "width": 1000,
+        "height": 1000
+      }
+    },
+    {
+      "base": "images/company/pharmacy-series/fialka",
+      "n": "fialka",
+      "source": "https://dvk-style.ru/upload/iblock/808/8086b8032c5474535c327f7b9ad8df04.png",
+      "width": 1000,
+      "height": 1000,
+      "original": {
+        "width": 1000,
+        "height": 1000
+      }
+    }
+  ]
+}

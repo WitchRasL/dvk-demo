@@ -1,0 +1,28 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/projects/museum-bryansk/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/medialibrary/ac1/ac119496ba76311a6d95d122af30d6a5.jpg",
+      "width": 1466,
+      "height": 550,
+      "original": {
+        "width": 1466,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/museum-bryansk/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/medialibrary/19e/19e8dbabc3782e957265526963a55fcd.jpg",
+      "width": 1100,
+      "height": 550,
+      "original": {
+        "width": 1100,
+        "height": 550
+      }
+    }
+  ]
+}

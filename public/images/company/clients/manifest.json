@@ -1,0 +1,116 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/company/clients/sberbank",
+      "n": "sberbank",
+      "source": "https://dvk-style.ru/upload/iblock/17d/17d1e50e47c6a087f3e14ad5c953821b.jpg",
+      "width": 199,
+      "height": 199,
+      "original": {
+        "width": 199,
+        "height": 199
+      }
+    },
+    {
+      "base": "images/company/clients/hermitage",
+      "n": "hermitage",
+      "source": "https://dvk-style.ru/upload/iblock/4c8/4c8c40d1d04b9004f51f4cb13da2348a.jpg",
+      "width": 350,
+      "height": 350,
+      "original": {
+        "width": 350,
+        "height": 350
+      }
+    },
+    {
+      "base": "images/company/clients/natur-produkt",
+      "n": "natur-produkt",
+      "source": "https://dvk-style.ru/upload/iblock/e9b/e9ba3a3eb9e80e99a012bbef291079d6.jpg",
+      "width": 350,
+      "height": 350,
+      "original": {
+        "width": 350,
+        "height": 350
+      }
+    },
+    {
+      "base": "images/company/clients/makita",
+      "n": "makita",
+      "source": "https://dvk-style.ru/upload/iblock/81b/81b6ee4de2ba19b46ecf5361296ae907.jpg",
+      "width": 350,
+      "height": 350,
+      "original": {
+        "width": 350,
+        "height": 350
+      }
+    },
+    {
+      "base": "images/company/clients/knauf",
+      "n": "knauf",
+      "source": "https://dvk-style.ru/upload/iblock/309/309d69c1770ceb53f60e50d91ed6f8f5.jpg",
+      "width": 350,
+      "height": 350,
+      "original": {
+        "width": 350,
+        "height": 350
+      }
+    },
+    {
+      "base": "images/company/clients/gazprom",
+      "n": "gazprom",
+      "source": "https://dvk-style.ru/upload/iblock/71a/71acf303818831fb7295fcacc4fdbcee.jpg",
+      "width": 350,
+      "height": 350,
+      "original": {
+        "width": 350,
+        "height": 350
+      }
+    },
+    {
+      "base": "images/company/clients/ford",
+      "n": "ford",
+      "source": "https://dvk-style.ru/upload/iblock/a14/a14a22a03fa4133199af81a6310948de.jpg",
+      "width": 350,
+      "height": 350,
+      "original": {
+        "width": 350,
+        "height": 350
+      }
+    },
+    {
+      "base": "images/company/clients/tikkurila",
+      "n": "tikkurila",
+      "source": "https://dvk-style.ru/upload/iblock/c72/c7215da325185d08d7fbfc7f5ea7ebd1.jpg",
+      "width": 120,
+      "height": 120,
+      "original": {
+        "width": 120,
+        "height": 120
+      }
+    },
+    {
+      "base": "images/company/clients/lensovet-theatre",
+      "n": "lensovet-theatre",
+      "source": "https://dvk-style.ru/upload/iblock/c02/c023b0af43a677caef62530f820d056c.png",
+      "width": 120,
+      "height": 120,
+      "original": {
+        "width": 120,
+        "height": 120
+      }
+    },
+    {
+      "base": "images/company/clients/severstal",
+      "n": "severstal",
+      "source": "https://dvk-style.ru/upload/iblock/bc5/bc5eaa292cca375943e18e050769f083.jpg",
+      "width": 197,
+      "height": 197,
+      "original": {
+        "width": 197,
+        "height": 197
+      }
+    }
+  ]
+}

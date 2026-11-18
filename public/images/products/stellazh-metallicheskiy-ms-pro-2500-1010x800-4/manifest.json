@@ -1,0 +1,50 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/3a0/3a0d5ca69d1613296cdef6ce765ddf42.jpg",
+      "width": 748,
+      "height": 748,
+      "original": {
+        "width": 748,
+        "height": 748
+      }
+    },
+    {
+      "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/053/053d11cd232babb6b3d661e9a3bd0725.jpg",
+      "width": 1024,
+      "height": 768,
+      "original": {
+        "width": 1024,
+        "height": 768
+      }
+    },
+    {
+      "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/iblock/7bb/7bb9668e3b817996df8964e381294a9f.jpg",
+      "width": 1024,
+      "height": 768,
+      "original": {
+        "width": 1024,
+        "height": 768
+      }
+    },
+    {
+      "base": "images/products/stellazh-metallicheskiy-ms-pro-2500-1010x800-4/4",
+      "n": "4",
+      "source": "https://dvk-style.ru/upload/iblock/a7c/a7c4c3fc8a67bfbb3825d58d20e89dba.jpg",
+      "width": 1024,
+      "height": 757,
+      "original": {
+        "width": 1024,
+        "height": 757
+      }
+    }
+  ]
+}

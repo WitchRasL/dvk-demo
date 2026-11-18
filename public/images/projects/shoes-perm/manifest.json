@@ -1,0 +1,39 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/projects/shoes-perm/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/medialibrary/e12/e1222ad816c9291833a2c5769ffee53a.jpg",
+      "width": 977,
+      "height": 550,
+      "original": {
+        "width": 977,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/shoes-perm/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/medialibrary/03c/03cf16d6891f6a204825749cadee5843.jpg",
+      "width": 977,
+      "height": 550,
+      "original": {
+        "width": 977,
+        "height": 550
+      }
+    },
+    {
+      "base": "images/projects/shoes-perm/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/medialibrary/949/94902558e3bcf6e05315f3487295e17f.jpg",
+      "width": 977,
+      "height": 550,
+      "original": {
+        "width": 977,
+        "height": 550
+      }
+    }
+  ]
+}

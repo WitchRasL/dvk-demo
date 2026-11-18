@@ -1,0 +1,28 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/vitrina-dlya-chasov-vchyu-23/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/a0c/a0c1641c560269dda923c90f43332346.jpg",
+      "width": 1000,
+      "height": 825,
+      "original": {
+        "width": 1000,
+        "height": 825
+      }
+    },
+    {
+      "base": "images/products/vitrina-dlya-chasov-vchyu-23/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/61b/61bd78692c7aff6b3b052baaf68108ee.jpg",
+      "width": 1000,
+      "height": 750,
+      "original": {
+        "width": 1000,
+        "height": 750
+      }
+    }
+  ]
+}

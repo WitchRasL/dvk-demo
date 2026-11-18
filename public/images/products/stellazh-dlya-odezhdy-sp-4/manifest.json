@@ -1,0 +1,39 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/stellazh-dlya-odezhdy-sp-4/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/55a/55a5ffbe4bdd021b8afb8d451eeffa53.jpg",
+      "width": 1024,
+      "height": 768,
+      "original": {
+        "width": 1024,
+        "height": 768
+      }
+    },
+    {
+      "base": "images/products/stellazh-dlya-odezhdy-sp-4/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/71a/71a96b0138770de6bb213fc4e97575b5.jpg",
+      "width": 768,
+      "height": 1024,
+      "original": {
+        "width": 768,
+        "height": 1024
+      }
+    },
+    {
+      "base": "images/products/stellazh-dlya-odezhdy-sp-4/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/iblock/df6/df64e5fd7b77b0b0889c32984e34c8a0.jpg",
+      "width": 1024,
+      "height": 768,
+      "original": {
+        "width": 1024,
+        "height": 768
+      }
+    }
+  ]
+}

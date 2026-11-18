@@ -1,0 +1,28 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/igrovoy-kompleks-mgm-78-korablik/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/224/78yhrlkw8xxr4o01s1an9gy6ccmr6eek/%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D0%9C%D0%93%D0%9C-78%20%D0%9A%D0%BE%D1%80%D0%B0%D0%B1%D0%BB%D0%B8%D0%BA.jpg",
+      "width": 1000,
+      "height": 600,
+      "original": {
+        "width": 1000,
+        "height": 600
+      }
+    },
+    {
+      "base": "images/products/igrovoy-kompleks-mgm-78-korablik/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/268/3jytm0ajxk35qid9n34mh87fo0u8rfp1/%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D0%9C%D0%93%D0%9C-78%20%D0%9A%D0%BE%D1%80%D0%B0%D0%B1%D0%BB%D0%B8%D0%BA1.jpg",
+      "width": 1000,
+      "height": 600,
+      "original": {
+        "width": 1000,
+        "height": 600
+      }
+    }
+  ]
+}

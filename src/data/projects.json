@@ -1,1 +1,286 @@
-[]
+[
+  {
+    "id": "perfume-balashikha",
+    "slug": "perfume-balashikha",
+    "title": "Оборудование для парфюмерии",
+    "client": null,
+    "city": "Балашиха",
+    "year": null,
+    "direction": "retail",
+    "industry": "cosmetics",
+    "summary": "Дизайн торгового оборудования для парфюмерии в г. Балашиха. Оборудование изготовлено по дизайн-проекту сотрудников «ДВК Стиль».",
+    "scope": [
+      "Дизайн-проект",
+      "Производство оборудования"
+    ],
+    "images": [
+      {
+        "base": "images/projects/perfume-balashikha/1",
+        "alt": "Дизайн торгового оборудования для парфюмерии в г. Балашиха",
+        "w": 1586,
+        "h": 550
+      },
+      {
+        "base": "images/projects/perfume-balashikha/2",
+        "alt": "Дизайн торгового оборудования для парфюмерии в г. Балашиха, фото 2",
+        "w": 977,
+        "h": 550
+      }
+    ],
+    "sourceUrl": "https://dvk-style.ru/projects/dizayn-torgovogo-oborudovaniya/"
+  },
+  {
+    "id": "museum-bryansk",
+    "slug": "museum-bryansk",
+    "title": "Оборудование для музея",
+    "client": null,
+    "city": "Брянск",
+    "year": null,
+    "direction": "retail",
+    "industry": "museums",
+    "summary": "Дизайн торгового оборудования для музеев в г. Брянск. Оборудование изготовлено по дизайн-проекту сотрудников «ДВК Стиль».",
+    "scope": [
+      "Дизайн-проект",
+      "Производство оборудования"
+    ],
+    "images": [
+      {
+        "base": "images/projects/museum-bryansk/1",
+        "alt": "Дизайн торгового оборудования для музеев в г. Брянск",
+        "w": 1466,
+        "h": 550
+      },
+      {
+        "base": "images/projects/museum-bryansk/2",
+        "alt": "Дизайн торгового оборудования для музеев в г. Брянск, фото 2",
+        "w": 1100,
+        "h": 550
+      }
+    ],
+    "sourceUrl": "https://dvk-style.ru/projects/dizayn-torgovogo-oborudovaniya/"
+  },
+  {
+    "id": "duty-free-spb",
+    "slug": "duty-free-spb",
+    "title": "Оборудование для магазинов «Дьюти фри»",
+    "client": null,
+    "city": "Санкт-Петербург",
+    "year": null,
+    "direction": "retail",
+    "industry": null,
+    "summary": "Дизайн торгового оборудования для магазинов «ДЮТИ ФРИ» в г. Санкт-Петербург. Оборудование изготовлено по дизайн-проекту сотрудников «ДВК Стиль».",
+    "scope": [
+      "Дизайн-проект",
+      "Производство оборудования"
+    ],
+    "images": [
+      {
+        "base": "images/projects/duty-free-spb/1",
+        "alt": "Дизайн торгового оборудования для магазинов «ДЮТИ ФРИ» в г. Санкт-Петербург",
+        "w": 1100,
+        "h": 550
+      },
+      {
+        "base": "images/projects/duty-free-spb/2",
+        "alt": "Дизайн торгового оборудования для магазинов «ДЮТИ ФРИ» в г. Санкт-Петербург, фото 2",
+        "w": 1100,
+        "h": 550
+      },
+      {
+        "base": "images/projects/duty-free-spb/3",
+        "alt": "Дизайн торгового оборудования для магазинов «ДЮТИ ФРИ» в г. Санкт-Петербург, фото 3",
+        "w": 1100,
+        "h": 550
+      },
+      {
+        "base": "images/projects/duty-free-spb/4",
+        "alt": "Дизайн торгового оборудования для магазинов «ДЮТИ ФРИ» в г. Санкт-Петербург, фото 4",
+        "w": 1100,
+        "h": 550
+      }
+    ],
+    "sourceUrl": "https://dvk-style.ru/projects/dizayn-torgovogo-oborudovaniya/"
+  },
+  {
+    "id": "shoes-perm",
+    "slug": "shoes-perm",
+    "title": "Оборудование для обувного магазина",
+    "client": null,
+    "city": "Пермь",
+    "year": null,
+    "direction": "retail",
+    "industry": "apparel",
+    "summary": "Дизайн торгового оборудования для обуви в г. Пермь. Оборудование изготовлено по дизайн-проекту сотрудников «ДВК Стиль».",
+    "scope": [
+      "Дизайн-проект",
+      "Производство оборудования"
+    ],
+    "images": [
+      {
+        "base": "images/projects/shoes-perm/1",
+        "alt": "Дизайн торгового оборудования для обуви в г. Пермь",
+        "w": 977,
+        "h": 550
+      },
+      {
+        "base": "images/projects/shoes-perm/2",
+        "alt": "Дизайн торгового оборудования для обуви в г. Пермь, фото 2",
+        "w": 977,
+        "h": 550
+      },
+      {
+        "base": "images/projects/shoes-perm/3",
+        "alt": "Дизайн торгового оборудования для обуви в г. Пермь, фото 3",
+        "w": 977,
+        "h": 550
+      }
+    ],
+    "sourceUrl": "https://dvk-style.ru/projects/dizayn-torgovogo-oborudovaniya/"
+  },
+  {
+    "id": "pharmacy-vladivostok",
+    "slug": "pharmacy-vladivostok",
+    "title": "Оборудование для аптеки",
+    "client": null,
+    "city": "Владивосток",
+    "year": null,
+    "direction": "retail",
+    "industry": "pharmacy",
+    "summary": "Дизайн оборудования для аптек в городе Владивосток. Оборудование изготовлено по дизайн-проекту сотрудников «ДВК Стиль».",
+    "scope": [
+      "Дизайн-проект",
+      "Производство оборудования"
+    ],
+    "images": [
+      {
+        "base": "images/projects/pharmacy-vladivostok/1",
+        "alt": "Дизайн оборудования для аптек в городе Владивосток",
+        "w": 1000,
+        "h": 550
+      },
+      {
+        "base": "images/projects/pharmacy-vladivostok/2",
+        "alt": "Дизайн оборудования для аптек в городе Владивосток, фото 2",
+        "w": 1000,
+        "h": 550
+      },
+      {
+        "base": "images/projects/pharmacy-vladivostok/3",
+        "alt": "Дизайн оборудования для аптек в городе Владивосток, фото 3",
+        "w": 1000,
+        "h": 550
+      }
+    ],
+    "sourceUrl": "https://dvk-style.ru/projects/dizayn-oborudovaniya-dlya-aptek/"
+  },
+  {
+    "id": "playground-voronezh",
+    "slug": "playground-voronezh",
+    "title": "Детская площадка",
+    "client": null,
+    "city": "Воронеж",
+    "year": null,
+    "direction": "landscape",
+    "industry": "yards-schools",
+    "summary": "Детская площадка в городе Воронеж.",
+    "scope": [
+      "Детское игровое оборудование"
+    ],
+    "images": [
+      {
+        "base": "images/projects/playground-voronezh/1",
+        "alt": "Детская площадка в городе Воронеж",
+        "w": 1188,
+        "h": 550
+      },
+      {
+        "base": "images/projects/playground-voronezh/2",
+        "alt": "Детская площадка в городе Воронеж, фото 2",
+        "w": 830,
+        "h": 550
+      },
+      {
+        "base": "images/projects/playground-voronezh/3",
+        "alt": "Детская площадка в городе Воронеж, фото 3",
+        "w": 830,
+        "h": 550
+      },
+      {
+        "base": "images/projects/playground-voronezh/4",
+        "alt": "Детская площадка в городе Воронеж, фото 4",
+        "w": 830,
+        "h": 550
+      }
+    ],
+    "sourceUrl": "https://dvk-style.ru/projects/detskie-igrovye-ploshchadki/"
+  },
+  {
+    "id": "playground-moscow",
+    "slug": "playground-moscow",
+    "title": "Детская площадка",
+    "client": null,
+    "city": "Москва",
+    "year": null,
+    "direction": "landscape",
+    "industry": "yards-schools",
+    "summary": "Детская площадка в Москве.",
+    "scope": [
+      "Детское игровое оборудование"
+    ],
+    "images": [
+      {
+        "base": "images/projects/playground-moscow/1",
+        "alt": "Детская площадка в Москве",
+        "w": 1000,
+        "h": 589
+      }
+    ],
+    "sourceUrl": "https://dvk-style.ru/projects/detskie-igrovye-ploshchadki/"
+  },
+  {
+    "id": "workshop-furniture",
+    "slug": "workshop-furniture",
+    "title": "Металлическая мебель для мастерской",
+    "client": null,
+    "city": null,
+    "year": null,
+    "direction": "metal",
+    "industry": "workshops",
+    "summary": "Металлическая мебель для мастерской.",
+    "scope": [
+      "Металлическая мебель"
+    ],
+    "images": [
+      {
+        "base": "images/projects/workshop-furniture/1",
+        "alt": "Металлическая мебель для мастерской",
+        "w": 1000,
+        "h": 589
+      }
+    ],
+    "sourceUrl": "https://dvk-style.ru/projects/metallicheskaya-mebel/"
+  },
+  {
+    "id": "pallet-racks",
+    "slug": "pallet-racks",
+    "title": "Паллетные стеллажи",
+    "client": null,
+    "city": null,
+    "year": null,
+    "direction": "metal",
+    "industry": "warehouses",
+    "summary": "Паллетные стеллажи.",
+    "scope": [
+      "Металлические стеллажи"
+    ],
+    "images": [
+      {
+        "base": "images/projects/pallet-racks/1",
+        "alt": "Паллетные стеллажи",
+        "w": 1000,
+        "h": 589
+      }
+    ],
+    "sourceUrl": "https://dvk-style.ru/projects/metallicheskaya-mebel/"
+  }
+]

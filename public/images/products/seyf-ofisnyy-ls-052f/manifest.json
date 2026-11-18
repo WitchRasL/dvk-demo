@@ -1,0 +1,39 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/seyf-ofisnyy-ls-052f/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/f7f/f7f6bfd9b93e36696494b16fce367bae.jpg",
+      "width": 1000,
+      "height": 750,
+      "original": {
+        "width": 1000,
+        "height": 750
+      }
+    },
+    {
+      "base": "images/products/seyf-ofisnyy-ls-052f/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/58d/58d948c63e46c43d2d3d40a6a0227646.jpg",
+      "width": 686,
+      "height": 514,
+      "original": {
+        "width": 686,
+        "height": 514
+      }
+    },
+    {
+      "base": "images/products/seyf-ofisnyy-ls-052f/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/iblock/30e/30e4236aee0fd4862d6dca2fe968020b.jpg",
+      "width": 1000,
+      "height": 750,
+      "original": {
+        "width": 1000,
+        "height": 750
+      }
+    }
+  ]
+}

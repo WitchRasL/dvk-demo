@@ -1,0 +1,39 @@
+{
+  "source": "https://dvk-style.ru",
+  "generatedAt": "2026-11-18",
+  "files": [
+    {
+      "base": "images/products/stellazh-arkhivnyy-stf-1034-2-5/1",
+      "n": "1",
+      "source": "https://dvk-style.ru/upload/iblock/fd1/fd10a2dae2d1b222b0b1ec6f8a3c82a1.jpg",
+      "width": 600,
+      "height": 600,
+      "original": {
+        "width": 600,
+        "height": 600
+      }
+    },
+    {
+      "base": "images/products/stellazh-arkhivnyy-stf-1034-2-5/2",
+      "n": "2",
+      "source": "https://dvk-style.ru/upload/iblock/67a/67ac31b617402242d4d9ce2d617ceed2.jpg",
+      "width": 600,
+      "height": 600,
+      "original": {
+        "width": 600,
+        "height": 600
+      }
+    },
+    {
+      "base": "images/products/stellazh-arkhivnyy-stf-1034-2-5/3",
+      "n": "3",
+      "source": "https://dvk-style.ru/upload/iblock/4fd/4fd67c58524f17dbafb71a96b685281a.jpg",
+      "width": 600,
+      "height": 600,
+      "original": {
+        "width": 600,
+        "height": 600
+      }
+    }
+  ]
+}
