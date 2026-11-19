@@ -2255,7 +2255,7 @@
   .sr-hero .scroll-video__video {
     height: calc(100% - 25rem);
     min-height: 10rem;
-    object-position: 84% 50%;
+    object-position: 74% 50%;
   }
 
   /* Телефон: пояснение — табличка вверху кадра (места под точки и проволоку нет). */

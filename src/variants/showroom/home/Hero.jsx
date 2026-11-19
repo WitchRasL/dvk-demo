@@ -1,7 +1,7 @@
-// Hero «Шоурума». Ролик по скроллу: камера входит в ювелирный салон и идёт мимо островного прилавка
-// к пристенным витринам. Сцена открывается в полутени и светлеет к середине пути; курсор — луч света
-// (тень с «окном» и тёплое пятно едут transform за мышью). На тач-устройствах свет только по скроллу,
-// при reduced-motion — последний кадр ролика. Если ролик не загрузился, его первый кадр освещают светильники заглушки.
+// Hero «Шоурума» — «Включи витрину». Ролик по скроллу: ночной атриум, камера по дуге обходит торговый островок,
+// и на нём по очереди включается свет. Курсор — луч света (тень с «окном» и тёплое пятно едут transform за мышью).
+// На тач-устройствах свет только по скроллу, при reduced-motion — последний кадр ролика (островок освещён).
+// Если ролик не загрузился, его первый кадр освещают светильники заглушки.
 import { Fragment, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { Link } from 'react-router';
 import { ArrowUpRight, Phone } from 'lucide-react';
@@ -19,11 +19,11 @@ import { Button } from '../ui.jsx';
 
 /** Доля пути hero, за которую шоурум освещается полностью (в ролике — к середине). */
 const LIGHT_UP_UNTIL = 0.5;
-/** Точка кадра, куда смотрит свет без мыши: пристенная витрина правой стены. */
-const FOCAL = { x: 0.9, y: 0.42 };
+/** Точка кадра, куда смотрит свет без мыши: торговый островок. */
+const FOCAL = { x: 0.62, y: 0.5 };
 const BEAM_TAU_MS = 110;
-/** Телефон: кадр занимает верх сцены (нижние 25rem — заголовок и действия) и сдвинут к правым витринам; то же в home.css. */
-const PHONE_FRAME = { below: 400, minHeight: 160, focus: { x: 0.84, y: 0.5 } };
+/** Телефон: кадр занимает верх сцены (нижние 25rem — заголовок и действия) и сдвинут к островку; то же в home.css. */
+const PHONE_FRAME = { below: 400, minHeight: 160, focus: { x: 0.74, y: 0.5 } };
 /** Место под табличку пояснения рядом с точкой: проволока и ширина таблички, px. */
 const CARD_REACH = 372;
 /** Уже этой ширины заголовок занимает больше половины сцены — табличке рядом с деталью места нет. */
@@ -264,11 +264,11 @@ function Lights({ progress, mode, mapping, photo }) {
     };
   }, [fine, reduce, isStatic, mapping]);
 
-  // В ролике свет зажигается сам: тень варианта только собирает взгляд на первой витрине и уходит к середине.
+  // В ролике свет зажигается сам, а первый кадр и так ночной: тень варианта лёгкая и уходит к середине.
   // Статичный кадр уже освещён. Заглушка (ролик не загрузился) освещает первый кадр светильниками.
   const lit = isStatic ? 1 : smooth(clamp01(progress / LIGHT_UP_UNTIL));
   // Фото из твиков уже освещено: тень лёгкая и уходит совсем — кадр должен читаться с первого экрана.
-  const shade = isStatic ? 0 : isVideo ? lerp(0.46, 0, lit) : photo ? lerp(0.3, 0, lit) : lerp(0.6, 0.1, lit);
+  const shade = isStatic ? 0 : isVideo ? lerp(0.18, 0, lit) : photo ? lerp(0.3, 0, lit) : lerp(0.6, 0.1, lit);
   // Светильники заглушки расставлены по первому кадру ролика — к фото из твиков они не относятся.
   const isPlaceholder = mode === 'placeholder' && !photo;
   const camera = isPlaceholder ? cameraTransform(heroConfig.camera, progress) : undefined;
@@ -350,7 +350,7 @@ export function Hero() {
   const callouts = useMemo(() => placeCallouts(heroConfig.callouts, mapping, { dock: Boolean(photo) }), [mapping, photo]);
   const frame = photo
     ? { sources: undefined, poster: { src: photo.src, alt: photo.alt }, placeholderLabel: `Кадр ${photo.code} — кандидат для ролика` }
-    : // reduced-motion: ролика нет — показываем его последний кадр, камера уже у прилавка
+    : // reduced-motion: ролика нет — показываем его последний кадр, островок уже освещён
       { poster: reduce ? HERO_POSTERS.lit : heroConfig.poster, placeholderLabel: 'Ролик не загрузился — показан его первый кадр' };
   return (
     <section className="sr-hero" aria-labelledby="sr-hero-title" data-frame={photo ? photo.id : 'video'}>

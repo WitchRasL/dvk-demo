@@ -94,8 +94,8 @@ describe('heroConfig «Шоурума»', () => {
   });
 
   it('точка кадра ролика переводится в точку сцены: кадр закрывает сцену (cover), лишнее обрезается поровну', () => {
-    // Ролик 1280×720. Сцена тех же пропорций — точка на месте.
-    expect(HERO_FRAME).toEqual({ width: 1280, height: 720 });
+    // Ролик 1920×1080 (16:9). Сцена тех же пропорций — точка на месте.
+    expect(HERO_FRAME).toEqual({ width: 1920, height: 1080 });
     const same = frameToStage({ x: 0.25, y: 0.4 }, { width: 1280, height: 720 });
     expect(same.x).toBeCloseTo(0.25, 5);
     expect(same.y).toBeCloseTo(0.4, 5);
@@ -153,7 +153,7 @@ describe('главная «Шоурума»', () => {
       'МОНТАЖ',
     ]);
 
-    // В hero идёт ролик из кадра H7: он подписан как визуализация, а не как объект ДВК, и никуда не ведёт
+    // В hero идёт ролик с торговым островком: он подписан как визуализация, а не как объект ДВК, и никуда не ведёт
     const credit = within(hero).getByText(HERO_CREDIT.text);
     expect(credit.textContent).toMatch(/визуализация интерьера, не объект ДВК/);
     expect(credit.closest('a')).toBeNull();
