@@ -126,16 +126,16 @@
     z-index: 1;
     pointer-events: none;
     background:
-      linear-gradient(180deg, rgb(10 8 6 / 0.82) 0, rgb(10 8 6 / 0) 9rem),
-      linear-gradient(0deg, rgb(10 8 6 / 0.97) 0, rgb(10 8 6 / 0.93) 8rem, rgb(10 8 6 / 0.84) 12.5rem, rgb(10 8 6 / 0.4) 16rem, rgb(10 8 6 / 0) 21rem),
+      linear-gradient(180deg, rgb(var(--sr-ink) / 0.82) 0, rgb(var(--sr-ink) / 0) 9rem),
+      linear-gradient(0deg, rgb(var(--sr-ink) / 0.97) 0, rgb(var(--sr-ink) / 0.93) 8rem, rgb(var(--sr-ink) / 0.84) 12.5rem, rgb(var(--sr-ink) / 0.4) 16rem, rgb(var(--sr-ink) / 0) 21rem),
       linear-gradient(
         90deg,
-        rgb(10 8 6 / 0.9) 0,
-        rgb(10 8 6 / 0.86) calc(var(--sr-hero-edge) - 12rem),
-        rgb(10 8 6 / 0.8) var(--sr-hero-edge),
-        rgb(10 8 6 / 0.46) calc(var(--sr-hero-edge) + 6rem),
-        rgb(10 8 6 / 0.13) calc(var(--sr-hero-edge) + 12rem),
-        rgb(10 8 6 / 0) calc(var(--sr-hero-edge) + 17rem)
+        rgb(var(--sr-ink) / 0.9) 0,
+        rgb(var(--sr-ink) / 0.86) calc(var(--sr-hero-edge) - 12rem),
+        rgb(var(--sr-ink) / 0.8) var(--sr-hero-edge),
+        rgb(var(--sr-ink) / 0.46) calc(var(--sr-hero-edge) + 6rem),
+        rgb(var(--sr-ink) / 0.13) calc(var(--sr-hero-edge) + 12rem),
+        rgb(var(--sr-ink) / 0) calc(var(--sr-hero-edge) + 17rem)
       );
   }
 
@@ -143,8 +143,8 @@
   @media (max-width: 1023px) {
     .sr-hero__scrim {
       background:
-        linear-gradient(180deg, rgb(10 8 6 / 0.82) 0, rgb(10 8 6 / 0) 7rem),
-        linear-gradient(0deg, rgb(10 8 6 / 0.97) 0, rgb(10 8 6 / 0.9) 30rem, rgb(10 8 6 / 0.85) 41.5rem, rgb(10 8 6 / 0.3) 46rem, rgb(10 8 6 / 0) 50rem);
+        linear-gradient(180deg, rgb(var(--sr-ink) / 0.82) 0, rgb(var(--sr-ink) / 0) 7rem),
+        linear-gradient(0deg, rgb(var(--sr-ink) / 0.97) 0, rgb(var(--sr-ink) / 0.9) 30rem, rgb(var(--sr-ink) / 0.85) 41.5rem, rgb(var(--sr-ink) / 0.3) 46rem, rgb(var(--sr-ink) / 0) 50rem);
     }
   }
 
@@ -575,8 +575,48 @@
     }
   }
 
-  /* Телефон: упрощённая версия — пояснение табличкой сверху кадра, свет только по скроллу. */
+  /* Строка пояснения над полосой фаз — только на телефоне (ниже); на широком экране пояснения стоят в кадре. */
+  .sr-hero__ticker {
+    display: none;
+  }
+
+  /* Телефон: упрощённая версия — пояснение строкой над полосой фаз, кадр остаётся открытым; свет только по скроллу. */
   @media (max-width: 767px) {
+    .sr-hero__ticker {
+      position: relative;
+      display: block;
+      min-height: 2.15rem; /* две строки: высота не прыгает, когда пояснения сменяются */
+      margin: 0 0 0.3rem;
+      font-size: 0.75rem;
+      line-height: 1.42;
+      color: #d6c9b1;
+    }
+
+    .sr-hero__ticker-item {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateY(4px);
+      transition:
+        opacity 0.35s var(--ease-out),
+        transform 0.35s var(--ease-out);
+    }
+
+    .sr-hero__ticker-item[data-active] {
+      opacity: 1;
+      transform: none;
+    }
+
+    .sr-hero__ticker-item b {
+      margin-right: 0.4em;
+      font-weight: 500;
+      color: var(--sr-brass-text);
+    }
+
+    .sr-hero__console {
+      margin-top: 0.6rem;
+    }
+
     .sr-callout {
       position: static;
     }
@@ -608,15 +648,15 @@
     /* Кадр занимает верх сцены: тень под заголовком идёт снизу вверх и гасит кадр к его нижнему краю. */
     .sr-hero__scrim {
       background:
-        linear-gradient(180deg, rgb(10 8 6 / 0.82) 0, rgb(10 8 6 / 0) 5rem),
+        linear-gradient(180deg, rgb(var(--sr-ink) / 0.82) 0, rgb(var(--sr-ink) / 0) 5rem),
         linear-gradient(
           0deg,
-          #0a0806 0,
-          #0a0806 24.5rem,
-          rgb(10 8 6 / 0.92) 28rem,
-          rgb(10 8 6 / 0.8) 33.5rem,
-          rgb(10 8 6 / 0.3) 37rem,
-          rgb(10 8 6 / 0) 40rem
+          rgb(var(--sr-ink)) 0,
+          rgb(var(--sr-ink)) 24.5rem,
+          rgb(var(--sr-ink) / 0.92) 28rem,
+          rgb(var(--sr-ink) / 0.8) 33.5rem,
+          rgb(var(--sr-ink) / 0.3) 37rem,
+          rgb(var(--sr-ink) / 0) 40rem
         );
     }
 
@@ -791,7 +831,7 @@
     position: absolute;
     inset: 0;
     overflow: hidden;
-    background: #120e0b;
+    background: var(--surface);
   }
 
   .sr-tile__media[data-kind='photo'] img {
@@ -833,12 +873,12 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgb(10 8 6 / 0) 38%, rgb(10 8 6 / 0.88) 100%);
+    background: linear-gradient(180deg, rgb(var(--sr-ink) / 0) 38%, rgb(var(--sr-ink) / 0.88) 100%);
   }
 
   /* Кадр остаётся светлым: затемнён только низ под подписью, верх и середина открыты. */
   .sr-tile__media[data-kind='photo']::after {
-    background: linear-gradient(180deg, rgb(10 8 6 / 0) 38%, rgb(10 8 6 / 0.5) 64%, rgb(10 8 6 / 0.86) 100%);
+    background: linear-gradient(180deg, rgb(var(--sr-ink) / 0) 38%, rgb(var(--sr-ink) / 0.5) 64%, rgb(var(--sr-ink) / 0.86) 100%);
   }
 
   .sr-tile__media[data-kind='photo'] img {
@@ -850,18 +890,18 @@
    * кремовый текст на бежевом не читался. У малой плитки цоколь выше: подпись бывает в три строки.
    */
   .sr-tile__media[data-kind='product']::after {
-    background: linear-gradient(180deg, rgb(12 9 7 / 0) 44%, rgb(12 9 7 / 0.92) 66%, rgb(12 9 7 / 0.98) 100%);
+    background: linear-gradient(180deg, rgb(var(--sr-ink) / 0) 44%, rgb(var(--sr-ink) / 0.92) 66%, rgb(var(--sr-ink) / 0.98) 100%);
   }
 
   .sr-tile--sm .sr-tile__media[data-kind='product']::after {
-    background: linear-gradient(180deg, rgb(12 9 7 / 0) 38%, rgb(12 9 7 / 0.94) 54%, #0c0907 100%);
+    background: linear-gradient(180deg, rgb(var(--sr-ink) / 0) 38%, rgb(var(--sr-ink) / 0.94) 54%, rgb(var(--sr-ink)) 100%);
   }
 
   /* Свет выключен: полутень над кадром. Зажигается по очереди, когда зал вошёл в окно. */
   .sr-tile__dark {
     position: absolute;
     inset: 0;
-    background: rgb(10 8 6 / 0.6);
+    background: rgb(var(--sr-ink) / 0.6);
     transition: opacity 0.9s var(--ease-out);
     transition-delay: calc(var(--i, 0) * 160ms + 120ms);
   }
@@ -1074,7 +1114,7 @@
   /* ───────────── Полный цикл ───────────── */
 
   .sr-cycle {
-    background: linear-gradient(180deg, transparent, #0b0907 18%, #0b0907 82%, transparent);
+    background: linear-gradient(180deg, transparent, rgb(var(--sr-ink)) 18%, rgb(var(--sr-ink)) 82%, transparent);
   }
 
   .sr-cycle--pinned {
@@ -1463,7 +1503,7 @@
     margin: 0;
     overflow: hidden;
     border-radius: var(--radius-lg);
-    background: #120e0b;
+    background: var(--surface);
     box-shadow: inset 0 0 0 1px var(--line);
     animation: sr-frame-on 0.95s var(--ease-out) both;
   }
@@ -1507,7 +1547,7 @@
     pointer-events: none;
     background:
       radial-gradient(70% 60% at 22% 0%, rgb(var(--sr-glow) / 0.3), rgb(var(--sr-glow) / 0) 70%),
-      linear-gradient(180deg, rgb(10 8 6 / 0) 55%, rgb(10 8 6 / 0.82) 100%);
+      linear-gradient(180deg, rgb(var(--sr-ink) / 0) 55%, rgb(var(--sr-ink) / 0.82) 100%);
     mix-blend-mode: normal;
   }
 
@@ -1777,7 +1817,7 @@
     min-height: 15rem;
     overflow: hidden;
     border-radius: var(--radius-lg);
-    background: #120e0b;
+    background: var(--surface);
   }
 
   .sr-proj__media img {
@@ -1794,7 +1834,7 @@
     inset: 0;
     background:
       radial-gradient(90% 80% at 50% 10%, rgb(var(--sr-glow) / 0.12), rgb(var(--sr-glow) / 0) 70%),
-      linear-gradient(180deg, rgb(10 8 6 / 0) 50%, rgb(10 8 6 / 0.5) 100%),
+      linear-gradient(180deg, rgb(var(--sr-ink) / 0) 50%, rgb(var(--sr-ink) / 0.5) 100%),
       rgb(60 34 12 / 0.22);
     transition: opacity var(--dur-slow) var(--ease-out);
   }
@@ -1805,7 +1845,7 @@
     top: 0;
     bottom: 0;
     width: 50.5%;
-    background: linear-gradient(180deg, #19140f, #0e0b09);
+    background: linear-gradient(180deg, var(--surface), var(--bg));
     opacity: 0.92;
     transition:
       transform 1.15s var(--ease-in-out) 0.1s,
@@ -1912,7 +1952,7 @@
   /* ───────────── Клиенты, письма, госзаказ (спокойный экран) ───────────── */
 
   .sr-trust {
-    background: linear-gradient(180deg, transparent, #0b0907 30%, #0b0907 70%, transparent);
+    background: linear-gradient(180deg, transparent, rgb(var(--sr-ink)) 30%, rgb(var(--sr-ink)) 70%, transparent);
   }
 
   .sr-trust__logos {
@@ -2186,7 +2226,7 @@
 /* ───────────── Перекрытия механики скролл-видео (её CSS без слоя — и эти правила без слоя) ───────────── */
 
 .sr-hero .scroll-video__stage {
-  background: #0a0806;
+  background: rgb(var(--sr-ink));
 }
 
 /* Кадр обрезается поровну с обеих сторон: на этом стоят точки пояснений (HERO_FOCUS в hero-config.js). */
@@ -2206,7 +2246,7 @@
   right: var(--sr-gutter);
   bottom: auto;
   padding: 0.45rem 0.7rem;
-  background: rgb(14 11 9 / 0.82);
+  background: rgb(var(--sr-ink) / 0.82);
   color: #eadbbd;
   border: 1px solid rgb(226 196 146 / 0.35);
   border-radius: var(--radius);
@@ -2258,15 +2298,8 @@
     object-position: 74% 50%;
   }
 
-  /* Телефон: пояснение — табличка вверху кадра (места под точки и проволоку нет). */
-  .sr-hero .scroll-video__callout {
-    left: var(--sr-gutter) !important;
-    right: var(--sr-gutter);
-    top: calc(var(--sr-header-h) + 0.6rem) !important;
-  }
-
-  /* Пометка «ролик не загрузился» — под табличкой пояснения, а не на её месте. */
-  .sr-hero .scroll-video__label {
-    top: calc(var(--sr-header-h) + 8rem);
+  /* Телефон: пояснения в кадре закрывали бы его целиком — их заменяет строка над полосой фаз (.sr-hero__ticker). */
+  .sr-hero .scroll-video__callouts {
+    display: none;
   }
 }

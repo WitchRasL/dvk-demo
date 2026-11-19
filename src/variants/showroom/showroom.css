@@ -8,9 +8,12 @@
 /* ───────────── Токены ───────────── */
 
 [data-variant='showroom'] {
-  --bg: #0e0b09;
-  --surface: #16120f;
-  --surface-2: #201a15;
+  /* База — тёплый тёмно-коричневый, а не чёрный: на телефоне под заголовком лежит большое ровное поле этого цвета. */
+  --bg: #17130f;
+  --surface: #1f1a15;
+  --surface-2: #2a231c;
+  /* Цвет теней и затемнений поверх фото и ролика (rgb, без запятых): совпадает с --bg, чтобы тень переходила в страницу без шва. */
+  --sr-ink: 23 19 15;
   --fg: #f2eadc;
   --fg-muted: #b5a791;
   --line: rgb(226 196 146 / 0.16);
@@ -70,9 +73,9 @@
 }
 
 [data-variant='showroom'] [data-direction='landscape'] {
-  --bg: #0b0e14;
-  --surface: #121722;
-  --surface-2: #1a202d;
+  --bg: #131722;
+  --surface: #1a202d;
+  --surface-2: #232a3a;
   --line: rgb(196 206 232 / 0.15);
   --fg-muted: #aeb2bd;
   --sr-glow: 255 212 140;
@@ -83,9 +86,9 @@
 }
 
 [data-variant='showroom'] [data-direction='metal'] {
-  --bg: #0c0e10;
-  --surface: #14171a;
-  --surface-2: #1c2024;
+  --bg: #14171a;
+  --surface: #1c2024;
+  --surface-2: #252a2f;
   --line: rgb(204 216 230 / 0.15);
   --fg-muted: #adb3ba;
   --sr-glow: 255 196 128;
@@ -96,20 +99,20 @@
 
 /* Фон и полосы прокрутки страницы — в цвет шоурума, а не нейтральные. */
 :root:has([data-variant='showroom']) {
-  background-color: #0e0b09;
+  background-color: #17130f;
   color-scheme: dark;
-  scrollbar-color: #5f4b2f #0e0b09;
+  scrollbar-color: #5f4b2f #17130f;
 }
 
 :root:has([data-variant='showroom'])::-webkit-scrollbar {
   width: 10px;
   height: 10px;
-  background: #0e0b09;
+  background: #17130f;
 }
 
 :root:has([data-variant='showroom'])::-webkit-scrollbar-thumb {
   background: #5f4b2f;
-  border: 2px solid #0e0b09;
+  border: 2px solid #17130f;
   border-radius: 999px;
 }
 
@@ -513,7 +516,7 @@
    * кадр занимает всю рамку без ниши и подиума; сверху остаётся тёплый блик светильника.
    */
   .sr-card__niche[data-kind='photo'] {
-    background: #120e0b;
+    background: var(--surface);
     box-shadow: none;
   }
 
@@ -536,7 +539,7 @@
     height: 34%;
     left: 0;
     right: 0;
-    background: linear-gradient(180deg, rgb(14 11 9 / 0), rgb(14 11 9 / 0.5));
+    background: linear-gradient(180deg, rgb(var(--sr-ink) / 0), rgb(var(--sr-ink) / 0.5));
   }
 
   /* Мягкая тень у подножия товара и кромка подиума. */
@@ -656,7 +659,7 @@
   .sr-header::before {
     inset: 0;
     z-index: -1;
-    background: #0e0b09;
+    background: var(--bg);
   }
 
   .sr-header::after {
@@ -980,7 +983,7 @@
     top: 100%;
     max-height: calc(100dvh - var(--sr-header-h));
     overflow: auto;
-    background: #120e0b;
+    background: var(--surface);
     border-top: 1px solid rgb(226 196 146 / 0.2);
     box-shadow: 0 48px 80px -36px rgb(0 0 0 / 0.95);
     animation: sr-mega-on 0.5s var(--ease-out) both;
@@ -1138,7 +1141,7 @@
     overflow-y: auto;
     background:
       radial-gradient(40rem 22rem at 100% 0%, rgb(var(--sr-glow) / 0.12), transparent 70%),
-      #0e0b09;
+      var(--bg);
     color: var(--fg);
   }
 
@@ -1295,7 +1298,7 @@
     padding-top: clamp(4rem, 3rem + 4vw, 6.5rem);
     /* Плавающий переключатель вариантов в левом нижнем углу — снизу не меньше 72px свободно. */
     padding-bottom: calc(6.5rem + env(safe-area-inset-bottom));
-    background: #0a0806;
+    background: rgb(var(--sr-ink));
     border-top: 1px solid var(--line);
   }
 

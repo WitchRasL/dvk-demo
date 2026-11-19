@@ -5,7 +5,7 @@
 import { Fragment, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { Link } from 'react-router';
 import { ArrowUpRight, Phone } from 'lucide-react';
-import { ScrollVideo, cameraTransform, findScrollVideoStage } from '../../../core/scroll-video/index.js';
+import { ScrollVideo, calloutState, cameraTransform, findScrollVideoStage } from '../../../core/scroll-video/index.js';
 import { getCompany, getDirectionTotal } from '../../../core/catalog/index.js';
 import { useCity } from '../../../core/city/index.js';
 import { useFinePointer, useMediaQuery, usePrefersReducedMotion } from '../../../core/hooks/media.js';
@@ -148,6 +148,24 @@ function PhaseStrip({ progress, api }) {
         );
       })}
     </div>
+  );
+}
+
+/**
+ * Пояснения одной строкой — для телефона: в кадре табличка закрывала бы его целиком, поэтому текущее пояснение
+ * стоит над полосой фаз. Все строки лежат друг на друге и сменяются прозрачностью; видна только на узком экране (home.css).
+ * Скрыта от скринридера: тот же текст есть в списке пояснений сцены.
+ */
+function Ticker({ progress }) {
+  return (
+    <p className="sr-hero__ticker" aria-hidden="true">
+      {heroConfig.callouts.map((callout) => (
+        <span key={callout.id} className="sr-hero__ticker-item" data-active={calloutState(progress, callout).active || undefined}>
+          <b>{callout.title}</b>
+          {callout.brief ?? callout.text}
+        </span>
+      ))}
+    </p>
   );
 }
 
@@ -328,6 +346,7 @@ function Overlay({ progress, api, mapping, photo }) {
           <p className="sr-hero__promise">{company.promise}</p>
         </div>
         <div className="sr-hero__console">
+          {api.mode === 'static' ? null : <Ticker progress={progress} />}
           <div className="sr-hero__strip">
             <PhaseStrip progress={progress} api={api} />
             <p className="sr-hero__credit sr-hero__credit--plain">

@@ -145,7 +145,7 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background: #0b0907;
+  background: rgb(var(--sr-ink));
   border-top-color: var(--line);
 }
 
@@ -282,7 +282,7 @@
   pointer-events: none;
   background:
     radial-gradient(90% 80% at 50% 0%, rgb(var(--sr-glow) / 0.12), rgb(var(--sr-glow) / 0) 70%),
-    linear-gradient(180deg, rgb(10 8 6 / 0) 45%, rgb(10 8 6 / 0.45)),
+    linear-gradient(180deg, rgb(var(--sr-ink) / 0) 45%, rgb(var(--sr-ink) / 0.45)),
     rgb(60 34 12 / 0.2);
   transition: opacity var(--dur-slow) var(--ease-out);
 }

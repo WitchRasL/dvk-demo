@@ -2,9 +2,9 @@
 name: ДВК Стиль — концепт редизайна
 description: Три мира главной страницы на одном ядре — «Шоурум», «Палитра RAL», «Чертёж» — с переключателем между ними.
 colors:
-  showroom-bg: "#0e0b09"
-  showroom-surface: "#16120f"
-  showroom-surface-2: "#201a15"
+  showroom-bg: "#17130f"
+  showroom-surface: "#1f1a15"
+  showroom-surface-2: "#2a231c"
   showroom-fg: "#f2eadc"
   showroom-fg-muted: "#b5a791"
   showroom-line: "rgb(226 196 146 / 0.16)"

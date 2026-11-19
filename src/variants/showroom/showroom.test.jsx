@@ -161,6 +161,17 @@ describe('главная «Шоурума»', () => {
     expect(hero.querySelector('img.scroll-video__poster').getAttribute('src')).toContain('media/showroom/hero-poster.jpg');
     expect(within(hero).queryByText('Здесь будет видео-интерьер')).toBeNull();
 
+    // Телефон: пояснения идут строкой над полосой фаз — по одной на каждое пояснение, текст из данных
+    const ticker = hero.querySelector('.sr-hero__ticker');
+    expect(ticker.getAttribute('aria-hidden')).toBe('true');
+    const lines = [...ticker.querySelectorAll('.sr-hero__ticker-item')];
+    expect(lines).toHaveLength(showroom.heroConfig.callouts.length);
+    showroom.heroConfig.callouts.forEach((callout, index) => {
+      expect(lines.at(index).textContent).toContain(callout.title);
+      expect(fromData(callout.brief ?? callout.text)).toBe(true);
+    });
+    expect(lines.filter((line) => line.hasAttribute('data-active')).length).toBeLessThanOrEqual(1);
+
     // R09: главная — 6–8 экранов
     const screens = main.querySelectorAll(':scope > section');
     expect(screens.length).toBeGreaterThanOrEqual(6);
