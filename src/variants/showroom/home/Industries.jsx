@@ -8,6 +8,8 @@ import { countText } from '../../../core/ui/format.js';
 import { imageSrc, srcSet } from '../../../lib/images.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { displayName, photoKind } from '../media-kind.js';
+import { GENERATED, GENERATED_CAPTION, INDUSTRY_PHOTOS } from '../tweaks/photos.js';
+import { useTweaks } from '../tweaks/store.jsx';
 import { SectionHeading } from '../ui.jsx';
 
 /** Отрасли экрана (спецификация, «Экраны главной») и кадр для каждой: фото объекта ДВК или товар отрасли. */
@@ -22,7 +24,10 @@ const INDUSTRIES = [
   { id: 'warehouses', project: 'pallet-racks', image: 0 },
 ];
 
-function frameOf(entry) {
+function frameOf(entry, tweaks) {
+  // Твик «Фото отраслей»: сгенерированный интерьер вместо фото с сайта — подписан как визуализация.
+  const generated = tweaks?.industries === GENERATED ? INDUSTRY_PHOTOS[entry.id] : null;
+  if (generated) return { kind: 'photo', image: generated, caption: GENERATED_CAPTION };
   if (entry.project) {
     const project = getProject(entry.project);
     const image = project?.images?.[entry.image] ?? project?.images?.[0];
@@ -42,10 +47,11 @@ export function Industries() {
   const { id: variantId } = useVariant();
   const list = INDUSTRIES.map((entry) => ({ ...entry, industry: getIndustry(entry.id) })).filter((entry) => entry.industry);
   const tabs = useTabs({ count: list.length }); // состояние и клавиатура табов — общие, из ядра
+  const tweaks = useTweaks().values;
   const current = list[tabs.selected];
   if (!current) return null;
   const { industry } = current;
-  const frame = frameOf(current);
+  const frame = frameOf(current, tweaks);
   const positions = positionsOf(industry);
   const series = industry.series?.length ?? 0;
 
@@ -72,7 +78,7 @@ export function Industries() {
           </div>
 
           <div {...tabs.panelProps} className="sr-industries__panel">
-            <figure key={current.id} className="sr-industries__frame" data-kind={frame?.kind ?? 'none'}>
+            <figure key={`${current.id}-${tweaks.industries}`} className="sr-industries__frame" data-kind={frame?.kind ?? 'none'}>
               {frame ? (
                 <img
                   src={imageSrc(frame.image.base, 1600)}

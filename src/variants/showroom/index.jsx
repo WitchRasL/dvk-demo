@@ -13,6 +13,7 @@ import '../../core/ui/reduced-motion.css';
 import './showroom.css';
 import './home.css';
 import './pages.css';
+import './tweaks/tweaks.css';
 import { Footer } from './Footer.jsx';
 import { Header } from './Header.jsx';
 import { heroConfig } from './hero-config.js';

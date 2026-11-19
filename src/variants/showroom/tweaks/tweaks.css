@@ -1,0 +1,327 @@
+/*
+ * Панель «Твики» главной «Шоурума»: выбор фото. Правый нижний угол — слева живёт переключатель вариантов.
+ * Анимируются только transform и opacity.
+ */
+@layer components {
+  .sr-tweaks {
+    position: fixed;
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    z-index: 950;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    color: var(--fg);
+    pointer-events: none;
+  }
+
+  .sr-tweaks > * {
+    pointer-events: auto;
+  }
+
+  .sr-tweaks__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    border: 1px solid rgb(226 196 146 / 0.4);
+    border-radius: 999px;
+    background: rgb(18 14 11 / 0.94);
+    color: var(--sr-brass-hi);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  .sr-tweaks__toggle:hover {
+    transform: translateY(-1px);
+  }
+
+  .sr-tweaks__toggle[aria-expanded='true'] {
+    background: var(--action);
+    border-color: var(--action);
+    color: var(--action-fg);
+  }
+
+  .sr-tweaks__panel {
+    width: min(23rem, calc(100vw - 24px));
+    max-height: min(76vh, 46rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.25rem 1rem 1rem;
+    border: 1px solid var(--sr-hair);
+    border-radius: var(--radius-lg);
+    background: rgb(18 14 11 / 0.97);
+    box-shadow: var(--shadow);
+    animation: sr-tweaks-in 0.32s var(--ease-out) both;
+  }
+
+  @keyframes sr-tweaks-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .sr-tweaks__head {
+    position: sticky;
+    top: -0.25rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 -1rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    background: rgb(18 14 11 / 0.97);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sr-tweaks__title {
+    margin: 0;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sr-brass-text);
+  }
+
+  .sr-tweaks__icon {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 0;
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--fg-muted);
+    cursor: pointer;
+  }
+
+  .sr-tweaks__icon:hover {
+    color: var(--fg);
+  }
+
+  .sr-tweaks__group {
+    min-width: 0;
+    margin: 1.15rem 0 0; /* отступ — margin: padding у fieldset лёг бы под legend, а не над ним */
+    padding: 0;
+    border: 0;
+  }
+
+  .sr-tweaks__legend {
+    padding: 0;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    line-height: 1.25;
+    color: var(--fg);
+  }
+
+  .sr-tweaks__hint {
+    margin: 0.2rem 0 0;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--fg-muted);
+  }
+
+  .sr-tweaks__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.65rem;
+  }
+
+  .sr-tweaks__row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4rem;
+    margin-top: 0.65rem;
+  }
+
+  .sr-tweaks__choice {
+    position: relative;
+    display: flex;
+    min-height: 2.75rem;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    box-shadow: inset 0 0 0 1px var(--line);
+    cursor: pointer;
+  }
+
+  .sr-tweaks__choice[data-thumb] {
+    aspect-ratio: 16 / 9;
+  }
+
+  .sr-tweaks__choice img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.78;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .sr-tweaks__choice:hover img,
+  .sr-tweaks__choice[data-checked] img {
+    opacity: 1;
+  }
+
+  /* Рамка выбранного — отдельным слоем поверх фото: тень самого label фото бы закрыло. */
+  .sr-tweaks__choice::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 2px var(--sr-brass-hi);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .sr-tweaks__choice[data-checked]::after {
+    opacity: 1;
+  }
+
+  .sr-tweaks__choice:has(:focus-visible) {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .sr-tweaks__tag {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.1rem;
+    width: 100%;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.6875rem;
+    line-height: 1.25;
+    color: var(--fg);
+  }
+
+  .sr-tweaks__choice[data-thumb] .sr-tweaks__tag {
+    background: linear-gradient(180deg, rgb(10 8 6 / 0) 30%, rgb(10 8 6 / 0.9) 100%);
+  }
+
+  .sr-tweaks__choice:not([data-thumb]) .sr-tweaks__tag {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .sr-tweaks__code {
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sr-brass-hi);
+  }
+
+  .sr-tweaks__choice[data-checked]:not([data-thumb]) {
+    background: rgb(226 184 102 / 0.16);
+  }
+
+  .sr-tweaks__name {
+    color: #e8dcc6;
+  }
+
+  .sr-tweaks__foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .sr-tweaks__summary {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    color: var(--fg);
+  }
+
+  .sr-tweaks__summary span {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+
+  .sr-tweaks__reset {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+    border: 1px solid var(--sr-hair);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--fg);
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+
+  .sr-tweaks__reset:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  /* Пометка под плитками направлений: в них стоят визуализации. */
+  .sr-bento__note {
+    margin: 1rem 0 0;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--fg-muted);
+  }
+
+  /* Подпись сгенерированного кадра в hero — текст, а не ссылка на проект. */
+  .sr-hero__credit--plain {
+    margin: 0;
+    text-decoration: none;
+  }
+
+  .sr-hero__credit--plain:hover {
+    color: #cdbfa7;
+  }
+}
+
+/*
+ * Кадр из твиков: пометка механики «ролик не загрузился» не нужна — кадр подписан строкой под фазами,
+ * а пометка легла бы на таблички пояснений, которые у фото встают в тот же правый верхний угол.
+ * Без слоя: CSS механики скролл-видео тоже без слоя.
+ */
+.sr-hero:not([data-frame='video']) .scroll-video__label {
+  display: none;
+}
+
+/*
+ * Телефон: внизу стоят переключатель вариантов и подпись кадра — кнопка твиков уходит под шапку,
+ * панель раскрывается вниз от неё.
+ */
+@media (max-width: 767px) {
+  .sr-tweaks {
+    top: calc(var(--sr-header-h) + 0.75rem);
+    bottom: auto;
+    flex-direction: column-reverse;
+  }
+
+  .sr-tweaks__panel {
+    max-height: calc(100dvh - var(--sr-header-h) - 5.5rem);
+  }
+}

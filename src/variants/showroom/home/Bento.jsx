@@ -13,6 +13,8 @@ import { cn } from '../../../lib/utils.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { useLitOnView, usePointerLight } from '../light.js';
 import { photoKind } from '../media-kind.js';
+import { FROM_SITE, INDUSTRY_PHOTOS, heroPhoto } from '../tweaks/photos.js';
+import { useTweaks } from '../tweaks/store.jsx';
 import { Button, SectionHeading } from '../ui.jsx';
 
 /** Какой кадр у раздела: фото реального объекта ДВК или товар раздела (на белом — в нише, в интерьере — кадром). */
@@ -28,9 +30,24 @@ const SECTION_MEDIA = {
   'metal-racks': { product: 'stellazh-metallicheskiy-ms-pro-2500-1010x800-4' },
 };
 
-function mediaFor(sectionId) {
+/**
+ * Твик «Плитки „Ритейл и экспозиция“»: вместо фото с сайта — сгенерированные интерьеры.
+ * Большая плитка берёт кадр из набора hero (его и выбирают в панели), малые — визуализацию своей отрасли.
+ */
+const TWEAKED_SECTION = 'trade-equipment';
+const GENERATED_TILES = { 'pharmacy-equipment': 'pharmacy', 'trade-islands': 'mall-islands' };
+
+function generatedFor(sectionId, tweaks) {
+  if (!tweaks || tweaks.tile === FROM_SITE) return null;
+  if (sectionId === TWEAKED_SECTION) return heroPhoto(tweaks.tile);
+  return INDUSTRY_PHOTOS[GENERATED_TILES[sectionId]] ?? null;
+}
+
+function mediaFor(sectionId, tweaks) {
   const spec = SECTION_MEDIA[sectionId];
   if (!spec) return null;
+  const generated = generatedFor(sectionId, tweaks);
+  if (generated) return { kind: 'photo', image: generated, alt: generated.alt };
   if (spec.project) {
     const project = getProject(spec.project);
     const image = project?.images?.[spec.image] ?? project?.images?.[0];
@@ -42,7 +59,7 @@ function mediaFor(sectionId) {
 }
 
 function Tile({ section, size, index }) {
-  const media = mediaFor(section.id);
+  const media = mediaFor(section.id, useTweaks().values);
   return (
     <li className={cn('sr-tile', `sr-tile--${size}`)} style={{ '--i': index }}>
       <Link to={section.to} className="sr-tile__link">
@@ -126,6 +143,7 @@ export function Bento() {
   const fine = useFinePointer();
   const reduce = usePrefersReducedMotion();
   usePointerLight(gridRef, { enabled: fine && !reduce });
+  const { tile } = useTweaks().values;
   return (
     <section className="sr-screen sr-bento" aria-labelledby="sr-bento-title">
       <div className="sr-wrap">
@@ -143,6 +161,7 @@ export function Bento() {
             <Bay key={direction.id} direction={direction} />
           ))}
         </div>
+        {tile === FROM_SITE ? null : <p className="sr-bento__note">Фото плиток «Ритейл и экспозиция» — визуализации интерьеров, не объекты ДВК.</p>}
         <div className="sr-bento__cta">
           <p>Не нашли свой раздел? Подберём оборудование под объект — бесплатно.</p>
           <div className="sr-bento__actions">

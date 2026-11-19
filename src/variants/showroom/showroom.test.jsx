@@ -9,9 +9,14 @@ import products from '../../data/products.json';
 import { installBrowserStubs, renderApp, resetStores } from '../../core/pages/test-utils.jsx';
 import { HERO_FRAME, HERO_LAMPS, frameToStage } from './hero-config.js';
 import showroom from './index.jsx';
+import { GENERATED_CAPTION, HERO_PHOTOS, INDUSTRY_PHOTOS, TWEAK_DEFAULTS, sanitizeTweaks } from './tweaks/photos.js';
+import { TWEAKS_STORAGE_KEY } from './tweaks/store.jsx';
 
 installBrowserStubs();
-beforeEach(() => resetStores());
+beforeEach(() => {
+  localStorage.removeItem(TWEAKS_STORAGE_KEY);
+  return resetStores();
+});
 afterEach(cleanup);
 
 // Шапка сайта — первый <header> в документе (шапки внутренних страниц тоже <header>, но внутри main).
@@ -138,11 +143,11 @@ describe('главная «Шоурума»', () => {
       'МОНТАЖ',
     ]);
 
-    // G04: кадр подписан как доработанное фото реального проекта ДВК и ведёт на этот проект
-    const project = projects.find((item) => item.slug === 'perfume-balashikha');
-    const credit = within(hero).getByRole('link', { name: /доработанное фото проекта ДВК/i });
-    expect(credit.getAttribute('href')).toBe('/showroom/projects/perfume-balashikha');
-    expect(credit.textContent).toContain(project.city);
+    // По умолчанию в hero стоит сгенерированный кадр H1: он подписан как визуализация, а не как объект ДВК
+    const credit = within(hero).getByText('Кадр H1: визуализация интерьера, не объект ДВК');
+    expect(credit.closest('a')).toBeNull();
+    expect(hero.querySelector('video')).toBeNull();
+    expect(hero.querySelector('img.scroll-video__poster').getAttribute('src')).toContain('images/gen/showroom/hero-h1-2400.webp');
     expect(within(hero).queryByText('Здесь будет видео-интерьер')).toBeNull();
 
     // R09: главная — 6–8 экранов
@@ -166,6 +171,98 @@ describe('главная «Шоурума»', () => {
 
     fireEvent.click(within(showcase).getAllByRole('button', { name: /В запрос КП/ })[0]);
     expect(JSON.parse(localStorage.getItem('dvk-kp-v1')).length).toBe(1);
+  });
+});
+
+describe('твики: выбор фото главной', () => {
+  const stored = () => JSON.parse(localStorage.getItem(TWEAKS_STORAGE_KEY));
+  const openPanel = () => {
+    const toggle = screen.getByRole('button', { name: 'Твики' });
+    fireEvent.click(toggle);
+    return screen.getByRole('complementary', { name: /Твики/ });
+  };
+
+  it('у каждого кадра набора есть файлы всех размеров', () => {
+    const missing = [];
+    for (const photo of HERO_PHOTOS) {
+      for (const path of [`${photo.base}-800.webp`, `${photo.base}-1600.webp`, photo.src]) {
+        if (!existsSync(resolve(process.cwd(), 'public', path))) missing.push(path);
+      }
+    }
+    for (const photo of Object.values(INDUSTRY_PHOTOS)) {
+      for (const width of [800, 1600]) {
+        const path = `${photo.base}-${width}.webp`;
+        if (!existsSync(resolve(process.cwd(), 'public', path))) missing.push(path);
+      }
+    }
+    expect(missing).toEqual([]);
+    expect(HERO_PHOTOS.length).toBeGreaterThanOrEqual(6);
+  });
+
+  it('сохранённый выбор приводится к допустимому: чужие значения заменяются значениями по умолчанию', () => {
+    expect(sanitizeTweaks(null)).toEqual(TWEAK_DEFAULTS);
+    expect(sanitizeTweaks({ hero: 'h3', tile: 'нет такого', industries: 'site', лишнее: 1 })).toEqual({ hero: 'h3', tile: TWEAK_DEFAULTS.tile, industries: 'site' });
+  });
+
+  it('выбор кадра в панели меняет hero и запоминается', async () => {
+    await renderApp('/showroom');
+    const hero = (await screen.findByRole('heading', { level: 1 })).closest('section');
+    const panel = openPanel();
+    const group = within(panel).getByRole('group', { name: 'Кадр hero' });
+    expect(within(group).getAllByRole('radio')).toHaveLength(HERO_PHOTOS.length + 1);
+
+    fireEvent.click(within(group).getByRole('radio', { name: /H3/ }));
+    expect(within(hero).getByText('Кадр H3: визуализация интерьера, не объект ДВК')).toBeTruthy();
+    expect(hero.querySelector('img.scroll-video__poster').getAttribute('src')).toContain('hero-h3-2400.webp');
+    expect(stored().hero).toBe('h3');
+    expect(within(panel).getByText(/hero H3/)).toBeTruthy();
+
+    fireEvent.click(within(panel).getByRole('button', { name: 'Сбросить' }));
+    expect(stored()).toEqual(TWEAK_DEFAULTS);
+    expect(within(hero).getByText(/Кадр H1:/)).toBeTruthy();
+  });
+
+  it('«Ролик» в панели возвращает прежний ролик и подпись со ссылкой на проект ДВК', async () => {
+    localStorage.setItem(TWEAKS_STORAGE_KEY, JSON.stringify({ hero: 'video' }));
+    await renderApp('/showroom');
+    const hero = (await screen.findByRole('heading', { level: 1 })).closest('section');
+    const project = projects.find((item) => item.slug === 'perfume-balashikha');
+    const credit = within(hero).getByRole('link', { name: /доработанное фото проекта ДВК/i });
+    expect(credit.getAttribute('href')).toBe('/showroom/projects/perfume-balashikha');
+    expect(credit.textContent).toContain(project.city);
+    expect(hero.querySelector('video')).toBeTruthy();
+  });
+
+  it('фото отраслей: новые подписаны как визуализация, «С сайта» возвращает объект ДВК', async () => {
+    await renderApp('/showroom');
+    await screen.findByRole('heading', { level: 1 });
+    const industries = screen.getByRole('heading', { level: 2, name: /Решения для вашего/ }).closest('section');
+    const caption = () => industries.querySelector('figcaption').textContent;
+    expect(caption()).toBe(GENERATED_CAPTION);
+    expect(industries.querySelector('figure img').getAttribute('src')).toContain('images/gen/showroom/industry-pharmacy');
+
+    const panel = openPanel();
+    fireEvent.click(within(within(panel).getByRole('group', { name: 'Фото отраслей' })).getByRole('radio', { name: 'С сайта' }));
+    expect(caption()).toMatch(/объект ДВК$/);
+    expect(stored().industries).toBe('site');
+  });
+
+  it('плитки «Ритейл и экспозиция»: большая берёт кадр из набора, «С сайта» возвращает фото с сайта и снимает пометку', async () => {
+    await renderApp('/showroom');
+    await screen.findByRole('heading', { level: 1 });
+    const tile = screen.getByRole('link', { name: /Торговое оборудование/ }).closest('.sr-tile');
+    const src = () => tile.querySelector('img').getAttribute('src');
+    expect(src()).toContain(`images/gen/showroom/hero-${TWEAK_DEFAULTS.tile}`);
+    const pharmacyTile = tile.closest('section').querySelector('.sr-tile a[href$="/catalog/retail/pharmacy-equipment"]').closest('.sr-tile');
+    expect(pharmacyTile.querySelector('img').getAttribute('src')).toContain('images/gen/showroom/industry-pharmacy');
+    const note = /визуализации интерьеров, не объекты ДВК/;
+    expect(screen.getByText(note)).toBeTruthy();
+
+    const panel = openPanel();
+    fireEvent.click(within(within(panel).getByRole('group', { name: /Плитки/ })).getByRole('radio', { name: 'С сайта' }));
+    expect(src()).not.toContain('images/gen/');
+    expect(pharmacyTile.querySelector('img').getAttribute('src')).not.toContain('images/gen/');
+    expect(screen.queryByText(note)).toBeNull();
   });
 });
 

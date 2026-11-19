@@ -13,6 +13,8 @@ import { useNav } from '../../../core/layout/nav.js';
 import { toTel, wordFor } from '../../../core/ui/format.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { HERO_CREDIT, HERO_FOCUS, HERO_LAMPS, HERO_POSTERS, frameToStage, heroConfig } from '../hero-config.js';
+import { heroPhoto } from '../tweaks/photos.js';
+import { useTweaks } from '../tweaks/store.jsx';
 import { Button } from '../ui.jsx';
 
 /** Доля пути hero, за которую шоурум освещается полностью (в ролике — к середине). */
@@ -60,13 +62,14 @@ function useFrameMapping() {
  * Пояснения в координатах сцены. На широком экране точка стоит на детали кадра, табличка — с той стороны,
  * где ей хватает места и где она не ложится на заголовок (левая половина сцены). Если места рядом с деталью
  * нет или деталь осталась за краем кадра, табличка встаёт без точки и проволоки в правый верхний угол, под шапку.
+ * dock — так же встают все таблички: точки сняты с ролика и к другому кадру (фото из твиков) не относятся.
  */
-function placeCallouts(callouts, mapping) {
+function placeCallouts(callouts, mapping, { dock = false } = {}) {
   const { width, height } = mapping;
   const docked = { x: (width - 24) / width, y: 124 / height, side: 'left', grow: 'down', anchored: false };
   return callouts.map((callout) => {
     const mapped = mapping.map(callout);
-    if (!mapped.visible || width < ANCHOR_MIN_WIDTH) return { ...callout, ...docked };
+    if (dock || !mapped.visible || width < ANCHOR_MIN_WIDTH) return { ...callout, ...docked };
     const px = mapped.x * width;
     const fits = { right: px + CARD_REACH < width - 16, left: px - CARD_REACH > width * 0.46 };
     const wanted = callout.side ?? (mapped.x > 0.72 ? 'left' : 'right');
@@ -176,7 +179,7 @@ function Directions() {
  * Свет сцены. Слои — прямые участники наложения в сцене (без своих контекстов наложения у родителя),
  * поэтому color-dodge и soft-light работают с кадром под ними.
  */
-function Lights({ progress, mode, mapping }) {
+function Lights({ progress, mode, mapping, photo }) {
   const shadeRef = useRef(null);
   const beamRef = useRef(null);
   const glowRef = useRef(null);
@@ -264,8 +267,10 @@ function Lights({ progress, mode, mapping }) {
   // В ролике свет зажигается сам: тень варианта только собирает взгляд на первой витрине и уходит к середине.
   // Статичный кадр уже освещён. Заглушка (ролик не загрузился) освещает первый кадр светильниками.
   const lit = isStatic ? 1 : smooth(clamp01(progress / LIGHT_UP_UNTIL));
-  const shade = isStatic ? 0 : isVideo ? lerp(0.46, 0, lit) : lerp(0.6, 0.1, lit);
-  const isPlaceholder = mode === 'placeholder';
+  // Фото из твиков уже освещено: тень лёгкая и уходит совсем — кадр должен читаться с первого экрана.
+  const shade = isStatic ? 0 : isVideo ? lerp(0.46, 0, lit) : photo ? lerp(0.3, 0, lit) : lerp(0.6, 0.1, lit);
+  // Светильники заглушки расставлены по первому кадру ролика — к фото из твиков они не относятся.
+  const isPlaceholder = mode === 'placeholder' && !photo;
   const camera = isPlaceholder ? cameraTransform(heroConfig.camera, progress) : undefined;
 
   return (
@@ -296,14 +301,14 @@ function Lights({ progress, mode, mapping }) {
   );
 }
 
-function Overlay({ progress, api, mapping }) {
+function Overlay({ progress, api, mapping, photo }) {
   const { id } = useVariant();
   const { contacts } = useCity();
   const company = getCompany();
   const phone = contacts?.phones?.[0];
   return (
     <>
-      <Lights progress={progress} mode={api.mode} mapping={mapping} />
+      <Lights progress={progress} mode={api.mode} mapping={mapping} photo={photo} />
       <div className="sr-hero__content">
         <div className="sr-hero__lede">
           <Positioning text={company.positioning} />
@@ -325,9 +330,13 @@ function Overlay({ progress, api, mapping }) {
         <div className="sr-hero__console">
           <div className="sr-hero__strip">
             <PhaseStrip progress={progress} api={api} />
-            <Link to={`/${id}/${HERO_CREDIT.to}`} className="sr-hero__credit">
-              {HERO_CREDIT.text}
-            </Link>
+            {photo ? (
+              <p className="sr-hero__credit sr-hero__credit--plain">Кадр {photo.code}: визуализация интерьера, не объект ДВК</p>
+            ) : (
+              <Link to={`/${id}/${HERO_CREDIT.to}`} className="sr-hero__credit">
+                {HERO_CREDIT.text}
+              </Link>
+            )}
           </div>
           <Directions />
         </div>
@@ -339,19 +348,25 @@ function Overlay({ progress, api, mapping }) {
 export function Hero() {
   const reduce = usePrefersReducedMotion();
   const mapping = useFrameMapping();
-  const callouts = useMemo(() => placeCallouts(heroConfig.callouts, mapping), [mapping]);
+  // Твик hero: кадр-кандидат вместо ролика. Ролик из выбранного кадра делается следующим шагом,
+  // а пока сцена работает как заглушка — кадр с медленным наездом и пояснениями по скроллу.
+  const photo = heroPhoto(useTweaks().values.hero);
+  const callouts = useMemo(() => placeCallouts(heroConfig.callouts, mapping, { dock: Boolean(photo) }), [mapping, photo]);
+  const frame = photo
+    ? { sources: undefined, poster: { src: photo.src, alt: photo.alt }, placeholderLabel: `Кадр ${photo.code} — кандидат для ролика` }
+    : // reduced-motion: ролика нет — показываем его последний кадр, где зал уже освещён
+      { poster: reduce ? HERO_POSTERS.lit : heroConfig.poster, placeholderLabel: 'Ролик не загрузился — показан его первый кадр' };
   return (
-    <section className="sr-hero" aria-labelledby="sr-hero-title">
+    <section className="sr-hero" aria-labelledby="sr-hero-title" data-frame={photo ? photo.id : 'video'}>
       <ScrollVideo
+        key={photo ? photo.id : 'video'}
         {...heroConfig}
-        // reduced-motion: ролика нет — показываем его последний кадр, где зал уже освещён
-        poster={reduce ? HERO_POSTERS.lit : heroConfig.poster}
+        {...frame}
         callouts={callouts}
         className="sr-hero__video"
-        placeholderLabel="Ролик не загрузился — показан его первый кадр"
         listLabel="Детали интерьера по ходу ролика"
         renderCallout={(callout, state) => <Callout callout={callout} state={state} />}
-        renderOverlay={(progress, api) => <Overlay progress={progress} api={api} mapping={mapping} />}
+        renderOverlay={(progress, api) => <Overlay progress={progress} api={api} mapping={mapping} photo={photo} />}
       />
     </section>
   );
