@@ -136,16 +136,17 @@ export function PageHeader({ title, lead, breadcrumbs = [], children, className 
  * ({ product, onQuickView }) — карточка-«витрина»: фото с белого фона стоит в светлой каменной нише
  * (белое растворяется в камне), мягкая тень у подножия, тёплый блик сверху; ниже — название, цена, «В запрос КП».
  */
-export function ProductCard({ product, onQuickView, className }) {
+export function ProductCard({ product, onQuickView, className, photo }) {
   const { id: variantId, ui } = useVariant();
-  const image = product.images?.[0];
+  // photo — кадр вместо первого фото товара (визуализация на главной); он всегда идёт во всю рамку
+  const image = photo ?? product.images?.[0];
   const to = `/${variantId}/product/${product.slug}`;
   const priced = typeof product.price === 'number';
   const name = displayName(product.name);
   return (
     <article className={cn('sr-card', className)}>
       {/* photo — съёмка в интерьере: кадр во всю рамку; product — предмет на белом: каменная ниша с подиумом */}
-      <Link to={to} tabIndex={-1} aria-hidden="true" className="sr-card__niche" data-kind={image ? photoKind(product) : 'product'}>
+      <Link to={to} tabIndex={-1} aria-hidden="true" className="sr-card__niche" data-kind={photo ? 'photo' : image ? photoKind(product) : 'product'}>
         <span className="sr-card__lamp" />
         {image ? (
           <img

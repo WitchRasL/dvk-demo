@@ -6,6 +6,8 @@ import { getProduct } from '../../../core/catalog/index.js';
 import { useQuickView } from '../../../core/pages/parts/QuickView.jsx';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { useLitOnView } from '../light.js';
+import { GENERATED, GENERATED_NOTES, PRODUCT_PHOTOS } from '../tweaks/photos.js';
+import { useTweaks } from '../tweaks/store.jsx';
 import { ProductCard, SectionHeading } from '../ui.jsx';
 
 /**
@@ -27,6 +29,8 @@ export function Showcase() {
   const { openQuickView, quickView } = useQuickView();
   const [ref, lit] = useLitOnView({ threshold: 0.3 });
   const products = SHOWCASE.map((slug) => getProduct(slug)).filter(Boolean);
+  // Твик «Каталог-витрина»: визуализации вместо фото с сайта; карточка, цена и быстрый просмотр — из данных товара.
+  const generated = useTweaks().values.catalog === GENERATED;
   return (
     <section className="sr-screen sr-showcase" aria-labelledby="sr-showcase-title">
       <div className="sr-wrap">
@@ -50,11 +54,12 @@ export function Showcase() {
           <ul className="sr-showcase__list">
             {products.map((product, index) => (
               <li key={product.id} style={{ '--i': index }}>
-                <ProductCard product={product} onQuickView={openQuickView} />
+                <ProductCard product={product} onQuickView={openQuickView} photo={generated ? PRODUCT_PHOTOS[product.slug] : undefined} />
               </li>
             ))}
           </ul>
         </div>
+        {generated ? <p className="sr-note">{GENERATED_NOTES.catalog}</p> : null}
       </div>
       {quickView}
     </section>

@@ -1,4 +1,4 @@
-// Панель «Твики»: выбор фото для hero, плиток «Ритейл и экспозиция» и экрана отраслей.
+// Панель «Твики»: выбор фото для hero и переключение «новые / с сайта» по экранам главной.
 // Живёт в правом нижнем углу главной «Шоурума» (слева — переключатель вариантов), рендерится внутри корня варианта.
 import { useEffect, useId, useRef, useState } from 'react';
 import { RotateCcw, SlidersHorizontal, X } from 'lucide-react';
@@ -9,7 +9,13 @@ import { FROM_SITE, GENERATED, HERO_PHOTOS, HERO_VIDEO, heroPhoto } from './phot
 import { useTweaks } from './store.jsx';
 
 /** Экран главной, на котором виден твик: после выбора страница прокручивается к нему, если он не в окне. */
-const SCREEN_OF = { hero: '.sr-hero', tile: '.sr-bento', industries: '.sr-industries' };
+const SCREEN_OF = { hero: '.sr-hero', tile: '.sr-bento', industries: '.sr-industries', catalog: '.sr-showcase', projects: '.sr-projects' };
+/** Экраны с переключателем «новые фото / фото с сайта». */
+const SWITCHES = [
+  { key: 'industries', title: 'Фото отраслей', short: 'отрасли' },
+  { key: 'catalog', title: 'Каталог-витрина', short: 'каталог' },
+  { key: 'projects', title: 'Проекты', short: 'проекты' },
+];
 
 function showScreen(key) {
   const screen = document.querySelector(SCREEN_OF[key]);
@@ -46,7 +52,8 @@ function Group({ title, hint, children }) {
 function summary(values) {
   const heroCode = heroPhoto(values.hero)?.code ?? 'ролик';
   const tileCode = heroPhoto(values.tile)?.code ?? 'с сайта';
-  return `hero ${heroCode} · плитка ${tileCode} · отрасли: ${values.industries === GENERATED ? 'новые' : 'с сайта'}`;
+  const rest = SWITCHES.map(({ key, short }) => `${short}: ${values[key] === GENERATED ? 'новые' : 'с сайта'}`);
+  return [`hero ${heroCode}`, `плитки ${tileCode}`, ...rest].join(' · ');
 }
 
 export function TweaksPanel() {
@@ -109,7 +116,7 @@ export function TweaksPanel() {
             </div>
           </Group>
 
-          <Group title="Плитки «Ритейл и экспозиция»" hint="Большая плитка — кадр из набора; аптеки и островки — свои визуализации.">
+          <Group title="Плитки направлений" hint="Кадр — для большой плитки «Торговое оборудование»; у остальных плиток свои фото. «С сайта» возвращает прежние во всех плитках.">
             <div className="sr-tweaks__row">
               {HERO_PHOTOS.map((photo) => (
                 <Choice
@@ -126,12 +133,14 @@ export function TweaksPanel() {
             </div>
           </Group>
 
-          <Group title="Фото отраслей" hint="Аптеки, ювелирные, оптика, музеи, одежда, островки.">
-            <div className="sr-tweaks__row">
-              <Choice name={`${name}-ind`} value={GENERATED} checked={values.industries === GENERATED} onPick={pick('industries')} code="Новые" />
-              <Choice name={`${name}-ind`} value={FROM_SITE} checked={values.industries === FROM_SITE} onPick={pick('industries')} code="С сайта" />
-            </div>
-          </Group>
+          {SWITCHES.map(({ key, title }) => (
+            <Group key={key} title={title}>
+              <div className="sr-tweaks__row">
+                <Choice name={`${name}-${key}`} value={GENERATED} checked={values[key] === GENERATED} onPick={pick(key)} code="Новые" />
+                <Choice name={`${name}-${key}`} value={FROM_SITE} checked={values[key] === FROM_SITE} onPick={pick(key)} code="С сайта" />
+              </div>
+            </Group>
+          ))}
 
           <footer className="sr-tweaks__foot">
             <p className="sr-tweaks__summary">

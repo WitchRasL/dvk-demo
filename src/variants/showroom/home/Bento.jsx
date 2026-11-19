@@ -13,7 +13,7 @@ import { cn } from '../../../lib/utils.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { useLitOnView, usePointerLight } from '../light.js';
 import { photoKind } from '../media-kind.js';
-import { FROM_SITE, INDUSTRY_PHOTOS, heroPhoto } from '../tweaks/photos.js';
+import { FROM_SITE, GENERATED_NOTES, TILE_PHOTOS, heroPhoto } from '../tweaks/photos.js';
 import { useTweaks } from '../tweaks/store.jsx';
 import { Button, SectionHeading } from '../ui.jsx';
 
@@ -31,16 +31,15 @@ const SECTION_MEDIA = {
 };
 
 /**
- * Твик «Плитки „Ритейл и экспозиция“»: вместо фото с сайта — сгенерированные интерьеры.
- * Большая плитка берёт кадр из набора hero (его и выбирают в панели), малые — визуализацию своей отрасли.
+ * Твик «Плитки направлений»: вместо фото с сайта — сгенерированные.
+ * Большая плитка ритейла берёт кадр из набора hero (его и выбирают в панели), остальные — визуализацию своего раздела.
  */
 const TWEAKED_SECTION = 'trade-equipment';
-const GENERATED_TILES = { 'pharmacy-equipment': 'pharmacy', 'trade-islands': 'mall-islands' };
 
 function generatedFor(sectionId, tweaks) {
   if (!tweaks || tweaks.tile === FROM_SITE) return null;
   if (sectionId === TWEAKED_SECTION) return heroPhoto(tweaks.tile);
-  return INDUSTRY_PHOTOS[GENERATED_TILES[sectionId]] ?? null;
+  return TILE_PHOTOS[sectionId] ?? null;
 }
 
 function mediaFor(sectionId, tweaks) {
@@ -161,7 +160,7 @@ export function Bento() {
             <Bay key={direction.id} direction={direction} />
           ))}
         </div>
-        {tile === FROM_SITE ? null : <p className="sr-bento__note">Фото плиток «Ритейл и экспозиция» — визуализации интерьеров, не объекты ДВК.</p>}
+        {tile === FROM_SITE ? null : <p className="sr-note">{GENERATED_NOTES.tiles}</p>}
         <div className="sr-bento__cta">
           <p>Не нашли свой раздел? Подберём оборудование под объект — бесплатно.</p>
           <div className="sr-bento__actions">

@@ -282,9 +282,9 @@
     cursor: default;
   }
 
-  /* Пометка под плитками направлений: в них стоят визуализации. */
-  .sr-bento__note {
-    margin: 1rem 0 0;
+  /* Пометка под экраном, где стоят визуализации. */
+  .sr-note {
+    margin: 1.25rem 0 0;
     font-size: 0.75rem;
     line-height: 1.4;
     color: var(--fg-muted);

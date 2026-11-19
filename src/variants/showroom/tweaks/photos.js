@@ -1,5 +1,6 @@
-// Сгенерированные интерьеры для главной «Шоурума» (Higgsfield, Nano Banana 2.1): кандидаты кадра hero
-// и фото отраслей. Это визуализации, а не объекты ДВК — так они и подписаны на странице.
+// Сгенерированные фото для главной «Шоурума» (Higgsfield, Nano Banana 2.1): кандидаты кадра hero, плитки
+// направлений, отрасли, товары каталога-витрины и проекты. Это визуализации, а не съёмка объектов и товаров
+// ДВК — так они и подписаны на странице. Реальные фото остаются на страницах товаров и проектов.
 // Файлы лежат парами <base>-800.webp и <base>-1600.webp; у кадров hero есть ещё <base>-2400.webp.
 const DIR = 'images/gen/showroom';
 
@@ -40,12 +41,11 @@ export function heroPhoto(id) {
   return HERO_BY_ID.get(id) ?? null;
 }
 
-const industry = (id, alt) => ({
-  base: `${DIR}/industry-${id}`,
-  w: 1200,
-  h: 896,
-  alt: `${alt} — визуализация интерьера`,
-});
+/** Кадр 4:3 (1200×896) из набора: file — имя без размера, alt — что в кадре. */
+const pic = (file, alt, size = { w: 1200, h: 896 }) => ({ base: `${DIR}/${file}`, ...size, alt: `${alt} — визуализация` });
+const industry = (id, alt) => pic(`industry-${id}`, alt);
+const WIDE = { w: 1376, h: 768 };
+const LANDSCAPE = { w: 1264, h: 848 };
 
 /** Фото отраслей для экрана «Решения по отраслям»: по одному на розничные отрасли. */
 export const INDUSTRY_PHOTOS = Object.freeze({
@@ -55,18 +55,59 @@ export const INDUSTRY_PHOTOS = Object.freeze({
   museums: industry('museums', 'Музейный зал: высокие стеклянные витрины с керамикой и бронзой, точечный свет'),
   apparel: industry('apparel', 'Бутик одежды и обуви: подсвеченные ниши со штангами и стена полок с обувью'),
   'mall-islands': industry('mall-islands', 'Торговый островок в атриуме: кольцо стеклянных прилавков с подсветкой'),
+  'yards-schools': industry('yards-schools', 'Школьный двор: игровая площадка с невысокими комплексами, качелями и скамьями'),
+  warehouses: pic('tile-racks', 'Склад: высокие металлические стеллажи вдоль прохода'),
+});
+
+/** Плитки «Выбор направления» по разделам каталога. Большую плитку ритейла выбирает твик — её здесь нет. */
+export const TILE_PHOTOS = Object.freeze({
+  'pharmacy-equipment': INDUSTRY_PHOTOS.pharmacy,
+  'trade-islands': INDUSTRY_PHOTOS['mall-islands'],
+  playgrounds: pic('tile-playgrounds', 'Детская площадка во дворе жилого комплекса: игровой комплекс из дерева и стали'),
+  benches: pic('tile-benches', 'Парковая скамья с деревянными рейками на бетонном основании'),
+  'small-architectural-forms': pic('tile-small-forms', 'Малые формы на городской площади: пергола, вазоны и урна'),
+  'metal-cabinets': pic('tile-cabinets', 'Ряд металлических шкафов, один открыт'),
+  'metal-racks': pic('tile-racks', 'Металлические стеллажи на складе'),
+  'metal-furniture': pic('tile-metal-furniture', 'Мастерская: верстаки, инструментальные панели и шкафы'),
+});
+
+/** Товары каталога-витрины по slug: предмет в интерьере, во всю рамку карточки. */
+export const PRODUCT_PHOTOS = Object.freeze({
+  'vitrina-dlya-chasov-vchyu-23': pic('product-watch-vitrine', 'Стеклянная витрина для часов на тёмной тумбе в бутике'),
+  'igrovoy-kompleks-mgm-78-korablik': pic('product-korablik', 'Игровой комплекс в виде корабля во дворе'),
+  'shkaf-instrumentalnyy-hard-2000-062000': pic('product-tool-cabinet', 'Инструментальный шкаф с открытыми дверцами в мастерской'),
+  'torgovyy-modul-tmd-3210': pic('product-trade-island', 'Торговый островок со стеклянными прилавками в торговом центре'),
+  'detskaya-gorka-mgs-3-vverkh-nogami': pic('product-slide', 'Детская горка на площадке во дворе'),
+  'verstak-vl-200-05-s-ekranom-vl-200-e4': pic('product-workbench', 'Слесарный верстак с перфорированным экраном в мастерской'),
+});
+
+/** Проекты экрана «Проекты» по slug. */
+export const PROJECT_PHOTOS = Object.freeze({
+  'museum-bryansk': pic('project-museum', 'Музейный зал: высокие стеклянные витрины с историческими костюмами', LANDSCAPE),
+  'duty-free-spb': pic('project-duty-free', 'Магазин беспошлинной торговли: круглый остров и подсвеченные стеллажи', WIDE),
+  'pharmacy-vladivostok': pic('project-pharmacy', 'Аптека: островные и пристенные стеллажи с открытой выкладкой', WIDE),
+  'playground-moscow': pic('project-playground', 'Игровой комплекс с башнями и горками во дворе жилого дома', WIDE),
+  'workshop-furniture': pic('project-workshop', 'Мастерская с металлическими шкафами, стеллажами и верстаком', WIDE),
 });
 
 /** Подпись сгенерированного кадра на странице: видно, что это не объект компании. */
-export const GENERATED_CAPTION = 'Визуализация интерьера · не объект ДВК';
+export const GENERATED_CAPTION = 'Визуализация · не объект ДВК';
+/** Пометки под экранами, где стоят сгенерированные фото. */
+export const GENERATED_NOTES = Object.freeze({
+  tiles: 'Фото плиток — визуализации, не объекты ДВК.',
+  catalog: 'Фото товаров на этом экране — визуализации. Реальные фото — в быстром просмотре и на странице товара.',
+  projects: 'Фото на этом экране — визуализации. Реальные фото объектов — на страницах проектов.',
+});
 
 /** Значения твиков по умолчанию и допустимые значения каждого. */
-export const TWEAK_DEFAULTS = Object.freeze({ hero: 'h1', tile: 'h2', industries: GENERATED });
+export const TWEAK_DEFAULTS = Object.freeze({ hero: 'h1', tile: 'h2', industries: GENERATED, catalog: GENERATED, projects: GENERATED });
 
 const ALLOWED = {
   hero: new Set([...HERO_BY_ID.keys(), HERO_VIDEO]),
   tile: new Set([...HERO_BY_ID.keys(), FROM_SITE]),
   industries: new Set([GENERATED, FROM_SITE]),
+  catalog: new Set([GENERATED, FROM_SITE]),
+  projects: new Set([GENERATED, FROM_SITE]),
 };
 
 /** Приводит сохранённые значения к допустимым: неизвестный ключ отбрасывается, неизвестное значение → по умолчанию. */

@@ -9,7 +9,17 @@ import products from '../../data/products.json';
 import { installBrowserStubs, renderApp, resetStores } from '../../core/pages/test-utils.jsx';
 import { HERO_FRAME, HERO_LAMPS, frameToStage } from './hero-config.js';
 import showroom from './index.jsx';
-import { GENERATED_CAPTION, HERO_PHOTOS, INDUSTRY_PHOTOS, TWEAK_DEFAULTS, sanitizeTweaks } from './tweaks/photos.js';
+import {
+  GENERATED_CAPTION,
+  GENERATED_NOTES,
+  HERO_PHOTOS,
+  INDUSTRY_PHOTOS,
+  PRODUCT_PHOTOS,
+  PROJECT_PHOTOS,
+  TILE_PHOTOS,
+  TWEAK_DEFAULTS,
+  sanitizeTweaks,
+} from './tweaks/photos.js';
 import { TWEAKS_STORAGE_KEY } from './tweaks/store.jsx';
 
 installBrowserStubs();
@@ -189,7 +199,7 @@ describe('твики: выбор фото главной', () => {
         if (!existsSync(resolve(process.cwd(), 'public', path))) missing.push(path);
       }
     }
-    for (const photo of Object.values(INDUSTRY_PHOTOS)) {
+    for (const photo of [INDUSTRY_PHOTOS, TILE_PHOTOS, PRODUCT_PHOTOS, PROJECT_PHOTOS].flatMap((set) => Object.values(set))) {
       for (const width of [800, 1600]) {
         const path = `${photo.base}-${width}.webp`;
         if (!existsSync(resolve(process.cwd(), 'public', path))) missing.push(path);
@@ -201,7 +211,7 @@ describe('твики: выбор фото главной', () => {
 
   it('сохранённый выбор приводится к допустимому: чужие значения заменяются значениями по умолчанию', () => {
     expect(sanitizeTweaks(null)).toEqual(TWEAK_DEFAULTS);
-    expect(sanitizeTweaks({ hero: 'h3', tile: 'нет такого', industries: 'site', лишнее: 1 })).toEqual({ hero: 'h3', tile: TWEAK_DEFAULTS.tile, industries: 'site' });
+    expect(sanitizeTweaks({ hero: 'h3', tile: 'нет такого', industries: 'site', лишнее: 1 })).toEqual({ ...TWEAK_DEFAULTS, hero: 'h3', industries: 'site' });
   });
 
   it('выбор кадра в панели меняет hero и запоминается', async () => {
@@ -247,7 +257,38 @@ describe('твики: выбор фото главной', () => {
     expect(stored().industries).toBe('site');
   });
 
-  it('плитки «Ритейл и экспозиция»: большая берёт кадр из набора, «С сайта» возвращает фото с сайта и снимает пометку', async () => {
+  it('по умолчанию на главной нет фото с сайта заказчика, кроме логотипов клиентов', async () => {
+    const { container } = await renderApp('/showroom');
+    await screen.findByRole('heading', { level: 1 });
+    const fromSite = [...container.querySelectorAll('main img')]
+      .map((image) => image.getAttribute('src'))
+      .filter((src) => !src.includes('images/gen/showroom/') && !src.includes('images/company/'));
+    expect(fromSite).toEqual([]);
+    for (const note of Object.values(GENERATED_NOTES)) expect(screen.getByText(note)).toBeTruthy();
+  });
+
+  it('каталог-витрина и проекты: «С сайта» возвращает фото товаров и объектов и снимает пометки', async () => {
+    await renderApp('/showroom');
+    await screen.findByRole('heading', { level: 1 });
+    const showcase = screen.getByRole('heading', { level: 2, name: /Каталог под подсветкой/ }).closest('section');
+    const projectsScreen = screen.getByRole('heading', { level: 2, name: /Объекты, где свет/ }).closest('section');
+    const sources = (section) => [...section.querySelectorAll('img')].map((image) => image.getAttribute('src'));
+    expect(sources(showcase).every((src) => src.includes('images/gen/showroom/product-'))).toBe(true);
+    expect(sources(projectsScreen).every((src) => src.includes('images/gen/showroom/project-'))).toBe(true);
+    // карточка остаётся карточкой товара: название и цена — из данных
+    expect(within(showcase).getByRole('heading', { name: 'Игровой комплекс МГМ-78 «Кораблик»' })).toBeTruthy();
+
+    const panel = openPanel();
+    fireEvent.click(within(within(panel).getByRole('group', { name: 'Каталог-витрина' })).getByRole('radio', { name: 'С сайта' }));
+    fireEvent.click(within(within(panel).getByRole('group', { name: 'Проекты' })).getByRole('radio', { name: 'С сайта' }));
+    expect(sources(showcase).some((src) => src.includes('images/gen/'))).toBe(false);
+    expect(sources(projectsScreen).some((src) => src.includes('images/gen/'))).toBe(false);
+    expect(screen.queryByText(GENERATED_NOTES.catalog)).toBeNull();
+    expect(screen.queryByText(GENERATED_NOTES.projects)).toBeNull();
+    expect(stored()).toMatchObject({ catalog: 'site', projects: 'site' });
+  });
+
+  it('плитки направлений: большая плитка ритейла берёт кадр из набора, «С сайта» возвращает фото с сайта и снимает пометку', async () => {
     await renderApp('/showroom');
     await screen.findByRole('heading', { level: 1 });
     const tile = screen.getByRole('link', { name: /Торговое оборудование/ }).closest('.sr-tile');
@@ -255,7 +296,7 @@ describe('твики: выбор фото главной', () => {
     expect(src()).toContain(`images/gen/showroom/hero-${TWEAK_DEFAULTS.tile}`);
     const pharmacyTile = tile.closest('section').querySelector('.sr-tile a[href$="/catalog/retail/pharmacy-equipment"]').closest('.sr-tile');
     expect(pharmacyTile.querySelector('img').getAttribute('src')).toContain('images/gen/showroom/industry-pharmacy');
-    const note = /визуализации интерьеров, не объекты ДВК/;
+    const note = GENERATED_NOTES.tiles;
     expect(screen.getByText(note)).toBeTruthy();
 
     const panel = openPanel();

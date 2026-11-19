@@ -7,6 +7,8 @@ import { imageSrc, srcSet } from '../../../lib/images.js';
 import { cn } from '../../../lib/utils.js';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { useLitOnView } from '../light.js';
+import { GENERATED, GENERATED_NOTES, PROJECT_PHOTOS } from '../tweaks/photos.js';
+import { useTweaks } from '../tweaks/store.jsx';
 import { SectionHeading } from '../ui.jsx';
 
 const PROJECTS = [
@@ -17,12 +19,13 @@ const PROJECTS = [
   { slug: 'workshop-furniture', image: 0, area: 'e' },
 ];
 
-function ProjectShowcase({ entry }) {
+function ProjectShowcase({ entry, generated }) {
   const { id: variantId } = useVariant();
   const [ref, lit] = useLitOnView({ threshold: 0.35 });
   const project = getProject(entry.slug);
   if (!project) return null;
-  const image = project.images?.[entry.image] ?? project.images?.[0];
+  // Твик «Проекты»: визуализация вместо фото объекта; название, город и страница проекта — из данных.
+  const image = (generated ? PROJECT_PHOTOS[project.slug] : null) ?? project.images?.[entry.image] ?? project.images?.[0];
   const direction = getDirection(project.direction);
   return (
     <li ref={ref} className={cn('sr-proj', `sr-proj--${entry.area}`)} data-lit={lit || undefined}>
@@ -55,6 +58,7 @@ function ProjectShowcase({ entry }) {
 
 export function Projects() {
   const { id } = useVariant();
+  const generated = useTweaks().values.projects === GENERATED;
   return (
     <section className="sr-screen sr-projects" aria-labelledby="sr-projects-title">
       <div className="sr-wrap">
@@ -75,9 +79,10 @@ export function Projects() {
         </div>
         <ul className="sr-projects__grid">
           {PROJECTS.map((entry) => (
-            <ProjectShowcase key={entry.slug} entry={entry} />
+            <ProjectShowcase key={entry.slug} entry={entry} generated={generated} />
           ))}
         </ul>
+        {generated ? <p className="sr-note">{GENERATED_NOTES.projects}</p> : null}
       </div>
     </section>
   );
