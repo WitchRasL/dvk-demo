@@ -95,12 +95,12 @@ export const GENERATED_CAPTION = 'Визуализация · не объект 
 /** Пометки под экранами, где стоят сгенерированные фото. */
 export const GENERATED_NOTES = Object.freeze({
   tiles: 'Фото плиток — визуализации, не объекты ДВК.',
-  catalog: 'Фото товаров на этом экране — визуализации. Реальные фото — в быстром просмотре и на странице товара.',
-  projects: 'Фото на этом экране — визуализации. Реальные фото объектов — на страницах проектов.',
+  catalog: 'Фото товаров на этом экране — визуализации.',
+  projects: 'Фото объектов на этом экране — визуализации.',
 });
 
 /** Значения твиков по умолчанию и допустимые значения каждого. */
-export const TWEAK_DEFAULTS = Object.freeze({ hero: 'h1', tile: 'h2', industries: GENERATED, catalog: GENERATED, projects: GENERATED });
+export const TWEAK_DEFAULTS = Object.freeze({ hero: HERO_VIDEO, tile: 'h4', industries: GENERATED, catalog: GENERATED, projects: GENERATED });
 
 const ALLOWED = {
   hero: new Set([...HERO_BY_ID.keys(), HERO_VIDEO]),

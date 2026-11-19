@@ -3,6 +3,7 @@
 import { Link } from 'react-router';
 import { ArrowUpRight } from 'lucide-react';
 import { getProduct } from '../../../core/catalog/index.js';
+import { isHomeOnlyDemo } from '../../../core/demo/demo.js';
 import { useQuickView } from '../../../core/pages/parts/QuickView.jsx';
 import { useVariant } from '../../../core/variants/VariantContext.jsx';
 import { useLitOnView } from '../light.js';
@@ -31,6 +32,8 @@ export function Showcase() {
   const products = SHOWCASE.map((slug) => getProduct(slug)).filter(Boolean);
   // Твик «Каталог-витрина»: визуализации вместо фото с сайта; карточка, цена и быстрый просмотр — из данных товара.
   const generated = useTweaks().values.catalog === GENERATED;
+  // Режим показа: только главная — быстрого просмотра товара в нём нет.
+  const onQuickView = isHomeOnlyDemo() ? undefined : openQuickView;
   return (
     <section className="sr-screen sr-showcase" aria-labelledby="sr-showcase-title">
       <div className="sr-wrap">
@@ -54,7 +57,7 @@ export function Showcase() {
           <ul className="sr-showcase__list">
             {products.map((product, index) => (
               <li key={product.id} style={{ '--i': index }}>
-                <ProductCard product={product} onQuickView={openQuickView} photo={generated ? PRODUCT_PHOTOS[product.slug] : undefined} />
+                <ProductCard product={product} onQuickView={onQuickView} photo={generated ? PRODUCT_PHOTOS[product.slug] : undefined} />
               </li>
             ))}
           </ul>

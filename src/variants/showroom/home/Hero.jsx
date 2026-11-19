@@ -1,7 +1,7 @@
-// Hero «Шоурума» — фишка «Включи витрину». Ночной шоурум: в ролике горит одна витрина, по скроллу
-// подсветка зажигается справа налево; курсор — луч света (тень с «окном» и тёплое пятно едут transform
-// за мышью). На тач-устройствах свет только по скроллу, при reduced-motion — сразу освещённый кадр.
-// Если ролик не загрузился, его первый кадр освещают светильники заглушки в том же порядке.
+// Hero «Шоурума». Ролик по скроллу: камера входит в ювелирный салон и идёт мимо островного прилавка
+// к пристенным витринам. Сцена открывается в полутени и светлеет к середине пути; курсор — луч света
+// (тень с «окном» и тёплое пятно едут transform за мышью). На тач-устройствах свет только по скроллу,
+// при reduced-motion — последний кадр ролика. Если ролик не загрузился, его первый кадр освещают светильники заглушки.
 import { Fragment, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { Link } from 'react-router';
 import { ArrowUpRight, Phone } from 'lucide-react';
@@ -19,8 +19,8 @@ import { Button } from '../ui.jsx';
 
 /** Доля пути hero, за которую шоурум освещается полностью (в ролике — к середине). */
 const LIGHT_UP_UNTIL = 0.5;
-/** Точка кадра, куда смотрит свет без мыши: витрина правой стены, которая горит с первого кадра. */
-const FOCAL = { x: 0.87, y: 0.47 };
+/** Точка кадра, куда смотрит свет без мыши: пристенная витрина правой стены. */
+const FOCAL = { x: 0.9, y: 0.42 };
 const BEAM_TAU_MS = 110;
 /** Телефон: кадр занимает верх сцены (нижние 25rem — заголовок и действия) и сдвинут к правым витринам; то же в home.css. */
 const PHONE_FRAME = { below: 400, minHeight: 160, focus: { x: 0.84, y: 0.5 } };
@@ -330,13 +330,9 @@ function Overlay({ progress, api, mapping, photo }) {
         <div className="sr-hero__console">
           <div className="sr-hero__strip">
             <PhaseStrip progress={progress} api={api} />
-            {photo ? (
-              <p className="sr-hero__credit sr-hero__credit--plain">Кадр {photo.code}: визуализация интерьера, не объект ДВК</p>
-            ) : (
-              <Link to={`/${id}/${HERO_CREDIT.to}`} className="sr-hero__credit">
-                {HERO_CREDIT.text}
-              </Link>
-            )}
+            <p className="sr-hero__credit sr-hero__credit--plain">
+              {photo ? `Кадр ${photo.code}: визуализация интерьера, не объект ДВК` : HERO_CREDIT.text}
+            </p>
           </div>
           <Directions />
         </div>
@@ -354,7 +350,7 @@ export function Hero() {
   const callouts = useMemo(() => placeCallouts(heroConfig.callouts, mapping, { dock: Boolean(photo) }), [mapping, photo]);
   const frame = photo
     ? { sources: undefined, poster: { src: photo.src, alt: photo.alt }, placeholderLabel: `Кадр ${photo.code} — кандидат для ролика` }
-    : // reduced-motion: ролика нет — показываем его последний кадр, где зал уже освещён
+    : // reduced-motion: ролика нет — показываем его последний кадр, камера уже у прилавка
       { poster: reduce ? HERO_POSTERS.lit : heroConfig.poster, placeholderLabel: 'Ролик не загрузился — показан его первый кадр' };
   return (
     <section className="sr-hero" aria-labelledby="sr-hero-title" data-frame={photo ? photo.id : 'video'}>

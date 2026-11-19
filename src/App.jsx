@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router';
+import { DEMO_VARIANT, isHomeOnlyDemo } from './core/demo/demo.js';
 import { ErrorBoundary } from './core/layout/ErrorBoundary.jsx';
 import { Shell } from './core/layout/Shell.jsx';
 import { fallbackVariantPath } from './core/variants/paths.js';
@@ -33,6 +34,8 @@ function VariantLoading() {
 function VariantGate() {
   const { variant } = useParams();
   const { pathname, search } = useLocation();
+  // Режим показа: открыта только главная одного варианта — чужой вариант возвращает на неё.
+  if (isHomeOnlyDemo() && variant !== DEMO_VARIANT) return <Navigate replace to={`/${DEMO_VARIANT}`} />;
   if (!isVariantId(variant)) return <Navigate replace to={fallbackVariantPath(pathname, search)} />;
   return (
     <Suspense fallback={<VariantLoading />}>
@@ -49,7 +52,28 @@ function VariantHome() {
   return <Home />;
 }
 
+/** Режим показа («только главная»): любой адрес, кроме главной выбранного варианта, возвращает на неё. */
+function DemoRoutes() {
+  const home = <Navigate replace to={`/${DEMO_VARIANT}`} />;
+  return (
+    <Routes>
+      <Route path="/" element={home} />
+      <Route path=":variant" element={<VariantGate />}>
+        <Route index element={<VariantHome />} />
+        <Route path="*" element={home} />
+      </Route>
+    </Routes>
+  );
+}
+
 export default function App() {
+  if (isHomeOnlyDemo()) {
+    return (
+      <ErrorBoundary>
+        <DemoRoutes />
+      </ErrorBoundary>
+    );
+  }
   return (
     <ErrorBoundary>
       <Routes>

@@ -1,25 +1,11 @@
 // heroConfig «Шоурума»: ролик, его первый кадр, фазы, пояснения и светильники заглушки.
-// Тексты пояснений берутся из данных (company.json, projects.json); чего нет — видимая заглушка «[уточнить]».
-// Точки сняты с ролика покадрово: что сделано и чем ролик отличается от раскадровки — docs/hero-video/showroom.md.
-import { UNKNOWN, getCycleStep, getFactText, getProject } from '../../core/catalog/index.js';
-
-/** Проект, фото которого доработано в ролик: зал парфюмерии в Балашихе. */
-export const HERO_PROJECT = 'perfume-balashikha';
-
-const project = getProject(HERO_PROJECT);
-const projectPlace = [project?.title, project?.city].filter(Boolean).join(', ') || UNKNOWN;
-
-/** Вторая фраза описания проекта («Оборудование изготовлено по дизайн-проекту…») — то, что видно в кадре. */
-function projectSentence(item) {
-  const sentences = String(item?.summary ?? '')
-    .split(/(?<=\.)\s+/)
-    .map((sentence) => sentence.trim())
-    .filter(Boolean);
-  return sentences.find((sentence) => /изготовлено/i.test(sentence)) ?? sentences[0] ?? UNKNOWN;
-}
+// Ролик — визуализация: камера входит в ювелирный салон и идёт мимо островного прилавка к пристенным витринам
+// (кадр H7 из набора, Higgsfield, Seedance 2.0). Тексты пояснений берутся из данных (company.json); чего нет —
+// видимая заглушка «[уточнить]». Точки сняты с ролика покадрово — docs/hero-video/showroom.md.
+import { UNKNOWN, getCycleStep, getFactText } from '../../core/catalog/index.js';
 
 /** Размер кадра ролика: в его долях заданы все точки ниже. */
-export const HERO_FRAME = Object.freeze({ width: 1280, height: 704 });
+export const HERO_FRAME = Object.freeze({ width: 1280, height: 720 });
 
 /** Какая часть кадра остаётся в сцене, когда он обрезается (совпадает с object-position в home.css). */
 export const HERO_FOCUS = Object.freeze({ x: 0.5, y: 0.5 });
@@ -50,68 +36,56 @@ export const HERO_PHASES = [
 ];
 
 /*
- * Пояснения. x, y — доли кадра ролика в середине отрезка (камера за отрезок смещает деталь меньше чем на 1 %).
- * side — куда от точки уходит табличка, grow — вниз или вверх она растёт: левая часть сцены занята заголовком,
- * низ — входами в направления, поэтому таблички живут справа вверху, над дальней стеной, и не закрывают
- * ни деталь, на которую указывают, ни стойки переднего плана.
+ * Пояснения. x, y — доли кадра ролика в середине отрезка: камера идёт вперёд, и за отрезок деталь смещается
+ * на несколько процентов кадра. side — куда от точки уходит табличка, grow — вниз или вверх она растёт:
+ * левая часть сцены занята заголовком, низ — входами в направления, поэтому точки стоят в правой половине
+ * кадра, а таблички растут вверх.
  */
 export const HERO_CALLOUTS = [
   {
-    // Пристенные витрины правой стены — зажигаются первыми; встроены в стены зала по месту.
+    // Пристенная витрина правой стены: встроена в нишу по месту. Точка — на её верхней кромке.
     id: 'measure',
     from: 0.04,
-    to: 0.17,
-    x: 0.89,
-    y: 0.37,
+    to: 0.16,
+    x: 0.905,
+    y: 0.33,
     side: 'left',
     grow: 'up',
     title: getCycleStep('measure')?.title ?? 'Замер',
     text: getFactText('same-day-measure'),
   },
   {
-    // Золотой орнамент на панели центральной стойки.
+    // Витрина дальней стены, справа от окна: камера уже вошла в зал, видна вся стена.
     id: 'design',
-    from: 0.18,
+    from: 0.19,
     to: 0.33,
-    x: 0.612,
-    y: 0.5,
+    x: 0.667,
+    y: 0.36,
     side: 'right',
     grow: 'up',
     title: getCycleStep('design')?.title ?? 'Дизайн-проект',
     text: getFactText('free-shop-design'),
   },
   {
-    // Центральная стойка со стеклянными полками: её подсветка только что включилась. Точка — на верхней кромке.
-    id: 'frame',
-    from: 0.36,
-    to: 0.5,
-    x: 0.53,
-    y: 0.412,
-    side: 'right',
-    grow: 'up',
-    title: projectPlace,
-    text: projectSentence(project),
-  },
-  {
-    // Низкая стойка-тумба справа: дерево, ящики, стеклянные полки. Точка — на её панели с орнаментом.
+    // Островной прилавок: латунная рама и гнутое стекло. Точка — на верхней кромке рамы.
     id: 'production',
-    from: 0.52,
-    to: 0.66,
-    x: 0.814,
-    y: 0.47,
-    side: 'left',
+    from: 0.38,
+    to: 0.62,
+    x: 0.61,
+    y: 0.57,
+    side: 'right',
     grow: 'up',
     title: getCycleStep('production')?.title ?? 'Производство',
     text: getCycleStep('production')?.text ?? UNKNOWN,
   },
   {
-    // Зал собран и освещён: пристенная витрина с ромбами на правой стене, левее стойки-тумбы.
+    // Камера у прилавка, зал виден целиком: витрина дальней стены справа от окна.
     id: 'install',
     from: 0.7,
     to: 0.94,
-    x: 0.775,
-    y: 0.39,
-    side: 'left',
+    x: 0.66,
+    y: 0.34,
+    side: 'right',
     grow: 'up',
     title: getCycleStep('install')?.title ?? 'Монтаж',
     text: getFactText('night-install'),
@@ -120,36 +94,31 @@ export const HERO_CALLOUTS = [
 
 /**
  * Светильники заглушки — только на случай, когда ролик не загрузился и в кадре стоит его первый кадр.
- * Повторяют порядок самого ролика: первая витрина справа уже горит в кадре (её не дублируем),
- * остальные зажигаются справа налево, к середине зал освещён. x, y — доли кадра, at — прогресс сцены.
+ * Подсвечивают витрины первого кадра справа налево, к середине зал освещён. x, y — доли кадра, at — прогресс сцены.
  */
 export const HERO_LAMPS = [
-  { id: 'wall-right', x: 0.8, y: 0.46, at: 0.06, size: 0.34 },
-  { id: 'stand-low', x: 0.8, y: 0.6, at: 0.12, size: 0.24 },
-  { id: 'wall-middle', x: 0.6, y: 0.38, at: 0.2, size: 0.3 },
-  { id: 'stand', x: 0.5, y: 0.7, at: 0.28, size: 0.36 },
-  { id: 'wall-left', x: 0.16, y: 0.46, at: 0.42, size: 0.44 },
+  { id: 'wall-right', x: 0.9, y: 0.42, at: 0.06, size: 0.3 },
+  { id: 'counter', x: 0.72, y: 0.62, at: 0.14, size: 0.4 },
+  { id: 'wall-middle', x: 0.69, y: 0.42, at: 0.22, size: 0.26 },
+  { id: 'wall-left', x: 0.45, y: 0.43, at: 0.32, size: 0.28 },
 ];
 
-const posterAlt = `${projectPlace}: ночной зал с подсветкой витрин, кадр ролика на основе фото объекта`;
+const posterAlt = 'Ювелирный салон: изумрудные панели, латунь, овальный стеклянный прилавок и пристенные витрины — кадр ролика, визуализация';
 
-/** Кадры ролика: первый — постер и заглушка, последний — статичный кадр при reduced-motion (всё освещено). */
+/** Кадры ролика: первый — постер и заглушка, последний — статичный кадр при reduced-motion (камера у прилавка). */
 export const HERO_POSTERS = {
   first: { src: 'media/showroom/hero-poster.jpg', alt: posterAlt },
   lit: { src: 'media/showroom/hero-lit.jpg', alt: posterAlt },
 };
 
-/** Подпись кадра: что это за интерьер и откуда он. */
-export const HERO_CREDIT = {
-  text: `Кадр: доработанное фото проекта ДВК — ${projectPlace.charAt(0).toLowerCase()}${projectPlace.slice(1)}`,
-  to: project ? `projects/${project.slug}` : 'projects',
-};
+/** Подпись кадра: ролик — визуализация, а не съёмка объекта компании. */
+export const HERO_CREDIT = { text: 'Ролик: визуализация интерьера, не объект ДВК' };
 
 export const heroConfig = {
   sources: { desktop: 'media/showroom/hero.mp4', mobile: 'media/showroom/hero-mobile.mp4' },
   poster: HERO_POSTERS.first,
-  // Заглушка повторяет движение ролика: медленный наезд, зал уходит вправо (камера смещается влево).
-  camera: { from: { x: 0, y: 0, scale: 1.02 }, to: { x: 3.5, y: 0.5, scale: 1.1 } },
+  // Заглушка повторяет движение ролика: медленный наезд на прилавок и правую стену.
+  camera: { from: { x: 0, y: 0, scale: 1.02 }, to: { x: -2, y: -1, scale: 1.16 } },
   callouts: HERO_CALLOUTS,
   phases: HERO_PHASES,
   lengthVh: 360,

@@ -4,6 +4,7 @@
 import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 import { getCompany } from '../../../core/catalog/index.js';
 import { CITIES, useCity } from '../../../core/city/index.js';
+import { DEMO_REQUEST_ID } from '../../../core/demo/demo.js';
 import { Quiz } from '../../../core/request/Quiz.jsx';
 import { UNKNOWN, toTel } from '../../../core/ui/format.js';
 import { SectionHeading } from '../ui.jsx';
@@ -13,7 +14,7 @@ export function RequestScreen() {
   const { city } = useCity();
   const cities = [city, ...CITIES.filter((other) => other !== city)].filter((cityId) => company.cities?.[cityId]);
   return (
-    <section className="sr-screen sr-request" aria-labelledby="sr-request-title">
+    <section id={DEMO_REQUEST_ID} className="sr-screen sr-request" aria-labelledby="sr-request-title">
       <span className="sr-request__light" aria-hidden="true" />
       <div className="sr-wrap sr-request__layout">
         <div className="sr-request__intro">

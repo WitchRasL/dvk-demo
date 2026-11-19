@@ -1,0 +1,30 @@
+/* Пометка режима показа: живёт внутри корня варианта и берёт его токены. Анимируются только transform и opacity. */
+.demo-notice {
+  position: fixed;
+  left: 50%;
+  bottom: calc(4.5rem + env(safe-area-inset-bottom));
+  z-index: 960;
+  width: max-content;
+  max-width: calc(100vw - 2rem);
+  margin: 0;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg, 4px);
+  background: var(--surface-2, var(--surface));
+  color: var(--fg);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: var(--shadow);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  transition:
+    opacity 0.25s ease-out,
+    transform 0.25s ease-out;
+}
+
+.demo-notice[data-shown] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

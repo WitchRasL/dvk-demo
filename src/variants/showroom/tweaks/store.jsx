@@ -4,6 +4,8 @@ import { createContext, useCallback, useContext, useMemo, useState } from 'react
 import { TWEAK_DEFAULTS, sanitizeTweaks } from './photos.js';
 
 export const TWEAKS_STORAGE_KEY = 'dvk-showroom-tweaks';
+/** Твики — рабочий инструмент: в опубликованной сборке панели нет и сохранённый выбор не читается. */
+export const TWEAKS_ENABLED = import.meta.env.DEV;
 
 function readStored() {
   try {
@@ -26,7 +28,7 @@ const TweaksContext = createContext(null);
 const NO_PROVIDER = Object.freeze({ values: TWEAK_DEFAULTS, set: () => {}, reset: () => {}, isDefault: true });
 
 export function TweaksProvider({ children }) {
-  const [values, setValues] = useState(readStored);
+  const [values, setValues] = useState(() => (TWEAKS_ENABLED ? readStored() : { ...TWEAK_DEFAULTS }));
   const set = useCallback((key, value) => {
     setValues((current) => {
       const next = sanitizeTweaks({ ...current, [key]: value });

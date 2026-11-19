@@ -40,6 +40,7 @@
 ## Окружение
 
 - `VITE_FORM_ENDPOINT` — адрес формы (Formspree/Web3Forms) для заявки; пусто — демо-режим, ничего не уходит (`.env.example`).
+- `VITE_DEMO` — `home` включает режим показа: открыта только главная «Шоурума», без переключателя вариантов и переходов внутрь сайта (`src/core/demo/`); задан в `.github/workflows/deploy.yml`, локально пусто — сайт полный.
 - `CHROME_PATH` — путь к Chrome для `npm run shot`.
 - `BITRIX_WEBHOOK_URL`, `BITRIX_STAGING_URL` — будущие, только в `docs/bitrix-integration.md`.
 

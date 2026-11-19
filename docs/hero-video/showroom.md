@@ -1,4 +1,54 @@
-# Hero-ролик «Шоурума»: раскадровка и промпт
+# Hero-ролик «Шоурума»
+
+## Действующий ролик (2026-11-19)
+
+Один непрерывный план: камера входит в ювелирный салон (изумрудные панели, латунь, паркет «ёлочка»), проходит
+тёмную панель слева, идёт мимо овального островного прилавка и останавливается над ним — видны пристенные
+витрины трёх стен. Людей и надписей в кадре нет. Это визуализация, а не съёмка объекта ДВК — так ролик и подписан в hero.
+
+| Что | Значение |
+|---|---|
+| Опорный кадр | H7 «Ювелирный флагман: изумруд и латунь» — `public/images/gen/showroom/hero-h7-*.webp` (Nano Banana 2.1, 2752×1536) |
+| Модель | Seedance 2.0, режим fast (на тарифе basic доступен только он), 8 с, 720p, 16:9, без звука — 20 кредитов |
+| Файлы | `hero.mp4` 1280×720, 193 кадра, все ключевые, 7,5 МБ · `hero-mobile.mp4` 720×404, 2,1 МБ · `hero-poster.jpg` (первый кадр) · `hero-lit.jpg` (последний) |
+| Перекодирование | команда из `docs/hero-video/README.md` (`-g 1`, crf 22; телефон — crf 26) |
+
+Промпт (image-to-video, кадр H7 как первый кадр):
+
+> One continuous, slow, perfectly smooth cinematic dolly shot at eye level, starting exactly from the first frame.
+> The camera glides forward through the entrance and sinks into the jewelry boutique, passes the dark emerald panel
+> on the left, then travels along the right side of the oval glass display counter, close enough to see the jewelry
+> trays under the glass, and continues deeper into the store past the counter toward the illuminated wall showcases,
+> revealing the glass display cases and brass-framed shelving along the emerald walls. Steady constant speed from
+> the first frame to the last, gentle parallax, no cuts, no zoom jumps, no camera shake, no rotation. The interior
+> stays exactly the same as in the first frame. Completely empty store: no people, no silhouettes. Nothing moves
+> except the camera, lighting stays constant with no flicker. Photorealistic, sharp detail.
+
+Пояснения (точки — доли кадра 1280×720 в середине отрезка, `src/variants/showroom/hero-config.js`):
+
+| Прогресс | Фаза | Пояснение | Деталь кадра | Точка |
+|---|---|---|---|---|
+| 0,04–0,16 | Проектирование | «Замер и планировка» — выезд на замер в тот же день | пристенная витрина правой стены | 90,5 % · 33 % |
+| 0,19–0,33 | Проектирование | «Дизайн-проект» — при заказе оборудования для магазина бесплатно | витрина дальней стены справа от окна | 66,7 % · 36 % |
+| 0,38–0,62 | Производство | «Собственное производство» — цех на «Ижорских заводах», немецкое оборудование | латунная рама островного прилавка | 61 % · 57 % |
+| 0,70–0,94 | Монтаж | «Монтаж и такелаж» — в торговых центрах, в том числе ночью | витрина дальней стены | 66 % · 34 % |
+
+Что не так и что осталось:
+
+- 720p: на экранах от 1440 px картинка мягкая. Настоящие 1080p у Seedance 2.0 — режим std (96 кредитов за 8 с,
+  нужен тариф Plus); у Grok Lite «1080p» — растянутые 720p.
+- Камера не проходит прилавок насквозь к дальней стене: она останавливается над ним. Более длинный проход —
+  новый ролик (до 15 с) или второй клип от последнего кадра.
+- Проверено в Chrome на компьютере (1440×900) и на ширине телефона 375 px; Safari и настоящий телефон — нет.
+- Первым был сделан черновик на Grok Imagine Video 1.5 Lite (8 кредитов) — в финале у окна появлялся силуэт;
+  заменён роликом Seedance по слову пользователя «используй сиданс 2.0».
+
+---
+
+# Прежний ролик (до 2026-11-19): раскадровка и промпт
+
+Ниже — план и описание первого ролика, сделанного из фото проекта «Оборудование для парфюмерии, Балашиха».
+На сайте его больше нет; текст оставлен как история решений.
 
 Ролик — один непрерывный план: ночной шоурум, в котором по очереди включается подсветка витрин, камера медленно
 наезжает на пристенные витрины. На сайте он перематывается скроллом, поэтому важнее всего ровное движение без склеек.

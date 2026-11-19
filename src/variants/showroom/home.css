@@ -836,10 +836,13 @@
     background: linear-gradient(180deg, rgb(10 8 6 / 0) 38%, rgb(10 8 6 / 0.88) 100%);
   }
 
+  /* Кадр остаётся светлым: затемнён только низ под подписью, верх и середина открыты. */
   .sr-tile__media[data-kind='photo']::after {
-    background:
-      linear-gradient(180deg, rgb(10 8 6 / 0.1) 0%, rgb(10 8 6 / 0.9) 100%),
-      rgb(70 40 14 / 0.18);
+    background: linear-gradient(180deg, rgb(10 8 6 / 0) 38%, rgb(10 8 6 / 0.5) 64%, rgb(10 8 6 / 0.86) 100%);
+  }
+
+  .sr-tile__media[data-kind='photo'] img {
+    filter: brightness(1.22) saturate(1.06);
   }
 
   /*

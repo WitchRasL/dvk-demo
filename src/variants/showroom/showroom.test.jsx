@@ -7,7 +7,7 @@ import company from '../../data/company.json';
 import projects from '../../data/projects.json';
 import products from '../../data/products.json';
 import { installBrowserStubs, renderApp, resetStores } from '../../core/pages/test-utils.jsx';
-import { HERO_FRAME, HERO_LAMPS, frameToStage } from './hero-config.js';
+import { HERO_CREDIT, HERO_FRAME, HERO_LAMPS, frameToStage } from './hero-config.js';
 import showroom from './index.jsx';
 import {
   GENERATED_CAPTION,
@@ -94,21 +94,21 @@ describe('heroConfig «Шоурума»', () => {
   });
 
   it('точка кадра ролика переводится в точку сцены: кадр закрывает сцену (cover), лишнее обрезается поровну', () => {
-    // Ролик 1280×704. Сцена тех же пропорций — точка на месте.
-    expect(HERO_FRAME).toEqual({ width: 1280, height: 704 });
-    const same = frameToStage({ x: 0.25, y: 0.4 }, { width: 1280, height: 704 });
+    // Ролик 1280×720. Сцена тех же пропорций — точка на месте.
+    expect(HERO_FRAME).toEqual({ width: 1280, height: 720 });
+    const same = frameToStage({ x: 0.25, y: 0.4 }, { width: 1280, height: 720 });
     expect(same.x).toBeCloseTo(0.25, 5);
     expect(same.y).toBeCloseTo(0.4, 5);
     expect(same.visible).toBe(true);
-    // 1440×900: кадр растянут по высоте до 1636,36 px, слева и справа срезано по 98,18 px.
+    // 1440×900: кадр растянут по высоте до 1600 px, слева и справа срезано по 80 px.
     const desktop = frameToStage({ x: 0.89, y: 0.37 }, { width: 1440, height: 900 });
-    expect(desktop.x).toBeCloseTo((0.89 * 1636.3636 - 98.1818) / 1440, 4);
+    expect(desktop.x).toBeCloseTo((0.89 * 1600 - 80) / 1440, 4);
     expect(desktop.y).toBeCloseTo(0.37, 5);
     expect(desktop.visible).toBe(true);
-    // 1920×800: кадр растянут по ширине до 1056 px по высоте, сверху и снизу срезано по 128 px.
+    // 1920×800: кадр растянут по ширине до 1080 px по высоте, сверху и снизу срезано по 140 px.
     const wide = frameToStage({ x: 0.5, y: 0.25 }, { width: 1920, height: 800 });
     expect(wide.x).toBeCloseTo(0.5, 5);
-    expect(wide.y).toBeCloseTo((0.25 * 1056 - 128) / 800, 4);
+    expect(wide.y).toBeCloseTo((0.25 * 1080 - 140) / 800, 4);
     // Портрет 390×844: правая витрина остаётся за краем сцены.
     expect(frameToStage({ x: 0.89, y: 0.37 }, { width: 390, height: 844 }).visible).toBe(false);
     // Смещение кадра (object-position): 100 % по горизонтали — срезается только слева.
@@ -116,7 +116,7 @@ describe('heroConfig «Шоурума»', () => {
     expect(shifted.x).toBeCloseTo(1, 5);
   });
 
-  it('светильники заглушки не спорят с роликом: первая витрина уже горит в кадре, остальные зажигаются справа налево', () => {
+  it('светильники заглушки зажигаются по скроллу справа налево и к середине ролика горят все', () => {
     const byTime = [...HERO_LAMPS].sort((a, b) => a.at - b.at);
     expect(byTime.length).toBeGreaterThanOrEqual(3);
     byTime.forEach((lamp, index) => {
@@ -153,11 +153,12 @@ describe('главная «Шоурума»', () => {
       'МОНТАЖ',
     ]);
 
-    // По умолчанию в hero стоит сгенерированный кадр H1: он подписан как визуализация, а не как объект ДВК
-    const credit = within(hero).getByText('Кадр H1: визуализация интерьера, не объект ДВК');
+    // В hero идёт ролик из кадра H7: он подписан как визуализация, а не как объект ДВК, и никуда не ведёт
+    const credit = within(hero).getByText(HERO_CREDIT.text);
+    expect(credit.textContent).toMatch(/визуализация интерьера, не объект ДВК/);
     expect(credit.closest('a')).toBeNull();
-    expect(hero.querySelector('video')).toBeNull();
-    expect(hero.querySelector('img.scroll-video__poster').getAttribute('src')).toContain('images/gen/showroom/hero-h1-2400.webp');
+    expect(hero.querySelector('video')).toBeTruthy();
+    expect(hero.querySelector('img.scroll-video__poster').getAttribute('src')).toContain('media/showroom/hero-poster.jpg');
     expect(within(hero).queryByText('Здесь будет видео-интерьер')).toBeNull();
 
     // R09: главная — 6–8 экранов
@@ -227,20 +228,21 @@ describe('твики: выбор фото главной', () => {
     expect(stored().hero).toBe('h3');
     expect(within(panel).getByText(/hero H3/)).toBeTruthy();
 
+    expect(hero.querySelector('video')).toBeNull();
+
     fireEvent.click(within(panel).getByRole('button', { name: 'Сбросить' }));
     expect(stored()).toEqual(TWEAK_DEFAULTS);
-    expect(within(hero).getByText(/Кадр H1:/)).toBeTruthy();
+    expect(within(hero).getByText(HERO_CREDIT.text)).toBeTruthy();
+    expect(hero.querySelector('video')).toBeTruthy();
   });
 
-  it('«Ролик» в панели возвращает прежний ролик и подпись со ссылкой на проект ДВК', async () => {
-    localStorage.setItem(TWEAKS_STORAGE_KEY, JSON.stringify({ hero: 'video' }));
+  it('сохранённый кадр-кандидат заменяет ролик кадром с его подписью', async () => {
+    localStorage.setItem(TWEAKS_STORAGE_KEY, JSON.stringify({ hero: 'h5' }));
     await renderApp('/showroom');
     const hero = (await screen.findByRole('heading', { level: 1 })).closest('section');
-    const project = projects.find((item) => item.slug === 'perfume-balashikha');
-    const credit = within(hero).getByRole('link', { name: /доработанное фото проекта ДВК/i });
-    expect(credit.getAttribute('href')).toBe('/showroom/projects/perfume-balashikha');
-    expect(credit.textContent).toContain(project.city);
-    expect(hero.querySelector('video')).toBeTruthy();
+    expect(within(hero).getByText('Кадр H5: визуализация интерьера, не объект ДВК')).toBeTruthy();
+    expect(hero.querySelector('video')).toBeNull();
+    expect(hero.querySelector('img.scroll-video__poster').getAttribute('src')).toContain('hero-h5-2400.webp');
   });
 
   it('фото отраслей: новые подписаны как визуализация, «С сайта» возвращает объект ДВК', async () => {
@@ -262,7 +264,8 @@ describe('твики: выбор фото главной', () => {
     await screen.findByRole('heading', { level: 1 });
     const fromSite = [...container.querySelectorAll('main img')]
       .map((image) => image.getAttribute('src'))
-      .filter((src) => !src.includes('images/gen/showroom/') && !src.includes('images/company/'));
+      // кадр ролика hero (media/showroom) — тоже визуализация; логотипы клиентов — не фото
+      .filter((src) => !['images/gen/showroom/', 'media/showroom/', 'images/company/'].some((own) => src.includes(own)));
     expect(fromSite).toEqual([]);
     for (const note of Object.values(GENERATED_NOTES)) expect(screen.getByText(note)).toBeTruthy();
   });
